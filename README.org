@@ -1,5 +1,17 @@
-#+TITLE:     Readme
-#+AUTHOR:    Inhof Dávid
-#+EMAIL:     yrwqid@gmail.com
-#+DATE:      2002-11-11
+#+title:     Dotfiles
+#+author:    Inhof Dávid
+#+email:     yrwqid@gmail.com
+
+
+* Contents
+  :toc:
+- [[#introduction][introduction]]
+- [[#Installation][installation]]
+- [[#Usage][usage]]
+  - [[#Keybinds][keybinds]]
+
+* Introduction
+This repository contains all of my configuration files for my Linux workstation,
+
+As a window manager, i use [[https://awesomewm.org][awesome]], because it's highly configurable.
 
