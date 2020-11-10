@@ -2,10 +2,9 @@
 #+author:    Inhof Dávid
 #+email:     yrwqid@gmail.com
 
-#+MACRO: imglink @@html:<a href="$1"><img src="$2"></a>@@
 
 #+begin_center
-{{{imglink(#introduction,.assets/introduction)}}}
+[[#introduction][introduction]] [[#installation][installation]]
 #+end_center
 
 * Introduction
