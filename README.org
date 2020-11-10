@@ -2,13 +2,11 @@
 #+author:    Inhof Dávid
 #+email:     yrwqid@gmail.com
 
+#+MACRO: imglink @@html:<a href="$1"><img src="$2"></a>@@
 
-* Contents
-  :toc:
-- [[#introduction][introduction]]
-- [[#Installation][installation]]
-- [[#Usage][usage]]
-  - [[#Keybinds][keybinds]]
+#+begin_center
+{{{imglink(#introduction,.assets/introduction)}}}
+#+end_center
 
 * Introduction
 This repository contains all of my configuration files for my Linux workstation,
