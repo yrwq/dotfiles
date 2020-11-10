@@ -1,0 +1,5 @@
+#+TITLE:     Readme
+#+AUTHOR:    Inhof Dávid
+#+EMAIL:     yrwqid@gmail.com
+#+DATE:      2002-11-11
+
