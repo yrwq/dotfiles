@@ -4,7 +4,7 @@
 
 
 #+begin_center
-[[#introduction][introduction]] [[#installation][installation]]
+[[#introduction][introduction]]     [[#installation][installation]]       [[#usage][usage]] 
 #+end_center
 
 * Introduction
