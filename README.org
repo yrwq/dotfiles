@@ -1,11 +1,8 @@
 #+title:     Dotfiles
 #+author:    Inhof Dávid
 #+email:     yrwqid@gmail.com
-#+ATTR_HTML: :style margin-left: auto; margin-right: auto;
 
-[[#introduction][introduction
-]][[#installation][installation]]
-[[#usage][usage]]
+<p align="center"> <a href="#introduction"> <img src=".assets/introduction.png"/> </p></a>
 
 * Introduction
 This repository contains all of my configuration files for my Linux workstation,
