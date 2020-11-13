@@ -5,6 +5,7 @@ local wibox = require("wibox")
 local awful = require("awful")
 local dpi = beautiful.xresources.apply_dpi
 local helpers = require("helpers")
+local menubar = require("menubar")
 
 local notifications = {}
 
@@ -15,7 +16,7 @@ naughty.config.defaults.timeout = 3
 naughty.config.defaults.title = "System Notification"
 naughty.config.defaults.margin = dpi(20)
 naughty.config.defaults.border_width = 0
-naughty.config.defaults.border_color = beautiful.xcolor0
+naughty.config.defaults.border_color = x.color1
 naughty.config.defaults.position = "top_right"
 naughty.config.defaults.shape = helpers.rrect(beautiful.client_radius)
 
@@ -46,24 +47,23 @@ end
 
 naughty.config.presets.normal = {
     font = beautiful.font,
-    fg = beautiful.fg_normal,
-    bg = beautiful.bg_normal,
+    fg = x.fg,
+    bg = x.bg,
     position = "top_right"
 }
 
 naughty.config.presets.low = {
     font = beautiful.font,
-    fg = beautiful.fg_normal,
-    bg = beautiful.bg_normal,
+    fg = x.fg,
+    bg = x.bg,
     position = "top_right"
 }
 
 naughty.config.presets.critical = {
-    font = "JetBrains Mono Bold 10",
-    fg = "#ffffff",
-    bg = "#ff0000",
-    position = "top_right",
-    timeout = 0
+    font = beautiful.font,
+    fg = x.fg,
+    bg = x.bg,
+    position = "top_right"
 }
 
 naughty.config.presets.ok = naughty.config.presets.normal

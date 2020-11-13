@@ -62,19 +62,24 @@ local function create_button(symbol, color, hover_color, cmd, key)
 end
 
 -- Create app buttons
-local browser = create_button("󰈹", x.color1, x.color9, apps.browser, "q")
-local discord = create_button("󰙯", x.color1, x.color9, apps.discord, "w")
-local whatsapp = create_button("󰖣", x.color1, x.color9, apps.whatsapp, "e")
-local mail = create_button("󰇮", x.color1, x.color9, apps.mail, "r")
-local file_manager = create_button("󰉋", x.color5, x.color13, apps.file_manager, "a")
-local editor = create_button("󰷈", x.color5, x.color13, apps.editor, "s")
-local music = create_button("󰝚", x.color5, x.color13, apps.music, "d")
-local todo = create_button("󰄭", x.color5, x.color13, apps.todo, "f")
+local browser = create_button("󰈹", x.color8, x.fg, apps.browser, "q")
+local discord = create_button("󰙯", x.color8, x.fg, apps.discord, "w")
+local whatsapp = create_button("󰖣", x.color8, x.fg, apps.whatsapp, "e")
+local mail = create_button("󰇮", x.color8, x.fg, apps.mail, "r")
+local file_manager = create_button("󰉋", x.color8, x.fg, apps.file_manager, "a")
+local editor = create_button("󰷈", x.color8, x.fg, apps.editor, "s")
+local music = create_button("󰝚", x.color8, x.fg, apps.music, "d")
+local todo = create_button("󰄭", x.color8, x.fg, apps.todo, "f")
+local lxappearance = create_button("󰔎", x.color8, x.fg, apps.lxappearance, "y")
+local volume = create_button("󰕾", x.color8, x.fg, apps.volume, "x")
+local nitrogen = create_button("󰸉", x.color8, x.fg, apps.nitrogen, "c")
+local torrent = create_button("󱎔", x.color8, x.fg, apps.torrent, "v")
+
 -- Create the widget
 app_drawer = wibox({visible = false, ontop = true, type = "dock"})
 awful.placement.maximize(app_drawer)
 
-app_drawer.bg = "#00000000"
+app_drawer.bg = "#0f0f0fA0"
 -- app_drawer.bg = beautiful.app_drawer_bg or x.background or "#111111"
 app_drawer.fg = "#FEFEFE"
 
@@ -177,11 +182,12 @@ app_drawer:setup {
     -- Background
     {
         -- Stripes
-        create_stripe({ browser, discord, whatsapp, mail }, "#00000000"),
-        create_stripe({ file_manager, editor, music, todo}, "#00000000"),
+        create_stripe({ browser, discord, whatsapp, mail}, "#00000000"),
+        create_stripe({ file_manager, editor, music, todo }, "#00000000"),
+        create_stripe({ lxappearance, volume, nitrogen, torrent}, "#00000000"),
         layout = wibox.layout.flex.vertical
     },
-    bg = x.bg ..99,
+    bg = x.bg .. "A0",
     -- bg = x.background.."AA",
     -- bg = "#00000000",
     widget = wibox.container.background

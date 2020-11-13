@@ -40,7 +40,7 @@ end
 
 -- systray
 local mysystray = wibox.widget.systray()
-mysystray:set_base_size(beautiful.systray_icon_size)
+mysystray:set_base_size(20)
 
 local mysystray_container = {
     mysystray,
@@ -51,7 +51,7 @@ local mysystray_container = {
     widget = wibox.container.margin
 }
 
--- volume button
+-- create volume button
 local volume_symbol = ""
 local volume_muted_color = x.color8
 local volume_unmuted_color = x.fg
@@ -81,6 +81,7 @@ awesome.connect_signal("shit::volume", function(_, muted)
     end
 end)
 
+-- create apple button
 local apple = create_button("󰀵", x.fg, x.trans, x.color8)
 
 apple:buttons(gears.table.join(
@@ -92,16 +93,17 @@ apple:buttons(gears.table.join(
                   end)
 ))
 
+-- create settings button
 local settingsPop = require('candy.panel.settings')
 local settings = create_button("漣", x.fg, x.trans, x.color8)
 
-local st = settings:get_all_children()[1]
-
 settings:connect_signal("mouse::enter", function()
+    st = settings:get_all_children()[1]
     st.markup = helpers.colorize_text("漣", x.color15)
 end)
 
 settings:connect_signal("mouse::leave", function()
+    st = settings:get_all_children()[1]
     st.markup = helpers.colorize_text("漣", x.fg)
 end)
 
@@ -114,10 +116,7 @@ settings:buttons(gears.table.join(
     end)
 ))
 
-local battery = create_button("", x.fg, x.trans, x.color8)
-local wifi = create_button("", x.fg, x.trans, x.color8)
-
--- microphone button
+-- create microphone button
 local microphone_symbol = ""
 local microphone_muted_color = x.color8
 local microphone_unmuted_color = x.fg
@@ -137,13 +136,11 @@ awesome.connect_signal("shit::microphone", function(muted)
         t.markup = helpers.colorize_text(microphone_symbol, microphone_unmuted_color)
     end
 end)
-local systray = wibox.widget.systray()
-systray:set_base_size(20)
 
 local mytextclock = awful.widget.textclock()
 awful.screen.connect_for_each_screen(function(s)
-        s.mypromptbox = awful.widget.prompt()
 
+        -- create tasklist
         s.mytasklist = awful.widget.tasklist {
             screen   = s,
             filter   = awful.widget.tasklist.filter.currenttags,
@@ -181,6 +178,7 @@ awful.screen.connect_for_each_screen(function(s)
             },
         }
 
+        -- create taglist
         s.mytaglist = awful.widget.taglist {
             screen = s,
             filter = awful.widget.taglist.filter.all,
@@ -202,6 +200,7 @@ awful.screen.connect_for_each_screen(function(s)
             buttons = taglist_buttons
         }
 
+        -- create wibox
         s.mywibox = awful.wibar({
                 position = "top",
                 screen = s,
@@ -210,9 +209,12 @@ awful.screen.connect_for_each_screen(function(s)
                 height = dpi(30)
         })
 
+        -- add widgets to wibox
         s.mywibox:setup{
         layout = wibox.layout.align.horizontal,
         expand = "none",
+
+        -- left
         {
             apple,
             layout = wibox.layout.fixed.horizontal,
@@ -222,19 +224,23 @@ awful.screen.connect_for_each_screen(function(s)
                 widget = wibox.container.margin
             },
         },
+
+        -- center
         {
             layout = wibox.layout.fixed.horizontal,
             {
                 {
                     s.mytaglist,
                     shape = helpers.rrect(beautiful.border_radius),
-                    bg = beautiful.xbackground,
+                    bg = x.color0,
                     widget = wibox.container.background
                 },
                 margins = dpi(5),
                 widget = wibox.container.margin
             },
         },
+
+        -- right
         {
             microphone,
             volume,

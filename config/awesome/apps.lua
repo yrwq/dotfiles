@@ -20,7 +20,7 @@ apps.whatsapp = function ()
 end
 
 apps.discord = function ()
-    helpers.run_or_raise({class = 'discord'}, false, "discord")
+    helpers.run_or_raise({class = 'lightcord'}, false, "lightcord")
 end
 
 apps.mail = function ()
@@ -49,6 +49,18 @@ end
 
 apps.todo = function()
     helpers.run_or_raise({instance = 'todo'}, false, "emacs ~/doc/todo.org", { switchtotag = true })
+end
+
+apps.lxappearance = function()
+    helpers.run_or_raise({instance = 'lxappearance'}, false, "lxappearance", { switchtotag = true })
+end
+
+apps.nitrogen = function()
+    helpers.run_or_raise({instance = 'nitrogen'}, false, "nitrogen", { switchtotag = true })
+end
+
+apps.torrent = function()
+    helpers.run_or_raise({instance = 'transmission-gtk'}, false, "transmission-gtk", { switchtotag = true })
 end
 
 return apps

@@ -12,12 +12,9 @@ editor = "emacs"
 terminal = "xst"
 music = "xst -c music -e music"
 mail = "xst -c mail -e neomutt"
---applauncher = "rofi -show drun -show-icons"
-
 
 local beautiful = require("beautiful")
 local xrdb = beautiful.xresources.get_current_theme()
-
 x = {
     --           xrdb variable
     bg = xrdb.background,
