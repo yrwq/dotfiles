@@ -18,7 +18,7 @@ I use the software above:
 **Terminal**: [simple-terminal](https://st.suckless.org/)  
 **Shell**: [zsh](https://github.com/ohmyzsh/ohmyzsh)  
 **File manager**: [thunar](https://git.xfce.org/xfce/thunar/) [fff](https://github.com/dylanaraps/fff)  
-**Music player**: [ncmpcpp](https://github.com/ncmpcpp/ncmpcpp)
+**Music player**: [ncmpcpp](https://github.com/ncmpcpp/ncmpcpp)  
 **Email client**: [neomutt](https://github.com/neomutt/neomutt)
 
 # Gallery
