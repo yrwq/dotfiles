@@ -21,7 +21,7 @@ I use the software above:
 **Music player**: [ncmpcpp](https://github.com/ncmpcpp/ncmpcpp)
 **Email client**: [neomutt](https://github.com/neomutt/neomutt)
 
-* Gallery
+# Gallery
 
 <img src=".assets/preview1.png">
 <img src=".assets/preview2.png">
