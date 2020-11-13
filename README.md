@@ -4,13 +4,14 @@
 
 # Introduction
 
-<img src=".assets/preview1.png" alt="img" align="right" width="400px">
+<img src=".assets/preview1.png" alt="img" align="right" width="500px">
 
 This repository contains my personal collection of configuration files.  
-I tried to clone the new Mac OS Big Sur look and feel using [awesome](https://awesomewm.org) window manager  
+Inspired by elena's [dotfiles](https://github.com/elenapan/dotfiles) and JavaCafe01's [dotfiles](https://github.com/JavaCafe01/dotfiles)  
 
 I use the software above:
 
+**Window Manager**: [awesome](https://awesomewm.org)  
 **Text editor**: [doom-emacs](https://github.com/hlissner/doom-emacs)  
 **Web browser**: [firefox](https://www.mozilla.org/en-US/firefox/)  
 **Terminal**: [simple-terminal](https://st.suckless.org/)  
