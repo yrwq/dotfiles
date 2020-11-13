@@ -8,9 +8,10 @@ local dpi = xresources.apply_dpi
 local helpers = require("helpers")
 local keys = require("keys")
 
+-- helper function to create buttons
 local create_button = function (symbol, color, bg_color, hover_color)
     local widget = wibox.widget {
-        font = "Monofur Nerd Font 14",
+        font = "RobotoMono Nerd Font Mono 14",
         align = "center",
         id = "text_role",
         valign = "center",
@@ -22,24 +23,39 @@ local create_button = function (symbol, color, bg_color, hover_color)
         widget,
         forced_width = dpi(40),
         bg = bg_color,
+        shape = gears.shape.rounded_rect,
         widget = wibox.container.background
     }
 
     -- Hover animation
-    section:connect_signal("mouse::enter", function ()
+    section:connect_signal("button::press", function ()
         section.bg = hover_color
     end)
-    section:connect_signal("mouse::leave", function ()
+    section:connect_signal("button::release", function ()
         section.bg = bg_color
     end)
 
     return section
 end
 
-local volume_symbol = " "
+-- systray
+local mysystray = wibox.widget.systray()
+mysystray:set_base_size(beautiful.systray_icon_size)
+
+local mysystray_container = {
+    mysystray,
+    left = dpi(8),
+    right = dpi(8),
+    top = dpi(5),
+    screen = 1,
+    widget = wibox.container.margin
+}
+
+-- volume button
+local volume_symbol = ""
 local volume_muted_color = x.color8
-local volume_unmuted_color = x.color5
-local volume = create_button(volume_symbol, volume_unmuted_color, x.color8.."30", x.color8.."50")
+local volume_unmuted_color = x.fg
+local volume = create_button(volume_symbol, volume_unmuted_color, x.trans, x.color8)
 
 volume:buttons(gears.table.join(
     awful.button({ }, 1, function ()
@@ -65,10 +81,47 @@ awesome.connect_signal("shit::volume", function(_, muted)
     end
 end)
 
-local microphone_symbol = ""
+local apple = create_button("󰀵", x.fg, x.trans, x.color8)
+
+apple:buttons(gears.table.join(
+                  awful.button({  }, 1, function()
+                          app_drawer_show()
+                  end),
+                  awful.button({  }, 1, function()
+                          exit_screen_show()
+                  end)
+))
+
+local settingsPop = require('candy.panel.settings')
+local settings = create_button("漣", x.fg, x.trans, x.color8)
+
+local st = settings:get_all_children()[1]
+
+settings:connect_signal("mouse::enter", function()
+    st.markup = helpers.colorize_text("漣", x.color15)
+end)
+
+settings:connect_signal("mouse::leave", function()
+    st.markup = helpers.colorize_text("漣", x.fg)
+end)
+
+settings:buttons(gears.table.join(
+    awful.button({ }, 1, function ()
+            settingsPop.visible = not settingsPop.visible
+    end),
+    awful.button({ }, 3, function()
+            settingsPop.visible = not settingsPop.visible
+    end)
+))
+
+local battery = create_button("", x.fg, x.trans, x.color8)
+local wifi = create_button("", x.fg, x.trans, x.color8)
+
+-- microphone button
+local microphone_symbol = ""
 local microphone_muted_color = x.color8
-local microphone_unmuted_color = x.color3
-local microphone = create_button(microphone_symbol, microphone_unmuted_color, x.color8.."60", x.color8.."80")
+local microphone_unmuted_color = x.fg
+local microphone = create_button(microphone_symbol, microphone_unmuted_color, x.trans, x.color8)
 
 microphone:buttons(gears.table.join(
     awful.button({ }, 1, function ()
@@ -84,7 +137,10 @@ awesome.connect_signal("shit::microphone", function(muted)
         t.markup = helpers.colorize_text(microphone_symbol, microphone_unmuted_color)
     end
 end)
+local systray = wibox.widget.systray()
+systray:set_base_size(20)
 
+local mytextclock = awful.widget.textclock()
 awful.screen.connect_for_each_screen(function(s)
         s.mypromptbox = awful.widget.prompt()
 
@@ -150,7 +206,7 @@ awful.screen.connect_for_each_screen(function(s)
                 position = "top",
                 screen = s,
                 ontop = true,
-                bg = x.color0,
+                bg = x.trans,
                 height = dpi(30)
         })
 
@@ -158,9 +214,13 @@ awful.screen.connect_for_each_screen(function(s)
         layout = wibox.layout.align.horizontal,
         expand = "none",
         {
-            s.mytasklist,
-            margins = dpi(5),
-            widget = wibox.container.margin
+            apple,
+            layout = wibox.layout.fixed.horizontal,
+            {
+                s.mytasklist,
+                margins = dpi(5),
+                widget = wibox.container.margin
+            },
         },
         {
             layout = wibox.layout.fixed.horizontal,
@@ -176,9 +236,12 @@ awful.screen.connect_for_each_screen(function(s)
             },
         },
         {
-            helpers.horizontal_pad(0),
-            volume,
             microphone,
+            volume,
+            settings,
+            mysystray_container,
+            mytextclock,
+            helpers.horizontal_pad(10),
             widget = wibox.container.margin,
             layout = wibox.layout.fixed.horizontal
         }

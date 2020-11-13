@@ -1,0 +1,7 @@
+require("module.layout-popup")
+require("module.notification")
+require("module.notification.volume")
+require("module.titlebar.dear")
+require("module.mpd")
+require("module.shoot")
+require("module.applauncher")

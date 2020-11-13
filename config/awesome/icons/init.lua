@@ -1,13 +1,4 @@
---  _                     
--- (_) ___ ___  _ __  ___ 
--- | |/ __/ _ \| '_ \/ __|
--- | | (_| (_) | | | \__ \
--- |_|\___\___/|_| |_|___/
-
--- Most of these icons I stole from flaticon
-
-
-
+-- stolen from JavaCafe01
 local gears = require("gears")
 
 local function file_exists(path)
@@ -24,67 +15,9 @@ local icons = {}
 
 -- Available icons
 local icon_names = {
-    "notif",
-    "awesome",
-    "awesome_menu",
-    "playerctl_toggle",
-    "playerctl_prev",
-    "playerctl_next",
-    "stats",
-    "search",
-    "volume",
-    "muted",
-    "mpd",
-    "firefox",
-    "youtube",
-    "reddit",
     "discord",
-    "telegram",
-    "steam",
-    "games",
-    "files",
-    "manual",
-    "keyboard",
-    "appearance",
-    "editor",
-    "redshift",
-    "gimp",
-    "terminal",
-    "mail",
-    "music",
-    "temperature",
-    "battery",
-    "battery_charging",
-    "cpu",
-    "compositor",
-    "start",
-    "ram",
-    "screenshot",
-    "home",
-    "alarm",
-    "alarm_off",
-    "alert",
-    "submenu",
-    "up",
-    "down",
-    -- Weather icons
-    "cloud",
-    "dcloud",
-    "ncloud",
-    "sun",
-    "star",
-    "rain",
-    "snow",
-    "mist",
-    "storm",
-    "whatever",
-    -- Exit screen icons
-    "exit",
-    "poweroff",
-    "reboot",
-    "suspend",
-    "lock",
-    "brightness",
+    "volume",
+    "volume-muted",
 }
 
 -- Path to icons

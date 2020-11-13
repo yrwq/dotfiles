@@ -1,10 +1,6 @@
 pcall(require, "luarocks.loader")
 local gears = require("gears")
 local awful = require("awful")
-require("awful.autofocus")
-local wibox = require("wibox")
-local naughty = require("naughty")
-local ruled = require("ruled")
 
 -- init
 awful.spawn.with_shell("xrdb ~/.Xresources")
@@ -12,8 +8,12 @@ awful.spawn.with_shell("picom")
 awful.spawn.with_shell("nitrogen --restore")
 
 -- vars
+editor = "emacs"
 terminal = "xst"
-applauncher = "rofi -show drun -show-icons"
+music = "xst -c music -e music"
+mail = "xst -c mail -e neomutt"
+--applauncher = "rofi -show drun -show-icons"
+
 
 local beautiful = require("beautiful")
 local xrdb = beautiful.xresources.get_current_theme()
@@ -22,6 +22,8 @@ x = {
     --           xrdb variable
     bg = xrdb.background,
     fg = xrdb.foreground,
+    trans = "#00000000",   -- fully transparent
+    transbg = "#262626D9", -- 85% transparent
     color0     = xrdb.color0,
     color1     = xrdb.color1,
     color2     = xrdb.color2,
@@ -39,15 +41,15 @@ x = {
     color14    = xrdb.color14,
     color15    = xrdb.color15,
 }
+screen_width = awful.screen.focused().geometry.width
+screen_height = awful.screen.focused().geometry.height
 
 beautiful.init(require("theme"))
-
-local icons = require("icons")
-icons.init("sheet")
 
 local bling = require("bling")
 bling.module.flash_focus.enable()
 
+-- layouts
 awful.layout.layouts = {
     bling.layout.mstab,
     awful.layout.suit.tile,
@@ -56,7 +58,7 @@ awful.layout.layouts = {
 }
 
 awful.screen.connect_for_each_screen(function(s)
-    local b = bling.layout
+    local b = bling.layout -- to save time
     local layouts = {
       b.mstab,
       b.mstab,
@@ -65,15 +67,14 @@ awful.screen.connect_for_each_screen(function(s)
       b.mstab,
     }
 
+    -- tags
     local tagnames = { "一", "二", "三", "四", "五" }
     awful.tag(tagnames, s, layouts)
 end)
 
 
-require("shit")
-require("keys")
-require("rules")
-require("module.layout-popup")
-require("noti")
-require("module.titlebar")
-require("candy.bar.dear")
+require("shit") -- daemons
+require("keys") -- key binds
+require("candy") -- bar, panels
+require("module") -- titlebar, popups
+require("rules") -- rules

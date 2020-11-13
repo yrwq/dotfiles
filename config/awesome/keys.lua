@@ -1,109 +1,123 @@
 local awful = require("awful")
 local gears = require("gears")
 local wibox = require("wibox")
-
+local settingsPop = require("candy.panel.settings")
 modkey = "Mod4"
 shiftkey = "Shift"
 altkey = "Mod1"
 
--- custom
 awful.keyboard.append_global_keybindings({
 
+    -- show shoot screen
+    awful.key({ modkey }, "s", function() app_drawer_show() end),
+
+    -- show shoot screen
+    awful.key({ }, "Print", function() shoot_screen_show() end),
+
+    -- show top right panel
+    awful.key({ altkey }, "q",  function()
+        settingsPop.visible = not settingsPop.visible end),
+
+    -- spawn music
+    awful.key({ modkey }, "m",  function()
+        awful.spawn(mail) end),
+
+    -- spawn mail
+    awful.key({ modkey, shiftkey }, "m",  function()
+        awful.spawn(music) end),
+
+    -- toggle microphone
+    awful.key({ modkey }, "v",  function()
+        awful.spawn.with_shell("amixer -D pulse sset Capture toggle &> /dev/null") end),
+
+    -- spawn emoji picker
     awful.key({ altkey }, "e",     function ()
-        awful.spawn.with_shell("rofimoji")
-    end,
-      {description = "show emoji picker", group = "launcher"}),
+        awful.spawn.with_shell("rofimoji") end),
 
+    -- spawn nerd font picker
     awful.key({ altkey }, "y",     function ()
-        awful.spawn.with_shell("~/.bin/nerdy")
-    end,
-      {description = "show nerd font picker", group = "launcher"}),
-    
-    awful.key({ altkey }, "Up",     function ()
-        awful.spawn.with_shell("amixer sset Master 5%+")
-    end,
-      {description = "increase volume", group = "launcher"}),
+        awful.spawn.with_shell("~/.bin/nerdy") end),
 
+    -- increase volume
+    awful.key({ altkey }, "Up",     function ()
+        awful.spawn.with_shell("amixer sset Master 5%+") end),
+
+    -- decrease volume
     awful.key({ altkey }, "Down",     function ()
         awful.spawn.with_shell("amixer sset Master 5%-")
-    end,
-      {description = "decrease volume", group = "launcher"}),
+    end),
 
-})
-
-awful.keyboard.append_global_keybindings({
-    awful.key({ modkey,           }, "a",   awful.tag.viewprev,
-      {description = "view previous", group = "tag"}),
-
-    awful.key({ modkey,           }, "d",  awful.tag.viewnext,
-      {description = "view next", group = "tag"}),
-
+    awful.key({ altkey }, "space",  function()
+        awful.spawn.with_shell("mpc toggle")
+    end),
 })
 
 -- Focus related keybindings
 awful.keyboard.append_global_keybindings({
-    awful.key({ modkey,           }, "j",
-        function ()
-            awful.client.focus.byidx( 1)
-        end,
-        {description = "focus next by index", group = "client"}
-    ),
-    awful.key({ modkey,           }, "k",
-        function ()
-            awful.client.focus.byidx(-1)
-        end,
-        {description = "focus previous by index", group = "client"}
-    ),
+
+    -- switch tags
+    awful.key({ modkey }, "a",   awful.tag.viewprev),
+    awful.key({ modkey }, "d",  awful.tag.viewnext),
+
+    -- focus clients with hjkl
+    awful.key({ modkey }, "j", function()
+            awful.client.focus.bydirection("down")
+    end),
+
+    awful.key({ modkey }, "k", function()
+            awful.client.focus.bydirection("up")
+    end),
+
+    awful.key({ modkey }, "h", function()
+            awful.client.focus.bydirection("left")
+    end),
+
+    awful.key({ modkey }, "l", function()
+            awful.client.focus.bydirection("right")
+    end),
+
     awful.key({ modkey,           }, "Tab",
         function ()
             awful.client.focus.history.previous()
             if client.focus then
                 client.focus:raise()
             end
-        end,
-        {description = "go back", group = "client"}),
-    awful.key({ modkey, "Control" }, "j", function () awful.screen.focus_relative( 1) end,
-      {description = "focus the next screen", group = "screen"}),
-
-    awful.key({ modkey, "Control" }, "k", function () awful.screen.focus_relative(-1) end,
-      {description = "focus the previous screen", group = "screen"}),
+    end),
 
 })
 
 -- Layout related keybindings
 awful.keyboard.append_global_keybindings({
-    awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end,
-      {description = "swap with next client by index", group = "client"}),
+    -- swap clients
+    awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end),
+    awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end),
 
-    awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end,
-      {description = "swap with previous client by index", group = "client"}),
+    -- increase master width
+    awful.key({ modkey,"Control"}, "l",     function () awful.tag.incmwfact( 0.05) end),
+    -- decrease master width
+    awful.key({ modkey,"Control"}, "h",     function () awful.tag.incmwfact(-0.05) end),
 
-    awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)          end,
-      {description = "increase master width factor", group = "layout"}),
-
-    awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)          end,
-      {description = "decrease master width factor", group = "layout"}),
+    -- Gaps
+    awful.key({ modkey, shiftkey }, "minus", function () awful.tag.incgap(5, nil) end),
+    awful.key({ modkey }, "minus", function () awful.tag.incgap(-5, nil) end),
 
 })
 
 -- General Awesome keys
 awful.keyboard.append_global_keybindings({
 
-    awful.key({ modkey, shiftkey }, "r", awesome.restart,
-      {description = "reload awesome", group = "awesome"}),
+    -- reload awesome
+    awful.key({ modkey, shiftkey }, "r", awesome.restart),
+    -- quit awesome
+    awful.key({ modkey, shiftkey   }, "e", awesome.quit),
 
-    awful.key({ modkey, shiftkey   }, "e", awesome.quit,
-      {description = "quit awesome", group = "awesome"}),
+    -- spawn terminal
+    awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end),
 
-    awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
-      {description = "open a terminal", group = "launcher"}),
+    -- run prompt
+    awful.key({ modkey }, "r",     function () awful.screen.focused().mypromptbox:run() end),
 
-    awful.key({ modkey }, "r",     function () awful.screen.focused().mypromptbox:run() end,
-      {description = "run prompt", group = "launcher"}),
-    
-    awful.key({ modkey }, "s",     function () awful.spawn(applauncher) end,
-      {description = "spawn application launcher", group = "launcher"}),
-    
+
 })
 
 awful.keyboard.append_global_keybindings({

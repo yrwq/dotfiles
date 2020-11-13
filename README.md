@@ -16,6 +16,3 @@ I use the software above:
 **Terminal**: [simple-terminal](https://st.suckless.org/)  
 **Shell**: [zsh](https://github.com/ohmyzsh/ohmyzsh)  
 **File manager**: [thunar](https://git.xfce.org/xfce/thunar/) [fff](https://github.com/dylanaraps/fff)  
-
-
-
