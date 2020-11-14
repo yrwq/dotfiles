@@ -26,39 +26,39 @@ I use the software above:
 
 1. Install awesome
 
- You need the git version, otherwise you can't use my setup
+    You need the git version, otherwise you can't use my setup
  
- ```sh
- yay -S awesome-git 
- ```
+     ```sh
+     yay -S awesome-git 
+     ```
  
 2. Install required fonts
 
- ```sh 
- git clone https://github.com/yrwq/dotfiles && cd dotfiles
+    ```sh 
+    git clone https://github.com/yrwq/dotfiles && cd dotfiles
  
- mkdir ~/.fonts
+    mkdir ~/.fonts
  
- cp fonts/* ~/.fonts/ -r
+    cp fonts/* ~/.fonts/ -r
  
- fc-cache -fv
- ```
+   fc-cache -fv
+   ```
  
 3. Install my awesomewm configuration
 
- First back up your current config
- ```sh
- mv ~/.config/awaesome ~/.config/awesome-backup
- ```
+    First back up your current config
+    ```sh
+    mv ~/.config/awaesome ~/.config/awesome-backup
+    ```
 
- Now copy my files
- ```sh
- cp config/awesome ~/.config/ -r 
- ```
+    Now copy my files
+    ```sh
+    cp config/awesome ~/.config/ -r 
+    ```
   
 4. Configure 
  
- Before using my config you should change the default applications, in `rc.lua` and `apps.lua`
+    Before using my config you should change the default applications, in `rc.lua` and `apps.lua`
  
 # Gallery
 
