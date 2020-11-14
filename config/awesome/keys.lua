@@ -1,6 +1,7 @@
 local awful = require("awful")
 local gears = require("gears")
 local wibox = require("wibox")
+local apps = require("apps")
 local settingsPop = require("candy.panel.settings")
 modkey = "Mod4"
 shiftkey = "Shift"
@@ -8,23 +9,21 @@ altkey = "Mod1"
 
 awful.keyboard.append_global_keybindings({
 
+    -- spawn file manager
+    awful.key({ altkey }, "t", apps.file_manager),
+    awful.key({ altkey, shiftkey }, "m", apps.mail),
+    awful.key({ altkey }, "s", apps.youtube),
+    awful.key({ modkey }, "e", apps.editor),
+    awful.key({ modkey }, "m", apps.music),
     -- show shoot screen
     awful.key({ modkey }, "s", function() app_drawer_show() end),
 
     -- show shoot screen
-    awful.key({ }, "Print", function() shoot_screen_show() end),
+    awful.key({ altkey }, "d", function() shoot_screen_show() end),
 
     -- show top right panel
     awful.key({ altkey }, "q",  function()
         settingsPop.visible = not settingsPop.visible end),
-
-    -- spawn music
-    awful.key({ modkey }, "m",  function()
-        awful.spawn(mail) end),
-
-    -- spawn mail
-    awful.key({ modkey, shiftkey }, "m",  function()
-        awful.spawn(music) end),
 
     -- toggle microphone
     awful.key({ modkey }, "v",  function()
@@ -52,9 +51,8 @@ awful.keyboard.append_global_keybindings({
     end),
 })
 
--- Focus related keybindings
+-- focus and layout
 awful.keyboard.append_global_keybindings({
-
     -- switch tags
     awful.key({ modkey }, "a",   awful.tag.viewprev),
     awful.key({ modkey }, "d",  awful.tag.viewnext),
@@ -76,6 +74,7 @@ awful.keyboard.append_global_keybindings({
             awful.client.focus.bydirection("right")
     end),
 
+    -- focus previous with tab
     awful.key({ modkey,           }, "Tab",
         function ()
             awful.client.focus.history.previous()
@@ -84,20 +83,11 @@ awful.keyboard.append_global_keybindings({
             end
     end),
 
-})
-
--- Layout related keybindings
-awful.keyboard.append_global_keybindings({
     -- swap clients
     awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end),
     awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end),
 
-    -- increase master width
-    awful.key({ modkey,"Control"}, "l",     function () awful.tag.incmwfact( 0.05) end),
-    -- decrease master width
-    awful.key({ modkey,"Control"}, "h",     function () awful.tag.incmwfact(-0.05) end),
-
-    -- Gaps
+    -- increase/decrease gaps
     awful.key({ modkey, shiftkey }, "minus", function () awful.tag.incgap(5, nil) end),
     awful.key({ modkey }, "minus", function () awful.tag.incgap(-5, nil) end),
 

@@ -12,7 +12,6 @@ local pad = helpers.pad
 local record_text_icon = ""
 local picture_text_icon = ""
 local stoprec_text_icon = "壘"
-local select_text_icon = "麗"
 local button_bg = x.color0
 local button_size = dpi(120)
 local shoot_screen_bg = x.bg .. 95
@@ -63,7 +62,7 @@ local create_button = function(symbol, hover_color, text, command)
             button.border_color = hover_color
         end)
         button:connect_signal("mouse::leave", function()
-            icon.markup = helpers.colorize_text(icon.text, x.foreground)
+            icon.markup = helpers.colorize_text(icon.text, x.fg)
             button.border_color = button_bg
         end)
 

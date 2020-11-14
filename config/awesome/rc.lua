@@ -48,20 +48,20 @@ bling.module.flash_focus.enable()
 
 -- layouts
 awful.layout.layouts = {
-    bling.layout.mstab,
     awful.layout.suit.tile,
+    bling.layout.mstab,
     bling.layout.centered,
     awful.layout.suit.floating,
 }
 
 awful.screen.connect_for_each_screen(function(s)
-    local b = bling.layout -- to save time
+    local l = awful.layout.suit -- to save time
     local layouts = {
-      b.mstab,
-      b.mstab,
-      b.mstab,
-      b.mstab,
-      b.mstab,
+      l.tile,
+      l.tile,
+      l.tile,
+      l.tile,
+      l.tile,
     }
 
     -- tags
