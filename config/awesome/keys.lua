@@ -10,8 +10,8 @@ altkey = "Mod1"
 awful.keyboard.append_global_keybindings({
 
     -- spawn file manager
-    awful.key({ altkey }, "t", apps.file_manager),
-    awful.key({ altkey, shiftkey }, "m", apps.mail),
+    awful.key({ modkey }, "t", apps.file_manager),
+    awful.key({ modkey, shiftkey }, "m", apps.mail),
     awful.key({ altkey }, "s", apps.youtube),
     awful.key({ modkey }, "e", apps.editor),
     awful.key({ modkey }, "m", apps.music),
@@ -72,15 +72,6 @@ awful.keyboard.append_global_keybindings({
 
     awful.key({ modkey }, "l", function()
             awful.client.focus.bydirection("right")
-    end),
-
-    -- focus previous with tab
-    awful.key({ modkey,           }, "Tab",
-        function ()
-            awful.client.focus.history.previous()
-            if client.focus then
-                client.focus:raise()
-            end
     end),
 
     -- swap clients

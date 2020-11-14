@@ -151,11 +151,7 @@ ruled.client.connect_signal("request::rules", function()
         rule_any = {
             class = {
                 "music",
-                "Sxiv",
                 "mail",
-                "feh",
-                "Tor Browser",
-                "Thunar",
                 "Pavucontrol",
                 "Lxappearance"
             },

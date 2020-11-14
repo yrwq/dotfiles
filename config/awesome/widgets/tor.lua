@@ -6,7 +6,7 @@ local dpi = beautiful.xresources.apply_dpi
 local helpers = require("helpers")
 local pad = helpers.pad
 
-local nord_box = wibox.widget {
+local tor_box = wibox.widget {
     markup = 'Disconnected',
     align = 'center',
     font = 'Anonymous Pro 12',
@@ -15,13 +15,11 @@ local nord_box = wibox.widget {
 
 local c_cmd = function()
     awful.spawn.with_shell("sudo systemctl start tor")
-    awful.spawn.with_shell("notify-send 'Tor started!'")
-    nord_box.markup = "Connected"
+    tor_box.markup = helpers.colorize_text("Connected", x.color1)
 end
 local d_cmd = function()
     awful.spawn.with_shell("sudo systemctl stop tor")
-    awful.spawn.with_shell("notify-send 'Tor stopped!'")
-    nord_box.markup = "Disconnected"
+    tor_box.markup = helpers.colorize_text("Disconnected", x.color8)
 end
 
 local create_button = function(cmd, mkup)
@@ -35,16 +33,16 @@ local create_button = function(cmd, mkup)
     }
 
     local button = wibox.widget {
-        {text, margins = dpi(2), layout = wibox.container.margin},
+        {text, margins = dpi(5), layout = wibox.container.margin},
         shape = helpers.rrect(dpi(6)),
-        bg = x.bg,
+        bg = "#1f1f1f",
         widget = wibox.container.background
     }
 
     button:buttons(gears.table.join(awful.button({}, 1, function() cmd() end)))
 
     button:connect_signal("mouse::enter", function()
-        text.markup = helpers.colorize_text(text.text, x.color4)
+        text.markup = helpers.colorize_text(text.text, x.color9)
     end)
 
     button:connect_signal("mouse::leave", function()
@@ -74,7 +72,7 @@ local image_cont = wibox.widget {
 local align_vertical = {
 
     nil,
-    nord_box,
+    tor_box,
     {
         connect_button,
         nil,
@@ -102,6 +100,5 @@ local main_wd = wibox.widget {
     bg = x.color0,
     widget = wibox.container.margin
 }
-
 
 return main_wd

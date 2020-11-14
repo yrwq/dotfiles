@@ -10,7 +10,7 @@ local menubar = require("menubar")
 local notifications = {}
 
 naughty.config.defaults.ontop = true
-naughty.config.defaults.icon_size = dpi(50)
+naughty.config.defaults.icon_size = dpi(60)
 naughty.config.defaults.screen = awful.screen.focused()
 naughty.config.defaults.timeout = 3
 naughty.config.defaults.title = "System Notification"
@@ -29,6 +29,7 @@ naughty.config.icon_formats = {"png", "svg"}
 
 -- Timeouts
 naughty.config.presets.low.timeout = 3
+naughty.config.presets.normal.timeout = 5
 naughty.config.presets.critical.timeout = 0
 
 function notifications.notify_dwim(args, notif)
@@ -46,7 +47,7 @@ function notifications.notify_dwim(args, notif)
 end
 
 naughty.config.presets.normal = {
-    font = beautiful.font,
+    font = "Anonymous Pro 45",
     fg = x.fg,
     bg = x.bg,
     position = "top_right"

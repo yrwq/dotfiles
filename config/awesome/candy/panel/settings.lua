@@ -100,7 +100,7 @@ local volicon = wibox.widget { -- create volume icon
 }
 local volbar = require("widgets.volume_bar")
 local volume = format_progress_bar(volbar, volicon) -- create the prograss bar
-local vol_box = create_boxed_widget(volume, 400, 50, x.bg) -- final volume bar
+local vol_box = create_boxed_widget(volume, 400, 50, x.color0) -- final volume bar
 
 -- add buttons
 volume:buttons(gears.table.join(
@@ -123,43 +123,74 @@ volume:buttons(gears.table.join(
 
 -- tor
 local tor = require("widgets.tor") 
-local tor_box = create_boxed_widget(tor, 100, 120, x.bg) -- final tor icon
--- wifi
-local wifi = create_button("直", x.fg, x.trans) -- create wifi button
-local wifi_box = create_boxed_widget(wifi, 50, 50, x.bg) -- final wifi icon
--- bluetooth 
-local bt = create_button("", x.fg, x.trans) -- create bluetooth button
-local bt_box = create_boxed_widget(bt, 50, 50, x.bg) -- final battery icon
--- rec
-local rec = create_button("雷", x.fg, x.trans)
-local rec_box = create_boxed_widget(rec, 50, 50, x.bg) -- final battery icon
-rec_box:buttons(gears.table.join(
-    -- left click - mute
-    awful.button({ }, 1, function ()
-        awful.spawn.with_shell("~/.bin/rec")
-    end),
-    -- right click - open pavucontrol
-    awful.button({ }, 3, function()
-        awful.spawn.with_shell("pkill ffmpeg && notify-send 'Recording Stopped!")
-    end)
-))
--- joplin
-local todo = create_button("", x.fg, x.trans) -- create joplin button
-local todo_box = create_boxed_widget(todo, 50, 50, x.bg) -- final joplin icon
-todo_box:buttons(gears.table.join(
-    -- left click - mute
-    awful.button({ }, 1, function ()
-        awful.spawn.with_shell("emacs ~/doc/todo.org")
-    end),
-    -- right click - open pavucontrol
-    awful.button({ }, 3, function()
-        awful.spawn.with_shell("emacs ~/doc/todo.org")
-    end)
-))
+local tor_box = create_boxed_widget(tor, 100, 120, x.color0) -- final tor icon
+--
+-- disk
+--
+local disk_arc = wibox.widget {
+    start_angle = 3 * math.pi / 2,
+    min_value = 0,
+    max_value = 100,
+    value = 50,
+    border_width = 0,
+    rounded_edge = true,
+    bg = x.color8.."55",
+    colors = { x.color1 },
+    widget = wibox.container.arcchart
+}
+local disk_hover_text_value = wibox.widget {
+    align = "center",
+    valign = "center",
+    font = "Anonymous Pro 13",
+    widget = wibox.widget.textbox()
+}
+local disk_hover_text = wibox.widget {
+    disk_hover_text_value,
+    {
+        align = "center",
+        valign = "center",
+        font = "Anonymous Pro 10",
+        widget = wibox.widget.textbox("free")
+    },
+    visible = false,
+    layout = wibox.layout.fixed.vertical
+}
+awesome.connect_signal("shit::disk", function(used, total)
+    disk_arc.value = used * 100 / total
+    disk_hover_text_value.markup = helpers.colorize_text(tostring(helpers.round(total - used, 1)).."G", x.color9)
+end)
+local disk_icon = wibox. widget {
+    align = "center",
+    valign = "center",
+    font = "icomoon 23",
+    markup = helpers.colorize_text("", x.color9),
+    widget = wibox.widget.textbox()
+}
+local disk = wibox.widget {
+    {
+        nil,
+        disk_hover_text,
+        expand = "none",
+        layout = wibox.layout.align.vertical
+    },
+    disk_icon,
+    disk_arc,
+    top_only = false,
+    layout = wibox.layout.stack
+}
+local disk_box = create_boxed_widget(disk, 100, 120, x.trans)
+disk_box:connect_signal("mouse::enter", function ()
+    disk_icon.visible = false
+    disk_hover_text.visible = true
+end)
+disk_box:connect_signal("mouse::leave", function ()
+    disk_icon.visible = true
+    disk_hover_text.visible = false
+end)
 
 -- mpd
 local mpd = require("widgets.mpd") 
-local mpd_box = create_boxed_widget(mpd, 400, 125, x.bg) -- final mpd widget
+local mpd_box = create_boxed_widget(mpd, 400, 125, x.color0) -- final mpd widget
 
 -- final app box
 local tor_area = {
@@ -180,16 +211,7 @@ local tor_area = {
 local sys_area = {
     nil,
     {
-        {
-            bt_box,
-            wifi_box,
-            layout = wibox.layout.align.horizontal
-        },
-        {
-            todo_box,
-            rec_box,
-            layout = wibox.layout.align.horizontal
-        },
+        disk_box,
         layout = wibox.layout.align.vertical,
     },
     nil,
@@ -198,7 +220,7 @@ local sys_area = {
 
 local settings_area = {
   nil,
-          helpers.vertical_pad(100),
+        helpers.vertical_pad(100),
   {
       {
           vol_box,

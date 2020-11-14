@@ -20,7 +20,7 @@ x = {
     bg = xrdb.background,
     fg = xrdb.foreground,
     trans = "#00000000",   -- fully transparent
-    transbg = "#262626D9", -- 85% transparent
+    transbg = "#1f1f1f90", -- 85% transparent
     color0     = xrdb.color0,
     color1     = xrdb.color1,
     color2     = xrdb.color2,
@@ -42,7 +42,6 @@ screen_width = awful.screen.focused().geometry.width
 screen_height = awful.screen.focused().geometry.height
 
 beautiful.init(require("theme"))
-
 local bling = require("bling")
 bling.module.flash_focus.enable()
 
