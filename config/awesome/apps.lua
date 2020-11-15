@@ -63,4 +63,16 @@ apps.torrent = function()
     helpers.run_or_raise({instance = 'transmission-gtk'}, false, "transmission-gtk", { switchtotag = true })
 end
 
+apps.lock = function()
+    awful.spawn.with_shell("betterlockscreen -l -u ~/.wp/mac-mojave.jpg")
+end
+
+apps.logout = function()
+    awesome.quit()
+end
+
+apps.shutdown = function()
+    awful.spawn.with_shell("sudo shutdown now")
+end
+
 return apps

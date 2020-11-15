@@ -17,7 +17,7 @@ theme.bg_dark = x.bg
 theme.bg_focus = x.transbg
 theme.bg_urgent = x.color3
 theme.bg_minimize = x.bg
-theme.bg_systray = x.bg
+theme.bg_systray = x.trans
 
 theme.fg_normal = x.fg
 theme.fg_focus = x.color1

@@ -6,6 +6,7 @@ local xresources = require("beautiful.xresources")
 local dpi = xresources.apply_dpi
 local naughty = require("naughty")
 local helpers = require("helpers")
+local apps = require("apps")
 local popupLib = require("candy.popupLib")
 local box_radius = beautiful.border_radius
 local box_gap = dpi(6)
@@ -29,35 +30,52 @@ local function format_progress_bar(bar, icon)
 end
 
 -- helper function to create buttons
-local create_button = function (symbol, color, bg_color, hover_color)
-    local widget = wibox.widget {
-        font = "RobotoMono Nerd Font Mono 18",
-        align = "center",
-        id = "text_role",
-        valign = "center",
+local function create_button(symbol, color, hover_color, cmd)
+    local icon = wibox.widget {
         markup = helpers.colorize_text(symbol, color),
-        widget = wibox.widget.textbox()
+        align = "center",
+        valign = "center",
+        font = "Material Icons 20",
+        forced_width = dpi(30),
+        forced_height = dpi(30),
+        widget = wibox.widget.textbox
     }
 
-    local section = wibox.widget {
-        widget,
-        forced_width = dpi(20),
-        bg = bg_color,
-        shape = gears.shape.rounded_rect,
-        widget = wibox.container.background
-    }
+    -- Press "animation"
+    icon:connect_signal("button::press", function(_, _, __, button)
+        if button == 3 then
+            icon.markup = helpers.colorize_text(symbol, hover_color.."55")
+        end
+    end)
+    icon:connect_signal("button::release", function ()
+        icon.markup = helpers.colorize_text(symbol, hover_color)
+    end)
 
-    -- Hover animation
-    section:connect_signal("mouse::enter", function ()
-        section.bg = hover_color
+    -- Hover "animation"
+    icon:connect_signal("mouse::enter", function ()
+        icon.markup = helpers.colorize_text(symbol, hover_color)
     end)
-    section:connect_signal("mouse::leave", function ()
-        section.bg = bg_color
+    icon:connect_signal("mouse::leave", function ()
+        icon.markup = helpers.colorize_text(symbol, color)
     end)
-    helpers.add_hover_cursor(section, "hand1")
-    return section
+
+    -- Change cursor on hover
+    helpers.add_hover_cursor(icon, "hand1")
+
+    -- Adds mousebinds if cmd is provided
+    if cmd then
+        icon:buttons(gears.table.join(
+            awful.button({ }, 1, function ()
+                cmd()
+            end),
+            awful.button({ }, 3, function ()
+                cmd()
+            end)
+        ))
+    end
+
+    return icon
 end
-
 -- helper function to create boxes
 local function create_boxed_widget(widget_to_be_boxed, width, height, bg_color)
     local box_container = wibox.container.background()
@@ -124,9 +142,17 @@ volume:buttons(gears.table.join(
 -- tor
 local tor = require("widgets.tor") 
 local tor_box = create_boxed_widget(tor, 100, 120, x.color0) -- final tor icon
---
+
+-- power buttons
+local logout = create_button("", x.fg, x.color1, apps.logout)
+local shutdown = create_button("", x.fg, x.color1, apps.shutdown)
+local lock = create_button("", x.fg, x.color1, apps.lock)
+local logout_box = create_boxed_widget(logout, 50, 50, x.color0)
+local shutdown_box = create_boxed_widget(shutdown, 50, 50, x.color0)
+local lock_box = create_boxed_widget(lock, 50, 50, x.color0)
+
 -- disk
---
+--BEGIN
 local disk_arc = wibox.widget {
     start_angle = 3 * math.pi / 2,
     min_value = 0,
@@ -187,12 +213,13 @@ disk_box:connect_signal("mouse::leave", function ()
     disk_icon.visible = true
     disk_hover_text.visible = false
 end)
+--END
+
 
 -- mpd
 local mpd = require("widgets.mpd") 
 local mpd_box = create_boxed_widget(mpd, 400, 125, x.color0) -- final mpd widget
 
--- final app box
 local tor_area = {
     nil,
     {
@@ -208,7 +235,7 @@ local tor_area = {
     layout = wibox.layout.align.vertical
 }
 
-local sys_area = {
+local disk_area = {
     nil,
     {
         disk_box,
@@ -218,9 +245,27 @@ local sys_area = {
     layout = wibox.layout.align.vertical
 }
 
+local power_area = {
+  {
+      {
+          lock_box,
+          layout = wibox.layout.align.horizontal,
+      },
+      {
+          logout_box,
+          layout = wibox.layout.align.horizontal,
+      },
+      {
+          shutdown_box,
+          layout = wibox.layout.align.horizontal,
+      },
+      layout = wibox.layout.align.horizontal,
+  },
+  layout = wibox.layout.align.vertical
+}
+
 local settings_area = {
   nil,
-        helpers.vertical_pad(100),
   {
       {
           vol_box,
@@ -252,12 +297,16 @@ local mpd_area = {
 
 local panelWidget = wibox.widget {
     {
-        sys_area,
+        disk_area,
         tor_area,
         layout = wibox.layout.align.horizontal
     },
-    settings_area,
-    mpd_area,
+    power_area,
+    {
+        settings_area,
+        mpd_area,
+        layout = wibox.layout.align.vertical
+    },
     layout = wibox.layout.align.vertical
 }
 

@@ -48,6 +48,7 @@ local mysystray_container = {
     right = dpi(8),
     top = dpi(5),
     screen = 1,
+    bg = x.trans,
     widget = wibox.container.margin
 }
 
