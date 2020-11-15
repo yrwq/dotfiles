@@ -9,7 +9,9 @@ altkey = "Mod1"
 
 awful.keyboard.append_global_keybindings({
 
-    -- spawn file manager
+    awful.key({ modkey, shiftkey }, "s",  function()
+        awful.spawn.with_shell("rofi -show drun") end),
+
     awful.key({ modkey }, "t", apps.file_manager),
     awful.key({ modkey, shiftkey }, "m", apps.mail),
     awful.key({ altkey }, "s", apps.youtube),

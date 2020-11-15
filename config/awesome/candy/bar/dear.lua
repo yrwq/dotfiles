@@ -139,6 +139,7 @@ awesome.connect_signal("shit::microphone", function(muted)
 end)
 
 local mytextclock = awful.widget.textclock()
+
 awful.screen.connect_for_each_screen(function(s)
 
         -- create tasklist
@@ -233,7 +234,7 @@ awful.screen.connect_for_each_screen(function(s)
                 {
                     s.mytaglist,
                     shape = helpers.rrect(beautiful.border_radius),
-                    bg = x.color0,
+                    bg = x.trans,
                     widget = wibox.container.background
                 },
                 margins = dpi(5),

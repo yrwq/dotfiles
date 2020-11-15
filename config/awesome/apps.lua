@@ -40,7 +40,7 @@ apps.volume = function ()
 end
 
 apps.editor = function ()
-    helpers.run_or_raise({instance = 'editor'}, false, "emacs", { switchtotag = true })
+    helpers.run_or_raise({instance = 'editor'}, false, "emacsclient -c", { switchtotag = true })
 end
 
 apps.music = function ()

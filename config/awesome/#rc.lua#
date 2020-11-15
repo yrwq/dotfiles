@@ -5,8 +5,6 @@ local awful = require("awful")
 -- init
 awful.spawn.with_shell("xrdb ~/.Xresources")
 awful.spawn.with_shell("picom")
-awful.spawn.with_shell("mpd")
-awful.spawn.with_shell("emacs --daemon")
 awful.spawn.with_shell("nitrogen --restore")
 
 -- vars
@@ -16,9 +14,7 @@ music = "xst -c music -e music"
 mail = "xst -c mail -e neomutt"
 
 local beautiful = require("beautiful")
-
 local xrdb = beautiful.xresources.get_current_theme()
-
 x = {
     --           xrdb variable
     bg = xrdb.background,
@@ -42,7 +38,6 @@ x = {
     color14    = xrdb.color14,
     color15    = xrdb.color15,
 }
-
 screen_width = awful.screen.focused().geometry.width
 screen_height = awful.screen.focused().geometry.height
 

@@ -80,7 +80,6 @@ app_drawer = wibox({visible = false, ontop = true, type = "dock"})
 awful.placement.maximize(app_drawer)
 
 app_drawer.bg = "#0f0f0fA0"
--- app_drawer.bg = beautiful.app_drawer_bg or x.background or "#111111"
 app_drawer.fg = "#FEFEFE"
 
 -- Add app drawer or mask to each screen
@@ -188,7 +187,5 @@ app_drawer:setup {
         layout = wibox.layout.flex.vertical
     },
     bg = x.bg .. "A0",
-    -- bg = x.background.."AA",
-    -- bg = "#00000000",
     widget = wibox.container.background
 }
