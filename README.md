@@ -64,3 +64,5 @@ I use the software above:
 
 <img src=".assets/preview1.png">
 <img src=".assets/preview2.png">
+<img src=".assets/preview3.png">
+<img src=".assets/preview4.png">
