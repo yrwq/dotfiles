@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+img="shot_$(date '+%m%d%H%M%S').png"
+file="$HOME/etc/pic/shots/$img"
+sleep 1
+import -window root $file
+
+xclip -selection clipboard -t image/png -i  $file
+notify-send -i $file "saved"

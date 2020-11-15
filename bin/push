@@ -1,0 +1,11 @@
+#!/bin/sh
+#push a repo to main branch
+#https://github.com/co1ncidence
+
+[ -z "$1" ] && \
+    msg="update" || \
+    msg="$1"
+
+git add .
+git commit -m "${msg}"
+git push origin main 

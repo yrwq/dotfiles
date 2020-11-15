@@ -1,0 +1,6 @@
+#!/bin/sh
+# convert every jpg to png in a dir
+# https://github.com/yrwq
+
+find . -name "*.jpg" -exec mogrify -format png {} \;
+rm -rf *.jpg

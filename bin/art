@@ -1,0 +1,11 @@
+#!/bin/sh
+# 
+# Extract cover from audio file
+
+ffmpeg \
+    -hide_banner \
+    -loglevel 0 \
+    -y \
+    -i "$1" \
+    -vf scale=300:-1 \
+    "$1_cover.jpg"

@@ -11,6 +11,7 @@
 This repository contains my personal collection of configuration files.  
 Inspired by elena's [dotfiles](https://github.com/elenapan/dotfiles) and JavaCafe01's [dotfiles](https://github.com/JavaCafe01/dotfiles)  
 
+
 I use the software above:
 
 **Window Manager**: [awesome](https://awesomewm.org)  
@@ -55,8 +56,14 @@ I use the software above:
     ```sh
     cp config/awesome ~/.config/ -r 
     ```
-  
-4. Configure 
+    
+4. Install [bling](https://github.com/Nooo37/bling)
+
+    ```sh
+    git clone https://github.com/Nooo37/bling ~/.config/awesome -r
+    ```
+    
+5. Configure 
  
     Before using my config you should change the default applications, in `rc.lua` and `apps.lua`
  

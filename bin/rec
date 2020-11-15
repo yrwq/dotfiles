@@ -1,0 +1,16 @@
+#!/bin/bash
+slop=$(slop -f "%x %y %w %h")
+
+read -r X Y W H < <(echo $slop)
+
+time=$(date +%F%T)
+
+notify-send "Recording started"
+    # only start recording if we give a width (e.g we press escape to get out of slop - don't record)
+width=${#W}
+
+      
+ffmpeg -f x11grab -framerate 30  -thread_queue_size 512  -i $DISPLAY.0+$X,$Y \
+    -vcodec libx264 -qp 18 -preset ultrafast \
+    ~/etc/vid/rec/rec-$time.mp4
+
