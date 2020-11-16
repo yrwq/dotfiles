@@ -17,7 +17,7 @@ The configuration probably won't match your setup out-of-the-box, so you should 
 
 I use the software below, recommended to install them but not required.
 
-|    Name    |        For        |
+|    Name    |        Purpose    |
 |:----------:|:-----------------:|
 | Doom Emacs |    Text Editor    |
 |   Firefox  |    Web Browser    |
