@@ -1,4 +1,3 @@
-<p align="center"><img src=".assets/preview1.png" width="600px"></p>
 <p align="center"> 
     <a href="#introduction"> <img width="150px" src=".assets/introduction.png"/> </a>
     <a href="#software"> <img width="150px" src=".assets/software.png"/> </a>
