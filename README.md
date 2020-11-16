@@ -15,7 +15,7 @@ The configuration probably won't match your setup out-of-the-box, so you should 
 
 # Software
 
-I use the software above, recommended to install them but not required.
+I use the software below, recommended to install them but not required.
 
 |    Name    |        For        |
 |:----------:|:-----------------:|
