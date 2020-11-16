@@ -9,9 +9,10 @@
 
 This repository contains my personal collection of configuration files linux.  
 Inspired by elena's [dotfiles](https://github.com/elenapan/dotfiles) and JavaCafe01's [dotfiles](https://github.com/JavaCafe01/dotfiles)  
-
-I'm distro hopping a lot and i got tired of copying my dotfiles so i ended up here.
-
+I'm distro hopping a lot and i got tired of copying my dotfiles so i ended up here.  
+This repository will always will be work in progress, so expect to find issues.  
+The configuration probably won't match your setup out-of-box   
+so you should edit the files to match your setup.
 
 I use the software above:
 
