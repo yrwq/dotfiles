@@ -1,0 +1,11 @@
+* Bin
+
+These are my shell scripts, that makes my life easier.
+
+
+| name  | description               | usage                  |
+|       |                           |                        |
+| arc   | archives a folder         | `arc <folder>`         |
+| art   | extracts cover from music | `art <music>`          |
+| clone | easily clone a repo       | `clone <user/repo>`    |
+| conv  | convert every jpg to png  | run `conv` in a folder |
