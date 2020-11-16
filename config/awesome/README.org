@@ -1,20 +1,45 @@
+#+TITLE: Aweomsome WM Config
+#+PROPERTY: header-args :tangle rc.lua
+
+* table-of-contets :toc:
+- [[#libraries][Libraries]]
+- [[#autostart][Autostart]]
+- [[#vars][Vars]]
+- [[#beautiful][Beautiful]]
+- [[#layouts][Layouts]]
+- [[#require][Require]]
+
+* Libraries
+
+#+BEGIN_SRC lua :tangle rc.lua
 pcall(require, "luarocks.loader")
 local gears = require("gears")
 local awful = require("awful")
+#+END_SRC
 
+
+* Autostart
+#+BEGIN_SRC lua :tangle rc.lua
 awful.spawn.with_shell("xrdb ~/.Xresources")
 awful.spawn.with_shell("picom")
 awful.spawn.with_shell("mpd")
 awful.spawn.with_shell("emacs --daemon")
 awful.spawn.with_shell("nitrogen --restore")
+#+END_SRC
 
+* Vars
+#+BEGIN_SRC lua :tangle rc.lua
 editor = "emacs"
 terminal = "xst"
 music = "xst -c music -e music"
 mail = "xst -c mail -e neomutt"
 screen_width = awful.screen.focused().geometry.width
 screen_height = awful.screen.focused().geometry.height
+#+END_SRC
 
+* Beautiful
+
+#+BEGIN_SRC lua :tangle rc.lua
 local beautiful = require("beautiful")
 
 local xrdb = beautiful.xresources.get_current_theme()
@@ -44,7 +69,11 @@ x = {
 }
 
 beautiful.init(require("theme"))
+#+end_src
 
+* Layouts
+
+#+BEGIN_SRC lua :tangle rc.lua
 local bling = require("bling")
 bling.module.flash_focus.enable()
 
@@ -70,9 +99,14 @@ awful.screen.connect_for_each_screen(function(s)
     local tagnames = { "一", "二", "三", "四", "五" }
     awful.tag(tagnames, s, layouts)
 end)
+#+end_src
 
+* Require
+
+#+BEGIN_SRC lua :tangle rc.lua
 require("shit") -- daemons
 require("keys") -- key binds
 require("candy") -- bar, panels
 require("module") -- titlebar, popups
 require("rules") -- rules
+#+end_src

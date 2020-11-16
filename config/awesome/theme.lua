@@ -56,6 +56,7 @@ theme.tasklist_fg_normal = x.color8
 
 theme.systray_icon_spacing = dpi(8)
 theme.notification_max_width = dpi(350)
+theme.notification_font = "Anonymous Pro 14"
 
 theme.icon_theme = "/home/yrwq/.icons/grey/apps/16"
 

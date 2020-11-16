@@ -12,9 +12,6 @@ awful.keyboard.append_global_keybindings({
     awful.key({ modkey, shiftkey }, "s",  function()
         awful.spawn.with_shell("rofi -show drun") end),
 
-    awful.key({ modkey }, "t", apps.file_manager),
-    awful.key({ modkey, shiftkey }, "m", apps.mail),
-    awful.key({ altkey }, "s", apps.youtube),
     awful.key({ modkey }, "e", apps.editor),
     awful.key({ modkey }, "m", apps.music),
     -- show shoot screen
@@ -77,8 +74,8 @@ awful.keyboard.append_global_keybindings({
     end),
 
     -- swap clients
-    awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end),
-    awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end),
+    awful.key({ modkey, shiftkey}, "j", function () awful.client.swap.byidx(  1)    end),
+    awful.key({ modkey, shiftkey}, "k", function () awful.client.swap.byidx( -1)    end),
 
     -- increase/decrease gaps
     awful.key({ modkey, shiftkey }, "minus", function () awful.tag.incgap(5, nil) end),
@@ -95,7 +92,7 @@ awful.keyboard.append_global_keybindings({
     awful.key({ modkey, shiftkey   }, "e", awesome.quit),
 
     -- spawn terminal
-    awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end),
+    awful.key({ modkey}, "Return", function () awful.spawn(terminal) end),
 
     -- run prompt
     awful.key({ modkey }, "r",     function () awful.screen.focused().mypromptbox:run() end),

@@ -74,6 +74,8 @@ local lxappearance = create_button("󰔎", x.color8, x.fg, apps.lxappearance, "y
 local volume = create_button("󰕾", x.color8, x.fg, apps.volume, "x")
 local nitrogen = create_button("󰸉", x.color8, x.fg, apps.nitrogen, "c")
 local torrent = create_button("󱎔", x.color8, x.fg, apps.torrent, "v")
+local pdf = create_button("󰹖", x.color8, x.fg, apps.pdf, "u")
+local news = create_button("󰾱", x.color8, x.fg, apps.news, "i")
 
 -- Create the widget
 app_drawer = wibox({visible = false, ontop = true, type = "dock"})
@@ -184,6 +186,7 @@ app_drawer:setup {
         create_stripe({ browser, discord, whatsapp, mail}, "#00000000"),
         create_stripe({ file_manager, editor, music, todo }, "#00000000"),
         create_stripe({ lxappearance, volume, nitrogen, torrent}, "#00000000"),
+        create_stripe({ pdf, news }, "#00000000"),
         layout = wibox.layout.flex.vertical
     },
     bg = x.bg .. "A0",

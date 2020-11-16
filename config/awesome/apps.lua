@@ -7,6 +7,14 @@ local helpers = require("helpers")
 
 local apps = {}
 
+apps.pdf = function()
+    awful.spawn.with_shell("~/.bin/pdf")
+end
+
+apps.news = function()
+    awful.spawn.with_shell("xst -c news -e newsboat")
+end
+
 apps.browser = function ()
     awful.spawn.with_shell("firefox", { switchtotag = true })
 end
@@ -31,10 +39,6 @@ apps.gimp = function ()
     helpers.run_or_raise({class = 'Gimp'}, false, "gimp")
 end
 
-apps.youtube = function ()
-    awful.spawn.with_shell("mpvtube")
-end
-
 apps.volume = function ()
     helpers.run_or_raise({class = 'Pavucontrol'}, true, "pavucontrol")
 end
@@ -48,7 +52,7 @@ apps.music = function ()
 end
 
 apps.todo = function()
-    helpers.run_or_raise({instance = 'todo'}, false, "emacs ~/doc/todo.org", { switchtotag = true })
+    helpers.run_or_raise({instance = 'todo'}, false, "emacsclient -c ~/doc/todo.org", { switchtotag = true })
 end
 
 apps.lxappearance = function()
@@ -64,7 +68,7 @@ apps.torrent = function()
 end
 
 apps.lock = function()
-    awful.spawn.with_shell("betterlockscreen -l -u ~/.wp/mac-mojave.jpg")
+    awful.spawn.with_shell("~/.bin/lock")
 end
 
 apps.logout = function()
