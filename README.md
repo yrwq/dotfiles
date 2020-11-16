@@ -33,25 +33,18 @@ I use the software above:
      yay -S awesome-git 
      ```
  
-2. Install required fonts
-
-    ```sh 
-    git clone https://github.com/yrwq/dotfiles && cd dotfiles
- 
-    mkdir ~/.fonts
- 
-    cp fonts/* ~/.fonts/ -r
- 
-   fc-cache -fv
-   ```
- 
 3. Install my awesomewm configuration
 
     First back up your current config
     ```sh
     mv ~/.config/awaesome ~/.config/awesome-backup
     ```
-
+    Clone this repository
+    
+    ```sh 
+    git clone https://github.com/yrwq/dotfiles && cd dotfiles
+    ```
+    
     Now copy my files
     ```sh
     cp config/awesome ~/.config/ -r 
@@ -62,11 +55,31 @@ I use the software above:
     ```sh
     git clone https://github.com/Nooo37/bling ~/.config/awesome -r
     ```
-    
+   
 5. Configure 
  
     Before using my config you should change the default applications, in `rc.lua` and `apps.lua`
- 
+
+6. Install scripts, wallpapers, etc. (optional)
+
+    Before copying my scripts take a look at bin's [readme](https://github.com/yrwq/dotfiles/blob/main/bin/README.org)
+
+    ```sh
+    cp bin ~/.bin -r
+    ```
+    
+    Copy wallpapers
+    
+    ```sh
+    cp wp ~/.wp -r
+    ```
+    
+    Copy fonts
+    
+    ```sh
+    cp fonts ~/.fonts/ -r 
+    ```
+    
 # Gallery
 
 <img src=".assets/preview1.png">
