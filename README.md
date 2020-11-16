@@ -6,10 +6,10 @@
 
 # Introduction
 
-<img src=".assets/preview1.png" alt="img" align="right" width="500px">
-
-This repository contains my personal collection of configuration files.  
+This repository contains my personal collection of configuration files linux.  
 Inspired by elena's [dotfiles](https://github.com/elenapan/dotfiles) and JavaCafe01's [dotfiles](https://github.com/JavaCafe01/dotfiles)  
+
+I'm distro hopping a lot and i got tired of copying my dotfiles so i ended up here.
 
 
 I use the software above:
