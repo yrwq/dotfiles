@@ -33,7 +33,7 @@ I use the software above:
      yay -S awesome-git 
      ```
  
-3. Install my awesomewm configuration
+2. Install my awesomewm configuration
 
     First back up your current config
     ```sh
@@ -50,17 +50,15 @@ I use the software above:
     cp config/awesome ~/.config/ -r 
     ```
     
-4. Install [bling](https://github.com/Nooo37/bling)
-
+3. Install [bling](https://github.com/Nooo37/bling) (utilities for awesomewm)
+   
+   This is optional, but if you don't wanna use bling you should edit `rc.lua`
+   
     ```sh
     git clone https://github.com/Nooo37/bling ~/.config/awesome -r
     ```
-   
-5. Configure 
- 
-    Before using my config you should change the default applications, in `rc.lua` and `apps.lua`
 
-6. Install scripts, wallpapers, etc. (optional)
+4. Install scripts, wallpapers, etc. (optional)
 
     Before copying my scripts take a look at bin's [readme](https://github.com/yrwq/dotfiles/blob/main/bin/README.org)
 
@@ -79,6 +77,9 @@ I use the software above:
     ```sh
     cp fonts ~/.fonts/ -r 
     ```
+    
+    Before using my config you should change the default applications, in `rc.lua` and `apps.lua`
+    
     
 # Gallery
 
