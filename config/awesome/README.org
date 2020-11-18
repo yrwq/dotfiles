@@ -1,4 +1,3 @@
-#+TITLE: Aweomsome WM Config
 #+PROPERTY: header-args :tangle rc.lua
 
 * table-of-contets :toc:
@@ -16,7 +15,6 @@ pcall(require, "luarocks.loader")
 local gears = require("gears")
 local awful = require("awful")
 #+END_SRC
-
 
 * Autostart
 #+BEGIN_SRC lua :tangle rc.lua

@@ -6,11 +6,44 @@ local settingsPop = require("candy.panel.settings")
 modkey = "Mod4"
 shiftkey = "Shift"
 altkey = "Mod1"
+ctrlkey = "Control"
+
+local function shift_focus_and_move_client(move_back)
+  local t = client.focus and client.focus.first_tag or nil
+  if t == nil then
+    return
+  end
+  if move_back then
+    if t.index == 1 then
+      new_tagindex = #awful.screen.focused().tags
+    else
+      new_tagindex = t.index - 1
+    end
+    local tag = client.focus.screen.tags[new_tagindex]
+    awful.client.movetotag(tag)
+    awful.tag.viewprev()
+    awesome.emit_signal("toggle::nav")
+  else
+    if t.index == #awful.screen.focused().tags then
+      new_tagindex = 1
+    else
+      new_tagindex = t.index + 1
+    end
+    local tag = client.focus.screen.tags[new_tagindex]
+    awful.client.movetotag(tag)
+    awful.tag.viewnext()
+  end
+end
 
 awful.keyboard.append_global_keybindings({
 
-    awful.key({ modkey, shiftkey }, "s",  function()
-        awful.spawn.with_shell("rofi -show drun") end),
+    awful.key({ modkey, shiftkey }, "d", function () shift_focus_and_move_client(false) end),
+
+    awful.key({ modkey, shiftkey}, "a", function () shift_focus_and_move_client(true) end),
+
+    awful.key({ modkey}, "Tab", function () awful.client.focus.byidx( 1)             end),
+
+    awful.key({ modkey, shiftkey }, "s",  function() awful.spawn.with_shell("rofi -show drun") end),
 
     awful.key({ modkey }, "e", apps.editor),
     awful.key({ modkey }, "m", apps.music),
@@ -73,6 +106,9 @@ awful.keyboard.append_global_keybindings({
             awful.client.focus.bydirection("right")
     end),
 
+    awful.key({ modkey, ctrlkey }, "l",     function () awful.tag.incmwfact( 0.05)      end),
+
+    awful.key({ modkey, ctrlkey }, "h",     function () awful.tag.incmwfact(-0.05)      end),
     -- swap clients
     awful.key({ modkey, shiftkey}, "j", function () awful.client.swap.byidx(  1)    end),
     awful.key({ modkey, shiftkey}, "k", function () awful.client.swap.byidx( -1)    end),
@@ -81,6 +117,9 @@ awful.keyboard.append_global_keybindings({
     awful.key({ modkey, shiftkey }, "minus", function () awful.tag.incgap(5, nil) end),
     awful.key({ modkey }, "minus", function () awful.tag.incgap(-5, nil) end),
 
+    awful.key({ modkey }, "c", function (c)
+       awful.placement.centered(c, {honor_workarea = true, honor_padding = true})
+    end),
 })
 
 -- General Awesome keys

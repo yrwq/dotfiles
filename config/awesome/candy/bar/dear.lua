@@ -211,6 +211,15 @@ awful.screen.connect_for_each_screen(function(s)
                 height = dpi(30)
         })
 
+        local function remove_wibar(c)
+        if c.fullscreen or c.maximized then
+            s.mywibox.visible = false
+        else
+            s.mywibox.visible = true
+        end
+        end
+
+        client.connect_signal("property::fullscreen", remove_wibar)
         -- add widgets to wibox
         s.mywibox:setup{
         layout = wibox.layout.align.horizontal,
