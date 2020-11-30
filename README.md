@@ -92,7 +92,7 @@ I use the software below, recommended to install them but not required.
 
 # Gallery
 
-<img src=".assets/preview1.png">
-<img src=".assets/preview2.png">
-<img src=".assets/preview3.png">
-<img src=".assets/preview4.png">
+![preview](https://0x0.st/i7cq.png)
+![preview](https://0x0.st/i7cZ.png)
+![preview](https://0x0.st/i7cb.png)
+![preview](https://0x0.st/i7cc.png)
