@@ -1,7 +1,7 @@
 appearance.calendarview=monthly
 appearance.compactpanels=no
-appearance.defaultpanel=calendar
-appearance.layout=1
+appearance.defaultpanel=todo
+appearance.layout=5
 appearance.notifybar=yes
 appearance.sidebarwidth=1
 appearance.theme=red on default
