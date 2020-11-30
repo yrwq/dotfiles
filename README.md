@@ -1,4 +1,4 @@
-<p align="center"> 
+<p align="center">
     <a href="#introduction"> <img width="150px" src=".assets/introduction.png"/> </a>
     <a href="#software"> <img width="150px" src=".assets/software.png"/> </a>
     <a href="#setup"> <img width="150px" src=".assets/setup.png"/> </a>
@@ -7,10 +7,10 @@
 
 # Introduction
 
-This repository contains my personal collection of configuration files for linux.  
-Inspired by elena's [dotfiles](https://github.com/elenapan/dotfiles) and JavaCafe01's [dotfiles](https://github.com/JavaCafe01/dotfiles)  
-I'm distro hopping a lot and i got tired of copying my dotfiles so i ended up here.  
-This repository will always will be work in progress, so expect to find issues.  
+This repository contains my personal collection of configuration files for linux.
+Inspired by elena's [dotfiles](https://github.com/elenapan/dotfiles), JavaCafe01's [dotfiles](https://github.com/JavaCafe01/dotfiles) and Luke Smith's [dotfiles](https://github.com/LukeSmithxyz/voidrice)
+I'm distro hopping a lot and i got tired of copying my dotfiles so i ended up here.
+This repository will always will be work in progress, so expect to find issues.
 The configuration probably won't match your setup out-of-the-box, so you should edit the files to match your setup.
 
 # Software
@@ -19,46 +19,50 @@ I use the software below, recommended to install them but not required.
 
 |    Name    |        Purpose    |
 |:----------:|:-----------------:|
-| Doom Emacs |    Text Editor    |
-|   Firefox  |    Web Browser    |
-|     Xst    | Terminal Emulator |
+| Vim |    Text Editor    |
+|   Brave |    Web Browser    |
+|     st    | Terminal Emulator |
 |     Zsh    |       Shell       |
 |   Ncmpcpp  |    Music Player   |
 |   Neomutt  |    Email Client   |
 |  Newsboat  |     RSS Reader    |
-|   Thunar   |    File Manager   |
+|   lf |    File Manager   |
 
 # Setup
 
 1. Install awesome
 
     You need the git version, otherwise you can't use my setup
- 
+
      ```sh
-     yay -S awesome-git 
+     yay -S awesome-git
      ```
- 
+
 2. Install my awesomewm configuration
 
-    First back up your current config
+    First back up your current configurations
     ```sh
-    mv ~/.config/awaesome ~/.config/awesome-backup
+    mv ~/.config ~/.config-backup
+
+	mkdir ~/.config
     ```
     Clone this repository
-    
-    ```sh 
+
+    ```sh
     git clone https://github.com/yrwq/dotfiles && cd dotfiles
     ```
-    
+
     Now copy my files
     ```sh
-    cp config/awesome ~/.config/ -r 
+    cp config/awesome ~/.config/ -r
     ```
-    
+
 3. Install [bling](https://github.com/Nooo37/bling) (utilities for awesomewm)
-   
-   This is optional, but if you don't wanna use bling you should edit `rc.lua`
-   
+
+   This is optional, but highly recommended.
+
+   If you don't wanna use bling you should edit `rc.lua`
+
     ```sh
     git clone https://github.com/Nooo37/bling ~/.config/awesome -r
     ```
@@ -70,22 +74,22 @@ I use the software below, recommended to install them but not required.
     ```sh
     cp bin ~/.bin -r
     ```
-    
+
     Copy wallpapers
-    
+
     ```sh
     cp wp ~/.wp -r
     ```
-    
+
     Copy fonts
-    
+
     ```sh
-    cp fonts ~/.fonts/ -r 
+    cp fonts ~/.fonts/ -r
     ```
-    
+
     Before using my config you should change the default applications, in `rc.lua` and `apps.lua`
-    
-    
+
+
 # Gallery
 
 <img src=".assets/preview1.png">
