@@ -15,5 +15,6 @@ else
 fi
 setxkbmap hu
 chth &
-sleep 5
+sleep 3
 exec awesome
+syncmail &

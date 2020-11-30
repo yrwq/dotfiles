@@ -75,5 +75,3 @@ require("keys") -- key binds
 require("candy") -- bar, panels
 require("module") -- titlebar, popups
 require("rules") -- rules
-
--- awful.spawn.with_shell("xrdb ~/.Xresources")
