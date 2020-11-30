@@ -64,7 +64,7 @@ I use the software below, recommended to install them but not required.
    If you don't wanna use bling you should edit `rc.lua`
 
     ```sh
-    git clone https://github.com/Nooo37/bling ~/.config/awesome -r
+    git clone https://github.com/Nooo37/bling ~/.config/awesome/bling
     ```
 
 4. Install scripts, wallpapers, etc. (optional)
