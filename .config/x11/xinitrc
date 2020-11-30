@@ -17,4 +17,3 @@ setxkbmap hu
 chth &
 sleep 3
 exec awesome
-syncmail &
