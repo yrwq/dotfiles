@@ -72,19 +72,13 @@ I use the software below, recommended to install them but not required.
     Before copying my scripts take a look at bin's [readme](https://github.com/yrwq/dotfiles/blob/main/bin/README.org)
 
     ```sh
-    cp bin ~/.bin -r
-    ```
-
-    Copy wallpapers
-
-    ```sh
-    cp wp ~/.wp -r
+    cp .bin ~/.bin -r
     ```
 
     Copy fonts
 
     ```sh
-    cp fonts ~/.fonts/ -r
+    cp .fonts ~/.fonts/ -r
     ```
 
     Before using my config you should change the default applications, in `rc.lua` and `apps.lua`
