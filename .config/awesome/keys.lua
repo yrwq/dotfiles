@@ -66,6 +66,7 @@ awful.keyboard.append_global_keybindings({
     awful.key({ modkey }, "á", apps.torrent),
     awful.key({ modkey, shiftkey }, "á", apps.torrent_toggle),
 
+	awful.key({ modkey }, "b", function() wibars_toggle() end),
     -- show app launcher
     awful.key({ modkey }, "s", function() app_drawer_show() end),
 
