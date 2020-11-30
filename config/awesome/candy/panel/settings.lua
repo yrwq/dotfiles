@@ -140,7 +140,7 @@ volume:buttons(gears.table.join(
 ))
 
 -- tor
-local tor = require("widgets.tor") 
+local tor = require("widgets.tor")
 local tor_box = create_boxed_widget(tor, 100, 120, x.color0) -- final tor icon
 
 -- power buttons
@@ -217,7 +217,7 @@ end)
 
 
 -- mpd
-local mpd = require("widgets.mpd") 
+local mpd = require("widgets.mpd")
 local mpd_box = create_boxed_widget(mpd, 400, 125, x.color0) -- final mpd widget
 
 local tor_area = {

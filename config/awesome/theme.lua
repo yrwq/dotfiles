@@ -10,7 +10,7 @@ local helpers = require("helpers")
 
 local theme = dofile(themes_path .. "default/theme.lua")
 
-theme.font = "Anonymous Pro 9"
+theme.font = "Iosevka Term 9"
 
 theme.bg_normal = x.transbg
 theme.bg_dark = x.bg

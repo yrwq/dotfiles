@@ -2,7 +2,8 @@ local awful = require("awful")
 local gears = require("gears")
 local wibox = require("wibox")
 local apps = require("apps")
-local settingsPop = require("candy.panel.settings")
+local bling = require("bling")
+
 modkey = "Mod4"
 shiftkey = "Shift"
 altkey = "Mod1"
@@ -37,6 +38,12 @@ end
 
 awful.keyboard.append_global_keybindings({
 
+    awful.key({ altkey }, "a", function () bling.module.tabbed.pick() end),
+
+    awful.key({ altkey }, "s", function () bling.module.tabbed.iter() end),
+
+    awful.key({ altkey }, "d", function () bling.module.tabbed.pop() end),
+
     awful.key({ modkey, shiftkey }, "d", function () shift_focus_and_move_client(false) end),
 
     awful.key({ modkey, shiftkey}, "a", function () shift_focus_and_move_client(true) end),
@@ -45,13 +52,25 @@ awful.keyboard.append_global_keybindings({
 
     awful.key({ modkey, shiftkey }, "s",  function() awful.spawn.with_shell("rofi -show drun") end),
 
+    awful.key({ }, "Print",  function() awful.spawn.with_shell("lien -s -f") end),
+
+    awful.key({ modkey }, "Print",  function() awful.spawn.with_shell("lien -a -f") end),
+
+    awful.key({ altkey }, "Print",  function() awful.spawn.with_shell("rec") end),
+
+    -- apps
     awful.key({ modkey }, "e", apps.editor),
     awful.key({ modkey }, "m", apps.music),
-    -- show shoot screen
+    awful.key({ modkey }, "r", apps.file_manager),
+    awful.key({ modkey }, "y", apps.youtube),
+    awful.key({ modkey }, "á", apps.torrent),
+    awful.key({ modkey, shiftkey }, "á", apps.torrent_toggle),
+
+    -- show app launcher
     awful.key({ modkey }, "s", function() app_drawer_show() end),
 
     -- show shoot screen
-    awful.key({ altkey }, "d", function() shoot_screen_show() end),
+    awful.key({ altkey }, "f", function() shoot_screen_show() end),
 
     -- show top right panel
     awful.key({ altkey }, "q",  function()
@@ -67,20 +86,22 @@ awful.keyboard.append_global_keybindings({
 
     -- spawn nerd font picker
     awful.key({ altkey }, "y",     function ()
-        awful.spawn.with_shell("~/.bin/nerdy") end),
+        awful.spawn.with_shell("nerdy") end),
 
     -- increase volume
     awful.key({ altkey }, "Up",     function ()
-        awful.spawn.with_shell("amixer sset Master 5%+") end),
+        awful.spawn.with_shell("pamixer --allow-boost -i 5") end),
 
     -- decrease volume
     awful.key({ altkey }, "Down",     function ()
-        awful.spawn.with_shell("amixer sset Master 5%-")
-    end),
+        awful.spawn.with_shell("pamixer --allow-boost -d 5") end),
 
     awful.key({ altkey }, "space",  function()
         awful.spawn.with_shell("mpc toggle")
     end),
+
+    awful.key({ altkey }, "m", function()
+	awful.spawn.with_shell("amixer set Master toggle") end),
 })
 
 -- focus and layout
@@ -91,12 +112,10 @@ awful.keyboard.append_global_keybindings({
 
     -- focus clients with hjkl
     awful.key({ modkey }, "j", function()
-            awful.client.focus.bydirection("down")
-    end),
+	awful.client.focus.byidx( -1)             end),
 
     awful.key({ modkey }, "k", function()
-            awful.client.focus.bydirection("up")
-    end),
+    	awful.client.focus.byidx( 1)             end),
 
     awful.key({ modkey }, "h", function()
             awful.client.focus.bydirection("left")
@@ -132,10 +151,6 @@ awful.keyboard.append_global_keybindings({
 
     -- spawn terminal
     awful.key({ modkey}, "Return", function () awful.spawn(terminal) end),
-
-    -- run prompt
-    awful.key({ modkey }, "r",     function () awful.screen.focused().mypromptbox:run() end),
-
 
 })
 
@@ -204,7 +219,7 @@ client.connect_signal("request::default_keybindings", function()
             end,
             {description = "toggle fullscreen", group = "client"}),
 
-        awful.key({ modkey, "Shift"   }, "q",      function (c) c:kill()                         end,
+        awful.key({ modkey }, "q",      function (c) c:kill()                         end,
           {description = "close", group = "client"}),
 
         awful.key({ modkey, shiftkey }, "space",  awful.client.floating.toggle                     ,

@@ -2,16 +2,14 @@ pcall(require, "luarocks.loader")
 local gears = require("gears")
 local awful = require("awful")
 
-awful.spawn.with_shell("xrdb ~/.Xresources")
 awful.spawn.with_shell("picom")
 awful.spawn.with_shell("mpd")
 awful.spawn.with_shell("emacs --daemon")
-awful.spawn.with_shell("nitrogen --restore")
 
-editor = "emacs"
-terminal = "xst"
-music = "xst -c music -e music"
-mail = "xst -c mail -e neomutt"
+editor = "emacsclient -c"
+terminal = "st"
+music = "st -c music -e ncmpcpp"
+mail = "st -c mail -e neomutt"
 screen_width = awful.screen.focused().geometry.width
 screen_height = awful.screen.focused().geometry.height
 
@@ -57,11 +55,12 @@ awful.layout.layouts = {
 }
 
 awful.screen.connect_for_each_screen(function(s)
-    local l = awful.layout.suit -- to save time
+    local l = awful.layout.suit
+    local b = bling.layout
     local layouts = {
+      b.mstab,
       l.tile,
-      l.tile,
-      l.tile,
+      b.mstab,
       l.tile,
       l.tile,
     }
@@ -76,3 +75,5 @@ require("keys") -- key binds
 require("candy") -- bar, panels
 require("module") -- titlebar, popups
 require("rules") -- rules
+
+-- awful.spawn.with_shell("xrdb ~/.Xresources")

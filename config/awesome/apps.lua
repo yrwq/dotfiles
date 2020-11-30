@@ -7,24 +7,24 @@ local helpers = require("helpers")
 
 local apps = {}
 
-apps.pdf = function()
-    awful.spawn.with_shell("~/.bin/pdf")
-end
-
 apps.news = function()
-    awful.spawn.with_shell("xst -c news -e newsboat")
+    awful.spawn.with_shell("st -c news -e newsboat")
 end
 
 apps.browser = function ()
-    awful.spawn.with_shell("firefox", { switchtotag = true })
+    awful.spawn.with_shell("brave-dev", { switchtotag = true })
+end
+
+apps.abook = function ()
+    awful.spawn.with_shell("st -e abook -C ~/.config/abook/abookrc --datafile ~/.config/abook/addressbook", { switchtotag = true })
+end
+
+apps.calcurse = function ()
+    awful.spawn.with_shell("st -e calcurse", { switchtotag = true })
 end
 
 apps.file_manager = function ()
-    helpers.run_or_raise({class = 'thunar'}, false, "thunar")
-end
-
-apps.whatsapp = function ()
-    helpers.run_or_raise({class = 'whatsapp-nativefier-dark'}, false, "whatsapp-nativefier-dark")
+    helpers.run_or_raise({class = 'st -c files -e lf'}, false, "st -c files -e lf")
 end
 
 apps.discord = function ()
@@ -32,7 +32,7 @@ apps.discord = function ()
 end
 
 apps.mail = function ()
-    helpers.run_or_raise({instance = 'email'}, false, mail, {switchtotag = true})
+    helpers.run_or_raise({instance = 'email'}, false, "st -c email -e neomutt", {switchtotag = true})
 end
 
 apps.gimp = function ()
@@ -40,7 +40,7 @@ apps.gimp = function ()
 end
 
 apps.volume = function ()
-    helpers.run_or_raise({class = 'Pavucontrol'}, true, "pavucontrol")
+    awful.spawn.with_shell("st -c volume -e pulsemixer")
 end
 
 apps.editor = function ()
@@ -64,11 +64,19 @@ apps.nitrogen = function()
 end
 
 apps.torrent = function()
-    helpers.run_or_raise({instance = 'transmission-gtk'}, false, "transmission-gtk", { switchtotag = true })
+    awful.spawn.with_shell("torwrap")
+end
+
+apps.torrent_toggle = function()
+    awful.spawn.with_shell("td-toggle")
+end
+
+apps.youtube = function()
+    awful.spawn.with_shell("ytw")
 end
 
 apps.lock = function()
-    awful.spawn.with_shell("~/.bin/lock")
+    awful.spawn.with_shell("lock")
 end
 
 apps.logout = function()

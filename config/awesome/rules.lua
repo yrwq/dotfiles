@@ -46,14 +46,14 @@ ruled.client.connect_signal("request::rules", function()
         id       = "floating",
         rule_any = {
             class    = {
-                "music",
+        	"music",
                 "mail",
-              "Sxiv",
-              "feh",
-              "Tor Browser",
-              "Thunar",
-              "Pavucontrol",
-              "Lxappearance"
+        	"Sxiv",
+              	"feh",
+              	"Tor Browser",
+              	"Thunar",
+              	"Pavucontrol",
+              	"Lxappearance"
             },
             name    = {
                 "Event Tester",  -- xev.
@@ -97,15 +97,13 @@ ruled.client.connect_signal("request::rules", function()
         callback = function (c)
             c.floating = true
             c.ontop = true
-            c.width = screen_width * 0.30
-            c.height = screen_height * 0.35
         end
     }
 
     -- i use tag 1 for terminals, but i use terminals on any other tags too
     -- tag 2
     -- browser
-    ruled.client.append_rule {
+    --[[ruled.client.append_rule {
         rule_any = {
             class = {
                 "firefox",
@@ -157,7 +155,7 @@ ruled.client.connect_signal("request::rules", function()
             },
         },
         properties = { screen = 1, tag = awful.screen.focused().tags[5] },
-    }
+    } ]]--
 end)
 
 client.connect_signal("manage", function (c)

@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+#
+# Theme changer
+
+rand=true
+choose=false
+
+themes_path="$HOME/xfiles"
+wp_path="$HOME/.wp"
+
+while getopts 'rc' flag; do
+    case "${flag}" in
+        r)
+            rand='true'
+            choose='false' ;;
+        c)
+            rand='false'
+            choose='true'
+            ;;
+    esac
+done
+
+if [ $rand = 'true' ]; then
+    theme=$(shuf -e -n1 ~/xfiles/*)
+    xrdb -load $theme
+fi
+
+if [ $choose = 'true' ]; then
+    theme=$(ls $themes_path | rofi -i -dmenu)
+    xrdb -load $themes_path/$theme
+fi
+
+wp=$(shuf -e -n1 ~/.wp/*)
+feh --bg-scale $wp
+wpa=${wp%.*}
+short_wp="$(echo $wpa | awk -F"/" '{print $5}')"
+short_theme="$(echo $theme)"
+notify-send "Theme: $short_theme" "Wallpaper: $short_wp"

@@ -12,6 +12,7 @@ local pad = helpers.pad
 local record_text_icon = ""
 local picture_text_icon = ""
 local stoprec_text_icon = "壘"
+local selpic_text_icon = "麗"
 local button_bg = x.color0
 local button_size = dpi(120)
 local shoot_screen_bg = x.bg .. 95
@@ -19,17 +20,21 @@ local shoot_screen_bg = x.bg .. 95
 -- commands
 -- record
 local record_command = function()
-    awful.spawn.with_shell("~/.bin/rec")
+    awful.spawn.with_shell("rec")
 end
 
 -- full screen picture
 local picture_command = function()
-    awful.spawn.with_shell("~/.bin/shoot")
+    awful.spawn.with_shell("lien -s -f")
 end
 
 -- stop recording
 local stoprec_command = function()
-    awful.spawn.with_shell("pkill ffmpeg && notify-send 'Recording stopped'")
+    awful.spawn.with_shell("rec'")
+end
+
+local selpic_command = function()
+	awful.spawn.with_shell("lien -a -f")
 end
 
 local create_button = function(symbol, hover_color, text, command)
@@ -74,6 +79,7 @@ end
 local picture = create_button(picture_text_icon, x.color1, "Picture", picture_command)
 local record = create_button(record_text_icon,x.color1, "Record", record_command)
 local stoprec = create_button(stoprec_text_icon,x.color1, "Stop recording", stoprec_command)
+local selpic = create_button(selpic_text_icon,x.color1, "Select picture", selpic_command)
 
 shoot_screen = wibox({visible = false, ontop = true})
 awful.placement.maximize(shoot_screen)
@@ -123,6 +129,7 @@ shoot_screen:setup{
             record,
             picture,
             stoprec,
+			selpic,
             spacing = dpi(50),
             layout = wibox.layout.fixed.horizontal
         },

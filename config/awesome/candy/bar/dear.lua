@@ -1,4 +1,3 @@
--- require
 local awful = require("awful")
 local gears = require("gears")
 local wibox = require("wibox")
@@ -11,7 +10,7 @@ local keys = require("keys")
 -- helper function to create buttons
 local create_button = function (symbol, color, bg_color, hover_color)
     local widget = wibox.widget {
-        font = "RobotoMono Nerd Font Mono 14",
+        font = "Ioseva Nerd Font 14",
         align = "center",
         id = "text_role",
         valign = "center",

@@ -18,3 +18,4 @@ You should edit them to match your setup.
 | rec   | records the screen               | run rec              |
 | shoot | take a screenshot                | run shoot            |
 | upl   | upload a text file for 0x0.st    | upl <file>           |
+| chth  | change theme 					   | run chth		      |
