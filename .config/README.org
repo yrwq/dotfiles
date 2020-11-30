@@ -1,0 +1,110 @@
+#+PROPERTY: header-args :tangle rc.lua
+
+* table-of-contets :toc:
+- [[#libraries][Libraries]]
+- [[#autostart][Autostart]]
+- [[#vars][Vars]]
+- [[#beautiful][Beautiful]]
+- [[#layouts][Layouts]]
+- [[#require][Require]]
+
+* Libraries
+
+#+BEGIN_SRC lua :tangle rc.lua
+pcall(require, "luarocks.loader")
+local gears = require("gears")
+local awful = require("awful")
+#+END_SRC
+
+* Autostart
+#+BEGIN_SRC lua :tangle rc.lua
+awful.spawn.with_shell("xrdb ~/.Xresources")
+awful.spawn.with_shell("picom")
+awful.spawn.with_shell("mpd")
+awful.spawn.with_shell("emacs --daemon")
+awful.spawn.with_shell("nitrogen --restore")
+#+END_SRC
+
+* Vars
+#+BEGIN_SRC lua :tangle rc.lua
+editor = "emacs"
+terminal = "xst"
+music = "xst -c music -e music"
+mail = "xst -c mail -e neomutt"
+screen_width = awful.screen.focused().geometry.width
+screen_height = awful.screen.focused().geometry.height
+#+END_SRC
+
+* Beautiful
+
+#+BEGIN_SRC lua :tangle rc.lua
+local beautiful = require("beautiful")
+
+local xrdb = beautiful.xresources.get_current_theme()
+
+x = {
+    --           xrdb variable
+    bg = xrdb.background,
+    fg = xrdb.foreground,
+    trans = "#00000000",   -- fully transparent
+    transbg = xrdb.background .. "CC", -- 80% transparent
+    color0     = xrdb.color0,
+    color1     = xrdb.color1,
+    color2     = xrdb.color2,
+    color3     = xrdb.color3,
+    color4     = xrdb.color4,
+    color5     = xrdb.color5,
+    color6     = xrdb.color6,
+    color7     = xrdb.color7,
+    color8     = xrdb.color8,
+    color9     = xrdb.color9,
+    color10    = xrdb.color10,
+    color11    = xrdb.color11,
+    color12    = xrdb.color12,
+    color13    = xrdb.color13,
+    color14    = xrdb.color14,
+    color15    = xrdb.color15,
+}
+
+beautiful.init(require("theme"))
+#+end_src
+
+* Layouts
+
+#+BEGIN_SRC lua :tangle rc.lua
+local bling = require("bling")
+bling.module.flash_focus.enable()
+
+-- layouts
+awful.layout.layouts = {
+    awful.layout.suit.tile,
+    bling.layout.mstab,
+    bling.layout.centered,
+    awful.layout.suit.floating,
+}
+
+awful.screen.connect_for_each_screen(function(s)
+    local l = awful.layout.suit -- to save time
+    local layouts = {
+      l.tile,
+      l.tile,
+      l.tile,
+      l.tile,
+      l.tile,
+    }
+
+    -- tags
+    local tagnames = { "一", "二", "三", "四", "五" }
+    awful.tag(tagnames, s, layouts)
+end)
+#+end_src
+
+* Require
+
+#+BEGIN_SRC lua :tangle rc.lua
+require("shit") -- daemons
+require("keys") -- key binds
+require("candy") -- bar, panels
+require("module") -- titlebar, popups
+require("rules") -- rules
+#+end_src
