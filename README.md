@@ -87,15 +87,15 @@ I use the software below, recommended to install them but not required.
 
 ## The file manager
 
-	As a file manager, i choose [lf](https://github.com/gokcehan/lf) (as in "list files"), a terminal based one written in Go.
+As a file manager, i choose [lf](https://github.com/gokcehan/lf) (as in "list files"), a terminal based one written in Go.
 
-	I got the configuration files for lf from Luke Smith, and added some extra features.
+I got the configuration files for lf from Luke Smith, and added some extra features.
 
-	To preview images, you need to install [lfimg](https://github.com/cirala/lfimg).
+To preview images, you need to install [lfimg](https://github.com/cirala/lfimg).
 
-	`git clone https://github.com/cirala/lfimg && cd lfimg`
+`git clone https://github.com/cirala/lfimg && cd lfimg`
 
-	`make install`
+`make install`
 
 # Gallery
 
