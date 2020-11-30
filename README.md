@@ -86,7 +86,8 @@ I use the software below, recommended to install them but not required.
 
 # Gallery
 
-![preview](https://0x0.st/i7cq.png)
+![preview](https://0x0.st/i7Tl.png)
 ![preview](https://0x0.st/i7cZ.png)
+![preview](https://0x0.st/i7cq.png)
 ![preview](https://0x0.st/i7cb.png)
 ![preview](https://0x0.st/i7cc.png)
