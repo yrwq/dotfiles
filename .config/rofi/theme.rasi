@@ -1,15 +1,15 @@
 
 /** COLORS & FONT **/
 * {
-    background:             #212121;
-    background-alt:         #353535;
-    accent:                 #a252b0;
-    foreground:             #e1bee7;
+    background:             #231e18;
+    background-alt:         #48413a;
+    accent:                 #d35c5c;
+    foreground:             #cabcb1;
 
     border-color:           @accent;
     background-color:		@background;
 
-    font:					"Anonymice Nerd Font Complete 16";
+    font:					"Iosevka Term 16";
 }
 
 /** ELEMENTS PROPERTIES **/
