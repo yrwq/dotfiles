@@ -1,0 +1,12 @@
+hash -d cac=/home/me/.cache 
+hash -d cf=/home/me/.config 
+hash -d D=/home/me/etc/dl 
+hash -d d=/home/me/etc/doc 
+hash -d dt=/home/me/.local/share 
+hash -d h=/home/me 
+hash -d m=/home/me/etc/music 
+hash -d mn=/mnt 
+hash -d pp=/home/me/etc/pic 
+hash -d sc=/home/me/.local/bin 
+hash -d src=/home/me/.local/src 
+hash -d vv=/home/me/etc/vid 
