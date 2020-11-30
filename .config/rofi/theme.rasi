@@ -1,0 +1,79 @@
+
+/** COLORS & FONT **/
+* {
+    background:             #212121;
+    background-alt:         #353535;
+    accent:                 #a252b0;
+    foreground:             #e1bee7;
+
+    border-color:           @accent;
+    background-color:		@background;
+
+    font:					"Anonymice Nerd Font Complete 16";
+}
+
+/** ELEMENTS PROPERTIES **/
+#window {
+    background-color: 		@background;
+    border:           		1;
+    padding:          		20;
+}
+
+#textbox {
+    text-color: 			@foreground;
+}
+
+#listview {
+    padding: 				5px 5px 5px;
+}
+
+#element {
+    padding: 				8px ;
+}
+
+#element.normal.normal {
+    background-color: 		@background;
+    text-color:       		@foreground;
+}
+
+#element.selected.normal {
+    background-color: 		@accent;
+    text-color:       		@foreground;
+}
+
+#element.alternate.normal {
+    background-color: 		@background-alt;
+    text-color:       		@foreground;
+}
+
+#element.selected.active {
+    background-color: 		@accent;
+    text-color:       		@foreground;
+}
+
+#element.normal.active {
+    background-color: 		@background;
+    text-color:       		@foreground;
+}
+
+#element.alternate.active {
+    background-color: 		@background-alt;
+    text-color:       		@foreground;
+}
+
+/** TEXT IMPUT **/
+#entry {
+    spacing:    			5px;
+    text-color: 			@foreground;
+}
+
+#prompt {
+    spacing:    			10px;
+    text-color: 			@foreground;
+}
+
+#inputbar {
+    spacing:    			5px;
+    text-color: 			@foreground;
+    padding:    			8px;
+}
