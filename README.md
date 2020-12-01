@@ -2,7 +2,6 @@
     <a href="#introduction"> <img width="150px" src=".assets/introduction.png"/> </a>
     <a href="#software"> <img width="150px" src=".assets/software.png"/> </a>
     <a href="#setup"> <img width="150px" src=".assets/setup.png"/> </a>
-    <a href="#usage"> <img width="150px" src=".assets/usage.png"/> </a>
     <a href="#gallery"> <img width="150px" src=".assets/gallery.png"/> </a>
 </p>
 
@@ -11,23 +10,8 @@
 This repository contains my personal collection of configuration files for linux.
 Inspired by elena's [dotfiles](https://github.com/elenapan/dotfiles), JavaCafe01's [dotfiles](https://github.com/JavaCafe01/dotfiles) and Luke Smith's [dotfiles](https://github.com/LukeSmithxyz/voidrice)
 I'm distro hopping a lot and i got tired of copying my dotfiles so i ended up here.
-This repository will always will be work in progress, so expect to find issues.
+This repository will always be work in progress, so expect to find issues.
 The configuration probably won't match your setup out-of-the-box, so you should edit the files to match your setup.
-
-# Software
-
-I use the software below, recommended to install them but not required.
-
-|    Name    |        Purpose    |
-|:----------:|:-----------------:|
-| Vim |    Text Editor    |
-|   Brave |    Web Browser    |
-|     st    | Terminal Emulator |
-|     Zsh    |       Shell       |
-|   Ncmpcpp  |    Music Player   |
-|   Neomutt  |    Email Client   |
-|  Newsboat  |     RSS Reader    |
-|   lf |    File Manager   |
 
 # Setup
 
@@ -58,7 +42,7 @@ I use the software below, recommended to install them but not required.
     cp config/awesome ~/.config/ -r
     ```
 
-3. Install [bling](https://github.com/Nooo37/bling) (utilities for awesomewm)
+3. Install, and :star: [bling](https://github.com/Nooo37/bling) (utilities for awesomewm)
 
    This is optional, but highly recommended.
 
@@ -84,7 +68,13 @@ I use the software below, recommended to install them but not required.
 
     Before using my config you should change the default applications, in `rc.lua` and `apps.lua`
 
-# Usage
+# Software
+
+## The window manager
+
+As a window manager, i use [awesome](https://awesomewm.org), because it's highly configurable and extensible.
+
+Take a look at `.config/awesome/keys.lua` for the keybindings, i tried to comment every key.
 
 ## The file manager
 
@@ -92,11 +82,6 @@ As a file manager, i choose [lf](https://github.com/gokcehan/lf) (as in "list fi
 
 I got the configuration files for lf from Luke Smith, and added some extra features.
 
-To preview images, you need to install [lfimg](https://github.com/cirala/lfimg).
-
-`git clone https://github.com/cirala/lfimg && cd lfimg`
-
-`make install`
 
 # Gallery
 
