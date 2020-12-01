@@ -23,6 +23,7 @@ x = {
     fg = xrdb.foreground,
     trans = "#00000000",   -- fully transparent
     transbg = xrdb.background .. "CC", -- 80% transparent
+    transbg2 = xrdb.background .. "90", -- 80% transparent
     color0     = xrdb.color0,
     color1     = xrdb.color1,
     color2     = xrdb.color2,

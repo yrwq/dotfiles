@@ -33,7 +33,7 @@ theme.border_normal = x.color0
 theme.border_focus = x.color8
 theme.border_radius = dpi(30)
 theme.client_radius = dpi(30)
-theme.titlebar_size = dpi(5)
+theme.titlebar_size = dpi(30)
 
 local taglist_square_size = dpi(0)
 theme.taglist_squares_sel = theme_assets.taglist_squares_sel(
@@ -56,7 +56,7 @@ theme.tasklist_fg_normal = x.color8
 
 theme.systray_icon_spacing = dpi(8)
 theme.notification_max_width = dpi(350)
-theme.notification_font = "Anonymous Pro 14"
+theme.notification_font = "Iosevka Term 9"
 
 theme.icon_theme = "/home/yrwq/.icons/grey/apps/16"
 
@@ -66,5 +66,12 @@ theme.mstab_bar_height = dpi(30)
 theme.mstab_bar_padding = dpi(10)
 theme.mstab_tabbar_orientation = "top"
 theme.mstab_border_radius = dpi(10)
+
+theme.tabbar_style = "modern"
+theme.tabbar_bg_focus = x.bg
+theme.tabbar_bg_normal = x.bg
+theme.tabbed_spawn_in_tab = true
+theme.tabbar_radius = dpi(6)
+theme.tabbar_font = "Iosevka Term 11"
 
 return theme
