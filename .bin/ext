@@ -1,61 +1,44 @@
 #!/bin/sh
-#an all purpose archive extractor
-#https://github.com/co1ncidence
 
-usage() {
-    >&2 printf '%s\n' "Usage: "${0##*/}" [-c copy_path] file"
-    exit 1
-}
+# A general, all-purpose extraction script. Not all extraction programs here
+# are installed by LARBS automatically.
+#
+# Default behavior: Extract archive into new directory
+# Behavior with `-c` option: Extract contents into current directory
 
-#main commands to use
-decompress() {
-    case "${1##*.}" in
-        gz|tgz)  gunzip -qdc "$1" ;;
-        xz|txz)  xz -qdcT 0 "$1"  ;;
-        bz2|tbz) bunzip2 -qdc "$1" ;;
-    esac
-}
+while getopts "hc" o; do case "${o}" in
+	c) extracthere="True" ;;
+	*) printf "Options:\\n   -c: Extract archive into current directory rather than a new one.\\n" && exit 1 ;;
+esac done
 
-#plumber
-run() {
-    case "$1" in
-        *tar.*|*.tgz|*.txz|*.tbz)
-            #untar
-            decompress "$1" | \
-            tar -C "${COPY_PATH:-$PWD}" -xpf - ;;
+if [ -z "$extracthere" ]; then
+	archive="$(readlink -f "$*")" &&
+	directory="$(echo "$archive" | sed 's/\.[^\/.]*$//')" &&
+	mkdir -p "$directory" &&
+	cd "$directory" || exit 1
+else
+	archive="$(readlink -f "$(echo "$*" | cut -d' ' -f2)" 2>/dev/null)"
+fi
 
-        *.xz|*.gz|*.bz2)
-            #bz
-            decompress "$1" "${COPY_PATH:-"$PWD"}/"${1%.*}"" ;;
+[ -z "$archive" ] && printf "Give archive to extract as argument.\\n" && exit 1
 
-        *.zip)
-            #zip
-            unzip -q "$1" -d "$2" ;;
-
-        *.rar)
-            #unrar
-            unrar x "$1" ;;
-
-        *.7z)
-            #who uses this
-            7z x "$1" ;;
-
-        *)
-            >&2 echo "Unrecognized compression format: "${1##*.}""
-    esac
-}
-
-#make sure output has same name
-while [ "$1" ] ; do
-    case "$1" in
-        -h|h)
-            usage
-            ;;
-        -C|-c)
-            COPY_PATH="$1"
-            ;;
-        *)
-            run "$@"
-    esac
-    shift
-done
+if [ -f "$archive" ] ; then
+	case "$archive" in
+		*.tar.bz2|*.tbz2) tar xvjf "$archive" ;;
+		*.tar.xz) tar -xf "$archive" ;;
+		*.tar.gz|*.tgz) tar xvzf "$archive" ;;
+		*.lzma) unlzma "$archive" ;;
+		*.bz2) bunzip2 "$archive" ;;
+		*.rar) unrar x -ad "$archive" ;;
+		*.gz) gunzip "$archive" ;;
+		*.tar) tar xvf "$archive" ;;
+		*.zip) unzip "$archive" ;;
+		*.Z) uncompress "$archive" ;;
+		*.7z) 7z x "$archive" ;;
+		*.xz) unxz "$archive" ;;
+		*.exe) cabextract "$archive" ;;
+		*) printf "extract: '%s' - unknown archive method\\n" "$archive" ;;
+	esac
+else
+	printf "File \"%s\" not found.\\n" "$archive"
+fi

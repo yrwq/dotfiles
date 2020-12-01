@@ -63,3 +63,5 @@ if [ $# -le 2 ]; then
 else
 	for i; do fun "$i"; done
 fi
+
+notify-send "Dowload finished"

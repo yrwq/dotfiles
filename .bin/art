@@ -1,11 +1,21 @@
 #!/bin/sh
-# 
+#
 # Extract cover from audio file
 
-ffmpeg \
-    -hide_banner \
-    -loglevel 0 \
-    -y \
-    -i "$1" \
-    -vf scale=300:-1 \
-    "$1_cover.jpg"
+music_library="/home/$USER/etc/music"
+
+ext="$(mpc --format %file% current | sed 's/^.*\.//')"
+if [ "$ext" = "flac" ]; then
+	metaflac --export-picture-to=/tmp/mpd_cover.jpg \
+        "$(mpc --format "$music_library"/%file% current)" &&
+        cover_path="/tmp/mpd_cover.jpg" && return
+else
+	ffmpeg -y -i "$(mpc --format "$music_library"/%file% | head -n 1)" \
+        /tmp/mpd_cover.jpg &&
+        cover_path="/tmp/mpd_cover.jpg" && return
+fi
+
+convert /tmp/mpd_cover.jpg -resize 250x250 /tmp/mpd_cover.jpg
+
+dunstctl close-all
+# notify-send -i "/tmp/mpd_cover.jpg" " Now playing" "$(mpc current)"

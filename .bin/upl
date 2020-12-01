@@ -1,8 +1,9 @@
-#!/bin/sh
-#  upload file to 0x0.st
+#!/usr/bin/env bash
 
-# prevent filetypes like text/x-shellscript or text/x-diff
-# autodownloading in some browsers
+# case $1 in
+# 	*.mkv|*.mp4|*.png|*.jpg|*.jpeg)
+# 		curl -F'file=@${1}' https://0x0.st
+
 type=
 file -ibL "$1" | grep -q '^text/' && type=';type=text/plain'
 

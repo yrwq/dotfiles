@@ -1,0 +1,7 @@
+#!/bin/sh
+#
+# Rofi manpage chooser
+
+rofi_args="-sort false -dmenu -i"
+
+man -k . | rofi $rofi_args | awk '{print $1}' | xargs -r man -Tpdf | zathura -

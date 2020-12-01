@@ -1,0 +1,42 @@
+#!/bin/sh
+
+dots_dir=$HOME/dev/dotfiles
+
+mkdir -p $dots_dir/.config/awesome
+cp ~/.config/awesome/* $dots_dir/.config/awesome/ -r
+cp ~/.config/calcurse/ $dots_dir/.config/ -r
+cp ~/.config/lf/ $dots_dir/.config/ -r
+cp ~/.config/mpv/ $dots_dir/.config/ -r
+cp ~/.config/newsboat/ $dots_dir/.config/ -r
+cp ~/.config/nvim/init.vim $dots_dir/.config/nvim -r
+cp ~/.config/ranger/ $dots_dir/.config/ -r
+cp ~/.config/rofi/ $dots_dir/.config/ -r
+cp ~/.config/shell/ $dots_dir/.config/ -r
+cp ~/.config/x11/ $dots_dir/.config/ -r
+cp ~/.config/zathura/ $dots_dir/.config/ -r
+cp ~/.config/zsh/.zshrc $dots_dir/.config/ -r
+cp ~/.config/directories $dots_dir/.config/ -r
+cp ~/.config/mimeapps.list $dots_dir/.config/ -r
+cp ~/.config/user-dirs.dirs $dots_dir/.config/ -r
+cp ~/.config/shortcutrc $dots_dir/.config/ -r
+cp ~/.config/zshnameddirrc $dots_dir/.config/ -r
+cp ~/.zprofile $dots_dir -r
+cp ~/.xprofile $dots_dir -r
+cp ~/.xinitrc $dots_dir -r
+cp ~/.profile $dots_dir -r
+cp ~/xfiles $dots_dir/ -r
+rm -rf $dots_dir/awesome/bling
+
+notify-send "Syncing ..."
+
+cd $dots_dir
+
+[ -z "$*" ] && \
+    msg="update" || \
+    msg="$*"
+
+git add .
+git commit -m "${msg}"
+git push origin main
+
+notify-send "Pushed!"

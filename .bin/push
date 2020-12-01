@@ -1,6 +1,5 @@
 #!/bin/sh
-#push a repo to main branch
-#https://github.com/co1ncidence
+# push a repo to main branch
 
 [ -z "$1" ] && \
     msg="update" || \
@@ -8,4 +7,6 @@
 
 git add .
 git commit -m "${msg}"
-git push origin main 
+git push origin main
+
+notify-send "Successfully pushed!"
