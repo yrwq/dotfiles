@@ -21,16 +21,14 @@ alias \
 # These common commands are just too long! Abbreviate them.
 alias \
 	ka="killall" \
-	g="git" \
+	ga="git add ." \
+	gc="git commit -m" \
+	ga="git push -u origin main" \
 	trem="transmission-remote" \
-	YT="youtube-viewer" \
-	sdn="sudo shutdown -h now" \
 	f="$FILE" \
-	e="$EDITOR" \
 	v="$EDITOR" \
-	p="sudo pacman" \
 	z="zathura"
 
 alias \
 	ref="shortcuts >/dev/null; source ${XDG_CONFIG_HOME:-$HOME/.config}/shortcutrc ; source ${XDG_CONFIG_HOME:-$HOME/.config}/zshnameddirrc" \
-	lf="lfrun" \
+	lf="lf" \
