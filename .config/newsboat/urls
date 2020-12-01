@@ -1,6 +1,4 @@
 http://lukesmith.xyz/rss.xml "luke"
 https://www.youtube.com/feeds/videos.xml?channel_id=UC2eYFnH61tmytImy1mTYvhA "luke"
-https://github.com/yrwq.private.atom?token=ALV4PBYLA3FM2NE6VFH7M555ZBRBC "Github"
-https://hnrss.org/frontpage "hackernews"
-https://www.reddit.com/r/unixporn/.rss "unixporn"
+https://www.reddit.com/r/unixporn/.rss
 https://www.reddit.com/r/commandline/.rss
