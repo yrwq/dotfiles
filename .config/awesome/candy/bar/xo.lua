@@ -58,6 +58,29 @@ local create_button = function (symbol, color, bg_color, hover_color)
     return section
 end
 
+local musicPop = require("candy.panel.music")
+local music_symbol = "ﱘ"
+local music = create_button(music_symbol, x.fg, x.trans, x.color8)
+
+music:connect_signal("mouse::enter", function()
+    st = music:get_all_children()[1]
+    st.markup = helpers.colorize_text(music_symbol, x.color15)
+end)
+
+music:connect_signal("mouse::leave", function()
+    st = muisc:get_all_children()[1]
+    st.markup = helpers.colorize_text(music_symbol, x.fg)
+end)
+
+music:buttons(gears.table.join(
+    awful.button({ }, 1, function ()
+            musicPop.visible = not musicPop.visible
+    end),
+    awful.button({ }, 3, function()
+            musicPop.visible = not musicPop.visible
+    end)
+))
+
 local volicon = wibox.widget.imagebox(nil)
 local volume_bar = require("widgets.volume_bar")
 local volbar = format_progress_bar(volume_bar, volicon)
@@ -200,8 +223,9 @@ awful.screen.connect_for_each_screen(function(s)
             {
                 {
                     {
-			volume,
-			microphone,
+						music,
+						volume,
+						microphone,
                         layout = wibox.layout.fixed.horizontal
                     },
                     shape = helpers.rrect(beautiful.border_radius),

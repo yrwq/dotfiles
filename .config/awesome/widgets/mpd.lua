@@ -11,7 +11,7 @@ local pad = helpers.pad
 
 -- Set colors
 ------------------------------------------------------------
-local title_color = x.color8
+local title_color = x.fg
 local artist_color = x.fg
 local paused_color = x.color8
 ------------------------------------------------------------
@@ -213,13 +213,8 @@ local script = [[bash -c '
   DEFAULT_ART="$HOME/etc/pic/prof.png"
   file=`mpc current -f %file%`
   info=`mpc -f "%artist%@@%title%@"`
-  
-  art="$HOME/]] .. music_directory .. [[/${file%/*}"
-  if ]] .. "[[ -d $art ]];" .. [[ then
-    cover="$(find "$art/" -maxdepth 1 -type f | egrep -i -m1 "$IMG_REG")"
-  fi
+  art
   cover="/tmp/mpd_cover.jpg"
-  # convert "$cover" -resize 250x250 "resize.$cover"
   echo $info"##"$cover"##"
   ~/.config/ncmpcpp/ncmpcpp-ueberzug/ncmpcpp_cover_art.sh
 ']]
@@ -257,7 +252,7 @@ local function update_widget()
                                      "\"> </span>"
             -- if sidebar.visible == false then
             -- bar_timer:stop()
-            send_notification(artist_span, title_span, cover_path)
+            -- send_notification(artist_span, title_span, cover_path)
             -- end
 
         end

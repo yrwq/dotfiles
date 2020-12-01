@@ -3,7 +3,7 @@ local gears = require("gears")
 local wibox = require("wibox")
 local apps = require("apps")
 local bling = require("bling")
-
+local musicPop = require("candy.panel.music")
 modkey = "Mod4"
 shiftkey = "Shift"
 altkey = "Mod1"
@@ -37,6 +37,8 @@ local function shift_focus_and_move_client(move_back)
 end
 
 awful.keyboard.append_global_keybindings({
+
+    awful.key({ altkey }, "q", function () musicPop.visible = not musicPop.visible end),
 
     awful.key({ altkey }, "a", function () bling.module.tabbed.pick() end),
 
