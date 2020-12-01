@@ -83,4 +83,3 @@ bindkey '^e' edit-command-line
 
 # Load syntax highlighting; should be last.
 source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh 2>/dev/null
-export YT_API_KEY=AIzaSyB3AkuCNp43L5nkNpFNx32Mp59a0hWafZs
