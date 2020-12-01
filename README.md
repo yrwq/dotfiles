@@ -72,9 +72,17 @@ The configuration probably won't match your setup out-of-the-box, so you should 
 
 ## The window manager
 
-As a window manager, i use [awesome](https://awesomewm.org), because it's highly configurable and extensible.
+The window manager of my choice is [awesome](https://awesomewm.org), because it's highly configurable and extensible.
 
-Take a look at `.config/awesome/keys.lua` for the keybindings, i tried to comment every key.
+- File structure
+	- `rc.lua` Awesome loads this file first.
+	- `theme.lua` Which colors to use, size of gaps, etc.
+	- `apps.lua` Default applications.
+	- `candy` Bar and panel themes
+	- `icons` Icons used by notifications, etc.
+	- `module` Notifications, titlebars, other popups.
+	- `shit` Shitty daemons used by widgets
+	- `widgets` Widgets used by bars, popups and panels.
 
 ## The file manager
 
