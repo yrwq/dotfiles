@@ -8,6 +8,7 @@ PS1="%{$fg[magenta]%}%~%{$reset_color%}%b "
 setopt autocd		# Automatically cd into typed directory.
 stty stop undef		# Disable ctrl-s to freeze terminal.
 setopt interactive_comments
+
 export GPG_AGENT_INFO=""
 
 # History in cache directory:
