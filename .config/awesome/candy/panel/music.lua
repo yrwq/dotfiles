@@ -108,7 +108,7 @@ end
 
 local mpd = require("widgets.mpd")
 
-local mpd_box = create_boxed_widget(mpd, 250, 250, x.color0)
+local mpd_box = create_boxed_widget(mpd, 250, 250, "#2e2e2e")
 
 local mpd_area = {
     nil,

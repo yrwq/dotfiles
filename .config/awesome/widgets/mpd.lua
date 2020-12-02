@@ -22,7 +22,6 @@ local seek_state = false
 -- control icons,
 local icon_font_nerd = "Iosevka Nerd Font 16"
 
-
 local bar = wibox.widget {
     value = 64,
     max_value = 100,
@@ -34,7 +33,7 @@ local bar = wibox.widget {
         to = {200, 50}, -- replace with w,h later
         stops = {{0, x.color5}, {0.75, x.color13}}
     },
-    background_color = x.color0,
+    background_color = "#4e4e4e",
     shape = helpers.rrect(dpi(6)),
     bar_shape = helpers.rrect(dpi(6)),
     widget = wibox.widget.progressbar
@@ -118,7 +117,7 @@ align_vertical:set_bottom(wibox.container.constraint(bar, "exact", nil, dpi(8)))
 local area = wibox.layout.fixed.horizontal()
 area:add(image_cont)
 area:add(wibox.container.margin(align_vertical, dpi(30), dpi(20), 0, 0))
-area.bg = x.color8
+area.bg = "#2e2e2e"
 
 local main_wd = wibox.widget {
     area,
@@ -127,7 +126,7 @@ local main_wd = wibox.widget {
     forced_width = dpi(200),
     forced_height = dpi(100),
     shape = helpers.rrect(dpi(6)),
-    bg = x.color8,
+    bg = "#2e2e2e",
     widget = wibox.container.margin
 }
 ------------------------------------------------------------
