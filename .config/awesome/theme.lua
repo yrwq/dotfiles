@@ -71,6 +71,7 @@ theme.mstab_tabbar_orientation = "top"
 theme.mstab_border_radius = dpi(10)
 
 theme.tabbar_style = "modern"
+theme.tabbar_size = dpi(30)
 theme.tabbar_bg_focus = x.transbg
 theme.tabbar_bg_normal = x.trans40
 theme.tabbed_spawn_in_tab = true
