@@ -96,5 +96,5 @@ I got the configuration files for lf from Luke Smith, and added some extra featu
 ![preview](https://0x0.st/i7Tl.png)
 ![preview](https://0x0.st/i7cZ.png)
 ![preview](https://0x0.st/i7cq.png)
-![preview](https://0x0.st/i7cb.png)
+![preview](https://0x0.st/i7OX.png)
 ![preview](https://0x0.st/i7cc.png)
