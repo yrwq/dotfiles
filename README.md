@@ -42,19 +42,7 @@ The configuration probably won't match your setup out-of-the-box, so you should 
     cp config/awesome ~/.config/ -r
     ```
 
-3. Install, and :star: [bling](https://github.com/Nooo37/bling) (utilities for awesomewm)
-
-   This is optional, but highly recommended.
-
-   If you don't wanna use bling you should edit `rc.lua`
-
-    ```sh
-    git clone https://github.com/Nooo37/bling ~/.config/awesome/bling
-    ```
-
-4. Install scripts, wallpapers, etc. (optional)
-
-    Before copying my scripts take a look at bin's [readme](https://github.com/yrwq/dotfiles/blob/main/bin/README.org)
+3. Install scripts, wallpapers, etc. (optional)
 
     ```sh
     cp .bin ~/.bin -r
