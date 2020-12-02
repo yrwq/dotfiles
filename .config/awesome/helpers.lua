@@ -1,8 +1,3 @@
--- helpers.lua
--- Functions that you use more than once and in different files would
--- be nice to define here.
--- i stole this from JavaCafe01
--- https://github.com/JavaCafe01/dotfiles
 local awful = require("awful")
 local gears = require("gears")
 local beautiful = require("beautiful")

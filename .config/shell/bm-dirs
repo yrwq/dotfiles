@@ -1,6 +1,6 @@
 # You can add comments to these files with #
 cf  ${XDG_CONFIG_HOME:-$HOME/.config}
-cfa ${XDG_CONFIG_HOME:-$HOME/.config/awesome}
+cfa ${XDG_CONFIG_HOME:-$HOME/.config}/awesome
 D   ${XDG_DOWNLOAD_DIR:-$HOME/etc/dl}
 d   ${XDG_DOCUMENTS_DIR:-$HOME/etc/doc}
 h   $HOME

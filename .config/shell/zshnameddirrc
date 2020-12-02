@@ -1,5 +1,5 @@
 hash -d cf=/home/me/.config 
-hash -d cfa=/home/me/.config 
+hash -d cfa=/home/me/.config/awesome 
 hash -d D=/home/me/etc/dl 
 hash -d d=/home/me/etc/doc 
 hash -d h=/home/me 

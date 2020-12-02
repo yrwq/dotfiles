@@ -76,6 +76,7 @@ awful.keyboard.append_global_keybindings({
     awful.key({ modkey }, "s", function() app_drawer_show() end),
     awful.key({ modkey }, "e", apps.editor),
     awful.key({ modkey }, "m", apps.music),
+    awful.key({ modkey }, "w", apps.surf),
     awful.key({ modkey }, "r", apps.file_manager),
     awful.key({ modkey }, "y", apps.youtube),
     awful.key({ modkey }, "á", apps.torrent),

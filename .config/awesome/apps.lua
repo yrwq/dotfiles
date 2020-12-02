@@ -7,6 +7,10 @@ local helpers = require("helpers")
 
 local apps = {}
 
+apps.surf = function()
+	awful.spawn.with_shell("surf")
+end
+
 apps.news = function()
     awful.spawn.with_shell("st -c news -e newsboat")
 end

@@ -1,6 +1,6 @@
 # vim: filetype=sh
 alias cf="cd /home/me/.config && ls -a" \
-cfa="cd /home/me/.config && ls -a" \
+cfa="cd /home/me/.config/awesome && ls -a" \
 D="cd /home/me/etc/dl && ls -a" \
 d="cd /home/me/etc/doc && ls -a" \
 h="cd /home/me && ls -a" \
