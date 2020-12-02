@@ -9,32 +9,19 @@ local dpi = xresources.apply_dpi
 local helpers = require("helpers")
 local pad = helpers.pad
 
--- Set colors
-------------------------------------------------------------
+-- colors
 local title_color = x.fg
 local artist_color = x.fg
-local paused_color = x.color8
-------------------------------------------------------------
+local paused_color = x.color1
 
 local artist_fg
 local artist_bg
 
 local seek_state = false
 
--- Control icons
-local icon_font_nerd = "Monofur Nerd Font 16"
+-- control icons,
+local icon_font_nerd = "Iosevka Nerd Font 16"
 
-local icons = require("icons")
-icons.init("dear")
-
--- Set notification icon path
-local notification_icon = icons.music
-
--- Construct layouts
---------------------------------------------------------------------------------
-
--- Progressbar
-------------------------------------------------------------
 
 local bar = wibox.widget {
     value = 64,
@@ -45,7 +32,7 @@ local bar = wibox.widget {
         type = 'linear',
         from = {0, 0},
         to = {200, 50}, -- replace with w,h later
-        stops = {{0, x.color1}, {0.75, x.color9}}
+        stops = {{0, x.color5}, {0.75, x.color13}}
     },
     background_color = x.color0,
     shape = helpers.rrect(dpi(6)),
@@ -64,10 +51,7 @@ local bar_timer = gears.timer {
     end
 }
 
-------------------------------------------------------------
-
--- Poster (image)
-------------------------------------------------------------
+-- cover
 local box_image = wibox.widget {
     shape = helpers.rrect(dpi(10)),
     widget = wibox.widget.imagebox
@@ -75,27 +59,23 @@ local box_image = wibox.widget {
 local image_cont = wibox.widget {
     box_image,
     shape = helpers.rrect(dpi(6)),
-    bg = x.color8 .. "33",
+    bg = "#2e2e2e",
     widget = wibox.container.background
 }
-------------------------------------------------------------
 
--- Text lines
-------------------------------------------------------------
+-- text
 local mpd_title = wibox.widget.textbox("Title")
 local mpd_artist = wibox.widget.textbox("Artist")
 mpd_title:set_font(beautiful.font)
 mpd_title:set_valign("top")
-mpd_artist:set_font("Anonymous Pro 14")
+mpd_artist:set_font("Iosevka Term 14")
 mpd_artist:set_valign("top")
 
 local text_area = wibox.layout.fixed.vertical()
 text_area:add(wibox.container.constraint(mpd_artist, "exact", nil, dpi(26)))
 text_area:add(wibox.container.constraint(mpd_title, "exact", nil, dpi(26)))
-------------------------------------------------------------
 
--- Control line
-------------------------------------------------------------
+-- controls
 local btn_color = x.color15
 -- playback buttons
 local player_buttons = wibox.layout.fixed.horizontal()
@@ -138,7 +118,7 @@ align_vertical:set_bottom(wibox.container.constraint(bar, "exact", nil, dpi(8)))
 local area = wibox.layout.fixed.horizontal()
 area:add(image_cont)
 area:add(wibox.container.margin(align_vertical, dpi(30), dpi(20), 0, 0))
-area.bg = x.color0
+area.bg = x.color8
 
 local main_wd = wibox.widget {
     area,
@@ -147,7 +127,7 @@ local main_wd = wibox.widget {
     forced_width = dpi(200),
     forced_height = dpi(100),
     shape = helpers.rrect(dpi(6)),
-    bg = x.color0,
+    bg = x.color8,
     widget = wibox.container.margin
 }
 ------------------------------------------------------------
@@ -187,22 +167,6 @@ end)))
 next_button:buttons(gears.table.join(awful.button({}, 1, function()
     awful.spawn.with_shell("mpc next")
 end)))
-------------------------------------------------------------
-
--- Notification
-------------------------------------------------------------
-local last_notification_id
-local function send_notification(artist, title, icon)
-    notification = naughty.notify({
-        title = artist,
-        text = title,
-        icon = icon,
-        timeout = 4,
-        replaces_id = last_notification_id
-    })
-    last_notification_id = notification.id
-end
-------------------------------------------------------------
 
 local music_directory = "etc/music"
 

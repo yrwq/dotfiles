@@ -57,7 +57,7 @@ awful.keyboard.append_global_keybindings({
     awful.key({ modkey, shiftkey}, "a", function () shift_focus_and_move_client(true) end),
 
 	-- focus next client
-    awful.key({ modkey}, "Tab", function () awful.client.focus.byidx( 1)             end),
+    -- awful.key({ modkey}, "Tab", function () awful.client.focus.byidx( 1)             end),
 
 	-- run application launcher (rofi)
     awful.key({ modkey, shiftkey }, "s",  function() awful.spawn.with_shell("rofi -show drun") end),

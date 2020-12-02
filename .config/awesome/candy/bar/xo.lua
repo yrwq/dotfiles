@@ -7,27 +7,6 @@ local dpi = xresources.apply_dpi
 local helpers = require("helpers")
 local keys = require("keys")
 
-local mysystray = wibox.widget.systray()
-mysystray:set_base_size(15)
-
--- helper function to create progress bar
-local function format_progress_bar(bar, icon)
-    icon.forced_height = dpi(27)
-    icon.forced_width = dpi(36)
-    icon.resize = true
-    bar.forced_width = dpi(150)
-    bar.shape = gears.shape.rounded_bar
-    bar.bar_shape = gears.shape.rounded_bar
-
-    local w = wibox.widget {
-        nil,
-        {icon, bar, layout = wibox.layout.fixed.horizontal},
-        expand = "none",
-        layout = wibox.layout.align.horizontal
-    }
-    return w
-end
-
 -- helper function to create buttons
 local create_button = function (symbol, color, bg_color, hover_color)
     local widget = wibox.widget {
@@ -58,65 +37,20 @@ local create_button = function (symbol, color, bg_color, hover_color)
     return section
 end
 
-local musicPop = require("candy.panel.music")
-local music_symbol = "ﱘ"
-local music = create_button(music_symbol, x.fg, x.trans, x.color8)
-
-music:connect_signal("mouse::enter", function()
-    st = music:get_all_children()[1]
-    st.markup = helpers.colorize_text(music_symbol, x.color15)
-end)
-
-music:connect_signal("mouse::leave", function()
-    st = muisc:get_all_children()[1]
-    st.markup = helpers.colorize_text(music_symbol, x.fg)
-end)
-
-music:buttons(gears.table.join(
-    awful.button({ }, 1, function ()
-            musicPop.visible = not musicPop.visible
-    end),
-    awful.button({ }, 3, function()
-            musicPop.visible = not musicPop.visible
-    end)
-))
-
-local volicon = wibox.widget.imagebox(nil)
-local volume_bar = require("widgets.volume_bar")
-local volbar = format_progress_bar(volume_bar, volicon)
+-- systray
+local mysystray = wibox.widget.systray()
+mysystray:set_base_size(20)
 
 local mysystray_container = {
     mysystray,
-    left = dpi(10),
-    right = dpi(10),
-    top = dpi(8),
+    left = dpi(8),
+    right = dpi(8),
+    top = dpi(5),
     screen = 1,
     bg = x.trans,
     widget = wibox.container.margin
 }
 
-local mytextclock = awful.widget.textclock()
-
--- create microphone button
-local microphone_symbol = ""
-local microphone_muted_color = x.color8
-local microphone_unmuted_color = x.fg
-local microphone = create_button(microphone_symbol, microphone_unmuted_color, x.trans, x.color8)
-
-microphone:buttons(gears.table.join(
-    awful.button({ }, 1, function ()
-        awful.spawn.with_shell("amixer -D pulse sset Capture toggle &> /dev/null")
-    end)
-))
-
-awesome.connect_signal("shit::microphone", function(muted)
-    local t = microphone:get_all_children()[1]
-    if muted then
-        t.markup = helpers.colorize_text(microphone_symbol, microphone_muted_color)
-    else
-        t.markup = helpers.colorize_text(microphone_symbol, microphone_unmuted_color)
-    end
-end)
 -- create volume button
 local volume_symbol = ""
 local volume_muted_color = x.color8
@@ -146,7 +80,104 @@ awesome.connect_signal("shit::volume", function(_, muted)
         t.markup = helpers.colorize_text(volume_symbol, volume_unmuted_color)
     end
 end)
+
+-- create apple button
+local apple = create_button("󰀵", x.fg, x.trans, x.color8)
+
+apple:buttons(gears.table.join(
+                  awful.button({  }, 1, function()
+                          app_drawer_show()
+                  end),
+                  awful.button({  }, 1, function()
+                          exit_screen_show()
+                  end)
+))
+
+-- create settings button
+local settingsPop = require('candy.panel.settings')
+local settings = create_button("漣", x.fg, x.trans, x.color8)
+
+settings:connect_signal("mouse::enter", function()
+    st = settings:get_all_children()[1]
+    st.markup = helpers.colorize_text("漣", x.color15)
+end)
+
+settings:connect_signal("mouse::leave", function()
+    st = settings:get_all_children()[1]
+    st.markup = helpers.colorize_text("漣", x.fg)
+end)
+
+settings:buttons(gears.table.join(
+    awful.button({ }, 1, function ()
+            settingsPop.visible = not settingsPop.visible
+    end),
+    awful.button({ }, 3, function()
+            settingsPop.visible = not settingsPop.visible
+    end)
+))
+
+-- create microphone button
+local microphone_symbol = ""
+local microphone_muted_color = x.color8
+local microphone_unmuted_color = x.fg
+local microphone = create_button(microphone_symbol, microphone_unmuted_color, x.trans, x.color8)
+
+microphone:buttons(gears.table.join(
+    awful.button({ }, 1, function ()
+        awful.spawn.with_shell("amixer -D pulse sset Capture toggle &> /dev/null")
+    end)
+))
+
+awesome.connect_signal("shit::microphone", function(muted)
+    local t = microphone:get_all_children()[1]
+    if muted then
+        t.markup = helpers.colorize_text(microphone_symbol, microphone_muted_color)
+    else
+        t.markup = helpers.colorize_text(microphone_symbol, microphone_unmuted_color)
+    end
+end)
+
+local mytextclock = awful.widget.textclock()
+
 awful.screen.connect_for_each_screen(function(s)
+
+        -- create tasklist
+        s.mytasklist = awful.widget.tasklist {
+            screen   = s,
+            filter   = awful.widget.tasklist.filter.currenttags,
+            style    = {
+                font = beautiful.font,
+                bg = x.color0,
+            },
+            layout   = {
+                -- spacing = dpi(10),
+                layout  = wibox.layout.flex.horizontal
+            },
+            widget_template = {
+            {
+                {
+                    id     = 'text_role',
+                    align  = "center",
+                    widget = wibox.widget.textbox,
+                },
+                forced_width = dpi(220),
+                left = dpi(15),
+                right = dpi(15),
+                -- Add margins to top and bottom in order to force the
+                -- text to be on a single line, if needed. Might need
+                -- to adjust them according to font size.
+                top  = dpi(4),
+                bottom = dpi(4),
+                widget = wibox.container.margin
+            },
+            -- shape = helpers.rrect(dpi(8)),
+            -- border_width = dpi(2),
+            id = "bg_role",
+            -- id = "background_role",
+            -- shape = gears.shape.rounded_bar,
+            widget = wibox.container.background,
+            },
+        }
 
         -- create taglist
         s.mytaglist = awful.widget.taglist {
@@ -176,141 +207,59 @@ awful.screen.connect_for_each_screen(function(s)
                 screen = s,
                 ontop = true,
                 bg = x.trans,
-                height = dpi(35)
+                height = dpi(30)
         })
-	s.mylayoutbox = awful.widget.layoutbox
 
-	s.mywibox:setup{
+        local function remove_wibar(c)
+        if c.fullscreen or c.maximized then
+            s.mywibox.visible = false
+        else
+            s.mywibox.visible = true
+        end
+        end
+
+        client.connect_signal("property::fullscreen", remove_wibar)
+        -- add widgets to wibox
+        s.mywibox:setup{
         layout = wibox.layout.align.horizontal,
         expand = "none",
+
+        -- left
+        {
+            apple,
+            layout = wibox.layout.fixed.horizontal,
+            {
+                s.mytasklist,
+                margins = dpi(5),
+                widget = wibox.container.margin
+            },
+        },
+
+        -- center
         {
             layout = wibox.layout.fixed.horizontal,
             {
                 {
                     s.mytaglist,
                     shape = helpers.rrect(beautiful.border_radius),
-                    bg = x.transbg,
+                    bg = x.trans,
                     widget = wibox.container.background
                 },
-                top = 5,
-                right = 5,
-                left = 5,
+                margins = dpi(5),
                 widget = wibox.container.margin
             },
         },
 
+        -- right
         {
-            layout = wibox.layout.fixed.horizontal,
-            {
-                {
-		    mytextclock,
-                    shape = helpers.rrect(beautiful.border_radius),
-        	    right = 8,
-                    left = 8,
-                    bg = x.transbg,
-                    widget = wibox.container.background
-                },
-                top = 5,
-                right = 8,
-                left = 8,
-                widget = wibox.container.margin
-            },
-        },
-
-        {
-
-
-            {
-                {
-                    {
-						music,
-						volume,
-						microphone,
-                        layout = wibox.layout.fixed.horizontal
-                    },
-                    shape = helpers.rrect(beautiful.border_radius),
-                    bg = x.transbg,
-                    widget = wibox.container.background
-                },
-                top = 5,
-                right = 5,
-                left = 5,
-                widget = wibox.container.margin
-            },
-
-            helpers.horizontal_pad(0),
-            {
-                {
-                    {
-                        mysystray_container,
-                        layout = wibox.container.margin
-                    },
-                    shape = helpers.rrect(beautiful.border_radius),
-                    bg = x.transbg,
-                    widget = wibox.container.background
-                },
-                top = 5,
-                right = 5,
-                left = 5,
-                widget = wibox.container.margin
-            },
-
-            helpers.horizontal_pad(0),
-            {
-                {
-                    {
-		        volume_bar,
-			right = 10,
-			left = 10,
-                        layout = wibox.container.margin
-                    },
-                    shape = helpers.rrect(beautiful.border_radius),
-                    bg = x.transbg,
-                    widget = wibox.container.background
-                },
-		top = 5,
-                right = 5,
-                left = 5,
-                widget = wibox.container.margin
-            },
-
-            {
-                {
-                    {
-                        s.mylayoutbox,
-                        margins = dpi(6),
-                        widget = wibox.container.margin
-                    },
-                    shape = helpers.rrect(beautiful.border_radius),
-                    bg = x.color0,
-                    widget = wibox.container.background
-                },
-                top = 5,
-                right = 10,
-                left = 10,
-                widget = wibox.container.margin
-            },
-
+            microphone,
+            volume,
+            settings,
+            mysystray_container,
+            mytextclock,
+            helpers.horizontal_pad(10),
+            widget = wibox.container.margin,
             layout = wibox.layout.fixed.horizontal
         }
     }
 end)
-
-local function no_wibar_ontop(c)
-    local s = awful.screen.focused()
-    if c.fullscreen then
-        s.mywibox.ontop = false
-    else
-        s.mywibox.ontop = true
-    end
-end
-
-client.connect_signal("focus", no_wibar_ontop)
-client.connect_signal("unfocus", no_wibar_ontop)
-client.connect_signal("property::fullscreen", no_wibar_ontop)
-
--- Every bar theme should provide these fuctions
-function wibars_toggle()
-    local s = awful.screen.focused()
-    s.mywibox.visible = not s.mywibox.visible
-end

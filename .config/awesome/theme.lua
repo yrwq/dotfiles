@@ -31,6 +31,7 @@ theme.gap_single_client = true
 theme.border_width = dpi(0)
 theme.border_normal = x.color0
 theme.border_focus = x.color8
+theme.bar_radius = dpi(7)
 theme.border_radius = dpi(30)
 theme.client_radius = dpi(30)
 theme.titlebar_size = dpi(30)

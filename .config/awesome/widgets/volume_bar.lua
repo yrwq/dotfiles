@@ -9,7 +9,7 @@ local active_color = {
     type = 'linear',
     from = {0, 0},
     to = {200, 50}, -- replace with w,h later
-    stops = {{0, x.color1}, {0.75, x.color9}}
+    stops = {{0, x.color1}, {0.5, x.color5}}
 }
 
 local muted_color = x.bg

@@ -6,7 +6,7 @@ awful.spawn.with_shell("picom")
 awful.spawn.with_shell("mpd")
 awful.spawn.with_shell("emacs --daemon")
 
-editor = "emacsclient -c"
+editor = "st -c editor -e nvim"
 terminal = "st"
 music = "st -c music -e ncmpcpp"
 mail = "st -c mail -e neomutt"
@@ -23,7 +23,7 @@ x = {
     fg = xrdb.foreground,
     trans = "#00000000",   -- fully transparent
     transbg = xrdb.background .. "CC", -- 80% transparent
-    transbg2 = xrdb.background .. "90", -- 80% transparent
+    trans60 = xrdb.background .. "99", -- 60% transparent
     color0     = xrdb.color0,
     color1     = xrdb.color1,
     color2     = xrdb.color2,

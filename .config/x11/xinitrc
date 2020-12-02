@@ -17,8 +17,7 @@ fi
 # Hungarian keys
 setxkbmap hu
 
-# Change theme
-chth &
+chth dear &
 
 sleep 3
 exec awesome

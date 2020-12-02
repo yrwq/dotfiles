@@ -17,7 +17,7 @@ client.connect_signal("property::floating", function(c)
     if c.floating or b then
         awful.titlebar.show(c)
     else
-        if not c.bling_tabbed then awful.titlebar.hide(c) end
+        awful.titlebar.hide(c)
     end
 end)
 
@@ -25,7 +25,10 @@ client.connect_signal("manage", function(c)
     if c.floating or c.first_tag.layout.name == "floating" then
         awful.titlebar.show(c)
     else
-        if not c.bling_tabbed then awful.titlebar.hide(c) end
+        awful.titlebar.hide(c)
+    end
+    c.shape = function(cr,w,h)
+        gears.shape.rounded_rect(cr,w,h,10)
     end
 end)
 
@@ -35,7 +38,7 @@ tag.connect_signal("property::layout", function(t)
         if c.floating or c.first_tag.layout.name == "floating" then
             awful.titlebar.show(c)
         else
-            if not c.bling_tabbed then awful.titlebar.hide(c) end
+            awful.titlebar.hide(c)
         end
     end
 end)
@@ -44,10 +47,7 @@ end)
 -- {{ Helper to create mult tb buttons
 local function create_title_button(c, color_focus, color_unfocus)
     local tb_color = wibox.widget {
-        forced_width = dpi(8),
-        forced_height = dpi(8),
         bg = color_focus,
-        shape = gears.shape.circle,
         widget = wibox.container.background
     }
 
@@ -70,11 +70,6 @@ local function create_title_button(c, color_focus, color_unfocus)
     c:connect_signal("focus", update)
     c:connect_signal("unfocus", update)
 
-    tb:connect_signal("mouse::enter",
-                      function() tb_color.bg = color_focus .. "70" end)
-
-    tb:connect_signal("mouse::leave", function() tb_color.bg = color_focus end)
-
     tb.visible = true
     return tb
 end
@@ -83,7 +78,6 @@ end
 -- Add a titlebar if titlebars_enabled is set to true in the rules.
 client.connect_signal("request::titlebars", function(c)
     -- buttons for the titlebar
-
     local buttons = gears.table.join(awful.button({}, 1, function()
         c:emit_signal("request::activate", "titlebar", {raise = true})
         if c.maximized == true then c.maximized = false end
@@ -105,93 +99,20 @@ client.connect_signal("request::titlebars", function(c)
     close:connect_signal("button::press", function() c:kill() end)
 
     local floating =
-        create_title_button(c, x.color5, x.color0)
+        create_title_button(c, x.color3, x.color8)
     floating:connect_signal("button::press",
                             function() c.floating = not c.floating end)
 
-    local min = create_title_button(c, x.color3, x.color0)
-    min:connect_signal("button::press", function() c.fullscreen = true end)
-
-    local l_reverse_corner = wibox.widget {
-        bg = x.trans,
-        shape = helpers.prrect(6, false, false, true, false),
-        widget = wibox.container.background
+    local active_color_1 = {
+        type = 'linear',
+        from = {0, 0},
+        to = {c.width, 20}, -- replace with w,h later
+        stops = {{0, x.color1}, {0.90, x.color9}}
     }
 
-    local r_reverse_corner = wibox.widget {
-        bg = x.trans,
-        shape = helpers.prrect(6, false, false, false, true),
-        widget = wibox.container.background
-    }
-
-    local function update()
-        if client.focus == c then
-            l_reverse_corner.bg = x.trans
-            r_reverse_corner.bg = x.trans
-        else
-            l_reverse_corner.bg = x.trans
-            r_reverse_corner.bg = x.trans
-        end
-    end
-
-    update()
-    c:connect_signal("focus", update)
-    c:connect_signal("unfocus", update)
-
-    awful.titlebar(c, {position = "top", size = beautiful.titlebar_size}):setup{
-        nil,
-        nil,
-        {
-            {
-                {
-                    l_reverse_corner,
-                    bg = x.trans,
-                    shape = gears.rectangle,
-                    widget = wibox.container.background
-                },
-                width = 10,
-                height = 40,
-                strategy = "exact",
-                layout = wibox.layout.constraint
-            },
-            {
-                {
-                    {
-                        {
-                            min,
-                            floating,
-                            close,
-                            layout = wibox.layout.fixed.horizontal
-                        },
-                        margins = dpi(4),
-                        widget = wibox.container.margin
-                    },
-                    bg = x.trans,
-                    shape = helpers.prrect(beautiful.border_radius, true, true,
-                                           false, false),
-                    widget = wibox.container.background
-                },
-                top = dpi(8),
-                widget = wibox.container.margin
-            },
-            {
-                {
-                    r_reverse_corner,
-                    bg = x.trans,
-                    shape = gears.rectangle,
-                    widget = wibox.container.background
-                },
-                width = 10,
-                height = 40,
-                strategy = "exact",
-                layout = wibox.layout.constraint
-            },
-
-            -- top = dpi(8),
-            -- right = dpi(5),
-            -- widget = wibox.container.margin
-            layout = wibox.layout.fixed.horizontal
-        },
-        layout = wibox.layout.align.horizontal
-    }
+    awful.titlebar(c, {
+        position = "top",
+        size = 20,
+        bg_focus = active_color_1
+    })
 end)
