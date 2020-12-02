@@ -16,7 +16,7 @@ theme.bg_normal = x.bg
 theme.bg_dark = x.transbg
 theme.bg_focus = x.transbg
 theme.bg_urgent = x.color3
-theme.bg_minimize = x.trans
+theme.bg_minimize = x.trans40
 theme.bg_systray = x.trans
 
 theme.fg_normal = x.fg
@@ -71,10 +71,10 @@ theme.mstab_tabbar_orientation = "top"
 theme.mstab_border_radius = dpi(10)
 
 theme.tabbar_style = "modern"
-theme.tabbar_bg_focus = "#3e3e3e"
-theme.tabbar_bg_normal = x.bg
+theme.tabbar_bg_focus = x.transbg
+theme.tabbar_bg_normal = x.trans40
 theme.tabbed_spawn_in_tab = true
-theme.tabbar_radius = dpi(6)
+theme.tabbar_radius = dpi(3)
 theme.tabbar_font = "Iosevka Term 9"
 
 return theme

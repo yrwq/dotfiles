@@ -48,15 +48,11 @@ apps.volume = function ()
 end
 
 apps.editor = function ()
-    helpers.run_or_raise({instance = 'editor'}, false, "emacsclient -c", { switchtotag = true })
+    awful.spawn(editor)
 end
 
 apps.music = function ()
     awful.spawn(music)
-end
-
-apps.todo = function()
-    helpers.run_or_raise({instance = 'todo'}, false, "emacsclient -c ~/doc/todo.org", { switchtotag = true })
 end
 
 apps.lxappearance = function()
