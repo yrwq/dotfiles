@@ -133,7 +133,11 @@ ruled.client.connect_signal("request::rules", function()
             instance = { "Toolkit" },
             type = { "dialog" }
         },
-        properties = { screen = 1, tag = awful.screen.focused().tags[2] },
+        properties = {
+			titlebars_enabled = false,
+			screen = 1,
+			tag = awful.screen.focused().tags[2]
+		},
     }
 
     -- tag 3

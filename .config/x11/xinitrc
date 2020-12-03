@@ -17,7 +17,7 @@ fi
 # Hungarian keys
 setxkbmap hu
 
-chth dear &
+chth &
 
 sleep 3
 exec awesome

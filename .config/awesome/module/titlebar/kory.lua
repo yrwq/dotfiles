@@ -10,38 +10,6 @@ local dpi = require("beautiful.xresources").apply_dpi
 
 local helpers = require("helpers")
 
--- {{{ Enable THICC Title Bars only while Floating
-client.connect_signal("property::floating", function(c)
-    local b = false;
-    if c.first_tag ~= nil then b = c.first_tag.layout.name == "floating" end
-    if c.floating or b then
-        awful.titlebar.show(c)
-    else
-        if not c.bling_tabbed then awful.titlebar.hide(c) end
-    end
-end)
-
-client.connect_signal("manage", function(c)
-    if c.floating or c.first_tag.layout.name == "floating" then
-        awful.titlebar.show(c)
-    else
-        if not c.bling_tabbed then awful.titlebar.hide(c) end
-    end
-end)
-
-tag.connect_signal("property::layout", function(t)
-    local clients = t:clients()
-    for k, c in pairs(clients) do
-        if c.floating or c.first_tag.layout.name == "floating" then
-            awful.titlebar.show(c)
-        else
-            if not c.bling_tabbed then awful.titlebar.hide(c) end
-        end
-    end
-end)
--- }}}
-
--- {{ Helper to create mult tb buttons
 local function create_title_button(c, color_focus, color_unfocus)
     local tb_color = wibox.widget {
         forced_width = dpi(8),

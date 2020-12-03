@@ -49,7 +49,7 @@ update_widget()
 
 local mpd_script = [[
   bash -c '
-  	echo ~/.config/todos | entr notify-send " Todo added!"
+  	cat ~/.config/todos
   ']]
 
 awful.spawn.with_line_callback(mpd_script, {
