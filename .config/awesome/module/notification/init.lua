@@ -6,6 +6,7 @@ local awful = require("awful")
 local dpi = beautiful.xresources.apply_dpi
 local helpers = require("helpers")
 local menubar = require("menubar")
+local helpers = require("helpers")
 
 local notifications = {}
 naughty.config.defaults.ontop = true
@@ -59,15 +60,16 @@ naughty.connect_signal("request::action_icon", function(a, context, hints)
     a.icon = menubar.utils.lookup_icon(hints.id)
 end)
 
-
+-- volume
 local notif
 local timeout = 1.5
 local first_time = true
-awesome.connect_signal("evil::volume", function (percentage, muted)
+
+awesome.connect_signal("shit::volume", function (percentage, muted)
     if first_time then
         first_time = false
     else
-        if (sidebar and sidebar.visible) or (client.focus and client.focus.class == "Pavucontrol") then
+        if (client.focus and client.focus.class == "Pavucontrol") then
             -- Sidebar and Pavucontrol already show volume, so
             -- destroy notification if it exists
             if notif then
@@ -77,14 +79,12 @@ awesome.connect_signal("evil::volume", function (percentage, muted)
             -- Send notification
             local message, icon
             if muted then
-                message = "muted"
-                icon = icons.image.muted
+                message = "婢 muted"
             else
-                message = tostring(percentage)
-                icon = icons.image.volume
+                message = "奔 " .. tostring(percentage)
             end
 
-            notif = notifications.notify_dwim({ title = "Volume", message = message, icon = icon, timeout = timeout, app_name = "volume" }, notif)
+            notif = notifications.notify_dwim({ title = message,font = "Iosevka 20", timeout = timeout, app_name = "volume" }, notif)
         end
     end
 end)
