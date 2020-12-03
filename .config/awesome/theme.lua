@@ -58,8 +58,6 @@ theme.tasklist_fg_normal = x.color8
 theme = theme_assets.recolor_layout(theme, x.fg)
 theme.wibar_height = dpi(35)
 theme.systray_icon_spacing = dpi(8)
-theme.notification_max_width = dpi(350)
-theme.notification_font = "Iosevka Term 9"
 theme.useless_gap = dpi(10)
 theme.gap_single_client = true
 theme.border_width = dpi(0)
@@ -88,5 +86,10 @@ theme.tabbar_font = "Iosevka Term 9"
 
 -- popup
 theme.popup_bg = x.color0 .. "B3" -- 70% transparent
+
+-- notifications
+theme.notification_font = "Iosevka Term 9"
+theme.notification_bg = x.color0
+theme.notification_max_width = dpi(400)
 
 return theme

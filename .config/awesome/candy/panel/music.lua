@@ -48,6 +48,8 @@ local cover_image = wibox.widget {
 
 local script = [[bash -c '
   art
+  current=`mpc current`
+  echo $current
 ']]
 
 
@@ -82,14 +84,31 @@ local panelWidget = wibox.widget {
     layout = wibox.layout.align.vertical
 }
 
+local last_notification_id
+local function send_notification(artist, title, icon)
+    notification = naughty.notify({
+        title = title,
+        text = artist,
+        icon = icon,
+        timeout = 4,
+        replaces_id = last_notification_id
+    })
+    last_notification_id = notification.id
+end
+
 local function update_image()
 	awful.spawn.easy_async(script, function(stdout)
+		local artist = stdout
+		local title = " Currently playing"
 		local cover_path = "/tmp/mpd_cover.jpg"
 
 		cover_image:set_image(gears.surface.load_uncached(cover_path))
+		send_notification(artist, title, cover_path)
+
 		collectgarbage()
 	end)
 end
+
 
 local mpd_change_event_listener = [[
 sh -c '
