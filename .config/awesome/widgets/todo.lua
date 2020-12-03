@@ -1,61 +1,87 @@
 local awful = require("awful")
-local gears = require("gears")
-local wibox = require("wibox")
 local beautiful = require("beautiful")
-local naughty = require("naughty")
 local xresources = require("beautiful.xresources")
 local dpi = xresources.apply_dpi
+local wibox = require("wibox")
+local gears = require("gears")
+local watch = require("awful.widget.watch")
 
-local helpers = require("helpers")
-local pad = helpers.pad
-
-local todos = wibox.widget {
-	font = "Iosevka Term 10",
-	align = "center",
-	valign = "center",
-	markup = "todo",
-	widget = wibox.widget.textbox
-}
-
-local main_wd = wibox.widget {
-	{
-		todos,
-		layout = wibox.layout.fixed.vertical
-	},
-    shape = helpers.rrect(dpi(6)),
-    bg = "#2e2e2e",
-    widget = wibox.container.margin
-}
-
-local script = [[bash -c '
-cat ~/.config/todos
+local get_todo_cmd = "awtodo -g"
+local remove_todos = "awtodo -r"
+local add_todo = [[bash -c '
+	todo=$(rofi -dmenu)
+	echo $todo >> ~/.config/todos
 ']]
 
-local function update_widget()
-    awful.spawn.easy_async(script, function(stdout)
 
-        local to = stdout
+local todo_list = wibox.widget {
+		widget = wibox.widget.textbox,
+		font = "Iosevka Term 12",
+		markup = "",
+		color = x.fg,
+}
 
-        -- Escape &'s
-        to = string.gsub(to, "&", "&amp;")
+local widget_todo  = wibox.widget {
+	{
+		todo_list,
+		margins = dpi(50),
+		widget = wibox.container.margin,
+	},
+	layout = wibox.layout.fixed.vertical,
+}
 
-        todos.markup = "<span foreground='" .. "#efefef" .. "'>" .. to .. "</span>"
+local function update_todos()
+	awful.spawn.easy_async(get_todo_cmd, function(stdout)
+		local todos = stdout
 
-        collectgarbage()
-    end)
+		todo_list:set_markup_silently(todos)
+		collectgarbage()
+	end)
 end
 
-update_widget()
+widget_todo:buttons(gears.table.join(
+	awful.button({ }, 1, function()
+		awful.spawn.easy_async_with_shell(add_todo, function(widget, stdout, stderr, _, _)
+			widget.markup = string.match(stdout)
+    	end, todo_list)
+		update_todos()
+	end),
+	awful.button({ }, 2, function()
+		update_todos()
+	end),
+	awful.button({ }, 3, function()
+		awful.spawn.with_shell(remove_todos)
+		update_todos()
+	end),
+	awful.button({ }, 4, function()
+		update_todos()
+	end),
+	awful.button({ }, 5, function()
+		update_todos()
+	end)
+))
 
-local mpd_script = [[
-  bash -c '
-  	cat ~/.config/todos
-  ']]
+awful.spawn.easy_async_with_shell(
+	awful.spawn.with_line_callback(
+		get_todo_cmd,
+			{
+				stdout = function(line)
+					update_todos()
+				end
+			}
+		)
+)
 
-awful.spawn.with_line_callback(mpd_script, {
-    stdout = function(line)
-            update_widget()
-    end
-})
+update_todos()
 
-return main_wd
+-- Refreshes Widget every minute
+function widget_todo.init()
+	watch(get_todo_cmd, 1,
+		function(widget, stdout, stderr, _, _)
+			widget.markup = string.match(stdout, ".+")
+
+		end,
+		todo_list)
+end
+
+return widget_todo

@@ -148,7 +148,8 @@ local mpd_area = {
 }
 
 local todo = require("widgets.todo")
-local todo_box = create_boxed_widget(todo, dpi(80), dpi(80), x.bg)
+todo.init()
+local todo_box = create_boxed_widget(todo, dpi(200), dpi(250), x.bg)
 local todo_area = {
 	nil,
 	{
@@ -169,8 +170,6 @@ local panelWidget = wibox.widget {
 		todo_area,
     	layout = wibox.layout.align.vertical
 	},
-	valign = center,
-	align = center,
     layout = wibox.layout.align.horizontal
 }
 
