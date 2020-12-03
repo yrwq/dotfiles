@@ -70,6 +70,10 @@ local lxappearance = create_button("嗀", x.color8, x.fg, apps.lxappearance, "a"
 local volume = create_button("奔", x.color8, x.fg, apps.volume, "s")
 local nitrogen = create_button("", x.color8, x.fg, apps.nitrogen, "d")
 local abook = create_button("", x.color8, x.fg, apps.abook, "f")
+local news = create_button("", x.color8, x.fg, apps.news, "y")
+local qute = create_button("", x.color8, x.fg, apps.qute, "x")
+local yt = create_button("", x.color8, x.fg, apps.youtube, "c")
+local lock = create_button("", x.color8, x.fg, apps.lock, "v")
 
 -- Create the widget
 app_drawer = wibox({visible = false, ontop = true, type = "dock"})
@@ -179,6 +183,7 @@ app_drawer:setup {
         -- Stripes
         create_stripe({ browser, discord, calcurse, mail}, "#00000000"),
         create_stripe({ lxappearance, volume, nitrogen, abook}, "#00000000"),
+        create_stripe({ news, qute, yt, lock}, "#00000000"),
         layout = wibox.layout.flex.vertical
     },
     bg = x.bg .. "A0",
