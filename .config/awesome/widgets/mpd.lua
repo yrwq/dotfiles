@@ -11,7 +11,7 @@ local pad = helpers.pad
 
 local title_color = x.fg
 local artist_color = x.fg
-local paused_color = x.color1
+local paused_color = x.color8
 local artist_fg
 local artist_bg
 local seek_state = false
@@ -26,7 +26,7 @@ local bar = wibox.widget {
         type = 'linear',
         from = {0, 0},
         to = {200, 50}, -- replace with w,h later
-        stops = {{0, x.color9}, {0.75, x.color13}}
+        stops = {{0, x.color5}, {0.50, x.color1}}
     },
     background_color = "#4e4e4e",
     shape = helpers.rrect(dpi(6)),
@@ -77,6 +77,21 @@ local main_wd = wibox.widget {
     bg = "#2e2e2e",
     widget = wibox.container.margin
 }
+
+main_wd:buttons(gears.table.join(
+	awful.button({ }, 1, function()
+		awful.spawn.with_shell("mpc toggle")
+	end),
+	awful.button({ }, 3, function()
+		awful.spawn.with_shell("mpc next")
+	end),
+	awful.button({ }, 4, function()
+		awful.spawn.with_shell("mpc seek +5%")
+	end),
+	awful.button({ }, 5, function()
+		awful.spawn.with_shell("mpc seek -5%")
+	end)
+))
 
 local script = [[bash -c '
   file=`mpc current -f %file%`

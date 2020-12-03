@@ -58,20 +58,6 @@ local create_button = function (symbol, color, bg_color, hover_color)
     return section
 end
 
--- music popup widget
-local musicPop = require("candy.panel.music")
-local music_symbol = "ﱘ"
-local music = create_button(music_symbol, x.fg, x.trans, x.color8)
-
-music:buttons(gears.table.join(
-    awful.button({ }, 1, function ()
-            musicPop.visible = not musicPop.visible
-    end),
-    awful.button({ }, 3, function()
-            musicPop.visible = not musicPop.visible
-    end)
-))
-
 -- volume bar
 local volicon = wibox.widget.imagebox(nil)
 local volume_bar = require("widgets.volume_bar")
@@ -265,7 +251,6 @@ awful.screen.connect_for_each_screen(function(s)
             {
                 {
                     {
-						music,
 						volume,
 						microphone,
                         layout = wibox.layout.fixed.horizontal

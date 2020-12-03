@@ -105,7 +105,7 @@ local control_line = wibox.widget {
 	layout = wibox.container.margin
 }
 
-local control_box = create_boxed_widget(control_line, dpi(200), dpi(50), x.transbg)
+local control_box = create_boxed_widget(control_line, dpi(250), dpi(50), x.bg)
 
 local cover_image = wibox.widget {
 	resize = "false",
@@ -120,7 +120,7 @@ local script = [[bash -c '
 ']]
 
 
-local cover_box = create_boxed_widget(cover_image, dpi(200), dpi(250), x.transbg)
+local cover_box = create_boxed_widget(cover_image, dpi(250), dpi(250), x.bg)
 local cover_area = {
 	nil,
 	{
@@ -132,7 +132,7 @@ local cover_area = {
 }
 
 local mpd = require("widgets.mpd")
-local mpd_box = create_boxed_widget(mpd, dpi(200), dpi(100), "#2e2e2e")
+local mpd_box = create_boxed_widget(mpd, dpi(250), dpi(100), x.bg)
 local mpd_area = {
     nil,
     {
@@ -147,12 +147,31 @@ local mpd_area = {
     layout = wibox.layout.align.vertical
 }
 
+local todo = require("widgets.todo")
+local todo_box = create_boxed_widget(todo, dpi(80), dpi(80), x.bg)
+local todo_area = {
+	nil,
+	{
+		todo_box,
+		layout = wibox.container.margin
+	},
+	nil,
+	layout = wibox.layout.align.vertical
+}
+
 local panelWidget = wibox.widget {
-	cover_area,
-	mpd_area,
+	{
+		cover_area,
+		mpd_area,
+    	layout = wibox.layout.align.vertical
+	},
+	{
+		todo_area,
+    	layout = wibox.layout.align.vertical
+	},
 	valign = center,
 	align = center,
-    layout = wibox.layout.align.vertical
+    layout = wibox.layout.align.horizontal
 }
 
 local last_notification_id
@@ -174,7 +193,7 @@ local function update_image()
 		local cover_path = "/tmp/mpd_cover.jpg"
 
 		cover_image:set_image(gears.surface.load_uncached(cover_path))
-		send_notification(artist, title, cover_path)
+		-- send_notification(artist, title, cover_path)
 
 		collectgarbage()
 	end)
@@ -200,14 +219,14 @@ awful.spawn.easy_async_with_shell(
 
 update_image()
 
-local width = 280
+local width = 600
 local margin = 5
 
 local settingsPop = popupLib.create(
 	-- x
-  	screen_width - width - margin,
+  	screen_width / 2 - width / 2 - margin / 2,
 	-- y
-	beautiful.wibar_height + margin,
+	screen_height / 2 - 500 / 2 + margin / 2,
 	-- height
   	widget_height,
 	-- width

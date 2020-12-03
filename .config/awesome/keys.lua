@@ -12,7 +12,7 @@ shiftkey = "Shift"
 altkey = "Mod1"
 ctrlkey = "Control"
 
-local musicPop = require("candy.panel.music")
+local dashPop = require("candy.panel.dash")
 
 local function shift_focus_and_move_client(move_back)
   local t = client.focus and client.focus.first_tag or nil
@@ -59,9 +59,9 @@ awful.keyboard.append_global_keybindings({
         end end,
 		{description = "unminimize client", group = "client"}),
 
-	-- show music panel
-    awful.key({ altkey }, "q", function () musicPop.visible = not musicPop.visible end,
-		{description = "music panel", group = "ui"}),
+	-- toggle dashboard
+    awful.key({ altkey }, "q", function () dashPop.visible = not dashPop.visible end,
+		{description = "dashboard", group = "ui"}),
 
 	-- add client to tabbed
     awful.key({ altkey }, "a", function () bling.module.tabbed.pick() end,
@@ -113,7 +113,7 @@ awful.keyboard.append_global_keybindings({
     awful.key({ modkey }, "m", apps.music,
 		{description = "music player", group = "launch"}),
 
-    awful.key({ modkey }, "w", apps.surf,
+    awful.key({ modkey }, "w", apps.qute,
 		{description = "browser", group = "launch"}),
 
     awful.key({ modkey }, "r", apps.file_manager,

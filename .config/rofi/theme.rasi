@@ -1,18 +1,15 @@
-
-/** COLORS & FONT **/
 * {
-    background:             #231e18;
-    background-alt:         #48413a;
-    accent:                 #d35c5c;
-    foreground:             #cabcb1;
+    background:             #262427;
+    background-alt:         #262427;
+    accent:                 #454545;
+    foreground:             #fdf9f7;
 
     border-color:           @accent;
     background-color:		@background;
 
-    font:					"Iosevka Term 16";
+    font:					"Iosevka Term 12";
 }
 
-/** ELEMENTS PROPERTIES **/
 #window {
     background-color: 		@background;
     border:           		1;
