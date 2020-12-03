@@ -12,7 +12,7 @@ local theme = dofile(themes_path .. "default/theme.lua")
 
 theme.font = "Iosevka Term 9"
 
-theme.bg_normal = x.bg
+theme.bg_normal = x.trans40
 theme.bg_dark = x.transbg
 theme.bg_focus = x.transbg
 theme.bg_urgent = x.color3
@@ -38,6 +38,15 @@ theme.titlebar_size = dpi(25)
 
 theme.wibar_height = dpi(35)
 
+-- hotkeys
+theme.hotkeys_bg = x.bg
+theme.hotkeys_fg = x.fg
+theme.hotkeys_border_width = dpi(5)
+theme.hotkeys_modifiers_fg = x.color1
+theme.hotkeys_font = "Iosevka 12"
+theme.hotkeys_group_margin = dpi(15)
+
+-- taglist
 local taglist_square_size = dpi(0)
 theme.taglist_squares_sel = theme_assets.taglist_squares_sel(
                                 taglist_square_size, theme.fg_normal)
@@ -48,10 +57,13 @@ theme.taglist_fg_empty = x.color0
 theme.taglist_fg_occupied = x.color1
 theme.taglist_fg_urgent = x.color13
 theme.taglist_fg_focus = x.color9
+
 theme.taglist_bg_empty = x.trans
 theme.taglist_bg_occupied = x.trans
 theme.taglist_bg_urgent = x.trans
-theme.taglist_bg_focus = x.trans
+theme.taglist_bg_focus = x.color0 .. "90"
+
+theme.taglist_font = "Iosevka Term 16"
 
 theme.tasklist_font = theme.font
 theme.tasklist_fg_focus = x.fg

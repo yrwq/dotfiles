@@ -3,11 +3,15 @@ local gears = require("gears")
 local wibox = require("wibox")
 local apps = require("apps")
 local bling = require("bling")
-local musicPop = require("candy.panel.music")
+
+local hotkeys_popup = require("awful.hotkeys_popup").widget
+
 modkey = "Mod4"
 shiftkey = "Shift"
 altkey = "Mod1"
 ctrlkey = "Control"
+
+local musicPop = require("candy.panel.music")
 
 local function shift_focus_and_move_client(move_back)
   local t = client.focus and client.focus.first_tag or nil
@@ -36,7 +40,17 @@ local function shift_focus_and_move_client(move_back)
   end
 end
 
+procom = "rofi -show run"
+
 awful.keyboard.append_global_keybindings({
+
+	awful.key({ modkey }, "p",      hotkeys_popup.show_help),
+
+	-- unminimize
+    awful.key({modkey, shiftkey }, "n", function() local c = awful.client.restore()
+    	if c then
+            c:emit_signal("request::activate", "key.unminimize", {raise = true})
+        end end),
 
 	-- show music panel
     awful.key({ altkey }, "q", function () musicPop.visible = not musicPop.visible end),
@@ -148,23 +162,30 @@ awful.keyboard.append_global_keybindings({
 client.connect_signal("request::default_keybindings", function()
     awful.keyboard.append_client_keybindings({
 
-		-- fullscreen client
-        awful.key({ modkey }, "f", function (c)
-			c.fullscreen = not c.fullscreen
-            c:raise()
-        end),
+	-- fullscreen client
+    awful.key({ modkey }, "f", function (c)
+		c.fullscreen = not c.fullscreen
+        c:raise()
+    end),
 
-		-- kill client
-        awful.key({ modkey }, "q", function (c) c:kill() end),
+	-- kill client
+    awful.key({ modkey }, "q", function (c) c:kill() end),
 
-		-- toggle floating
-        awful.key({ modkey, shiftkey }, "space",  awful.client.floating.toggle),
+	-- toggle floating
+    awful.key({ modkey, shiftkey }, "space",  awful.client.floating.toggle),
 
-		-- move client to master
-        awful.key({ modkey, shiftkey }, "Return", function (c) c:swap(awful.client.getmaster()) end),
+	-- move client to master
+    awful.key({ modkey, shiftkey }, "Return", function (c) c:swap(awful.client.getmaster()) end),
 
-		-- toggle client on top
-        awful.key({ modkey }, "t",      function (c) c.ontop = not c.ontop            end),
+	-- toggle client on top
+    awful.key({ modkey, shiftkey }, "t",      function (c) c.ontop = not c.ontop end),
+
+	-- toggle titlebar
+    awful.key({ modkey }, "t", function (c) awful.titlebar.toggle(c) end),
+
+	-- minimize
+    awful.key({modkey}, "n", function(c) c.minimized = true end),
+
 
     })
 end)

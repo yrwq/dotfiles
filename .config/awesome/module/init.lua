@@ -1,4 +1,5 @@
 require("module.layout-popup")
+require("module.taglist-popup")
 require("module.notification")
 require("module.titlebar.dear")
 -- require("module.titlebar.xo")

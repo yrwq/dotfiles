@@ -46,14 +46,14 @@ ruled.client.connect_signal("request::rules", function()
         id       = "floating",
         rule_any = {
             class    = {
-        	"music",
-                "mail",
-        	"Sxiv",
-              	"feh",
-              	"Tor Browser",
-              	"Thunar",
-              	"Pavucontrol",
-              	"Lxappearance"
+        		"music",
+            	"mail",
+        		"Sxiv",
+            	"feh",
+            	"Tor Browser",
+            	"Thunar",
+            	"Pavucontrol",
+            	"Lxappearance"
             },
             name    = {
                 "Event Tester",  -- xev.
@@ -93,9 +93,12 @@ ruled.client.connect_signal("request::rules", function()
     -- MPV
     ruled.client.append_rule {
         rule = { class = "mpv" },
-        properties = {},
+        properties = {
+          floating = true,
+          width = 900,
+          height = 700,
+        },
         callback = function (c)
-            c.floating = true
             c.ontop = true
         end
     }
@@ -103,11 +106,14 @@ ruled.client.connect_signal("request::rules", function()
     -- i use tag 1 for terminals, but i use terminals on any other tags too
     -- tag 2
     -- browser
-    --[[ruled.client.append_rule {
+    ruled.client.append_rule {
         rule_any = {
             class = {
                 "firefox",
                 "Nightly",
+                "brave-browser-dev",
+                "Brave-browser-dev",
+                "brave-dev",
                 "qutebrowser",
             },
         },
@@ -143,19 +149,6 @@ ruled.client.connect_signal("request::rules", function()
         properties = { screen = 1, tag = awful.screen.focused().tags[4] },
     }
 
-    -- tag 5
-    -- misc
-    ruled.client.append_rule {
-        rule_any = {
-            class = {
-                "music",
-                "mail",
-                "Pavucontrol",
-                "Lxappearance"
-            },
-        },
-        properties = { screen = 1, tag = awful.screen.focused().tags[5] },
-    } ]]--
 end)
 
 client.connect_signal("manage", function (c)
