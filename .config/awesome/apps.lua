@@ -7,8 +7,8 @@ local helpers = require("helpers")
 
 local apps = {}
 
-apps.surf = function()
-	awful.spawn.with_shell("surf")
+apps.qute = function()
+	awful.spawn.with_shell("qutebrowser")
 end
 
 apps.news = function()
