@@ -78,10 +78,24 @@ As a file manager, i choose [lf](https://github.com/gokcehan/lf) (as in "list fi
 
 I got the configuration files for lf from Luke Smith, and added some extra features.
 
+## The terminal emulator
+
+As a terminal, i choose [st](https://st.suckless.org), because it's fast and minimal.
+
+You can find my build at `.local/src/st`, it is based on Luke's.
+
+- Basic keybindings:
+	- `Alt + j`: scroll up
+	- `Alt + k`: scroll down
+	- `Alt + c`: copy
+	- `Alt + v`: paste
+	- `Alt + Shift + k`: increase font size
+	- `Alt + Shift + j`: increase font size
+	- `Alt + j`: decrease font size
+	- `Alt + l`: follow url
+	- `Alt + o`: copy url
 
 # Gallery
 
 ![preview](https://0x0.st/i7OX.png)
 ![preview](https://0x0.st/i7Tl.png)
-![preview](https://0x0.st/i7cZ.png)
-![preview](https://0x0.st/i7cq.png)
