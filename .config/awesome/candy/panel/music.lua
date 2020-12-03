@@ -41,7 +41,7 @@ local function create_boxed_widget(widget_to_be_boxed, width, height, bg_color)
 end
 
 local cover_image = wibox.widget {
-	resize = "true",
+	resize = "false",
 	clip_shape = helpers.rrect(border_radius),
 	widget = wibox.widget.imagebox
 }
@@ -51,7 +51,7 @@ local script = [[bash -c '
 ']]
 
 
-local cover_box = create_boxed_widget(cover_image, dpi(200), dpi(300), x.transbg)
+local cover_box = create_boxed_widget(cover_image, dpi(200), dpi(250), x.transbg)
 local cover_area = {
 	nil,
 	{
@@ -110,7 +110,7 @@ awful.spawn.easy_async_with_shell(
 
 update_image()
 
-local width = 400
+local width = 280
 local margin = 5
 
 local settingsPop = popupLib.create(

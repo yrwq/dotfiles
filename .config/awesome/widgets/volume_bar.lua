@@ -12,9 +12,9 @@ local active_color = {
     stops = {{0, x.color1}, {0.5, x.color5}}
 }
 
-local muted_color = x.bg
+local muted_color = x.trans
 local active_background_color = x.color0
-local muted_background_color = x.bg
+local muted_background_color = x.trans
 
 local volume_bar = wibox.widget {
     max_value = 100,

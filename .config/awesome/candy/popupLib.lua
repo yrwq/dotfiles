@@ -2,6 +2,7 @@ local awful = require("awful")
 local gears = require("gears")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
+local xresources = require("beautiful.xresources")
 local dpi = require('beautiful').xresources.apply_dpi
 local helpers = require('helpers')
 
@@ -16,12 +17,26 @@ popupLib.create = function(x, y, height, width, widget)
     }
 
     local popupWidget = awful.popup {
-        widget = widgetContainer,
+    	widget = {
+			{
+				{
+					{
+						widgetContainer,
+						widget = wibox.container.margin
+					},
+					bg = beautiful.popup_bg,
+					clip = true,
+					widget = wibox.widget.background
+				},
+				layout = wibox.layout.fixed.vertical,
+			},
+			widget = wibox.container.margin
+		},
         shape = helpers.rrect(beautiful.client_radius),
         visible = false,
         ontop = true,
         x = x,
-        y = y
+        y = y,
     }
 
     local mouseInPopup = false

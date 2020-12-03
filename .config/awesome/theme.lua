@@ -86,27 +86,7 @@ theme.tabbed_spawn_in_tab = true
 theme.tabbar_radius = dpi(3)
 theme.tabbar_font = "Iosevka Term 9"
 
--- collision
---[[
-theme.collision_bg_focus            = x.color8
-theme.collision_fg_focus 	        = x.fg
-theme.collision_bg_center 	        = x.color8
-theme.collision_resize_width 	    = 30
-theme.collision_resize_border_width = theme.border_width
-theme.collision_resize_border_color = x.color0
-theme.collision_resize_bg 	        = x.color8
-theme.collision_resize_fg           = x.color1
-theme.collision_focus_border_width  = 0
-theme.collision_focus_border_color  = x.color1
-theme.collision_focus_bg            = x.color8
-theme.collision_focus_fg            = x.fg
-theme.collision_focus_bg_center     = x.color0
-theme.collision_screen_border_width = 0
-theme.collision_screen_border_color = x.color5
-theme.collision_screen_bg           = x.color8
-theme.collision_screen_fg           = x.color2
-theme.collision_screen_bg_focus     = x.bg
-theme.collision_screen_fg_focus     = x.color1
-]]--
+-- popup
+theme.popup_bg = x.color0 .. "B3" -- 70% transparent
 
 return theme
