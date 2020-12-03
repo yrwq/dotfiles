@@ -78,4 +78,3 @@ require("keys") -- key binds
 require("candy") -- bar, panels
 require("module") -- titlebar, popups
 require("rules") -- rules
-require("collision")()

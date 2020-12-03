@@ -103,6 +103,17 @@ ruled.client.connect_signal("request::rules", function()
         end
     }
 
+	ruled.client.append_rule {
+		rule = { class = "scratch" },
+      	properties = {
+			floating = true,
+			placement=awful.placement.centered
+		},
+        callback = function (c)
+            c.ontop = true
+        end
+	}
+
     -- i use tag 1 for terminals, but i use terminals on any other tags too
     -- tag 2
     -- browser
@@ -135,6 +146,8 @@ ruled.client.connect_signal("request::rules", function()
         },
         properties = { screen = 1, tag = awful.screen.focused().tags[3] },
     }
+
+
 
     -- tag 4
     -- chat

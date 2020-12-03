@@ -4,6 +4,7 @@ local wibox = require("wibox")
 local apps = require("apps")
 local bling = require("bling")
 
+local scratchpad = require("module.scratchpad")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 
 modkey = "Mod4"
@@ -44,118 +45,181 @@ procom = "rofi -show run"
 
 awful.keyboard.append_global_keybindings({
 
+	-- launch scratchpad terminal
+	awful.key({ modkey, ctrlkey }, "Return", function () scratchpad.toggle("st -c scratch", {class = "scratch"}) 	end,
+    	{description = "scratchpad terminal", group = "launch"}),
+
+	-- show keys
 	awful.key({ modkey }, "p",      hotkeys_popup.show_help),
 
 	-- unminimize
     awful.key({modkey, shiftkey }, "n", function() local c = awful.client.restore()
     	if c then
             c:emit_signal("request::activate", "key.unminimize", {raise = true})
-        end end),
+        end end,
+		{description = "unminimize client", group = "client"}),
 
 	-- show music panel
-    awful.key({ altkey }, "q", function () musicPop.visible = not musicPop.visible end),
+    awful.key({ altkey }, "q", function () musicPop.visible = not musicPop.visible end,
+		{description = "music panel", group = "ui"}),
 
 	-- add client to tabbed
-    awful.key({ altkey }, "a", function () bling.module.tabbed.pick() end),
+    awful.key({ altkey }, "a", function () bling.module.tabbed.pick() end,
+		{description = "add to tabbed", group = "client"}),
 
 	-- change tabbed clients
-    awful.key({ altkey }, "s", function () bling.module.tabbed.iter() end),
+    awful.key({ altkey }, "s", function () bling.module.tabbed.iter() end,
+		{description = "switch tabbed", group = "client"}),
 
 	-- remove tabbed client
-    awful.key({ altkey }, "d", function () bling.module.tabbed.pop() end),
+    awful.key({ altkey }, "d", function () bling.module.tabbed.pop() end,
+		{description = "remove from tabbed", group = "client"}),
 
 	-- move and focus to right tag
-    awful.key({ modkey, shiftkey }, "d", function () shift_focus_and_move_client(false) end),
+    awful.key({ modkey, shiftkey }, "d", function () shift_focus_and_move_client(false) end,
+		{description = "move and focus to right", group = "tag"}),
 
 	-- move and focus to left tag
-    awful.key({ modkey, shiftkey}, "a", function () shift_focus_and_move_client(true) end),
+    awful.key({ modkey, shiftkey}, "a", function () shift_focus_and_move_client(true) end,
+		{description = "move and focus to left", group = "tag"}),
 
 	-- focus next client
-    -- awful.key({ modkey}, "Tab", function () awful.client.focus.byidx( 1)             end),
+    awful.key({ modkey}, "Tab", function () awful.client.focus.byidx( 1)             end,
+		{description = "focus next", group = "client"}),
 
 	-- run application launcher (rofi)
-    awful.key({ modkey, shiftkey }, "s",  function() awful.spawn.with_shell("rofi -show drun") end),
+    awful.key({ modkey, shiftkey }, "s",  function() awful.spawn.with_shell("rofi -show drun") end,
+		{description = "rofi", group = "launch"}),
 
 	-- take a screenshot and upload it to 0x0(select area)
-    awful.key({ }, "Print",  function() awful.spawn.with_shell("lien -s -f") end),
+    awful.key({ }, "Print",  function() awful.spawn.with_shell("lien -s -f") end,
+		{description = "(screenshot) select area and upload", group = "launch"}),
 
 	-- take a screenshot and upload it to 0x0(whole screen)
-    awful.key({ modkey }, "Print",  function() awful.spawn.with_shell("lien -a -f") end),
+    awful.key({ modkey }, "Print",  function() awful.spawn.with_shell("lien -a -f") end,
+		{description = "(screenshot) whole screen and upload", group = "launch"}),
 
 	-- start recording the whole screen
-    awful.key({ altkey }, "Print",  function() awful.spawn.with_shell("rec") end),
+    awful.key({ altkey }, "Print",  function() awful.spawn.with_shell("rec") end,
+		{description = "toggle recording", group = "launch"}),
 
     -- apps
-    -- show app launcher
-    awful.key({ modkey }, "s", function() app_drawer_show() end),
-    awful.key({ modkey }, "e", apps.editor),
-    awful.key({ modkey }, "m", apps.music),
-    awful.key({ modkey }, "w", apps.surf),
-    awful.key({ modkey }, "r", apps.file_manager),
-    awful.key({ modkey }, "y", apps.youtube),
-    awful.key({ modkey }, "á", apps.torrent),
-    awful.key({ modkey, shiftkey }, "á", apps.torrent_toggle),
+    awful.key({ modkey }, "s", function() app_drawer_show() end,
+		{description = "app launcher", group = "launch"}),
+
+    awful.key({ modkey }, "e", apps.editor,
+		{description = "editor", group = "launch"}),
+
+    awful.key({ modkey }, "m", apps.music,
+		{description = "music player", group = "launch"}),
+
+    awful.key({ modkey }, "w", apps.surf,
+		{description = "browser", group = "launch"}),
+
+    awful.key({ modkey }, "r", apps.file_manager,
+		{description = "file manager", group = "launch"}),
+
+    awful.key({ modkey }, "y", apps.youtube,
+		{description = "youtube", group = "launch"}),
+
+    awful.key({ modkey }, "á", apps.torrent,
+		{description = "torrent", group = "launch"}),
+
+    awful.key({ modkey, shiftkey }, "á", apps.torrent_toggle,
+		{description = "start/stop torrent", group = "launch"}),
 
 	-- toggle bars
-	awful.key({ modkey }, "b", function() wibars_toggle() end),
+	awful.key({ modkey }, "b", function() wibars_toggle() end,
+		{description = "toggle bar", group = "ui"}),
 
     -- show shoot screen
-    awful.key({ altkey }, "f", function() shoot_screen_show() end),
+    awful.key({ altkey }, "f", function() shoot_screen_show() end,
+		{description = "screenshot menu", group = "ui"}),
 
     -- toggle microphone on/off
-    awful.key({ modkey }, "v",  function() awful.spawn.with_shell("amixer -D pulse sset Capture toggle &> /dev/null") end),
+    awful.key({ modkey }, "v",  function() awful.spawn.with_shell("amixer -D pulse sset Capture toggle &> /dev/null") end,
+		{description = "toggle microphone", group = "launch"}),
 
     -- spawn emoji picker
-    awful.key({ altkey }, "e",     function () awful.spawn.with_shell("rofimoji") end),
+    awful.key({ altkey }, "e",     function () awful.spawn.with_shell("rofimoji") end,
+		{description = "emoji picker", group = "launch"}),
 
     -- spawn nerd font picker
-    awful.key({ altkey }, "y",     function () awful.spawn.with_shell("nerdy") end),
+    awful.key({ altkey }, "y",     function () awful.spawn.with_shell("nerdy") end,
+		{description = "nerd font picker", group = "launch"}),
 
     -- increase volume
-    awful.key({ altkey }, "Up",     function () awful.spawn.with_shell("pamixer --allow-boost -i 5") end),
+    awful.key({ altkey }, "Up",     function () awful.spawn.with_shell("pamixer --allow-boost -i 5") end,
+		{description = "increase volume", group = "launch"}),
 
     -- decrease volume
-    awful.key({ altkey }, "Down",     function () awful.spawn.with_shell("pamixer --allow-boost -d 5") end),
+    awful.key({ altkey }, "Down",     function () awful.spawn.with_shell("pamixer --allow-boost -d 5") end,
+		{description = "decrease volume", group = "launch"}),
 
 	-- toggle music on/off
-    awful.key({ altkey }, "space",  function() awful.spawn.with_shell("mpc toggle") end),
+    awful.key({ altkey }, "space",  function() awful.spawn.with_shell("mpc toggle") end,
+		{description = "toggle music", group = "launch"}),
 
 	-- toggle volume on/off
-    awful.key({ altkey }, "m", function() awful.spawn.with_shell("amixer set Master toggle") end),
+    awful.key({ altkey }, "m", function() awful.spawn.with_shell("amixer set Master toggle") end,
+		{description = "toggle volume", group = "launch"}),
 
     -- switch tags
-    awful.key({ modkey }, "a",   awful.tag.viewprev),
-    awful.key({ modkey }, "d",  awful.tag.viewnext),
+    awful.key({ modkey }, "a",   awful.tag.viewprev,
+		{description = "switch to left ", group = "tag"}),
+
+    awful.key({ modkey }, "d",  awful.tag.viewnext,
+		{description = "switch to right", group = "tag"}),
 
     -- focus clients with hjkl
-    awful.key({ modkey }, "j", function() awful.client.focus.byidx( -1)             end),
-    awful.key({ modkey }, "k", function() awful.client.focus.byidx( 1)             end),
-    awful.key({ modkey }, "h", function() awful.client.focus.bydirection("left") end),
-    awful.key({ modkey }, "l", function() awful.client.focus.bydirection("right") end),
+    awful.key({ modkey }, "j", function() awful.client.focus.byidx( -1) end,
+		{description = "focus previous", group = "client"}),
+
+    awful.key({ modkey }, "k", function() awful.client.focus.byidx( 1) end,
+		{description = "focus next", group = "client"}),
+
+    awful.key({ modkey }, "h", function() awful.client.focus.bydirection("left") end,
+		{description = "focus left", group = "client"}),
+
+    awful.key({ modkey }, "l", function() awful.client.focus.bydirection("right") end,
+		{description = "focus focus right", group = "client"}),
 
 	-- resize master width
-    awful.key({ modkey, ctrlkey }, "l",     function () awful.tag.incmwfact( 0.05)      end),
-    awful.key({ modkey, ctrlkey }, "h",     function () awful.tag.incmwfact(-0.05)      end),
+    awful.key({ modkey, ctrlkey }, "l",     function () awful.tag.incmwfact( 0.05)      end,
+		{description = "increase master width", group = "client"}),
+
+    awful.key({ modkey, ctrlkey }, "h",     function () awful.tag.incmwfact(-0.05)      end,
+		{description = "decrease master width", group = "client"}),
 
     -- swap clients
-    awful.key({ modkey, shiftkey}, "j", function () awful.client.swap.byidx(  1)    end),
-    awful.key({ modkey, shiftkey}, "k", function () awful.client.swap.byidx( -1)    end),
+    awful.key({ modkey, shiftkey}, "j", function () awful.client.swap.byidx(  1)    end,
+		{description = "swap with next", group = "client"}),
+
+    awful.key({ modkey, shiftkey}, "k", function () awful.client.swap.byidx( -1)    end,
+		{description = "swap with previous", group = "client"}),
 
     -- increase/decrease gaps
-    awful.key({ modkey, shiftkey }, "minus", function () awful.tag.incgap(5, nil) end),
-    awful.key({ modkey }, "minus", function () awful.tag.incgap(-5, nil) end),
+    awful.key({ modkey, shiftkey }, "minus", function () awful.tag.incgap(5, nil) end,
+		{description = "increase gaps", group = "ui"}),
+
+    awful.key({ modkey }, "minus", function () awful.tag.incgap(-5, nil) end,
+		{description = "decrease gaps", group = "ui"}),
 
 	-- center focused client
-    awful.key({ modkey }, "c", function (c) awful.placement.centered(c, {honor_workarea = true, honor_padding = true}) end),
+    awful.key({ modkey }, "c", function (c) awful.placement.centered(c, {honor_workarea = true, honor_padding = true}) end,
+		{description = "center floating", group = "client"}),
 
     -- reload awesome
-    awful.key({ modkey, shiftkey }, "r", awesome.restart),
+    awful.key({ modkey, shiftkey }, "r", awesome.restart,
+		{description = "reload", group = "awesome"}),
 
     -- quit awesome
-    awful.key({ modkey, shiftkey   }, "e", awesome.quit),
+    awful.key({ modkey, shiftkey   }, "e", awesome.quit,
+		{description = "quit", group = "awesome"}),
 
     -- spawn terminal
-    awful.key({ modkey}, "Return", function () awful.spawn(terminal) end),
+    awful.key({ modkey}, "Return", function () awful.spawn(terminal) end,
+		{description = "terminal", group = "launch"}),
 
 })
 
