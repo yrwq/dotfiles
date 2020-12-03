@@ -66,15 +66,10 @@ local browser = create_button("爵", x.color8, x.fg, apps.browser, "q")
 local discord = create_button("ﭮ", x.color8, x.fg, apps.discord, "w")
 local calcurse = create_button("", x.color8, x.fg, apps.calcurse, "e")
 local mail = create_button("", x.color8, x.fg, apps.mail, "r")
-local file_manager = create_button("", x.color8, x.fg, apps.file_manager, "a")
-local editor = create_button("", x.color8, x.fg, apps.editor, "s")
-local music = create_button("", x.color8, x.fg, apps.music, "d")
-local todo = create_button("", x.color8, x.fg, apps.todo, "f")
-local lxappearance = create_button("嗀", x.color8, x.fg, apps.lxappearance, "y")
-local volume = create_button("奔", x.color8, x.fg, apps.volume, "x")
-local nitrogen = create_button("", x.color8, x.fg, apps.nitrogen, "c")
-local torrent = create_button("", x.color8, x.fg, apps.torrent, "v")
-local abook = create_button("", x.color8, x.fg, apps.abook, "u")
+local lxappearance = create_button("嗀", x.color8, x.fg, apps.lxappearance, "a")
+local volume = create_button("奔", x.color8, x.fg, apps.volume, "s")
+local nitrogen = create_button("", x.color8, x.fg, apps.nitrogen, "d")
+local abook = create_button("", x.color8, x.fg, apps.abook, "f")
 
 -- Create the widget
 app_drawer = wibox({visible = false, ontop = true, type = "dock"})
@@ -183,9 +178,7 @@ app_drawer:setup {
     {
         -- Stripes
         create_stripe({ browser, discord, calcurse, mail}, "#00000000"),
-        create_stripe({ file_manager, editor, music, todo }, "#00000000"),
-        create_stripe({ lxappearance, volume, nitrogen, torrent}, "#00000000"),
-        create_stripe({ abook}, "#00000000"),
+        create_stripe({ lxappearance, volume, nitrogen, abook}, "#00000000"),
         layout = wibox.layout.flex.vertical
     },
     bg = x.bg .. "A0",
