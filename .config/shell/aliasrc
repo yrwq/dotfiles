@@ -24,7 +24,7 @@ alias \
 	g="gitui" \
 	ga="git add ." \
 	gc="git commit -m" \
-	ga="git push -u origin main" \
+	gp="git push -u origin main" \
 	trem="transmission-remote" \
 	f="$FILE" \
 	v="$EDITOR" \

@@ -16,4 +16,3 @@ cfz="$EDITOR /home/me/.config/zsh/.zshrc" \
 cfu="$EDITOR /home/me/.config/newsboat/urls" \
 cfl="$EDITOR /home/me/.config/lf/lfrc" \
 ytl="$EDITOR /home/me/.config/playlist" \
-lp="$EDITOR /home/me/.config/links" \

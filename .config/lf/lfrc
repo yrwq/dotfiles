@@ -68,6 +68,7 @@ cmd xrdb "$1"
 cmd mpv "$1"
 cmd setbg "$1"
 cmd bulkrename $vidir
+cmd samedir
 
 # Bindings
 map <c-f> $lf -remote "send $id select '$(fzf)'"
@@ -93,6 +94,7 @@ map B bulkrename
 map b $setbg $f
 map x $xrdb $f
 map K $mpv $f
+map sd $samedir $f
 
 map <c-e> down
 map <c-y> up

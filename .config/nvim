@@ -13,7 +13,6 @@ Plug 'tpope/vim-surround'
 Plug 'preservim/nerdtree'
 Plug 'junegunn/goyo.vim'
 Plug 'jreybert/vimagit'
-Plug 'lukesmithxyz/vimling'
 Plug 'tpope/vim-commentary'
 Plug 'ap/vim-css-color'
 Plug 'junegunn/fzf.vim'
@@ -21,6 +20,8 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'mhinz/vim-startify'
 Plug 'ryanoasis/vim-devicons'
+Plug 'camspiers/animate.vim'
+Plug 'camspiers/lens.vim'
 
 call plug#end()
 
@@ -69,16 +70,19 @@ set noshowcmd
         let NERDTreeBookmarksFile = '~/.vim' . '/NERDTreeBookmarks'
     endif
 
-" vimling:
-	nm <leader><leader>d :call ToggleDeadKeys()<CR>
-	imap <leader><leader>d <esc>:call ToggleDeadKeys()<CR>a
-	nm <leader><leader>q :call ToggleProse()<CR>
-
 " Shortcutting split navigation, saving a keypress:
 	map <C-h> <C-w>h
 	map <C-j> <C-w>j
 	map <C-k> <C-w>k
 	map <C-l> <C-w>l
+
+	nnoremap <C-A-s> :sp <CR>
+	nnoremap <C-A-v> :vsp <CR>
+
+	nnoremap <C-A-k> :call animate#window_delta_height(10)<CR>
+	nnoremap <C-A-j> :call animate#window_delta_height(-10)<CR>
+	nnoremap <C-A-l> :call animate#window_delta_width(10)<CR>
+	nnoremap <C-A-h> :call animate#window_delta_width(-10)<CR>
 
 " Replace ex mode with gq
 	map Q gq
@@ -140,3 +144,8 @@ let g:airline_theme='deus'
 let g:startify_custom_header = [
  \ '',
  \]
+
+
+let g:fzf_layout = {
+ \ 'window': 'new | wincmd J | resize 1 | call animate#window_percent_height(0.5)'
+\ }

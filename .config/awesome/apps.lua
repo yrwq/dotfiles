@@ -7,6 +7,10 @@ local helpers = require("helpers")
 
 local apps = {}
 
+apps.org = function()
+	helpers.run_or_raise({class = 'emacs'}, false, "emacsclient -c")
+end
+
 apps.qute = function()
 	awful.spawn.with_shell("surf duckduckgo.com")
 end
