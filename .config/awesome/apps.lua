@@ -8,7 +8,7 @@ local helpers = require("helpers")
 local apps = {}
 
 apps.qute = function()
-	awful.spawn.with_shell("qutebrowser")
+	awful.spawn.with_shell("surf duckduckgo.com")
 end
 
 apps.news = function()

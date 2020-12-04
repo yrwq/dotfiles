@@ -51,6 +51,7 @@ ruled.client.connect_signal("request::rules", function()
             	"news",
         		"Sxiv",
             	"feh",
+            	"Surf",
             	"Tor Browser",
             	"Thunar",
             	"Pavucontrol",

@@ -14,10 +14,10 @@ urls="$(sed 's/.*│//g' | tr -d '\n' |
 chosen="$(echo -ne "$urls" | rofi -dmenu -i)"
 
 if [ -z "$chosen" ]; then
-	exit 1	
+	exit 1
 fi
 
-options="mpv\nwget\nbrowser\nyoutube-dl"
+options="mpv\nclip\nwget\nbrowser\nyoutube-dl"
 
 menu="$(echo -ne $options | rofi -dmenu -i)"
 
@@ -27,6 +27,10 @@ case $menu in
 		;;
 	wget)
 		wget $chosen
+		;;
+	clip)
+		echo "$chosen" | xclip -sel clip
+		notify-send "Copied to clipboard"
 		;;
 	browser)
 		setsid xdg-open "$chosen" >/dev/null 2>&1 &

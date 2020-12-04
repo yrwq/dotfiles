@@ -16,7 +16,7 @@ local add_todo = [[bash -c '
 
 local todo_list = wibox.widget {
 		widget = wibox.widget.textbox,
-		font = "Iosevka Term 12",
+		font = "Iosevka Term 10",
 		markup = "",
 		color = x.fg,
 }
@@ -24,7 +24,7 @@ local todo_list = wibox.widget {
 local widget_todo  = wibox.widget {
 	{
 		todo_list,
-		margins = dpi(50),
+		margins = dpi(20),
 		widget = wibox.container.margin,
 	},
 	layout = wibox.layout.fixed.vertical,

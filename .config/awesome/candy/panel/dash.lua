@@ -160,6 +160,18 @@ local todo_area = {
 	layout = wibox.layout.align.vertical
 }
 
+local horoscope = require("widgets.horoscope")
+local horoscope_box = create_boxed_widget(horoscope, dpi(200), dpi(250), x.bg)
+local horoscope_area = {
+	nil,
+	{
+		horoscope_box,
+		layout = wibox.container.margin
+	},
+	nil,
+	layout = wibox.layout.align.vertical
+}
+
 local panelWidget = wibox.widget {
 	{
 		cover_area,
@@ -168,6 +180,7 @@ local panelWidget = wibox.widget {
 	},
 	{
 		todo_area,
+		horoscope_area,
     	layout = wibox.layout.align.vertical
 	},
     layout = wibox.layout.align.horizontal

@@ -40,9 +40,9 @@ theme.taglist_squares_sel = theme_assets.taglist_squares_sel(
 theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
                                   taglist_square_size, theme.fg_normal)
 theme.taglist_fg_empty = x.color0
-theme.taglist_fg_occupied = x.color1
-theme.taglist_fg_urgent = x.color13
-theme.taglist_fg_focus = x.color5
+theme.taglist_fg_occupied = x.color9
+theme.taglist_fg_urgent = x.color11
+theme.taglist_fg_focus = x.color13
 theme.taglist_bg_empty = x.trans
 theme.taglist_bg_occupied = x.trans
 theme.taglist_bg_urgent = x.trans
