@@ -15,7 +15,7 @@ local paused_color = x.color8
 local artist_fg
 local artist_bg
 local seek_state = false
-local icon_font_nerd = "Iosevka Nerd Font 16"
+local icon_font_nerd = "Iosevka Custom 16"
 
 local bar = wibox.widget {
     value = 64,
@@ -46,14 +46,14 @@ local bar_timer = gears.timer {
 }
 
 local mpd_title = wibox.widget {
-	font = "Iosevka Term 10",
+	font = "Iosevka Custom 10",
 	align = "center",
 	valign = "center",
 	markup = "Title",
 	widget = wibox.widget.textbox
 }
 local mpd_artist = wibox.widget {
-	font = "Iosevka Term 14",
+	font = "Iosevka Custom 14",
 	align = "center",
 	valign = "center",
 	markup = "Artist",

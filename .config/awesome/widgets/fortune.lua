@@ -9,7 +9,7 @@ local get_fortune = "fortune"
 
 local fortune = wibox.widget {
 		widget = wibox.widget.textbox,
-		font = "Iosevka Term 10",
+		font = "Iosevka Custom 10",
 		markup = "",
 		color = x.fg,
 }

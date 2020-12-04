@@ -10,7 +10,7 @@ local keys = require("keys")
 -- helper function to create buttons
 local create_button = function (symbol, color, bg_color, hover_color)
     local widget = wibox.widget {
-        font = "Ioseva Nerd Font 14",
+        font = "Ioseva Custom 14",
         align = "center",
         id = "text_role",
         valign = "center",

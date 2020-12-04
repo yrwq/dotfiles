@@ -10,14 +10,14 @@ local get_tomorrow = "horoscope --tomorrow" -- this is a python script,
 
 local header = wibox.widget {
 	widget = wibox.widget.textbox,
-	font = "Iosevka Nerd Font Mono 12:style=Bold",
+	font = "Iosevka Custom 12:style=Bold",
 	markup = "",
 	color = x.fg,
 }
 
 local horoscope = wibox.widget {
 	widget = wibox.widget.textbox,
-	font = "Iosevka Term 10",
+	font = "Iosevka Custom 10",
 	markup = "",
 	color = x.fg,
 }

@@ -17,7 +17,7 @@ local function create_button(symbol, color, hover_color)
         markup = helpers.colorize_text(symbol, color),
         align = "center",
         valign = "center",
-        font = "Iosevka Nerd Font 20",
+        font = "Iosevka Custom 20",
         forced_width = dpi(30),
         forced_height = dpi(30),
         widget = wibox.widget.textbox
