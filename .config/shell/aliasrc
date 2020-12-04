@@ -21,6 +21,7 @@ alias \
 # These common commands are just too long! Abbreviate them.
 alias \
 	ka="killall" \
+	g="gitui" \
 	ga="git add ." \
 	gc="git commit -m" \
 	ga="git push -u origin main" \
