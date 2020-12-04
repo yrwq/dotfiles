@@ -71,9 +71,9 @@ ruled.client.connect_signal("request::rules", function()
             }
         },
         properties = {
-          floating = true,
-          width = 900,
-          height = 700,
+          	floating = true,
+		  	width = awful.screen.focused().workarea.width * 0.8,
+        	height = awful.screen.focused().workarea.height * 0.8
         },
         callback = function (c)
           awful.placement.centered(c)

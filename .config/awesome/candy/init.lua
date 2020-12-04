@@ -1,5 +1,3 @@
--- load top bar
--- require("candy.bar.dear")
+-- bars
 require("candy.bar.dear")
--- load settings panel
--- require("candy.panel.settings")
+-- require("candy.bar.xo")

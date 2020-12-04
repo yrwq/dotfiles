@@ -110,6 +110,9 @@ awful.keyboard.append_global_keybindings({
     awful.key({ modkey }, "e", apps.editor,
 		{description = "editor", group = "launch"}),
 
+    awful.key({ altkey, shiftkey }, "e", apps.org,
+		{description = "emacs", group = "launch"}),
+
     awful.key({ modkey }, "m", apps.music,
 		{description = "music player", group = "launch"}),
 
@@ -206,7 +209,9 @@ awful.keyboard.append_global_keybindings({
 		{description = "decrease gaps", group = "ui"}),
 
 	-- center focused client
-    awful.key({ modkey }, "c", function (c) awful.placement.centered(c, {honor_workarea = true, honor_padding = true}) end,
+    awful.key({ modkey }, "c", function (c)
+		awful.placement.centered(c, {honor_workarea = true, honor_padding = true})
+	end,
 		{description = "center floating", group = "client"}),
 
     -- reload awesome
@@ -242,7 +247,10 @@ client.connect_signal("request::default_keybindings", function()
     awful.key({ modkey, shiftkey }, "Return", function (c) c:swap(awful.client.getmaster()) end),
 
 	-- toggle client on top
-    awful.key({ modkey, shiftkey }, "t",      function (c) c.ontop = not c.ontop end),
+    awful.key({ modkey, shiftkey }, "t",      function (c)
+		c.ontop = not c.ontop
+		c.sticky = not c.sticky
+	end),
 
 	-- toggle titlebar
     awful.key({ modkey }, "t", function (c) awful.titlebar.toggle(c) end),
@@ -250,7 +258,13 @@ client.connect_signal("request::default_keybindings", function()
 	-- minimize
     awful.key({modkey}, "n", function(c) c.minimized = true end),
 
+	awful.key({ ctrlkey }, "-", function(c)
+        c.opacity = c.opacity + 0.1
+    end),
 
+	awful.key({ ctrlkey, shiftkey }, "-", function(c)
+        c.opacity = c.opacity - 0.1
+    end)
     })
 end)
 

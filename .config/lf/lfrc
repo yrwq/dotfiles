@@ -63,6 +63,12 @@ cmd copyto ${{
 	notify-send "隷 File(s) copied." "File(s) copies to $dest."
 }}
 
+cmd video_preview ${{
+    CACHE=$(mktemp /tmp/thumb_cache.XXXXX)
+    ffmpegthumbnailer -i "$f" -o $CACHE -s 0
+    img $CACHE && rm $CACHE
+}}
+
 cmd xrdb "$1"
 cmd mpv "$1"
 cmd setbg "$1"
@@ -88,4 +94,5 @@ map o &mimeopen $f
 map B bulkrename
 map b $feh --bg-scale $f
 map sd $samedir $f # open a terminal in the same directory
-map P $img $f # preview image
+map Pp $img $f # preview image
+map Pv :video_preview

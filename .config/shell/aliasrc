@@ -25,7 +25,7 @@ alias \
 	ga="git add ." \
 	gc="git commit -m" \
 	gp="git push -u origin main" \
-	trem="transmission-remote" \
+	mk="make && sudo make install" \
 	f="$FILE" \
 	v="$EDITOR" \
 	z="zathura"

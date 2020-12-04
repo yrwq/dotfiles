@@ -14,4 +14,4 @@ $HOME/etc/music
 $HOME/.config
 $HOME/etc/doc/prog
 $HOME/dev/dotfiles
-$HOME/dev/dotfiles/.bin/
+$HOME/dev/dotfiles/.local/bin/

@@ -82,7 +82,7 @@ awesome.connect_signal("shit::volume", function(_, muted)
 end)
 
 -- create apple button
-local apple = create_button("󰀵", x.fg, x.trans, x.color8)
+local apple = create_button("", x.fg, x.trans, x.color8)
 
 apple:buttons(gears.table.join(
                   awful.button({  }, 1, function()
@@ -91,29 +91,6 @@ apple:buttons(gears.table.join(
                   awful.button({  }, 1, function()
                           exit_screen_show()
                   end)
-))
-
--- create settings button
-local settingsPop = require('candy.panel.settings')
-local settings = create_button("漣", x.fg, x.trans, x.color8)
-
-settings:connect_signal("mouse::enter", function()
-    st = settings:get_all_children()[1]
-    st.markup = helpers.colorize_text("漣", x.color15)
-end)
-
-settings:connect_signal("mouse::leave", function()
-    st = settings:get_all_children()[1]
-    st.markup = helpers.colorize_text("漣", x.fg)
-end)
-
-settings:buttons(gears.table.join(
-    awful.button({ }, 1, function ()
-            settingsPop.visible = not settingsPop.visible
-    end),
-    awful.button({ }, 3, function()
-            settingsPop.visible = not settingsPop.visible
-    end)
 ))
 
 -- create microphone button
@@ -254,7 +231,6 @@ awful.screen.connect_for_each_screen(function(s)
         {
             microphone,
             volume,
-            settings,
             mysystray_container,
             mytextclock,
             helpers.horizontal_pad(10),

@@ -17,11 +17,15 @@ if [ -z "$chosen" ]; then
 	exit 1
 fi
 
-options="mpv\nclip\nwget\nbrowser\nyoutube-dl"
+options="img\nmpv\nclip\nwget\nbrowser\nyoutube-dl"
 
 menu="$(echo -ne $options | rofi -dmenu -i)"
 
 case $menu in
+	img)
+		curl -Ss $chosen -o /tmp/temp_image.png
+		sxiv /tmp/temp_image.png
+		;;
 	mpv)
 		mpv $chosen
 		;;

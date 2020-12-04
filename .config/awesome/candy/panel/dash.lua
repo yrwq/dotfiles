@@ -17,7 +17,7 @@ local function create_button(symbol, color, hover_color)
         markup = helpers.colorize_text(symbol, color),
         align = "center",
         valign = "center",
-        font = "Material Icons 20",
+        font = "Iosevka Nerd Font 20",
         forced_width = dpi(30),
         forced_height = dpi(30),
         widget = wibox.widget.textbox
@@ -147,13 +147,12 @@ local mpd_area = {
     layout = wibox.layout.align.vertical
 }
 
-local todo = require("widgets.todo")
-todo.init()
-local todo_box = create_boxed_widget(todo, dpi(200), dpi(250), x.bg)
-local todo_area = {
+local fortune = require("widgets.fortune")
+local fortune_box = create_boxed_widget(fortune, dpi(200), dpi(250), x.bg)
+local fortune_area = {
 	nil,
 	{
-		todo_box,
+		fortune_box,
 		layout = wibox.container.margin
 	},
 	nil,
@@ -179,7 +178,7 @@ local panelWidget = wibox.widget {
     	layout = wibox.layout.align.vertical
 	},
 	{
-		todo_area,
+		fortune_area,
 		horoscope_area,
     	layout = wibox.layout.align.vertical
 	},
@@ -231,7 +230,7 @@ awful.spawn.easy_async_with_shell(
 
 update_image()
 
-local width = 600
+local width = 800
 local margin = 5
 
 local settingsPop = popupLib.create(
