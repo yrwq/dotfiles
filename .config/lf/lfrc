@@ -6,7 +6,6 @@ set shell bash
 set shellopts '-eu'
 set ifs "\n"
 set scrolloff 10
-set color256
 set icons
 set period 1
 set hiddenfiles ".*:*.aux:*.log:*.bbl:*.bcf:*.blg:*.run.xml"
@@ -50,7 +49,7 @@ cmd moveto ${{
 	for x in $fx; do
 		eval mv -iv \"$x\" \"$dest\"
 	done &&
-	notify-send "🚚 File(s) moved." "File(s) moved to $dest."
+	notify-send "隷 File(s) moved." "File(s) moved to $dest."
 }}
 
 cmd copyto ${{
@@ -61,7 +60,7 @@ cmd copyto ${{
 	for x in $fx; do
 		eval cp -ivr \"$x\" \"$dest\"
 	done &&
-	notify-send "📋 File(s) copied." "File(s) copies to $dest."
+	notify-send "隷 File(s) copied." "File(s) copies to $dest."
 }}
 
 cmd xrdb "$1"
@@ -71,9 +70,11 @@ cmd bulkrename $vidir
 cmd samedir
 
 # Bindings
-map <c-f> $lf -remote "send $id select '$(fzf)'"
-map J $lf -remote "send $id cd $(cut -d'	' -f2 ${XDG_CONFIG_HOME:-$HOME/.config}/directories | fzf)"
-map gh
+map c
+map cf $lf -remote "send $id cd $HOME/.config"
+map cd $lf -remote "send $id cd $HOME/etc/doc"
+map cv $lf -remote "send $id cd $HOME/etc/vid"
+map cp $lf -remote "send $id cd $HOME/etc/pic"
 map g top
 map D delete
 map C copyto
@@ -86,16 +87,8 @@ map o &mimeopen $f
 map O $mimeopen --ask $f
 
 map A rename # at the very end
-map c push A<c-u> # new rename
-map I push A<c-a> # at the very beginning
-map i push A<a-b><a-b><a-f> # before extention
-map a push A<a-b> # after extention
 map B bulkrename
 map b $setbg $f
 map x $xrdb $f
 map K $mpv $f
 map sd $samedir $f
-
-map <c-e> down
-map <c-y> up
-map V push :!nvim<space>
