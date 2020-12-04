@@ -174,3 +174,7 @@ client.connect_signal("manage", function (c)
     -- i.e. put it at the end of others instead of setting it master.
     if not awesome.startup then awful.client.setslave(c) end
 end)
+
+client.connect_signal("unfocus", function(c)
+    c.opacity = 0.8
+end)
