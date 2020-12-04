@@ -1,7 +1,7 @@
-# set previewer ~/.config/lf/preview
 # Fork of Luke Smith's config
 
 # Basic vars
+set previewer ~/.config/lf/scope
 set shell bash
 set shellopts '-eu'
 set ifs "\n"
@@ -84,11 +84,8 @@ map <c-r> reload
 map <enter> shell
 map X !$f
 map o &mimeopen $f
-map O $mimeopen --ask $f
 
-map A rename # at the very end
 map B bulkrename
-map b $setbg $f
-map x $xrdb $f
-map K $mpv $f
-map sd $samedir $f
+map b $feh --bg-scale $f
+map sd $samedir $f # open a terminal in the same directory
+map P $img $f # preview image

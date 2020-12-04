@@ -6,7 +6,6 @@ if ! filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autolo
 	silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim
 	autocmd VimEnter * PlugInstall
 endif
-
 call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"'))
 
 Plug 'tpope/vim-surround'
@@ -22,9 +21,12 @@ Plug 'mhinz/vim-startify'
 Plug 'ryanoasis/vim-devicons'
 Plug 'camspiers/animate.vim'
 Plug 'camspiers/lens.vim'
+Plug 'ptzz/lf.vim'
+Plug 'rbgrouleff/bclose.vim'
 
 call plug#end()
 
+let g:lf_map_keys = 0
 set title
 set bg=light
 set go=a
@@ -102,6 +104,10 @@ set noshowcmd
 
 " Open file picker
 	map <leader>g :Files <CR>
+
+	map <leader>d :LfCurrentFile <CR>
+
+
 
 " Runs a script that cleans out tex build files whenever I close out of a .tex file.
 	autocmd VimLeave *.tex !texclear %
