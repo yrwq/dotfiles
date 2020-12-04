@@ -23,16 +23,13 @@ done
 if [ $rand = 'true' ]; then
     theme=$(shuf -e -n1 ~/xfiles/*)
     xrdb -load $theme
+	wp=$(shuf -e -n1 ~/.wp/*)
 fi
 
 if [ $choose = 'true' ]; then
     theme=$(ls $themes_path | rofi -i -dmenu)
     xrdb -load $themes_path/$theme
+	wp=$(shuf -e -n1 ~/.wp/*)
 fi
 
-wp=$(shuf -e -n1 ~/.wp/*)
-feh --bg-scale $wp
-wpa=${wp%.*}
-short_wp="$(echo $wpa | awk -F"/" '{print $5}')"
-short_theme="$(echo $theme)"
-notify-send "Theme: $short_theme" "Wallpaper: $short_wp"
+nitrogen --restore

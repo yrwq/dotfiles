@@ -2,7 +2,10 @@
 
 dots_dir=$HOME/dev/dotfiles
 
+rm -rf $dots_dir/config/awesome
 mkdir -p $dots_dir/.config/awesome
+cp ~/.local/src/st/config.h $dots_dir/.local/src/st/
+cp ~/.local/src/st/st-urlhandler $dots_dir/.local/src/st/
 cp ~/.config/awesome/* $dots_dir/.config/awesome/ -r
 cp ~/.config/calcurse/ $dots_dir/.config/ -r
 cp ~/.config/lf/ $dots_dir/.config/ -r
@@ -25,7 +28,6 @@ cp ~/.xprofile $dots_dir -r
 cp ~/.xinitrc $dots_dir -r
 cp ~/.profile $dots_dir -r
 cp ~/xfiles $dots_dir/ -r
-rm -rf $dots_dir/awesome/bling
 
 notify-send "Syncing ..."
 
