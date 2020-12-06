@@ -1,0 +1,18 @@
+scheme: "PaperColor Light"
+author: "Jon Leopard (http://github.com/jonleopard) based on PaperColor Theme (https://github.com/NLKNguyen/papercolor-theme)"
+base00: "eeeeee" # background (main)
+base01: "af0000" # negative (should be red)
+base02: "008700" # positive (should be green)
+base03: "5f8700" # string
+base04: "0087af" # neutral (2nd background)
+base05: "444444" # comment
+base06: "005f87" # typically storage class keywords
+base07: "878787" # foreground (normal text)
+base08: "bcbcbc" # 3rd background
+base09: "d70000" # typically import/try-catch keywords
+base0A: "d70087" # typically type and more emphasized keywords
+base0B: "8700af" # typically if/conditional/loop keywords
+base0C: "d75f00" # accent (rarely used)
+base0D: "d75f00" # typically number
+base0E: "005faf" # typically the rest of keywords
+base0F: "005f87" # highlight

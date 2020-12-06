@@ -1,0 +1,18 @@
+scheme: "PaperColor Dark"
+author: "Jon Leopard (http://github.com/jonleopard) based on PaperColor Theme (https://github.com/NLKNguyen/papercolor-theme)"
+base00: "1c1c1c" # background (main)
+base01: "af005f" # negative (should be red)
+base02: "5faf00" # positive (should be green)
+base03: "d7af5f" # string
+base04: "5fafd7" # neutral (2nd background)
+base05: "808080" # comment
+base06: "d7875f" # typically storage class keywords
+base07: "d0d0d0" # foreground (normal text)
+base08: "585858" # 3rd background
+base09: "5faf5f" # typically import/try-catch keywords
+base0A: "afd700" # typically type and more emphasized keywords
+base0B: "af87d7" # typically if/conditional/loop keywords
+base0C: "ffaf00" # accent (rarely used)
+base0D: "ff5faf" # typically number
+base0E: "00afaf" # typically the rest of keywords
+base0F: "5f8787" # highlight
