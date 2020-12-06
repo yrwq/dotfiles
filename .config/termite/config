@@ -1,51 +1,51 @@
 # Start flavours
 [colors]
-# Base16 vice
-# Author: Thomas Leon Highbaugh thighbaugh@zoho.com
+# Base16 Unikitty Reversible
+# Author: Josh W Lewis (@joshwlewis)
 
-foreground          = #8b9cbe
-foreground_bold     = #8b9cbe
-cursor              = #8b9cbe
-cursor_foreground   = #1F2023
-background          = #1F2023
+foreground          = #c3c2c4
+foreground_bold     = #c3c2c4
+cursor              = #c3c2c4
+cursor_foreground   = #2e2a31
+background          = #2e2a31
 
 # 16 color space
 
 # Black, Gray, Silver, White
-color0  = #1F2023
-color8  = #3A3F49
-color7  = #8b9cbe
-color15 = #e9efff
+color0  = #2e2a31
+color8  = #878589
+color7  = #c3c2c4
+color15 = #ffffff
 
 # Red
-color1  = #ff9cff
-color9  = #ff9cff
+color1  = #d8137f
+color9  = #d8137f
 
 # Green
-color2  = #6fffff
-color10 = #6fffff
+color2  = #17ad98
+color10 = #17ad98
 
 # Yellow
-color3  = #f0ee6e
-color11 = #f0ee6e
+color3  = #dc8a0e
+color11 = #dc8a0e
 
 # Blue
-color4  = #00caff
-color12 = #00caff
+color4  = #7864fa
+color12 = #7864fa
 
 # Purple
-color5  = #50B0FF
-color13 = #50B0FF
+color5  = #b33ce8
+color13 = #b33ce8
 
 # Teal
-color6  = #00eaff
-color14 = #00eaff
+color6  = #149bda
+color14 = #149bda
 
 # Extra colors
-color16 = #796af5
-color17 = #f850ac
-color18 = #23262C
-color19 = #313040
-color20 = #525d73
-color21 = #B2BFD9
+color16 = #d65407
+color17 = #d41acd
+color18 = #4b484e
+color19 = #69666b
+color20 = #a5a3a6
+color21 = #e1e0e1
 # End flavours

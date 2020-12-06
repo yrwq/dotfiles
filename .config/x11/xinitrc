@@ -11,7 +11,7 @@ fi
 pulseaudio --start
 
 setxkbmap hu
-
+chth -r &
 sleep 1
+
 exec awesome
-# exec openbox-session

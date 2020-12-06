@@ -1,9 +1,0 @@
-# Please order list alphanumerically
-emacs: https://github.com/belak/base16-emacs
-fzf: https://github.com/fnune/base16-fzf
-qutebrowser: https://github.com/theova/base16-qutebrowser
-rofi: https://gitlab.com/0xdec/base16-rofi
-styles: https://github.com/samme/base16-styles
-termite: https://github.com/khamer/base16-termite
-xresources: https://github.com/chriskempson/base16-xresources
-zathura: https://github.com/nicodebo/base16-zathura
