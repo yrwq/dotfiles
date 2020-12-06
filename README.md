@@ -20,7 +20,7 @@ If you are brave enough to use the script and you are running an Arch based dist
 
 run these commands in your terminal:
 
-`curl -Ss https://raw.githubusercontent.com/yrwq/dotfiles/main/install`
+`curl -Ss https://raw.githubusercontent.com/yrwq/dotfiles/main/install -o install`
 
 `chmod +x install`
 
