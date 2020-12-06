@@ -1,21 +1,14 @@
-! ROFI THEME
-	rofi.theme: ~/.config/rofi/theme.rasi
-	rofi.show-icons: true
-
-	rofi.lines: 12
-	rofi.scroll-method: 1
-	rofi.cycle: false
-	rofi.width: 40
-
-	rofi.location: 0
-	rofi.case-sensitive: false
-
-! MODE LABEL
-	rofi.display-run:
-	rofi.display-window:
-	rofi.display-drun:
-	rofi.display-ssh:
-
-! KEY BINDINGS
-	rofi.kb-accept-alt: Alt+Return
-	rofi.kb-cancel: Escape,Super_L,Super_R
+rofi.show-icons: true
+rofi.icon-size: 200px
+rofi.theme: base16-main
+rofi.lines: 12
+rofi.scroll-method: 2
+rofi.cycle: false
+rofi.width: 40
+rofi.location: 0
+rofi.case-sensitive: true
+rofi.display-run:
+rofi.display-window:
+rofi.display-drun:
+rofi.display-ssh:
+rofi.kb-cancel: Escape

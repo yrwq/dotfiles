@@ -1,5 +1,7 @@
 #!/bin/bash
-sleep 0.5
+#
+#
+sleep 1.5
 rm -rf /tmp/screenshot.png
 scrot /tmp/screenshot.png
 convert /tmp/screenshot.png -blur 0x3 /tmp/screenshotblur.png

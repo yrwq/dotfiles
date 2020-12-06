@@ -1,0 +1,135 @@
+/**
+ * Base16 Gruvbox dark, pale ROFI Color theme
+ *
+ * Authors
+ *  Scheme: Dawid Kurek (dawikur@gmail.com), morhetz (https://github.com/morhetz/gruvbox)
+ *  Template: Jordi Pakey-Rodriguez (https://github.com/0xdec), Andrea Scarpino (https://github.com/ilpianista)
+ */
+
+* {
+    red:                         rgba ( 215, 95, 95, 100 % );
+    blue:                        rgba ( 131, 173, 173, 100 % );
+    lightfg:                     rgba ( 213, 196, 161, 100 % );
+    lightbg:                     rgba ( 58, 58, 58, 100 % );
+    foreground:                  rgba ( 218, 185, 151, 100 % );
+    background:                  rgba ( 38, 38, 38, 100 % );
+    background-color:            rgba ( 38, 38, 38, 0 % );
+    separatorcolor:              @foreground;
+    border-color:                @foreground;
+    selected-normal-foreground:  @lightbg;
+    selected-normal-background:  @lightfg;
+    selected-active-foreground:  @background;
+    selected-active-background:  @blue;
+    selected-urgent-foreground:  @background;
+    selected-urgent-background:  @red;
+    normal-foreground:           @foreground;
+    normal-background:           @background;
+    active-foreground:           @blue;
+    active-background:           @background;
+    urgent-foreground:           @red;
+    urgent-background:           @background;
+    alternate-normal-foreground: @foreground;
+    alternate-normal-background: @lightbg;
+    alternate-active-foreground: @blue;
+    alternate-active-background: @lightbg;
+    alternate-urgent-foreground: @red;
+    alternate-urgent-background: @lightbg;
+    spacing:                     2;
+}
+window {
+    background-color: @background;
+    border:           3px;
+    padding:          5px;
+}
+mainbox {
+    border:           3px;
+    padding:          10px;
+}
+message {
+    border:           1px dash 0px 0px ;
+    border-color:     @separatorcolor;
+    padding:          1px ;
+}
+textbox {
+    text-color:       @urgent-foreground;
+}
+listview {
+    fixed-height:     20px;
+    border:           20px dash 0px 0px ;
+    border-color:     @normal-background;
+    spacing:          20px ;
+    scrollbar:        false;
+    padding:          20px 20px 20px ;
+}
+element {
+    border:           0;
+    padding:          10px ;
+}
+element normal.normal {
+    background-color: @normal-background;
+    text-color:       @normal-foreground;
+}
+element normal.urgent {
+    background-color: @normal-background;
+    text-color:       @urgent-foreground;
+}
+element normal.active {
+    background-color: @normal-background;
+    text-color:       @active-foreground;
+}
+element selected.normal {
+    background-color: @selected-normal-background;
+    text-color:       @selected-normal-foreground;
+}
+element selected.urgent {
+    background-color: @selected-urgent-background;
+    text-color:       @selected-urgent-foreground;
+}
+element selected.active {
+    background-color: @selected-active-background;
+    text-color:       @selected-active-foreground;
+}
+element alternate.normal {
+    background-color: @normal-normal-background;
+    text-color:       @alternate-normal-foreground;
+}
+element alternate.urgent {
+    background-color: @normal-urgent-background;
+    text-color:       @alternate-urgent-foreground;
+}
+element alternate.active {
+    background-color: @normal-active-background;
+    text-color:       @alternate-active-foreground;
+}
+button {
+    spacing:          10px;
+    text-color:       @normal-foreground;
+}
+button selected {
+    background-color: @selected-normal-background;
+    text-color:       @selected-normal-foreground;
+}
+inputbar {
+    spacing:          1px;
+    text-color:       @normal-foreground;
+    padding:          1px ;
+    children:         [ prompt,textbox-prompt-colon,entry,case-indicator ];
+}
+case-indicator {
+    spacing:          5px;
+    text-color:       @normal-foreground;
+}
+entry {
+    spacing:          5px;
+    text-color:       @normal-foreground;
+}
+prompt {
+    spacing:          5px;
+    text-color:       @normal-foreground;
+}
+textbox-prompt-colon {
+    expand:           false;
+    str:              "";
+    margin:           0px 0.3000em 0.0000em 0.0000em ;
+    text-color:       inherit;
+}

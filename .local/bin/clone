@@ -1,5 +1,4 @@
 #!/bin/sh
-#clone a repo
-# https://github.com/co1ncidence
+# clone a repo
 
 git clone "https://github.com/$1"

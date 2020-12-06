@@ -1,5 +1,5 @@
 #!/bin/sh
-#simple folder archiver
+# archives a folder
 # https://github.com/co1ncidence
 
 #help message

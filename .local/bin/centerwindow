@@ -1,5 +1,5 @@
 #!/bin/bash
-#center the current window
+# center the current window
 
 #get window position information
 IFS='x' read screenWidth screenHeight < <(xdpyinfo | grep dimensions | grep -o '[0-9x]*' | head -n1)

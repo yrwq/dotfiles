@@ -1,6 +1,5 @@
 #!/bin/sh
-#chmod +x toggle
-#https://github.com/co1ncidence
+# chmod +x toggle
 
 for file ; do
     #check if already executable

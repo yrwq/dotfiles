@@ -2,34 +2,46 @@
 #
 # Theme changer
 
-rand=true
-choose=false
+rand=false
+flavours=true
 
 themes_path="$HOME/xfiles"
 wp_path="$HOME/.wp"
 
 while getopts 'rc' flag; do
     case "${flag}" in
+		f)
+			flavours='true'
+			rand='false'
+			choose='false'
+			;;
         r)
             rand='true'
-            choose='false' ;;
-        c)
-            rand='false'
-            choose='true'
-            ;;
+            choose='false'
+			flavours='false'
+			;;
     esac
 done
 
 if [ $rand = 'true' ]; then
-    theme=$(shuf -e -n1 ~/xfiles/*)
-    xrdb -load $theme
-	wp=$(shuf -e -n1 ~/.wp/*)
+	theme=$(flavours list | sed 's/ / \n/g' | grep -v light | sort -R |  head -n1)
 fi
 
-if [ $choose = 'true' ]; then
-    theme=$(ls $themes_path | rofi -i -dmenu)
-    xrdb -load $themes_path/$theme
-	wp=$(shuf -e -n1 ~/.wp/*)
+if [ $flavours = 'true' ]; then
+	theme=$(flavours list | sed 's/ / \n/g' | grep -v light | rofi -dmenu)
 fi
 
-nitrogen --restore
+[[ -z "$theme" ]] && { exit 1; }
+flavours apply $theme
+xrdb ~/.Xresources
+
+echo 'awesome.restart()' | awesome-client
+cat ~/.config/Lightcord_BD/themes/style.css | xclip -sel clip
+
+wp=$(shuf -e -n1 ~/.wp/*)
+feh --bg-scale $wp
+short_wp=$(echo $wp | sed "s|/home/$USER/.wp/||g")
+
+notify-send "Successfully changed theme." "Theme: ${theme} \nWallpaper: ${short_wp}"
+
+# nitrogen --restore
