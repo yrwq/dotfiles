@@ -1,13 +1,16 @@
 #!/bin/bash
 
-# define dependencies
 dependencies=(git feh picom slop termite xorg-server abook alsa-card-profiles alsa-lib alsa-plugins alsa-utils dunst emacs exa ffmpeg ffmpegthumbnailer fzf imagemagick lxappearance-gtk3 maim mpc mpd mpv mupdf ncmpcpp neomutt neovim newsboat nitrogen obconf openbox pamixer poppler pulseaudio pulseaudio-alsa pulsemixer qutebrowser ranger rofi scrot sxiv tint2 transmission-cli transmission-gtk ttf-nerd-fonts-symbols urlscan w3m xautolock xclip xdg-user-dirs xdg-utils xdotool xf86-input-libinput xf86-video-intel xmobar xmonad xmonad-contrib xorg-font-util xorg-fonts-misc xorg-mkfontscale xorg-xinit xorg-xrandr xorg-xsetroot xorg-server-common xorg-server-devel xorg-setxkbmap xorg-xclipboard xorg-xdpyinfo xorg-xev xorg-xfontsel xorg-xinput xorg-xmodmap xorg-xprop xorg-xrandr xorg-xrdb xorg-xset xorg-xsetroot xorg-xwininfo xscreensaver youtube-dl zathura zathura-pdf-poppler zsh)
+
 dependencies_aur=(awesome-git brave-dev-bin ttf-material-design-icons-git urlview nerd-fonts-iosevka)
 
 clear
-
 echo "Updating repositories ..."
+echo ""
+sleep 2
 sudo pacman -Sy --noconfirm
+echo ""
+echo ""
 
 install_dependencies() {
   sudo pacman -S --needed --noconfirm "$@"
@@ -15,8 +18,11 @@ install_dependencies() {
 
 
 echo "Installing dependencies ..."
+echo ""
 sleep 2
 install_dependencies "${dependencies[@]}"
+echo ""
+echo ""
 
 
 read -p "Install dependencies from aur? [ Y / n ]" -n 1 -r
@@ -34,6 +40,8 @@ then
 	pikaur -S --needed --noconfirm "${dependencies_aur[@]}"
 fi
 
+echo ""
+echo ""
 echo "Warning!"
 echo "This will overwrite your configuration files!"
 read -p "Copy dotfiles? [ Y / n ] " -n 1 -r
@@ -47,7 +55,6 @@ then
 	walls="https://github.com/yrwq/walls.git"
   	git clone "$walls" ~/.wp
 fi
-clear
 
 # finalize
 {
