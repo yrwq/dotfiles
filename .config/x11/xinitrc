@@ -8,6 +8,9 @@ else
 	. "$HOME/.xprofile"
 fi
 
+pulseaudio --start
+
+setxkbmap hu
 chth -r &
 
 sleep 1

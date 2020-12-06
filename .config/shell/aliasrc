@@ -3,23 +3,17 @@
 # Use neovim for vim if present.
 #[ -x "$(command -v nvim)" ] && alias vim="nvim" vimdiff="nvim -d"
 
-# Verbosity and settings that you pretty much just always are going to want.
 alias \
 	cp="cp -iv" \
 	mv="mv -iv" \
 	rm="rm -vI" \
 	mkd="mkdir -pv" \
-	ffmpeg="ffmpeg -hide_banner"
-
-# Colorize commands when possible.
-alias \
+	ffmpeg="ffmpeg -hide_banner" \
+	slop="slop -o" \
 	ls="exa --icons" \
 	grep="grep --color=auto" \
 	diff="diff --color=auto" \
-	ccat="highlight --out-format=ansi"
-
-# These common commands are just too long! Abbreviate them.
-alias \
+	ccat="highlight --out-format=ansi" \
 	ka="killall" \
 	g="gitui" \
 	ga="git add --force" \
@@ -29,7 +23,5 @@ alias \
 	f="$FILE" \
 	v="$EDITOR" \
 	z="zathura" \
-	pik="pikaur --noconfirm"
-
-alias \
+	pik="pikaur --noconfirm" \
 	ref="shortcuts >/dev/null; source ${XDG_CONFIG_HOME:-$HOME/.config}/shortcutrc ; source ${XDG_CONFIG_HOME:-$HOME/.config}/zshnameddirrc" \

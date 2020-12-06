@@ -1,25 +1,26 @@
 #!/bin/zsh
 
-# profile file. Runs on login. Environmental variables are set here.
-
-# If you don't plan on reverting to bash, you can remove the link in ~/.profile
-# to clean up.
-
 # Adds `~/.local/bin` to $PATH
 export PATH="$PATH:$(du "$HOME/.local/bin" | cut -f2 | paste -sd ':')"
 
 # Default programs:
-export EDITOR="nvim"
-export TERMINAL="st"
-export BROWSER="brave-dev"
+export EDITOR="$(which nvim)"
+export TERMINAL="$(which st)"
+export BROWSER="$(which brave-dev)"
+export READER="$(which zathura)"
+export VISUAL="${EDITOR:="$(which nvim)"}"
+export PAGER="${EDITOR:="$(which nvim)"} -R"
+export OPENER="${HOME:="/home/$USER"}/.local/bin/open"
+export MANPAGER="${EDITOR:="$(which nvim)"} -c 'set ft=man' -"
 
 # ~/ Clean-up:
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
+
 export GPG_AGENT_INFO=""
 #export XINITRC="${XDG_CONFIG_HOME:-$HOME/.config}/x11/xinitrc"
-#export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority" # This line will break some DMs.
+export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority" # This line will break some DMs.
 export NOTMUCH_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/notmuch-config"
 export DOOMDIR="${XDG_CONFIG_HOME:-$HOME/.config}/doom"
 export GTK2_RC_FILES="${XDG_CONFIG_HOME:-$HOME/.config}/gtk-2.0/gtkrc-2.0"
@@ -129,6 +130,3 @@ ex= :\
 [ ! -f ${XDG_CONFIG_HOME:-$HOME/.config}/shell/shortcutrc ] && shortcuts >/dev/null 2>&1 &
 
 [ "$(tty)" = "/dev/tty1" ] && ! pidof -s Xorg >/dev/null 2>&1 && exec startx
-
-ref &
-setxkbmap hu

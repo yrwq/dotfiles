@@ -1,0 +1,46 @@
+#!/bin/sh
+#
+# Sync dotfiles
+
+dotdir="$HOME/dev/dotfiles/"
+dotconf="$HOME/dev/dotfiles/.config"
+dotbin="$HOME/dev/dotfiles/.local/bin"
+dotshare="$HOME/dev/dotfiles/.local/share"
+
+confdir="$HOME/.config"
+bindir="$HOME/.local/bin"
+sharedir="$HOME/.local/share"
+
+# config
+rm -rf $dotconf/*
+mkdir $dotconf/newsboat
+mkdir $dotconf/nvim
+
+cp $confdir/awesome $dotconf/ -r
+cp $confdir/discocss $dotconf/ -r
+cp $confdir/flavours $dotconf/ -r
+cp $confdir/lf $dotconf/ -r
+cp $confdir/mpv $dotconf/ -r
+cp $confdir/newsboat/config $dotconf/newsboat -r
+cp $confdir/newsboat/urls-sample $dotconf/newsboat/urls
+cp $confdir/nvim/init.vim $dotconf/nvim/ -r
+cp $confdir/qutebrowser $dotconf/ -r
+cp $confdir/ranger $dotconf/ -r
+cp $confdir/rofi $dotconf/ -r
+cp $confdir/shell $dotconf/ -r
+cp $confdir/termite $dotconf/ -r
+cp $confdir/x11 $dotconf/ -r
+cp $confdir/zsh $dotconf/ -r
+cp $confdir/directories $dotconf/ -r
+cp $confdir/mimeapps.list $dotconf/ -r
+cp $confdir/pikaur.conf $dotconf/ -r
+cp $confdir/shortcutrc $dotconf/ -r
+cp $confdir/user-dirs.dirs $dotconf/ -r
+cp $confdir/zshnameddirrc $dotconf/ -r
+
+# local
+rm -rf $dotshare/*
+
+cp $sharedir/flavours $dotshare/ -r
+cp $sharedir/applications $dotshare/ -r
+cp $sharedir/fonts $dotshare/ -r

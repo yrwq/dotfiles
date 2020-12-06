@@ -62,7 +62,7 @@ end
 
 -- Create app buttons
 local browser = create_button("爵", x.color8, x.fg, apps.browser, "q")
-local discord = create_button("ﭮ", x.color8, x.fg, apps.discord, "w")
+local discord = create_button("", x.color8, x.fg, apps.discord, "w")
 local calcurse = create_button("", x.color8, x.fg, apps.calcurse, "e")
 local mail = create_button("", x.color8, x.fg, apps.mail, "r")
 local lxappearance = create_button("嗀", x.color8, x.fg, apps.lxappearance, "a")

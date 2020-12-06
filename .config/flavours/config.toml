@@ -42,24 +42,24 @@ file = '~/.config/qutebrowser/config.py'
 template = 'qutebrowser'
 subtemplate = 'minimal'
 
-[[item]]
-file= '~/.config/zathura/zathurarc'
-template = 'zathura'
+# [[item]]
+# file= '~/.config/zathura/zathurarc'
+# template = 'zathura'
 
 [[item]]
 file= '~/.config/zsh/.zshrc'
 template = 'fzf'
 rewrite = false
 
-[[item]]
-file= '~/.emacs.d/themes/base16-main-theme.el'
-template = 'emacs'
-rewrite = true
+# [[item]]
+# file= '~/.emacs.d/themes/base16-main-theme.el'
+# template = 'emacs'
+# rewrite = true
 
 [[item]]
-file = '~/.config/Lightcord_BD/themes/style.css'
+file = '~/.config/discocss/custom.css'
 template = 'styles'
 subtemplate = 'css-variables'
 rewrite = false
-start= '/* Start flavours */'
-end = '/* End flavours */'
+start= '/* Start flav */'
+end = '/* End flav */'

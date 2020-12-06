@@ -36,7 +36,7 @@ apps.file_manager = function ()
 end
 
 apps.discord = function ()
-    helpers.run_or_raise({class = 'lightcord'}, false, "lightcord")
+    helpers.run_or_raise({class = 'discord'}, false, "discocss")
 end
 
 apps.mail = function ()
