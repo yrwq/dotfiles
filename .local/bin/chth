@@ -40,7 +40,7 @@ cat ~/.config/Lightcord_BD/themes/style.css | xclip -sel clip
 
 wp=$(shuf -e -n1 ~/.wp/*)
 feh --bg-scale $wp
-short_wp=$(echo $wp | sed "s|/home/$USER/.wp/||g")
+short_wp=$(echo $wp | sed "s|/home/$USER/.wp/||g" | sed 's/.png//g' )
 
 notify-send "Successfully changed theme." "Theme: ${theme} \nWallpaper: ${short_wp}"
 
