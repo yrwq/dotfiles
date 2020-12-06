@@ -1,10 +1,19 @@
 #!/bin/sh
 
-ffmpeg -f x11grab\
-    -framerate 60 \
-    -thread_queue_size 512 \
-    -i "$DISPLAY".0+"$X","$Y"\
-    -vcodec libx264\
-    -qp 18\
-    -preset ultrafast \
-    "$HOME/etc/vid/rec/$(date +'%a_%I:%M').mp4"
+case "$@" in
+	start)
+		ffmpeg -f x11grab\
+    		-framerate 60 \
+    		-thread_queue_size 512 \
+    		-i "$DISPLAY".0+"$X","$Y"\
+    		-vcodec libx264\
+    		-qp 18\
+    		-preset ultrafast \
+    		"$HOME/etc/vid/rec/$(date +'%a_%I:%M').mp4" &
+			notify-send "  Recording started"
+	;;
+	stop)
+		killall ffmpeg
+		notify-send "  Recording stopped"
+	;;
+esac
