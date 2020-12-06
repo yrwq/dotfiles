@@ -8,7 +8,7 @@ local helpers = require("helpers")
 local apps = {}
 
 apps.org = function()
-	helpers.run_or_raise({class = 'emacs'}, false, "emacs")
+	helpers.run_or_raise({class = 'emacs'}, false, "emacsclient -c ~/etc/doc/org/todo.org")
 end
 
 apps.qute = function()

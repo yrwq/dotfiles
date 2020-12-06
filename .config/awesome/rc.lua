@@ -4,6 +4,7 @@ local awful = require("awful")
 
 awful.spawn.with_shell("picom")
 awful.spawn.with_shell("mpd")
+awful.spawn.with_shell("emacs --daemon")
 
 editor = "st -c editor -e nvim"
 terminal = "st"

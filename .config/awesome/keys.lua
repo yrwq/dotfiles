@@ -41,7 +41,26 @@ local function shift_focus_and_move_client(move_back)
   end
 end
 
-procom = "rofi -show run"
+local fire_rule = { class = { "emacs", "Emacs" } }
+for group_name, group_data in pairs({
+    ["Emacs: org"] = { color = x.color1, rule_any = fire_rule }
+}) do
+    hotkeys_popup.add_group_rules(group_name, group_data)
+end
+
+-- Table with all of our hotkeys
+local firefox_keys = {
+
+    ["Emacs: org"] = {{
+        modifiers = { "Ctrl-C" },
+        keys = {
+            ["C-s"] = "Schedule"
+        }
+    }
+    }
+}
+
+hotkeys_popup.add_hotkeys(firefox_keys)
 
 awful.keyboard.append_global_keybindings({
 
@@ -218,7 +237,13 @@ awful.keyboard.append_global_keybindings({
     awful.key({ modkey, shiftkey }, "c", function()
 		awful.spawn.with_shell("chth -f")
 	end,
-		{description = "change theme", group = "client"}),
+		{description = "choose theme", group = "launch"}),
+
+    awful.key({ modkey, ctrlkey }, "c", function()
+		awful.spawn.with_shell("chth -r")
+	end,
+		{description = "random theme", group = "launch"}),
+
 
     -- reload awesome
     awful.key({ modkey, shiftkey }, "r", awesome.restart,
