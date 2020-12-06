@@ -214,6 +214,12 @@ awful.keyboard.append_global_keybindings({
 	end,
 		{description = "center floating", group = "client"}),
 
+	-- change theme
+    awful.key({ modkey, shiftkey }, "c", function()
+		awful.spawn.with_shell("chth -f")
+	end,
+		{description = "change theme", group = "client"}),
+
     -- reload awesome
     awful.key({ modkey, shiftkey }, "r", awesome.restart,
 		{description = "reload", group = "awesome"}),

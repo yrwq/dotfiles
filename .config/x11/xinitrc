@@ -21,4 +21,4 @@ chth &
 
 sleep 3
 exec awesome
-# exec openbox-session
+#exec openbox-session

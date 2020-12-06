@@ -1,0 +1,37 @@
+*.foreground:   #c0b18b
+*.background:   #1f1f1f
+*.cursorColor:  #c0b18b
+
+! black
+*.color0:       #3b302b
+*.color8:       #7e615a
+
+! red
+*.color1:       #6e3441
+*.color9:       #cb6e82
+
+! green
+*.color2:       #7f793d
+*.color10:      #beb669
+
+! yellow
+*.color3:       #8c6c4d
+*.color11:      #f4c190
+
+! blue
+*.color4:       #556e70
+*.color12:      #8bb4b5
+
+! magenta
+*.color5:       #72697d
+*.color13:      #9f8bb9
+
+! cyan
+*.color6:       #4f7a6a
+*.color14:      #7bbda4
+
+! white
+*.color7:       #b7b0ae
+*.color15:      #f5eeeb
+
+! vim: ft=xdefaults

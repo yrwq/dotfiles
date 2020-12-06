@@ -8,7 +8,6 @@
 # Introduction
 
 This repository contains my personal collection of configuration files for linux.
-Inspired by elena's [dotfiles](https://github.com/elenapan/dotfiles), JavaCafe01's [dotfiles](https://github.com/JavaCafe01/dotfiles) and Luke Smith's [dotfiles](https://github.com/LukeSmithxyz/voidrice)
 I'm distro hopping a lot and i got tired of copying my dotfiles so i ended up here.
 This repository will always be work in progress, so expect to find issues.
 The configuration probably won't match your setup out-of-the-box, so you should edit the files to match your setup.
@@ -23,13 +22,11 @@ The configuration probably won't match your setup out-of-the-box, so you should 
      yay -S awesome-git
      ```
 
-2. Install my awesomewm configuration
+2. Copy my configuration files
 
     First back up your current configurations
     ```sh
     mv ~/.config ~/.config-backup
-
-	mkdir ~/.config
     ```
     Clone this repository
 
@@ -39,13 +36,13 @@ The configuration probably won't match your setup out-of-the-box, so you should 
 
     Now copy my files
     ```sh
-    cp config/awesome ~/.config/ -r
+    cp .config/ ~/.config/ -r
     ```
 
 3. Install scripts, wallpapers, etc. (optional)
 
     ```sh
-    cp .bin ~/.bin -r
+    cp .local/ ~/.local/ -r
     ```
 
     Copy fonts
@@ -54,7 +51,11 @@ The configuration probably won't match your setup out-of-the-box, so you should 
     cp .fonts ~/.fonts/ -r
     ```
 
-    Before using my config you should change the default applications, in `rc.lua` and `apps.lua`
+I have a lot of wallpapers, so i maintain another repository for them [here](https://github.com/yrwq/walls)
+
+Before using my config you should change the default applications, in `rc.lua` and `apps.lua`.
+
+You can get a list of all the keybindings, just press `Super + P` in awesome.
 
 # Software
 
@@ -66,6 +67,7 @@ The window manager of my choice is [awesome](https://awesomewm.org), because it'
 	- `rc.lua` Awesome loads this file first.
 	- `theme.lua` Which colors to use, size of gaps, etc.
 	- `apps.lua` Default applications.
+	- `keys.lua` Key bindings.
 	- `candy` Bar and panel themes
 	- `icons` Icons used by notifications, etc.
 	- `module` Notifications, titlebars, other popups.
@@ -94,6 +96,10 @@ You can find my build at `.local/src/st`, it is based on Luke's.
 	- `Alt + j`: decrease font size
 	- `Alt + l`: follow url
 	- `Alt + o`: copy url
+
+## Misc
+
+For the colors, i use [flavours](https://github.com/Misterio77/flavours), a [base16](https://github.com/chriskempson/base16) colorscheme builder/manager. The program uses templates and schemes to theme my entire desktop with one command. I made a tiny bash script (`.local/bin/chth`), so i can choose a theme with rofi and apply it.
 
 # Gallery
 
