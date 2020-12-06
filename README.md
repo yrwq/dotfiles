@@ -14,48 +14,19 @@ The configuration probably won't match your setup out-of-the-box, so you should 
 
 # Setup
 
-1. Install awesome
+You can use the install script, but i recommend to manually copy the files and install dependencies!
 
-    You need the git version, otherwise you can't use my setup
+If you are brave enough to use the script and you are running an Arch based distro,
 
-     ```sh
-     yay -S awesome-git
-     ```
+run these commands in your terminal:
 
-2. Copy my configuration files
+`curl -Ss https://raw.githubusercontent.com/yrwq/dotfiles/main/install`
 
-    First back up your current configurations
-    ```sh
-    mv ~/.config ~/.config-backup
-    ```
-    Clone this repository
+`chmod +x install`
 
-    ```sh
-    git clone https://github.com/yrwq/dotfiles && cd dotfiles
-    ```
+`./install`
 
-    Now copy my files
-    ```sh
-    cp .config/ ~/.config/ -r
-    ```
-
-3. Install scripts, wallpapers, etc. (optional)
-
-    ```sh
-    cp .local/ ~/.local/ -r
-    ```
-
-    Copy fonts
-
-    ```sh
-    cp .fonts ~/.fonts/ -r
-    ```
-
-I have a lot of wallpapers, so i maintain another repository for them [here](https://github.com/yrwq/walls)
-
-Before using my config you should change the default applications, in `rc.lua` and `apps.lua`.
-
-You can get a list of all the keybindings, just press `Super + P` in awesome.
+The script will install dependencies, an AUR helper, if not already installed and copy files from this repository to your home directory.
 
 # Software
 
