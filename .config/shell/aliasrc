@@ -16,7 +16,7 @@ alias \
 	ccat="highlight --out-format=ansi" \
 	ka="killall" \
 	g="gitui" \
-	ga="git add --force" \
+	ga="git add" \
 	gc="git commit -m" \
 	gp="git push -u origin main" \
 	mk="make && sudo make install" \

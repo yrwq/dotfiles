@@ -81,27 +81,27 @@ autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
 
 # Start flavours
-# Base16 Seti UI
-# Author: 
+# Base16 vice
+# Author: Thomas Leon Highbaugh thighbaugh@zoho.com
 
 _gen_fzf_default_opts() {
 
-local color00='#151718'
-local color01='#282a2b'
-local color02='#3B758C'
-local color03='#41535B'
-local color04='#43a5d5'
-local color05='#d6d6d6'
-local color06='#eeeeee'
-local color07='#ffffff'
-local color08='#Cd3f45'
-local color09='#db7b55'
-local color0A='#e6cd69'
-local color0B='#9fca56'
-local color0C='#55dbbe'
-local color0D='#55b5db'
-local color0E='#a074c4'
-local color0F='#8a553f'
+local color00='#1F2023'
+local color01='#23262C'
+local color02='#313040'
+local color03='#3A3F49'
+local color04='#525d73'
+local color05='#8b9cbe'
+local color06='#B2BFD9'
+local color07='#e9efff'
+local color08='#ff9cff'
+local color09='#796af5'
+local color0A='#f0ee6e'
+local color0B='#6fffff'
+local color0C='#00eaff'
+local color0D='#00caff'
+local color0E='#50B0FF'
+local color0F='#f850ac'
 
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS"\
 " --color=bg+:$color01,bg:$color00,spinner:$color0C,hl:$color0D"\

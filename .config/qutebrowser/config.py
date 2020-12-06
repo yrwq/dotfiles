@@ -12,24 +12,24 @@ c.tabs.padding = {
 # Start flavours
 # base16-qutebrowser (https://github.com/theova/base16-qutebrowser)
 # Base16 qutebrowser template by theova and Daniel Mulford
-# Seti UI scheme by 
+# vice scheme by Thomas Leon Highbaugh thighbaugh@zoho.com
 
-base00 = "#151718"
-base01 = "#282a2b"
-base02 = "#3B758C"
-base03 = "#41535B"
-base04 = "#43a5d5"
-base05 = "#d6d6d6"
-base06 = "#eeeeee"
-base07 = "#ffffff"
-base08 = "#Cd3f45"
-base09 = "#db7b55"
-base0A = "#e6cd69"
-base0B = "#9fca56"
-base0C = "#55dbbe"
-base0D = "#55b5db"
-base0E = "#a074c4"
-base0F = "#8a553f"
+base00 = "#1F2023"
+base01 = "#23262C"
+base02 = "#313040"
+base03 = "#3A3F49"
+base04 = "#525d73"
+base05 = "#8b9cbe"
+base06 = "#B2BFD9"
+base07 = "#e9efff"
+base08 = "#ff9cff"
+base09 = "#796af5"
+base0A = "#f0ee6e"
+base0B = "#6fffff"
+base0C = "#00eaff"
+base0D = "#00caff"
+base0E = "#50B0FF"
+base0F = "#f850ac"
 
 # set qutebrowser colors
 

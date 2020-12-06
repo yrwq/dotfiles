@@ -1,19 +1,19 @@
 /**
- * Base16 Seti UI ROFI Color theme
+ * Base16 vice ROFI Color theme
  *
  * Authors
- *  Scheme: 
+ *  Scheme: Thomas Leon Highbaugh thighbaugh@zoho.com
  *  Template: Jordi Pakey-Rodriguez (https://github.com/0xdec), Andrea Scarpino (https://github.com/ilpianista)
  */
 
 * {
-    red:                         rgba ( 205, 63, 69, 100 % );
-    blue:                        rgba ( 85, 181, 219, 100 % );
-    lightfg:                     rgba ( 238, 238, 238, 100 % );
-    lightbg:                     rgba ( 40, 42, 43, 100 % );
-    foreground:                  rgba ( 214, 214, 214, 100 % );
-    background:                  rgba ( 21, 23, 24, 100 % );
-    background-color:            rgba ( 21, 23, 24, 0 % );
+    red:                         rgba ( 255, 156, 255, 100 % );
+    blue:                        rgba ( 0, 202, 255, 100 % );
+    lightfg:                     rgba ( 178, 191, 217, 100 % );
+    lightbg:                     rgba ( 35, 38, 44, 100 % );
+    foreground:                  rgba ( 139, 156, 190, 100 % );
+    background:                  rgba ( 31, 32, 35, 100 % );
+    background-color:            rgba ( 31, 32, 35, 0 % );
     separatorcolor:              @foreground;
     border-color:                @foreground;
     selected-normal-foreground:  @lightbg;
