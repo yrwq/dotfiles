@@ -39,13 +39,11 @@ fi
 clear
 
 echo "Warning!"
-echo "This will remove your entire home directory!"
+echo "This will overwrite your configuration files!"
 read -p "Copy dotfiles? [ Y / n ] " -n 1 -r
 echo ""
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
-	rm -rf ~/*
-	rm -rf ~/.*
 	url="https://github.com/yrwq/dotfiles.git"
 	temp_directory_dotfiles=$(mktemp -d)
   	git clone "$url" "$temp_directory_dotfiles"
