@@ -1,15 +1,12 @@
+#!/usr/bin/env zsh
 export PATH="$HOME/.bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
-# Enable colors and change prompt:
-autoload -U colors && colors	# Load colors
+autoload -U colors && colors
+PS1='%F{magenta}%~%f %(?.%f.%F{red})%F{red} %f '
 
-
-PS1="%{$fg[magenta]%}%~%{$reset_color%}%b "
 setopt autocd		# Automatically cd into typed directory.
 stty stop undef		# Disable ctrl-s to freeze terminal.
 setopt interactive_comments
-
-export GPG_AGENT_INFO=""
 
 # History in cache directory:
 HISTSIZE=10000000
