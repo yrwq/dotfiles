@@ -352,3 +352,4 @@ X Protocol Version 11, Revision 0
 [ 99545.390] (II) intel(0): Modeline "1024x768"x0.0   78.75  1024 1040 1136 1312  768 769 772 800 +hsync +vsync (60.0 kHz e)
 [ 99545.390] (II) intel(0): Modeline "1024x768"x0.0   65.00  1024 1048 1184 1344  768 771 777 806 -hsync -vsync (48.4 kHz e)
 [ 99545.390] (II) intel(0): Modeline "800x600"x0.0   49.50  800 816 896 1056  600 601 604 625 +hsync +vsync (46.9 kHz e)
+[ 99621.579] (EE) event3  - Logitech USB Keyboard: client bug: event processing lagging behind by 66ms, your system is too slow
