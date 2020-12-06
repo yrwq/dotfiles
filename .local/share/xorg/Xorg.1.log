@@ -1,0 +1,354 @@
+[ 99543.217] (WW) Failed to open protocol names file lib/xorg/protocol.txt
+[ 99543.219] 
+X.Org X Server 1.20.10
+X Protocol Version 11, Revision 0
+[ 99543.220] Build Operating System: Linux Arch Linux
+[ 99543.220] Current Operating System: Linux yrwq 5.9.11-arch2-1 #1 SMP PREEMPT Sat, 28 Nov 2020 02:07:22 +0000 x86_64
+[ 99543.220] Kernel command line: BOOT_IMAGE=/vmlinuz-linux root=UUID=cd4fa201-b230-4a37-ab91-ad57c4f8f170 rw quiet splash loglevel=3
+[ 99543.221] Build Date: 01 December 2020  07:51:57PM
+[ 99543.221]  
+[ 99543.221] Current version of pixman: 0.40.0
+[ 99543.222] 	Before reporting problems, check http://wiki.x.org
+	to make sure that you have the latest version.
+[ 99543.222] Markers: (--) probed, (**) from config file, (==) default setting,
+	(++) from command line, (!!) notice, (II) informational,
+	(WW) warning, (EE) error, (NI) not implemented, (??) unknown.
+[ 99543.224] (==) Log file: "/home/bl/.local/share/xorg/Xorg.1.log", Time: Sun Dec  6 13:52:03 2020
+[ 99543.253] (==) Using config directory: "/etc/X11/xorg.conf.d"
+[ 99543.254] (==) Using system config directory "/usr/share/X11/xorg.conf.d"
+[ 99543.254] (==) No Layout section.  Using the first Screen section.
+[ 99543.254] (==) No screen section available. Using defaults.
+[ 99543.254] (**) |-->Screen "Default Screen Section" (0)
+[ 99543.254] (**) |   |-->Monitor "<default monitor>"
+[ 99543.254] (==) No monitor specified for screen "Default Screen Section".
+	Using a default monitor configuration.
+[ 99543.254] (==) Automatically adding devices
+[ 99543.254] (==) Automatically enabling devices
+[ 99543.254] (==) Automatically adding GPU devices
+[ 99543.254] (==) Automatically binding GPU devices
+[ 99543.254] (==) Max clients allowed: 256, resource mask: 0x1fffff
+[ 99543.254] (WW) The directory "/usr/share/fonts/100dpi" does not exist.
+[ 99543.254] 	Entry deleted from font path.
+[ 99543.254] (WW) The directory "/usr/share/fonts/75dpi" does not exist.
+[ 99543.254] 	Entry deleted from font path.
+[ 99543.254] (==) FontPath set to:
+	/usr/share/fonts/misc,
+	/usr/share/fonts/TTF,
+	/usr/share/fonts/OTF,
+	/usr/share/fonts/Type1
+[ 99543.254] (==) ModulePath set to "/usr/lib/xorg/modules"
+[ 99543.254] (II) The server relies on udev to provide the list of input devices.
+	If no devices become available, reconfigure udev or disable AutoAddDevices.
+[ 99543.254] (II) Module ABI versions:
+[ 99543.254] 	X.Org ANSI C Emulation: 0.4
+[ 99543.254] 	X.Org Video Driver: 24.1
+[ 99543.254] 	X.Org XInput driver : 24.1
+[ 99543.254] 	X.Org Server Extension : 10.0
+[ 99543.256] (++) using VT number 2
+
+[ 99543.259] (II) systemd-logind: took control of session /org/freedesktop/login1/session/_336
+[ 99543.260] (II) xfree86: Adding drm device (/dev/dri/card0)
+[ 99543.262] (II) systemd-logind: got fd for /dev/dri/card0 226:0 fd 10 paused 0
+[ 99543.266] (--) PCI:*(0@0:2:0) 8086:2772:1849:2772 rev 2, Mem @ 0xfea80000/524288, 0xd0000000/268435456, 0xfea40000/262144, I/O @ 0x0000dc00/8, BIOS @ 0x????????/131072
+[ 99543.266] (WW) Open ACPI failed (/var/run/acpid.socket) (No such file or directory)
+[ 99543.266] (II) LoadModule: "glx"
+[ 99543.266] (II) Loading /usr/lib/xorg/modules/extensions/libglx.so
+[ 99543.297] (II) Module glx: vendor="X.Org Foundation"
+[ 99543.297] 	compiled for 1.20.10, module version = 1.0.0
+[ 99543.297] 	ABI class: X.Org Server Extension, version 10.0
+[ 99543.297] (==) Matched intel as autoconfigured driver 0
+[ 99543.297] (==) Matched modesetting as autoconfigured driver 1
+[ 99543.297] (==) Matched fbdev as autoconfigured driver 2
+[ 99543.297] (==) Matched vesa as autoconfigured driver 3
+[ 99543.297] (==) Assigned the driver to the xf86ConfigLayout
+[ 99543.297] (II) LoadModule: "intel"
+[ 99543.297] (II) Loading /usr/lib/xorg/modules/drivers/intel_drv.so
+[ 99543.309] (II) Module intel: vendor="X.Org Foundation"
+[ 99543.309] 	compiled for 1.20.9, module version = 2.99.917
+[ 99543.309] 	Module class: X.Org Video Driver
+[ 99543.309] 	ABI class: X.Org Video Driver, version 24.1
+[ 99543.309] (II) LoadModule: "modesetting"
+[ 99543.309] (II) Loading /usr/lib/xorg/modules/drivers/modesetting_drv.so
+[ 99543.310] (II) Module modesetting: vendor="X.Org Foundation"
+[ 99543.310] 	compiled for 1.20.10, module version = 1.20.10
+[ 99543.310] 	Module class: X.Org Video Driver
+[ 99543.310] 	ABI class: X.Org Video Driver, version 24.1
+[ 99543.310] (II) LoadModule: "fbdev"
+[ 99543.310] (WW) Warning, couldn't open module fbdev
+[ 99543.310] (EE) Failed to load module "fbdev" (module does not exist, 0)
+[ 99543.310] (II) LoadModule: "vesa"
+[ 99543.311] (WW) Warning, couldn't open module vesa
+[ 99543.311] (EE) Failed to load module "vesa" (module does not exist, 0)
+[ 99543.311] (II) intel: Driver for Intel(R) Integrated Graphics Chipsets:
+	i810, i810-dc100, i810e, i815, i830M, 845G, 854, 852GM/855GM, 865G,
+	915G, E7221 (i915), 915GM, 945G, 945GM, 945GME, Pineview GM,
+	Pineview G, 965G, G35, 965Q, 946GZ, 965GM, 965GME/GLE, G33, Q35, Q33,
+	GM45, 4 Series, G45/G43, Q45/Q43, G41, B43
+[ 99543.311] (II) intel: Driver for Intel(R) HD Graphics
+[ 99543.311] (II) intel: Driver for Intel(R) Iris(TM) Graphics
+[ 99543.311] (II) intel: Driver for Intel(R) Iris(TM) Pro Graphics
+[ 99543.311] (II) modesetting: Driver for Modesetting Kernel Drivers: kms
+[ 99543.311] xf86EnableIOPorts: failed to set IOPL for I/O (Operation not permitted)
+[ 99543.312] (II) intel(0): Using Kernel Mode Setting driver: i915, version 1.6.0 20200715
+[ 99543.312] (II) intel(0): SNA compiled from 2.99.917-913-g9236c582
+[ 99543.326] (WW) Falling back to old probe method for modesetting
+[ 99543.326] (WW) VGA arbiter: cannot open kernel arbiter, no multi-card support
+[ 99543.326] (--) intel(0): Integrated Graphics Chipset: Intel(R) 945G
+[ 99543.327] (--) intel(0): CPU: x86-64, sse2, sse3, ssse3; using a maximum of 2 threads
+[ 99543.327] (II) intel(0): Creating default Display subsection in Screen section
+	"Default Screen Section" for depth/fbbpp 24/32
+[ 99543.327] (==) intel(0): Depth 24, (--) framebuffer bpp 32
+[ 99543.327] (==) intel(0): RGB weight 888
+[ 99543.327] (==) intel(0): Default visual is TrueColor
+[ 99543.327] (II) intel(0): Output VGA1 has no monitor section
+[ 99543.327] (II) intel(0): Enabled output VGA1
+[ 99543.327] (--) intel(0): Using a maximum size of 256x256 for hardware cursors
+[ 99543.328] (II) intel(0): Output VIRTUAL1 has no monitor section
+[ 99543.328] (II) intel(0): Enabled output VIRTUAL1
+[ 99543.328] (--) intel(0): Output VGA1 using initial mode 1280x1024 on pipe 0
+[ 99543.328] (==) intel(0): TearFree disabled
+[ 99543.328] (==) intel(0): Using gamma correction (1.0, 1.0, 1.0)
+[ 99543.328] (==) intel(0): DPI set to (96, 96)
+[ 99543.328] (II) Loading sub module "dri3"
+[ 99543.328] (II) LoadModule: "dri3"
+[ 99543.328] (II) Module "dri3" already built-in
+[ 99543.328] (II) Loading sub module "dri2"
+[ 99543.328] (II) LoadModule: "dri2"
+[ 99543.328] (II) Module "dri2" already built-in
+[ 99543.328] (II) Loading sub module "present"
+[ 99543.328] (II) LoadModule: "present"
+[ 99543.328] (II) Module "present" already built-in
+[ 99543.328] (II) UnloadModule: "modesetting"
+[ 99543.328] (II) Unloading modesetting
+[ 99543.328] (II) intel(0): SNA initialized with Alviso (gen3) backend
+[ 99543.328] (==) intel(0): Backing store enabled
+[ 99543.328] (==) intel(0): Silken mouse disabled
+[ 99543.328] (II) intel(0): HW Cursor enabled
+[ 99543.328] (==) intel(0): DPMS enabled
+[ 99543.329] (==) intel(0): Display hotplug detection enabled
+[ 99543.329] (II) intel(0): [XvMC] i915_xvmc driver initialized.
+[ 99543.329] (II) intel(0): [DRI2] Setup complete
+[ 99543.329] (II) intel(0): [DRI2]   DRI driver: i915
+[ 99543.329] (II) intel(0): [DRI2]   VDPAU driver: va_gl
+[ 99543.329] (II) intel(0): direct rendering: DRI2 enabled
+[ 99543.329] (II) intel(0): hardware support for Present enabled
+[ 99543.329] (II) Initializing extension Generic Event Extension
+[ 99543.329] (II) Initializing extension SHAPE
+[ 99543.329] (II) Initializing extension MIT-SHM
+[ 99543.329] (II) Initializing extension XInputExtension
+[ 99543.329] (II) Initializing extension XTEST
+[ 99543.329] (II) Initializing extension BIG-REQUESTS
+[ 99543.329] (II) Initializing extension SYNC
+[ 99543.329] (II) Initializing extension XKEYBOARD
+[ 99543.329] (II) Initializing extension XC-MISC
+[ 99543.329] (II) Initializing extension SECURITY
+[ 99543.329] (II) Initializing extension XFIXES
+[ 99543.329] (II) Initializing extension RENDER
+[ 99543.329] (II) Initializing extension RANDR
+[ 99543.329] (II) Initializing extension COMPOSITE
+[ 99543.329] (II) Initializing extension DAMAGE
+[ 99543.329] (II) Initializing extension MIT-SCREEN-SAVER
+[ 99543.329] (II) Initializing extension DOUBLE-BUFFER
+[ 99543.329] (II) Initializing extension RECORD
+[ 99543.329] (II) Initializing extension DPMS
+[ 99543.329] (II) Initializing extension Present
+[ 99543.329] (II) Initializing extension DRI3
+[ 99543.329] (II) Initializing extension X-Resource
+[ 99543.329] (II) Initializing extension XVideo
+[ 99543.329] (II) Initializing extension XVideo-MotionCompensation
+[ 99543.329] (II) Initializing extension GLX
+[ 99543.339] (II) AIGLX: Loaded and initialized i915
+[ 99543.339] (II) GLX: Initialized DRI2 GL provider for screen 0
+[ 99543.339] (II) Initializing extension XFree86-VidModeExtension
+[ 99543.339] (II) Initializing extension XFree86-DGA
+[ 99543.339] (II) Initializing extension XFree86-DRI
+[ 99543.339] (II) Initializing extension DRI2
+[ 99543.355] (II) intel(0): switch to mode 1280x1024@60.0 on VGA1 using pipe 0, position (0, 0), rotation normal, reflection none
+[ 99543.369] (II) intel(0): Setting screen physical size to 338 x 270
+[ 99543.455] (II) config/udev: Adding input device Power Button (/dev/input/event1)
+[ 99543.455] (**) Power Button: Applying InputClass "libinput keyboard catchall"
+[ 99543.455] (**) Power Button: Applying InputClass "system-keyboard"
+[ 99543.455] (II) LoadModule: "libinput"
+[ 99543.456] (II) Loading /usr/lib/xorg/modules/input/libinput_drv.so
+[ 99543.470] (II) Module libinput: vendor="X.Org Foundation"
+[ 99543.470] 	compiled for 1.20.8, module version = 0.30.0
+[ 99543.470] 	Module class: X.Org XInput Driver
+[ 99543.470] 	ABI class: X.Org XInput driver, version 24.1
+[ 99543.470] (II) Using input driver 'libinput' for 'Power Button'
+[ 99543.473] (II) systemd-logind: got fd for /dev/input/event1 13:65 fd 14 paused 0
+[ 99543.473] (**) Power Button: always reports core events
+[ 99543.473] (**) Option "Device" "/dev/input/event1"
+[ 99543.473] (**) Option "_source" "server/udev"
+[ 99543.476] (II) event1  - Power Button: is tagged by udev as: Keyboard
+[ 99543.476] (II) event1  - Power Button: device is a keyboard
+[ 99543.476] (II) event1  - Power Button: device removed
+[ 99543.476] (**) Option "config_info" "udev:/sys/devices/LNXSYSTM:00/LNXPWRBN:00/input/input1/event1"
+[ 99543.476] (II) XINPUT: Adding extended input device "Power Button" (type: KEYBOARD, id 6)
+[ 99543.476] (**) Option "xkb_model" "pc105"
+[ 99543.477] (**) Option "xkb_layout" "hu"
+[ 99543.477] (**) Option "xkb_options" "terminate:ctrl_alt_bksp"
+[ 99543.511] (II) event1  - Power Button: is tagged by udev as: Keyboard
+[ 99543.511] (II) event1  - Power Button: device is a keyboard
+[ 99543.512] (II) config/udev: Adding input device Power Button (/dev/input/event0)
+[ 99543.512] (**) Power Button: Applying InputClass "libinput keyboard catchall"
+[ 99543.512] (**) Power Button: Applying InputClass "system-keyboard"
+[ 99543.512] (II) Using input driver 'libinput' for 'Power Button'
+[ 99543.514] (II) systemd-logind: got fd for /dev/input/event0 13:64 fd 17 paused 0
+[ 99543.514] (**) Power Button: always reports core events
+[ 99543.514] (**) Option "Device" "/dev/input/event0"
+[ 99543.514] (**) Option "_source" "server/udev"
+[ 99543.516] (II) event0  - Power Button: is tagged by udev as: Keyboard
+[ 99543.516] (II) event0  - Power Button: device is a keyboard
+[ 99543.516] (II) event0  - Power Button: device removed
+[ 99543.516] (**) Option "config_info" "udev:/sys/devices/LNXSYSTM:00/LNXSYBUS:00/PNP0C0C:00/input/input0/event0"
+[ 99543.516] (II) XINPUT: Adding extended input device "Power Button" (type: KEYBOARD, id 7)
+[ 99543.516] (**) Option "xkb_model" "pc105"
+[ 99543.516] (**) Option "xkb_layout" "hu"
+[ 99543.516] (**) Option "xkb_options" "terminate:ctrl_alt_bksp"
+[ 99543.520] (II) event0  - Power Button: is tagged by udev as: Keyboard
+[ 99543.520] (II) event0  - Power Button: device is a keyboard
+[ 99543.521] (II) config/udev: Adding input device HDA Intel Line (/dev/input/event10)
+[ 99543.521] (II) No input driver specified, ignoring this device.
+[ 99543.521] (II) This device may have been added with another device file.
+[ 99543.522] (II) config/udev: Adding input device HDA Intel Line Out Front (/dev/input/event11)
+[ 99543.522] (II) No input driver specified, ignoring this device.
+[ 99543.522] (II) This device may have been added with another device file.
+[ 99543.523] (II) config/udev: Adding input device HDA Intel Line Out Surround (/dev/input/event12)
+[ 99543.523] (II) No input driver specified, ignoring this device.
+[ 99543.523] (II) This device may have been added with another device file.
+[ 99543.523] (II) config/udev: Adding input device HDA Intel Line Out CLFE (/dev/input/event13)
+[ 99543.523] (II) No input driver specified, ignoring this device.
+[ 99543.523] (II) This device may have been added with another device file.
+[ 99543.524] (II) config/udev: Adding input device HDA Intel Line Out Side (/dev/input/event14)
+[ 99543.524] (II) No input driver specified, ignoring this device.
+[ 99543.524] (II) This device may have been added with another device file.
+[ 99543.525] (II) config/udev: Adding input device HDA Digital PCBeep (/dev/input/event8)
+[ 99543.525] (II) No input driver specified, ignoring this device.
+[ 99543.525] (II) This device may have been added with another device file.
+[ 99543.525] (II) config/udev: Adding input device HDA Intel Mic (/dev/input/event9)
+[ 99543.525] (II) No input driver specified, ignoring this device.
+[ 99543.525] (II) This device may have been added with another device file.
+[ 99543.527] (II) config/udev: Adding input device Logitech USB Keyboard (/dev/input/event3)
+[ 99543.527] (**) Logitech USB Keyboard: Applying InputClass "libinput keyboard catchall"
+[ 99543.527] (**) Logitech USB Keyboard: Applying InputClass "system-keyboard"
+[ 99543.527] (II) Using input driver 'libinput' for 'Logitech USB Keyboard'
+[ 99543.529] (II) systemd-logind: got fd for /dev/input/event3 13:67 fd 18 paused 0
+[ 99543.529] (**) Logitech USB Keyboard: always reports core events
+[ 99543.529] (**) Option "Device" "/dev/input/event3"
+[ 99543.529] (**) Option "_source" "server/udev"
+[ 99543.531] (II) event3  - Logitech USB Keyboard: is tagged by udev as: Keyboard
+[ 99543.532] (II) event3  - Logitech USB Keyboard: device is a keyboard
+[ 99543.532] (II) event3  - Logitech USB Keyboard: device removed
+[ 99543.532] (**) Option "config_info" "udev:/sys/devices/pci0000:00/0000:00:1d.0/usb2/2-1/2-1:1.0/0003:046D:C31C.0001/input/input3/event3"
+[ 99543.532] (II) XINPUT: Adding extended input device "Logitech USB Keyboard" (type: KEYBOARD, id 8)
+[ 99543.532] (**) Option "xkb_model" "pc105"
+[ 99543.532] (**) Option "xkb_layout" "hu"
+[ 99543.532] (**) Option "xkb_options" "terminate:ctrl_alt_bksp"
+[ 99543.535] (II) event3  - Logitech USB Keyboard: is tagged by udev as: Keyboard
+[ 99543.536] (II) event3  - Logitech USB Keyboard: device is a keyboard
+[ 99543.537] (II) config/udev: Adding input device Logitech USB Keyboard Consumer Control (/dev/input/event4)
+[ 99543.537] (**) Logitech USB Keyboard Consumer Control: Applying InputClass "libinput keyboard catchall"
+[ 99543.537] (**) Logitech USB Keyboard Consumer Control: Applying InputClass "system-keyboard"
+[ 99543.538] (II) Using input driver 'libinput' for 'Logitech USB Keyboard Consumer Control'
+[ 99543.539] (II) systemd-logind: got fd for /dev/input/event4 13:68 fd 19 paused 0
+[ 99543.539] (**) Logitech USB Keyboard Consumer Control: always reports core events
+[ 99543.539] (**) Option "Device" "/dev/input/event4"
+[ 99543.539] (**) Option "_source" "server/udev"
+[ 99543.542] (II) event4  - Logitech USB Keyboard Consumer Control: is tagged by udev as: Keyboard
+[ 99543.542] (II) event4  - Logitech USB Keyboard Consumer Control: device is a keyboard
+[ 99543.542] (II) event4  - Logitech USB Keyboard Consumer Control: device removed
+[ 99543.542] (**) Option "config_info" "udev:/sys/devices/pci0000:00/0000:00:1d.0/usb2/2-1/2-1:1.1/0003:046D:C31C.0002/input/input4/event4"
+[ 99543.542] (II) XINPUT: Adding extended input device "Logitech USB Keyboard Consumer Control" (type: KEYBOARD, id 9)
+[ 99543.542] (**) Option "xkb_model" "pc105"
+[ 99543.542] (**) Option "xkb_layout" "hu"
+[ 99543.542] (**) Option "xkb_options" "terminate:ctrl_alt_bksp"
+[ 99543.545] (II) event4  - Logitech USB Keyboard Consumer Control: is tagged by udev as: Keyboard
+[ 99543.545] (II) event4  - Logitech USB Keyboard Consumer Control: device is a keyboard
+[ 99543.547] (II) config/udev: Adding input device Logitech USB Keyboard System Control (/dev/input/event5)
+[ 99543.547] (**) Logitech USB Keyboard System Control: Applying InputClass "libinput keyboard catchall"
+[ 99543.547] (**) Logitech USB Keyboard System Control: Applying InputClass "system-keyboard"
+[ 99543.547] (II) Using input driver 'libinput' for 'Logitech USB Keyboard System Control'
+[ 99543.548] (II) systemd-logind: got fd for /dev/input/event5 13:69 fd 20 paused 0
+[ 99543.548] (**) Logitech USB Keyboard System Control: always reports core events
+[ 99543.548] (**) Option "Device" "/dev/input/event5"
+[ 99543.548] (**) Option "_source" "server/udev"
+[ 99543.551] (II) event5  - Logitech USB Keyboard System Control: is tagged by udev as: Keyboard
+[ 99543.551] (II) event5  - Logitech USB Keyboard System Control: device is a keyboard
+[ 99543.551] (II) event5  - Logitech USB Keyboard System Control: device removed
+[ 99543.551] (**) Option "config_info" "udev:/sys/devices/pci0000:00/0000:00:1d.0/usb2/2-1/2-1:1.1/0003:046D:C31C.0002/input/input5/event5"
+[ 99543.551] (II) XINPUT: Adding extended input device "Logitech USB Keyboard System Control" (type: KEYBOARD, id 10)
+[ 99543.552] (**) Option "xkb_model" "pc105"
+[ 99543.552] (**) Option "xkb_layout" "hu"
+[ 99543.552] (**) Option "xkb_options" "terminate:ctrl_alt_bksp"
+[ 99543.555] (II) event5  - Logitech USB Keyboard System Control: is tagged by udev as: Keyboard
+[ 99543.555] (II) event5  - Logitech USB Keyboard System Control: device is a keyboard
+[ 99543.557] (II) config/udev: Adding input device USB MOUSE USB Optical Mouse (/dev/input/event6)
+[ 99543.557] (**) USB MOUSE USB Optical Mouse: Applying InputClass "libinput pointer catchall"
+[ 99543.557] (II) Using input driver 'libinput' for 'USB MOUSE USB Optical Mouse'
+[ 99543.559] (II) systemd-logind: got fd for /dev/input/event6 13:70 fd 21 paused 0
+[ 99543.559] (**) USB MOUSE USB Optical Mouse: always reports core events
+[ 99543.559] (**) Option "Device" "/dev/input/event6"
+[ 99543.559] (**) Option "_source" "server/udev"
+[ 99543.561] (II) event6  - USB MOUSE USB Optical Mouse: is tagged by udev as: Mouse
+[ 99543.562] (II) event6  - USB MOUSE USB Optical Mouse: device is a pointer
+[ 99543.562] (II) event6  - USB MOUSE USB Optical Mouse: device removed
+[ 99543.562] (**) Option "config_info" "udev:/sys/devices/pci0000:00/0000:00:1d.0/usb2/2-2/2-2:1.0/0003:145F:01D9.0005/input/input15/event6"
+[ 99543.562] (II) XINPUT: Adding extended input device "USB MOUSE USB Optical Mouse" (type: MOUSE, id 11)
+[ 99543.563] (**) Option "AccelerationScheme" "none"
+[ 99543.563] (**) USB MOUSE USB Optical Mouse: (accel) selected scheme none/0
+[ 99543.563] (**) USB MOUSE USB Optical Mouse: (accel) acceleration factor: 2.000
+[ 99543.563] (**) USB MOUSE USB Optical Mouse: (accel) acceleration threshold: 4
+[ 99543.565] (II) event6  - USB MOUSE USB Optical Mouse: is tagged by udev as: Mouse
+[ 99543.566] (II) event6  - USB MOUSE USB Optical Mouse: device is a pointer
+[ 99543.567] (II) config/udev: Adding input device USB MOUSE USB Optical Mouse (/dev/input/mouse0)
+[ 99543.567] (II) No input driver specified, ignoring this device.
+[ 99543.567] (II) This device may have been added with another device file.
+[ 99543.568] (II) config/udev: Adding input device GeneralPlus USB Audio Device (/dev/input/event7)
+[ 99543.570] (**) GeneralPlus USB Audio Device: Applying InputClass "libinput keyboard catchall"
+[ 99543.570] (**) GeneralPlus USB Audio Device: Applying InputClass "system-keyboard"
+[ 99543.570] (II) Using input driver 'libinput' for 'GeneralPlus USB Audio Device'
+[ 99543.571] (II) systemd-logind: got fd for /dev/input/event7 13:71 fd 22 paused 0
+[ 99543.571] (**) GeneralPlus USB Audio Device: always reports core events
+[ 99543.571] (**) Option "Device" "/dev/input/event7"
+[ 99543.571] (**) Option "_source" "server/udev"
+[ 99543.574] (II) event7  - GeneralPlus USB Audio Device: is tagged by udev as: Keyboard
+[ 99543.574] (II) event7  - GeneralPlus USB Audio Device: device is a keyboard
+[ 99543.575] (II) event7  - GeneralPlus USB Audio Device: device removed
+[ 99543.575] (**) Option "config_info" "udev:/sys/devices/pci0000:00/0000:00:1d.1/usb3/3-1/3-1:1.3/0003:1B3F:2008.0004/input/input7/event7"
+[ 99543.575] (II) XINPUT: Adding extended input device "GeneralPlus USB Audio Device" (type: KEYBOARD, id 12)
+[ 99543.575] (**) Option "xkb_model" "pc105"
+[ 99543.575] (**) Option "xkb_layout" "hu"
+[ 99543.575] (**) Option "xkb_options" "terminate:ctrl_alt_bksp"
+[ 99543.578] (II) event7  - GeneralPlus USB Audio Device: is tagged by udev as: Keyboard
+[ 99543.578] (II) event7  - GeneralPlus USB Audio Device: device is a keyboard
+[ 99543.579] (II) config/udev: Adding input device AT Translated Set 2 keyboard (/dev/input/event2)
+[ 99543.579] (**) AT Translated Set 2 keyboard: Applying InputClass "libinput keyboard catchall"
+[ 99543.579] (**) AT Translated Set 2 keyboard: Applying InputClass "system-keyboard"
+[ 99543.579] (II) Using input driver 'libinput' for 'AT Translated Set 2 keyboard'
+[ 99543.581] (II) systemd-logind: got fd for /dev/input/event2 13:66 fd 23 paused 0
+[ 99543.581] (**) AT Translated Set 2 keyboard: always reports core events
+[ 99543.581] (**) Option "Device" "/dev/input/event2"
+[ 99543.581] (**) Option "_source" "server/udev"
+[ 99543.583] (II) event2  - AT Translated Set 2 keyboard: is tagged by udev as: Keyboard
+[ 99543.583] (II) event2  - AT Translated Set 2 keyboard: device is a keyboard
+[ 99543.584] (II) event2  - AT Translated Set 2 keyboard: device removed
+[ 99543.585] (**) Option "config_info" "udev:/sys/devices/platform/i8042/serio0/input/input2/event2"
+[ 99543.585] (II) XINPUT: Adding extended input device "AT Translated Set 2 keyboard" (type: KEYBOARD, id 13)
+[ 99543.585] (**) Option "xkb_model" "pc105"
+[ 99543.585] (**) Option "xkb_layout" "hu"
+[ 99543.585] (**) Option "xkb_options" "terminate:ctrl_alt_bksp"
+[ 99543.588] (II) event2  - AT Translated Set 2 keyboard: is tagged by udev as: Keyboard
+[ 99543.588] (II) event2  - AT Translated Set 2 keyboard: device is a keyboard
+[ 99545.390] (II) intel(0): EDID vendor "FUS", prod id 1427
+[ 99545.390] (II) intel(0): Using EDID range info for horizontal sync
+[ 99545.390] (II) intel(0): Using EDID range info for vertical refresh
+[ 99545.390] (II) intel(0): Printing DDC gathered Modelines:
+[ 99545.390] (II) intel(0): Modeline "1280x1024"x0.0  108.00  1280 1328 1440 1688  1024 1025 1028 1066 +hsync +vsync (64.0 kHz eP)
+[ 99545.390] (II) intel(0): Modeline "800x600"x0.0   40.00  800 840 968 1056  600 601 605 628 +hsync +vsync (37.9 kHz e)
+[ 99545.390] (II) intel(0): Modeline "640x480"x0.0   31.50  640 656 720 840  480 481 484 500 -hsync -vsync (37.5 kHz e)
+[ 99545.390] (II) intel(0): Modeline "640x480"x0.0   25.18  640 656 752 800  480 490 492 525 -hsync -vsync (31.5 kHz e)
+[ 99545.390] (II) intel(0): Modeline "720x400"x0.0   28.32  720 738 846 900  400 412 414 449 -hsync +vsync (31.5 kHz e)
+[ 99545.390] (II) intel(0): Modeline "1280x1024"x0.0  135.00  1280 1296 1440 1688  1024 1025 1028 1066 +hsync +vsync (80.0 kHz e)
+[ 99545.390] (II) intel(0): Modeline "1024x768"x0.0   78.75  1024 1040 1136 1312  768 769 772 800 +hsync +vsync (60.0 kHz e)
+[ 99545.390] (II) intel(0): Modeline "1024x768"x0.0   65.00  1024 1048 1184 1344  768 771 777 806 -hsync -vsync (48.4 kHz e)
+[ 99545.390] (II) intel(0): Modeline "800x600"x0.0   49.50  800 816 896 1056  600 601 604 625 +hsync +vsync (46.9 kHz e)

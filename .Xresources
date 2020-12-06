@@ -1,22 +1,22 @@
-! Base16 Atlas
-! Scheme: Alex Lende (https://ajlende.com)
+! Base16 Brewer
+! Scheme: Timothée Poisot (http://github.com/tpoisot)
 
-#define base00 #002635
-#define base01 #00384d
-#define base02 #517F8D
-#define base03 #6C8B91
-#define base04 #869696
-#define base05 #a1a19a
-#define base06 #e6e6dc
-#define base07 #fafaf8
-#define base08 #ff5a67
-#define base09 #f08e48
-#define base0A #ffcc1b
-#define base0B #7fc06e
-#define base0C #14747e
-#define base0D #5dd7b9
-#define base0E #9a70a4
-#define base0F #c43060
+#define base00 #0c0d0e
+#define base01 #2e2f30
+#define base02 #515253
+#define base03 #737475
+#define base04 #959697
+#define base05 #b7b8b9
+#define base06 #dadbdc
+#define base07 #fcfdfe
+#define base08 #e31a1c
+#define base09 #e6550d
+#define base0A #dca060
+#define base0B #31a354
+#define base0C #80b1d3
+#define base0D #3182bd
+#define base0E #756bb1
+#define base0F #b15928
 
 rofi.font:Iosevka Custom 14
 *foreground:   base05

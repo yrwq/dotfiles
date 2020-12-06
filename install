@@ -49,7 +49,7 @@ then
   	git clone "$url" "$temp_directory_dotfiles"
   	cp -rb "$temp_directory_dotfiles"/. ~
 	walls="https://github.com/yrwq/walls.git"
-  	git clone "$url" ~/.wp
+  	git clone "$walls" ~/.wp
 fi
 clear
 
