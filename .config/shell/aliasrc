@@ -22,14 +22,14 @@ alias \
 alias \
 	ka="killall" \
 	g="gitui" \
-	ga="git add ." \
+	ga="git add --force" \
 	gc="git commit -m" \
 	gp="git push -u origin main" \
 	mk="make && sudo make install" \
 	f="$FILE" \
 	v="$EDITOR" \
 	z="zathura" \
-	colr="flavours"
+	pik="pikaur --noconfirm"
 
 alias \
 	ref="shortcuts >/dev/null; source ${XDG_CONFIG_HOME:-$HOME/.config}/shortcutrc ; source ${XDG_CONFIG_HOME:-$HOME/.config}/zshnameddirrc" \

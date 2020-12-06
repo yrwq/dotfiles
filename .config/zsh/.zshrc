@@ -2,6 +2,7 @@
 export PATH="$HOME/.bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 autoload -U colors && colors
+
 PS1='%F{magenta}%~%f %(?.%f.%F{red})%F{red} %f '
 
 setopt autocd		# Automatically cd into typed directory.
@@ -14,6 +15,7 @@ SAVEHIST=10000000
 HISTFILE=~/.cache/zsh/history
 
 # Load aliases and shortcuts if existent.
+ref &
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shell/shortcutrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/shortcutrc"
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliasrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliasrc"
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shell/zshnameddirrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/zshnameddirrc"
