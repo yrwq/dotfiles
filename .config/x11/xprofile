@@ -4,4 +4,3 @@ xset +fp ~/.fonts/misc/ &
 remaps &
 xautolock -time 30 -locker lock &
 xset r rate 300 50 &
-setxkbmap hu
