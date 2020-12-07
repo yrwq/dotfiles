@@ -14,9 +14,9 @@ The configuration probably won't match your setup out-of-the-box, so you should 
 
 # Setup
 
-You can use the install script, but i recommend to manually copy the files and install dependencies!
+The install script provides a fully usable system, installing dependencies, an aur helper, my dotfiles and my wallpapers.
 
-If you are brave enough to use the script and you are running an Arch based distro,
+If you are brave enought to use it, and you are running an Arch based distro,
 
 run these commands in your terminal:
 
@@ -25,8 +25,6 @@ run these commands in your terminal:
 `chmod +x install`
 
 `./install`
-
-The script will install dependencies, an AUR helper, if not already installed and copy files from this repository to your home directory.
 
 # Software
 
