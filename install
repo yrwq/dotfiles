@@ -2,64 +2,49 @@
 
 dependencies=(git feh picom slop termite xorg-server abook alsa-card-profiles alsa-lib alsa-plugins alsa-utils dunst emacs exa ffmpeg ffmpegthumbnailer fzf imagemagick lxappearance-gtk3 maim mpc mpd mpv mupdf ncmpcpp neomutt neovim newsboat nitrogen obconf openbox pamixer poppler pulseaudio pulseaudio-alsa pulsemixer qutebrowser ranger rofi scrot sxiv tint2 transmission-cli transmission-gtk ttf-nerd-fonts-symbols urlscan w3m xautolock xclip xdg-user-dirs xdg-utils xdotool xf86-input-libinput xf86-video-intel xmobar xmonad xmonad-contrib xorg-font-util xorg-fonts-misc xorg-mkfontscale xorg-xinit xorg-xrandr xorg-xsetroot xorg-server-common xorg-server-devel xorg-setxkbmap xorg-xclipboard xorg-xdpyinfo xorg-xev xorg-xfontsel xorg-xinput xorg-xmodmap xorg-xprop xorg-xrandr xorg-xrdb xorg-xset xorg-xsetroot xorg-xwininfo xscreensaver youtube-dl zathura zathura-pdf-poppler zsh unzip ueberzug xcompmgr)
 
-dependencies_aur=(awesome-git brave-dev-bin ttf-material-design-icons-git urlview nerd-fonts-iosevka vidir libxft-bgra btpd-git)
+dependencies_aur=(awesome-git brave-dev-bin urlview nerd-fonts-iosevka vidir libxft-bgra)
 
 clear
-echo "Updating repositories ..."
-echo ""
-sleep 2
-sudo pacman -Sy --noconfirm
-echo ""
-echo ""
 
-install_dependencies() {
-  sudo pacman -S --needed --noconfirm "$@"
-}
+# Create a new user
+read -p "New username:" username
+sudo useradd -m $username
+sudo passwd $username
 
+# sudo pacman -Syu --noconfirm
 
-echo "Installing dependencies ..."
-echo ""
-sleep 2
-install_dependencies "${dependencies[@]}"
-echo ""
-echo ""
+# install_dependencies() {
+#   sudo pacman -S --needed --noconfirm "$@"
+# }
 
 
-read -p "Install dependencies from aur? [ Y / n ]" -n 1 -r
-echo ""
-if [[ $REPLY =~ ^[Yy]$ ]]
-then
-	if command -v yay &> /dev/null
-	then
-		echo "Installing packages from AUR ..."
-	else
-  		aur_tmp_dir=$(mktemp -d) && cd "$aur_tmp_dir" || exit 1
-  		git clone "https://aur.archlinux.org/yay.git" "$aur_tmp_dir"
-  		makepkg -sim --noconfirm
-	fi
-	yay -S --needed --noconfirm "${dependencies_aur[@]}"
-fi
+# install_dependencies "${dependencies[@]}"
 
-echo ""
-echo ""
-echo "Warning!"
-echo "This will overwrite your configuration files!"
-read -p "Copy dotfiles? [ Y / n ] " -n 1 -r
-echo ""
-if [[ $REPLY =~ ^[Yy]$ ]]
-then
+# if command -v yay &> /dev/null
+# then
+# 	echo "Installing packages from AUR ..."
+# else
+# 	aur_tmp_dir=$(mktemp -d) && cd "$aur_tmp_dir" || exit 1
+#   	git clone "https://aur.archlinux.org/yay.git" "$aur_tmp_dir"
+#   	makepkg -sim --noconfirm
+# fi
+# yay -S --needed --noconfirm "${dependencies_aur[@]}"
+
+echo "Copying dotfiles for new user"
+{
 	url="https://github.com/yrwq/dotfiles.git"
 	temp_directory_dotfiles=$(mktemp -d)
   	git clone "$url" "$temp_directory_dotfiles"
-  	cp -rb "$temp_directory_dotfiles"/. ~
+  	sudo cp -rb "$temp_directory_dotfiles"/. /home/$username/
 	walls="https://github.com/yrwq/walls.git"
-  	git clone "$walls" ~/.wp
-fi
+  	sudo git clone "$walls" /home/$username/.wp
+}
 
 # finalize
 {
-  sudo chsh -s /usr/bin/zsh "$USER"
+  sudo chsh -s /usr/bin/zsh $username
+  echo "${username} ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/${username}
+  sudo chown -R ${username} /home/${username}
 }
 
-clear
-echo "Installation finished, restart your session."
+echo "Installation finished, now you can login as ${username}."
