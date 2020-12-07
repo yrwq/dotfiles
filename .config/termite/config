@@ -6,7 +6,7 @@ cell_height_scale = 1.0
 cell_width_scale = 1.0
 clickable_url = true
 dynamic_title = true
-font = Hasklug Nerd Font 12
+font = Iosevka Custom 12
 icon_name = terminal
 mouse_autohide = true
 scroll_on_output = false
@@ -25,54 +25,54 @@ scrollbar = off
 
 # Start flavours
 [colors]
-# Base16 Material Vivid
-# Author: joshyrobot
+# Base16 Material
+# Author: Nate Peterson
 
-foreground          = #80868b
-foreground_bold     = #80868b
-cursor              = #80868b
-cursor_foreground   = #202124
-background          = #202124
+foreground          = #EEFFFF
+foreground_bold     = #EEFFFF
+cursor              = #EEFFFF
+cursor_foreground   = #263238
+background          = #263238
 
 # 16 color space
 
 # Black, Gray, Silver, White
-color0  = #202124
-color8  = #44464d
-color7  = #80868b
-color15 = #ffffff
+color0  = #263238
+color8  = #546E7A
+color7  = #EEFFFF
+color15 = #FFFFFF
 
 # Red
-color1  = #f44336
-color9  = #f44336
+color1  = #F07178
+color9  = #F07178
 
 # Green
-color2  = #00e676
-color10 = #00e676
+color2  = #C3E88D
+color10 = #C3E88D
 
 # Yellow
-color3  = #ffeb3b
-color11 = #ffeb3b
+color3  = #FFCB6B
+color11 = #FFCB6B
 
 # Blue
-color4  = #2196f3
-color12 = #2196f3
+color4  = #82AAFF
+color12 = #82AAFF
 
 # Purple
-color5  = #673ab7
-color13 = #673ab7
+color5  = #C792EA
+color13 = #C792EA
 
 # Teal
-color6  = #00bcd4
-color14 = #00bcd4
+color6  = #89DDFF
+color14 = #89DDFF
 
 # Extra colors
-color16 = #ff9800
-color17 = #8d6e63
-color18 = #27292c
-color19 = #323639
-color20 = #676c71
-color21 = #9e9e9e
+color16 = #F78C6C
+color17 = #FF5370
+color18 = #2E3C43
+color19 = #314549
+color20 = #B2CCD6
+color21 = #EEFFFF
 # End flavours
 
 # vim: ft=dosini cms=#%s
