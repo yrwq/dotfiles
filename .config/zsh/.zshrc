@@ -81,27 +81,27 @@ autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
 
 # Start flavours
-# Base16 Materia
-# Author: Defman21
+# Base16 Material Vivid
+# Author: joshyrobot
 
 _gen_fzf_default_opts() {
 
-local color00='#263238'
-local color01='#2C393F'
-local color02='#37474F'
-local color03='#707880'
-local color04='#C9CCD3'
-local color05='#CDD3DE'
-local color06='#D5DBE5'
-local color07='#FFFFFF'
-local color08='#EC5F67'
-local color09='#EA9560'
-local color0A='#FFCC00'
-local color0B='#8BD649'
-local color0C='#80CBC4'
-local color0D='#89DDFF'
-local color0E='#82AAFF'
-local color0F='#EC5F67'
+local color00='#202124'
+local color01='#27292c'
+local color02='#323639'
+local color03='#44464d'
+local color04='#676c71'
+local color05='#80868b'
+local color06='#9e9e9e'
+local color07='#ffffff'
+local color08='#f44336'
+local color09='#ff9800'
+local color0A='#ffeb3b'
+local color0B='#00e676'
+local color0C='#00bcd4'
+local color0D='#2196f3'
+local color0E='#673ab7'
+local color0F='#8d6e63'
 
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS"\
 " --color=bg+:$color01,bg:$color00,spinner:$color0C,hl:$color0D"\

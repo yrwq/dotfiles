@@ -25,54 +25,54 @@ scrollbar = off
 
 # Start flavours
 [colors]
-# Base16 Materia
-# Author: Defman21
+# Base16 Material Vivid
+# Author: joshyrobot
 
-foreground          = #CDD3DE
-foreground_bold     = #CDD3DE
-cursor              = #CDD3DE
-cursor_foreground   = #263238
-background          = #263238
+foreground          = #80868b
+foreground_bold     = #80868b
+cursor              = #80868b
+cursor_foreground   = #202124
+background          = #202124
 
 # 16 color space
 
 # Black, Gray, Silver, White
-color0  = #263238
-color8  = #707880
-color7  = #CDD3DE
-color15 = #FFFFFF
+color0  = #202124
+color8  = #44464d
+color7  = #80868b
+color15 = #ffffff
 
 # Red
-color1  = #EC5F67
-color9  = #EC5F67
+color1  = #f44336
+color9  = #f44336
 
 # Green
-color2  = #8BD649
-color10 = #8BD649
+color2  = #00e676
+color10 = #00e676
 
 # Yellow
-color3  = #FFCC00
-color11 = #FFCC00
+color3  = #ffeb3b
+color11 = #ffeb3b
 
 # Blue
-color4  = #89DDFF
-color12 = #89DDFF
+color4  = #2196f3
+color12 = #2196f3
 
 # Purple
-color5  = #82AAFF
-color13 = #82AAFF
+color5  = #673ab7
+color13 = #673ab7
 
 # Teal
-color6  = #80CBC4
-color14 = #80CBC4
+color6  = #00bcd4
+color14 = #00bcd4
 
 # Extra colors
-color16 = #EA9560
-color17 = #EC5F67
-color18 = #2C393F
-color19 = #37474F
-color20 = #C9CCD3
-color21 = #D5DBE5
+color16 = #ff9800
+color17 = #8d6e63
+color18 = #27292c
+color19 = #323639
+color20 = #676c71
+color21 = #9e9e9e
 # End flavours
 
 # vim: ft=dosini cms=#%s

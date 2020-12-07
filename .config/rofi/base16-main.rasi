@@ -1,19 +1,19 @@
 /**
- * Base16 Materia ROFI Color theme
+ * Base16 Material Vivid ROFI Color theme
  *
  * Authors
- *  Scheme: Defman21
+ *  Scheme: joshyrobot
  *  Template: Jordi Pakey-Rodriguez (https://github.com/0xdec), Andrea Scarpino (https://github.com/ilpianista)
  */
 
 * {
-    red:                         rgba ( 236, 95, 103, 100 % );
-    blue:                        rgba ( 137, 221, 255, 100 % );
-    lightfg:                     rgba ( 213, 219, 229, 100 % );
-    lightbg:                     rgba ( 44, 57, 63, 100 % );
-    foreground:                  rgba ( 205, 211, 222, 100 % );
-    background:                  rgba ( 38, 50, 56, 100 % );
-    background-color:            rgba ( 38, 50, 56, 0 % );
+    red:                         rgba ( 244, 67, 54, 100 % );
+    blue:                        rgba ( 33, 150, 243, 100 % );
+    lightfg:                     rgba ( 158, 158, 158, 100 % );
+    lightbg:                     rgba ( 39, 41, 44, 100 % );
+    foreground:                  rgba ( 128, 134, 139, 100 % );
+    background:                  rgba ( 32, 33, 36, 100 % );
+    background-color:            rgba ( 32, 33, 36, 0 % );
     separatorcolor:              @foreground;
     border-color:                @foreground;
     selected-normal-foreground:  @lightbg;

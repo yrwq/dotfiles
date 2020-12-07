@@ -1,4 +1,4 @@
-#files: 791	version: 5.8
+#files: 781	version: 5.8
 
 _comps=(
 '-' '_precommand'
@@ -130,7 +130,6 @@ _comps=(
 'cabal' '_cabal'
 'cal' '_cal'
 'calendar' '_calendar'
-'cargo' '_cargo'
 'cat' '_cat'
 'catchsegv' '_precommand'
 'cc' '_gcc'
@@ -709,8 +708,6 @@ _comps=(
 'make' '_make'
 'makeinfo' '_texinfo'
 'makepkg' '_pacman'
-'mako' '_mako'
-'makoctl' '_makoctl'
 'man' '_man'
 'manage.py' '_django'
 'manila' '_openstack'
@@ -871,7 +868,6 @@ _comps=(
 '-parameter-' '_parameter'
 'parec' '_pulseaudio'
 'parecord' '_pulseaudio'
-'pass' '_pass'
 'passwd' '_users'
 'paste' '_paste'
 'pasuspender' '_pulseaudio'
@@ -912,7 +908,6 @@ _comps=(
 'pidof' '_pidof'
 'pidstat' '_sysstat'
 'pigz' '_gzip'
-'pikaur' '_pikaur'
 'pine' '_pine'
 'pinef' '_pine'
 'pinfo' '_texinfo'
@@ -1057,7 +1052,6 @@ _comps=(
 'run-help' '_run-help'
 'rup' '_hosts'
 'rusage' '_precommand'
-'rustup' '_rustup'
 'rview' '_vim'
 'rvim' '_vim'
 'rwho' '_hosts'
@@ -1175,9 +1169,6 @@ _comps=(
 'svnlite' '_subversion'
 'swaks' '_swaks'
 'swanctl' '_swanctl'
-'sway' '_sway'
-'swaylock' '_swaylock'
-'swaymsg' '_swaymsg'
 'swift' '_swift'
 'swiftc' '_swift'
 'sync' '_nothing'
@@ -1397,7 +1388,6 @@ _comps=(
 'whom' '_mh'
 'wiggle' '_wiggle'
 'wipefs' '_wipefs'
-'wlogout' '_wlogout'
 'wodim' '_cdrecord'
 'wpa_cli' '_wpa_cli'
 'write' '_users_on'
@@ -1628,16 +1618,14 @@ bindkey '^[,' _history-complete-newer
 bindkey '^[/' _history-complete-older
 bindkey '^[~' _bash_complete-word
 
-autoload -Uz _bootctl _busctl _cargo _coredumpctl _curl \
-            _email-notmuch _exa _hostnamectl _journalctl _kernel-install \
-            _libinput _localectl _loginctl _machinectl _mako \
-            _makoctl _meson _mkinitcpio _mpv _networkctl \
-            _ninja _notmuch _pacman _pass _pikaur \
-            _pulseaudio _resolvectl _rustup _sd_hosts_or_user_at_host _sd_machines \
-            _sd_outputmodes _sd_unit_files _sway _swaylock _swaymsg \
-            _systemctl _systemd _systemd-analyze _systemd-delta _systemd-inhibit \
-            _systemd-nspawn _systemd-path _systemd-run _systemd-tmpfiles _timedatectl \
-            _udevadm _wlogout _yay _youtube-dl _zathura \
+autoload -Uz _bootctl _busctl _coredumpctl _curl _email-notmuch \
+            _exa _hostnamectl _journalctl _kernel-install _libinput \
+            _localectl _loginctl _machinectl _meson _mkinitcpio \
+            _mpv _networkctl _ninja _notmuch _pacman \
+            _pulseaudio _resolvectl _sd_hosts_or_user_at_host _sd_machines _sd_outputmodes \
+            _sd_unit_files _systemctl _systemd _systemd-analyze _systemd-delta \
+            _systemd-inhibit _systemd-nspawn _systemd-path _systemd-run _systemd-tmpfiles \
+            _timedatectl _udevadm _yay _youtube-dl _zathura \
             _cdr _all_labels _all_matches _alternative _approximate \
             _arg_compile _arguments _bash_completions _cache_invalid _call_function \
             _combination _complete _complete_debug _complete_help _complete_help_generic \
