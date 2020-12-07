@@ -94,7 +94,7 @@
 (use-package command-log-mode)
 
 (use-package base16-theme
-  :ensure nil
+  :ensure t
   :load-path "themes"
   :init
   (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
