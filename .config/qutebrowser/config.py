@@ -12,24 +12,24 @@ c.tabs.padding = {
 # Start flavours
 # base16-qutebrowser (https://github.com/theova/base16-qutebrowser)
 # Base16 qutebrowser template by theova and Daniel Mulford
-# Espresso scheme by Alex Mirrington (https://github.com/alexmirrington)
+# Gruvbox dark, hard scheme by Dawid Kurek (dawikur@gmail.com), morhetz (https://github.com/morhetz/gruvbox)
 
-base00 = "#2d2d2d"
-base01 = "#393939"
-base02 = "#515151"
-base03 = "#777777"
-base04 = "#b4b7b4"
-base05 = "#cccccc"
-base06 = "#e0e0e0"
-base07 = "#ffffff"
-base08 = "#d25252"
-base09 = "#f9a959"
-base0A = "#ffc66d"
-base0B = "#a5c261"
-base0C = "#bed6ff"
-base0D = "#6c99bb"
-base0E = "#d197d9"
-base0F = "#f97394"
+base00 = "#1d2021"
+base01 = "#3c3836"
+base02 = "#504945"
+base03 = "#665c54"
+base04 = "#bdae93"
+base05 = "#d5c4a1"
+base06 = "#ebdbb2"
+base07 = "#fbf1c7"
+base08 = "#fb4934"
+base09 = "#fe8019"
+base0A = "#fabd2f"
+base0B = "#b8bb26"
+base0C = "#8ec07c"
+base0D = "#83a598"
+base0E = "#d3869b"
+base0F = "#d65d0e"
 
 # set qutebrowser colors
 

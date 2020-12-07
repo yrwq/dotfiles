@@ -25,54 +25,54 @@ scrollbar = off
 
 # Start flavours
 [colors]
-# Base16 Espresso
-# Author: Alex Mirrington (https://github.com/alexmirrington)
+# Base16 Gruvbox dark, hard
+# Author: Dawid Kurek (dawikur@gmail.com), morhetz (https://github.com/morhetz/gruvbox)
 
-foreground          = #cccccc
-foreground_bold     = #cccccc
-cursor              = #cccccc
-cursor_foreground   = #2d2d2d
-background          = #2d2d2d
+foreground          = #d5c4a1
+foreground_bold     = #d5c4a1
+cursor              = #d5c4a1
+cursor_foreground   = #1d2021
+background          = #1d2021
 
 # 16 color space
 
 # Black, Gray, Silver, White
-color0  = #2d2d2d
-color8  = #777777
-color7  = #cccccc
-color15 = #ffffff
+color0  = #1d2021
+color8  = #665c54
+color7  = #d5c4a1
+color15 = #fbf1c7
 
 # Red
-color1  = #d25252
-color9  = #d25252
+color1  = #fb4934
+color9  = #fb4934
 
 # Green
-color2  = #a5c261
-color10 = #a5c261
+color2  = #b8bb26
+color10 = #b8bb26
 
 # Yellow
-color3  = #ffc66d
-color11 = #ffc66d
+color3  = #fabd2f
+color11 = #fabd2f
 
 # Blue
-color4  = #6c99bb
-color12 = #6c99bb
+color4  = #83a598
+color12 = #83a598
 
 # Purple
-color5  = #d197d9
-color13 = #d197d9
+color5  = #d3869b
+color13 = #d3869b
 
 # Teal
-color6  = #bed6ff
-color14 = #bed6ff
+color6  = #8ec07c
+color14 = #8ec07c
 
 # Extra colors
-color16 = #f9a959
-color17 = #f97394
-color18 = #393939
-color19 = #515151
-color20 = #b4b7b4
-color21 = #e0e0e0
+color16 = #fe8019
+color17 = #d65d0e
+color18 = #3c3836
+color19 = #504945
+color20 = #bdae93
+color21 = #ebdbb2
 # End flavours
 
 # vim: ft=dosini cms=#%s

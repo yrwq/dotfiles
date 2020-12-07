@@ -9,6 +9,6 @@ rofi.location: 0
 rofi.case-sensitive: true
 rofi.display-run:
 rofi.display-window:
-rofi.display-drun:
+rofi.display-drun: 
 rofi.display-ssh:
 rofi.kb-cancel: Escape

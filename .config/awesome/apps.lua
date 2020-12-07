@@ -8,7 +8,7 @@ local helpers = require("helpers")
 local apps = {}
 
 apps.org = function()
-	helpers.run_or_raise({class = 'emacs'}, false, "emacsclient -c /mnt/doc/org/todo.org")
+	helpers.run_or_raise({class = 'emacs'}, false, "emacsclient -c")
 end
 
 apps.news = function()
