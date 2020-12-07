@@ -11,7 +11,7 @@ local helpers = require("helpers")
 local theme = dofile(themes_path .. "default/theme.lua")
 
 -- default font
-theme.font = "Hasklug Nerd Font 9"
+theme.font = "Iosevka Custom 9"
 
 -- colors
 theme.bg_normal = x.trans40
@@ -30,7 +30,7 @@ theme.hotkeys_bg = x.bg
 theme.hotkeys_fg = x.fg
 theme.hotkeys_border_width = dpi(5)
 theme.hotkeys_modifiers_fg = x.color1
-theme.hotkeys_font = "Hasklug Nerd Font 12"
+theme.hotkeys_font = "Iosevka Custom 12"
 theme.hotkeys_group_margin = dpi(15)
 
 -- taglist
@@ -47,7 +47,7 @@ theme.taglist_bg_empty = x.trans
 theme.taglist_bg_occupied = x.trans
 theme.taglist_bg_urgent = x.trans
 theme.taglist_bg_focus = x.color8 .. "90"
-theme.taglist_font = "Hasklug Nerd Font Mono 14"
+theme.taglist_font = "Iosevka Custom 14"
 
 -- tasklist
 theme.tasklist_font = theme.font
@@ -82,13 +82,13 @@ theme.tabbar_bg_focus = x.transbg
 theme.tabbar_bg_normal = x.trans40
 theme.tabbed_spawn_in_tab = true
 theme.tabbar_radius = dpi(3)
-theme.tabbar_font = "Hasklug Nerd Font 9"
+theme.tabbar_font = "Iosevka Custom 9"
 
 -- popup
 theme.popup_bg = x.color0 .. "B3" -- 70% transparent
 
 -- notifications
-theme.notification_font = "Hasklug Nerd Font 9"
+theme.notification_font = "Iosevka Custom 9"
 theme.notification_bg = x.color0
 theme.notification_max_width = dpi(400)
 
