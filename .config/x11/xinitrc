@@ -8,10 +8,9 @@ else
 	. "$HOME/.xprofile"
 fi
 
-pulseaudio --start
-
-setxkbmap hu
-chth -r &
-sleep 1
+setxkbmap hu & # hungarian keymap
+chth -r & # pick random theme
+cl & # clear home directory
+sleep 1 # wait a second to properly load colors
 
 exec awesome

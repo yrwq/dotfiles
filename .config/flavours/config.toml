@@ -24,7 +24,7 @@
 [[item]]
 file = '~/.Xresources'
 template = 'xresources'
-subtemplate = 'default-256'
+subtemplate = 'default'
 rewrite = true
 
 [[item]]
@@ -51,10 +51,10 @@ file= '~/.config/zsh/.zshrc'
 template = 'fzf'
 rewrite = false
 
-# [[item]]
-# file= '~/.emacs.d/themes/base16-main-theme.el'
-# template = 'emacs'
-# rewrite = true
+[[item]]
+file= '~/.emacs.d/themes/base16-main-theme.el'
+template = 'emacs'
+rewrite = true
 
 [[item]]
 file = '~/.config/discocss/custom.css'

@@ -12,24 +12,24 @@ c.tabs.padding = {
 # Start flavours
 # base16-qutebrowser (https://github.com/theova/base16-qutebrowser)
 # Base16 qutebrowser template by theova and Daniel Mulford
-# Unikitty Reversible scheme by Josh W Lewis (@joshwlewis)
+# Espresso scheme by Alex Mirrington (https://github.com/alexmirrington)
 
-base00 = "#2e2a31"
-base01 = "#4b484e"
-base02 = "#69666b"
-base03 = "#878589"
-base04 = "#a5a3a6"
-base05 = "#c3c2c4"
-base06 = "#e1e0e1"
+base00 = "#2d2d2d"
+base01 = "#393939"
+base02 = "#515151"
+base03 = "#777777"
+base04 = "#b4b7b4"
+base05 = "#cccccc"
+base06 = "#e0e0e0"
 base07 = "#ffffff"
-base08 = "#d8137f"
-base09 = "#d65407"
-base0A = "#dc8a0e"
-base0B = "#17ad98"
-base0C = "#149bda"
-base0D = "#7864fa"
-base0E = "#b33ce8"
-base0F = "#d41acd"
+base08 = "#d25252"
+base09 = "#f9a959"
+base0A = "#ffc66d"
+base0B = "#a5c261"
+base0C = "#bed6ff"
+base0D = "#6c99bb"
+base0E = "#d197d9"
+base0F = "#f97394"
 
 # set qutebrowser colors
 

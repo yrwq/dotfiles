@@ -112,15 +112,19 @@ awful.keyboard.append_global_keybindings({
 
 	-- take a screenshot and upload it to 0x0(select area)
     awful.key({ }, "Print",  function() awful.spawn.with_shell("lien -s -f") end,
-		{description = "(screenshot) select area and upload", group = "launch"}),
+		{description = "(screenshot) select area", group = "launch"}),
 
 	-- take a screenshot and upload it to 0x0(whole screen)
     awful.key({ modkey }, "Print",  function() awful.spawn.with_shell("lien -a -f") end,
-		{description = "(screenshot) whole screen and upload", group = "launch"}),
+		{description = "(screenshot) whole screen", group = "launch"}),
 
 	-- start recording the whole screen
-    awful.key({ altkey }, "Print",  function() awful.spawn.with_shell("rec") end,
-		{description = "toggle recording", group = "launch"}),
+    awful.key({ altkey }, "Print",  function() awful.spawn.with_shell("rec start") end,
+		{description = "(recording) start", group = "launch"}),
+
+	-- stop recording
+    awful.key({ altkey, shiftkey }, "Print",  function() awful.spawn.with_shell("rec stop") end,
+		{description = "(recording) stop", group = "launch"}),
 
     -- apps
     awful.key({ modkey }, "s", function() app_drawer_show() end,
@@ -257,6 +261,8 @@ awful.keyboard.append_global_keybindings({
     awful.key({ modkey}, "Return", function () awful.spawn(terminal) end,
 		{description = "terminal", group = "launch"}),
 
+    awful.key({ altkey }, "Return", function () awful.spawn.with_shell("termite") end,
+		{description = "alternative terminal", group = "launch"})
 })
 
 client.connect_signal("request::default_keybindings", function()

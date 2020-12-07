@@ -139,7 +139,7 @@ client.connect_signal("request::titlebars", function(c)
                                            false, false),
                     widget = wibox.container.background
                 },
-                top = dpi(8),
+                top = dpi(4),
                 widget = wibox.container.margin
             },
             {

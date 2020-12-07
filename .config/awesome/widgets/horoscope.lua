@@ -6,7 +6,7 @@ local wibox = require("wibox")
 local gears = require("gears")
 
 local get_today = "horoscope --today" -- this is a python script,
-local get_tomorrow = "horoscope --tomorrow" -- this is a python script,
+local get_tomorrow = "horoscope --week" -- this is a python script,
 
 local header = wibox.widget {
 	widget = wibox.widget.textbox,
@@ -55,7 +55,7 @@ end
 local function update_to_tomorrow()
 	awful.spawn.easy_async(get_tomorrow, function(stdout)
 		local horoscp = stdout
-		header:set_markup_silently("Tomorrow's horoscope")
+		header:set_markup_silently("Weekly horoscope")
 		horoscope:set_markup_silently(horoscp)
 		collectgarbage()
 	end)

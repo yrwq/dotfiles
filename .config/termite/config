@@ -1,51 +1,78 @@
+[options]
+allow_bold = true
+audible_bell = false
+bold_is_bright = true
+cell_height_scale = 1.0
+cell_width_scale = 1.0
+clickable_url = true
+dynamic_title = true
+font = Hasklug Nerd Font 12
+icon_name = terminal
+mouse_autohide = true
+scroll_on_output = false
+scroll_on_keystroke = true
+scrollback_lines = 10000
+search_wrap = true
+urgent_on_bell = false
+hyperlinks = false
+browser = xdg-open
+cursor_blink = system
+cursor_shape = ibeam
+filter_unmatched_urls = true
+modify_other_keys = false
+size_hints = false
+scrollbar = off
+
 # Start flavours
 [colors]
-# Base16 Unikitty Reversible
-# Author: Josh W Lewis (@joshwlewis)
+# Base16 Espresso
+# Author: Alex Mirrington (https://github.com/alexmirrington)
 
-foreground          = #c3c2c4
-foreground_bold     = #c3c2c4
-cursor              = #c3c2c4
-cursor_foreground   = #2e2a31
-background          = #2e2a31
+foreground          = #cccccc
+foreground_bold     = #cccccc
+cursor              = #cccccc
+cursor_foreground   = #2d2d2d
+background          = #2d2d2d
 
 # 16 color space
 
 # Black, Gray, Silver, White
-color0  = #2e2a31
-color8  = #878589
-color7  = #c3c2c4
+color0  = #2d2d2d
+color8  = #777777
+color7  = #cccccc
 color15 = #ffffff
 
 # Red
-color1  = #d8137f
-color9  = #d8137f
+color1  = #d25252
+color9  = #d25252
 
 # Green
-color2  = #17ad98
-color10 = #17ad98
+color2  = #a5c261
+color10 = #a5c261
 
 # Yellow
-color3  = #dc8a0e
-color11 = #dc8a0e
+color3  = #ffc66d
+color11 = #ffc66d
 
 # Blue
-color4  = #7864fa
-color12 = #7864fa
+color4  = #6c99bb
+color12 = #6c99bb
 
 # Purple
-color5  = #b33ce8
-color13 = #b33ce8
+color5  = #d197d9
+color13 = #d197d9
 
 # Teal
-color6  = #149bda
-color14 = #149bda
+color6  = #bed6ff
+color14 = #bed6ff
 
 # Extra colors
-color16 = #d65407
-color17 = #d41acd
-color18 = #4b484e
-color19 = #69666b
-color20 = #a5a3a6
-color21 = #e1e0e1
+color16 = #f9a959
+color17 = #f97394
+color18 = #393939
+color19 = #515151
+color20 = #b4b7b4
+color21 = #e0e0e0
 # End flavours
+
+# vim: ft=dosini cms=#%s

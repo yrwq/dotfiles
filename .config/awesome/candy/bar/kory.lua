@@ -31,7 +31,7 @@ end
 -- helper function to create buttons
 local create_button = function (symbol, color, bg_color, hover_color)
     local widget = wibox.widget {
-        font = "Ioseva Custom 14",
+        font = "Hasklug Nerd Font 14",
         align = "center",
         id = "text_role",
         valign = "center",

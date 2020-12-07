@@ -13,7 +13,7 @@ local function create_button(symbol, color, hover_color, cmd, key)
         markup = helpers.colorize_text(symbol, color),
         align = "center",
         valign = "center",
-        font = "Iosevka Custom 50",
+        font = "Hasklug Nerd Font 50",
         forced_width = dpi(180),
         forced_height = dpi(200),
         widget = wibox.widget.textbox
@@ -63,16 +63,12 @@ end
 -- Create app buttons
 local browser = create_button("爵", x.color8, x.fg, apps.browser, "q")
 local discord = create_button("", x.color8, x.fg, apps.discord, "w")
-local calcurse = create_button("", x.color8, x.fg, apps.calcurse, "e")
-local mail = create_button("", x.color8, x.fg, apps.mail, "r")
+local mail = create_button("", x.color8, x.fg, apps.mail, "e")
+local news = create_button("", x.color8, x.fg, apps.news, "r")
 local lxappearance = create_button("嗀", x.color8, x.fg, apps.lxappearance, "a")
 local volume = create_button("奔", x.color8, x.fg, apps.volume, "s")
 local nitrogen = create_button("", x.color8, x.fg, apps.nitrogen, "d")
-local abook = create_button("", x.color8, x.fg, apps.abook, "f")
-local news = create_button("", x.color8, x.fg, apps.news, "y")
-local qute = create_button("", x.color8, x.fg, apps.qute, "x")
-local yt = create_button("", x.color8, x.fg, apps.youtube, "c")
-local lock = create_button("", x.color8, x.fg, apps.lock, "v")
+local yt = create_button("", x.color8, x.fg, apps.youtube, "f")
 
 -- Create the widget
 app_drawer = wibox({visible = false, ontop = true, type = "dock"})
@@ -180,9 +176,8 @@ app_drawer:setup {
     -- Background
     {
         -- Stripes
-        create_stripe({ browser, discord, calcurse, mail}, "#00000000"),
-        create_stripe({ lxappearance, volume, nitrogen, abook}, "#00000000"),
-        create_stripe({ news, qute, yt, lock}, "#00000000"),
+        create_stripe({ browser, discord, mail, news}, "#00000000"),
+        create_stripe({ lxappearance, volume, nitrogen, yt}, "#00000000"),
         layout = wibox.layout.flex.vertical
     },
     bg = x.bg .. "A0",

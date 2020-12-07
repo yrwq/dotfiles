@@ -1,19 +1,19 @@
 /**
- * Base16 Unikitty Reversible ROFI Color theme
+ * Base16 Espresso ROFI Color theme
  *
  * Authors
- *  Scheme: Josh W Lewis (@joshwlewis)
+ *  Scheme: Alex Mirrington (https://github.com/alexmirrington)
  *  Template: Jordi Pakey-Rodriguez (https://github.com/0xdec), Andrea Scarpino (https://github.com/ilpianista)
  */
 
 * {
-    red:                         rgba ( 216, 19, 127, 100 % );
-    blue:                        rgba ( 120, 100, 250, 100 % );
-    lightfg:                     rgba ( 225, 224, 225, 100 % );
-    lightbg:                     rgba ( 75, 72, 78, 100 % );
-    foreground:                  rgba ( 195, 194, 196, 100 % );
-    background:                  rgba ( 46, 42, 49, 100 % );
-    background-color:            rgba ( 46, 42, 49, 0 % );
+    red:                         rgba ( 210, 82, 82, 100 % );
+    blue:                        rgba ( 108, 153, 187, 100 % );
+    lightfg:                     rgba ( 224, 224, 224, 100 % );
+    lightbg:                     rgba ( 57, 57, 57, 100 % );
+    foreground:                  rgba ( 204, 204, 204, 100 % );
+    background:                  rgba ( 45, 45, 45, 100 % );
+    background-color:            rgba ( 45, 45, 45, 0 % );
     separatorcolor:              @foreground;
     border-color:                @foreground;
     selected-normal-foreground:  @lightbg;

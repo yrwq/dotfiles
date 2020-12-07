@@ -81,27 +81,27 @@ autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
 
 # Start flavours
-# Base16 Unikitty Reversible
-# Author: Josh W Lewis (@joshwlewis)
+# Base16 Espresso
+# Author: Alex Mirrington (https://github.com/alexmirrington)
 
 _gen_fzf_default_opts() {
 
-local color00='#2e2a31'
-local color01='#4b484e'
-local color02='#69666b'
-local color03='#878589'
-local color04='#a5a3a6'
-local color05='#c3c2c4'
-local color06='#e1e0e1'
+local color00='#2d2d2d'
+local color01='#393939'
+local color02='#515151'
+local color03='#777777'
+local color04='#b4b7b4'
+local color05='#cccccc'
+local color06='#e0e0e0'
 local color07='#ffffff'
-local color08='#d8137f'
-local color09='#d65407'
-local color0A='#dc8a0e'
-local color0B='#17ad98'
-local color0C='#149bda'
-local color0D='#7864fa'
-local color0E='#b33ce8'
-local color0F='#d41acd'
+local color08='#d25252'
+local color09='#f9a959'
+local color0A='#ffc66d'
+local color0B='#a5c261'
+local color0C='#bed6ff'
+local color0D='#6c99bb'
+local color0E='#d197d9'
+local color0F='#f97394'
 
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS"\
 " --color=bg+:$color01,bg:$color00,spinner:$color0C,hl:$color0D"\
