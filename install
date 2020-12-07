@@ -1,54 +1,91 @@
 #!/bin/bash
 
-dependencies=(git feh picom slop termite xorg-server abook alsa-card-profiles alsa-lib alsa-plugins alsa-utils dunst emacs exa ffmpeg ffmpegthumbnailer fzf imagemagick lxappearance-gtk3 maim mpc mpd mpv mupdf ncmpcpp neomutt neovim newsboat nitrogen obconf openbox pamixer poppler pulseaudio pulseaudio-alsa pulsemixer qutebrowser ranger rofi scrot tint2 transmission-cli transmission-gtk ttf-nerd-fonts-symbols urlscan w3m xautolock xclip xdg-user-dirs xdg-utils xdotool xf86-input-libinput xf86-video-intel xmobar xmonad xmonad-contrib xorg-font-util xorg-fonts-misc xorg-mkfontscale xorg-xinit xorg-xrandr xorg-xsetroot xorg-server-common xorg-server-devel xorg-setxkbmap xorg-xclipboard xorg-xdpyinfo xorg-xev xorg-xfontsel xorg-xinput xorg-xmodmap xorg-xprop xorg-xrandr xorg-xrdb xorg-xset xorg-xsetroot xorg-xwininfo xscreensaver youtube-dl zathura zathura-pdf-poppler zsh unzip ueberzug xcompmgr sxiv lf lf)
+dependencies=(git feh picom slop termite xorg-server abook alsa-card-profiles alsa-lib alsa-plugins alsa-utils dunst emacs exa ffmpeg ffmpegthumbnailer fzf imagemagick lxappearance-gtk3 maim mpc mpd mpv mupdf ncmpcpp neomutt neovim newsboat nitrogen obconf openbox pamixer poppler pulseaudio pulseaudio-alsa pulsemixer qutebrowser ranger rofi scrot tint2 transmission-cli transmission-gtk ttf-nerd-fonts-symbols urlscan w3m xautolock xclip xdg-user-dirs xdg-utils xdotool xf86-input-libinput xf86-video-intel xmobar xmonad xmonad-contrib xorg-font-util xorg-fonts-misc xorg-mkfontscale xorg-xinit xorg-xrandr xorg-xsetroot xorg-server-common xorg-server-devel xorg-setxkbmap xorg-xclipboard xorg-xdpyinfo xorg-xev xorg-xfontsel xorg-xinput xorg-xmodmap xorg-xprop xorg-xrandr xorg-xrdb xorg-xset xorg-xsetroot xorg-xwininfo xscreensaver youtube-dl zathura zathura-pdf-poppler zsh unzip ueberzug xcompmgr sxiv man-db)
 
-dependencies_aur=(awesome-git brave-dev-bin urlview nerd-fonts-iosevka vidir libxft-bgra)
+dependencies_aur=(awesome-git brave-dev-bin urlview nerd-fonts-iosevka vidir lf-bin)
 
-clear
-
-# Create a new user
-read -p "New username:" username
-sudo useradd -m $username
-sudo passwd $username
-
-sudo pacman -Syu --noconfirm
 
 install_dependencies() {
-  sudo pacman -S --needed --noconfirm "$@"
+  	sudo pacman -S --needed --noconfirm "$@"
 }
 
+# Only installs a package from aur, if you don't already have
+# https://github.com/Jguer/yay/issues/885
+install_aur(){
+	yay -S --noconfirm $(yay -Qi $@ 2>&1 >/dev/null | grep "error: package" | grep "was not found" | cut -d"'" -f2 | tr "\n" " ")
+}
 
-install_dependencies "${dependencies[@]}"
+aur_deps(){
+	if command -v yay &> /dev/null
+	then
+		echo "Installing packages from AUR."
+	else
+		echo "Installing Yay."
+		sleep 3
+		aur_tmp_dir=$(mktemp -d) && cd "$aur_tmp_dir" || exit 1
+  		git clone "https://aur.archlinux.org/yay.git" "$aur_tmp_dir"
+  		makepkg -sim --noconfirm
+	fi
+	install_aur "${dependencies_aur[@]}"
+	sleep 3
+}
 
-if command -v yay &> /dev/null
-then
-	echo "Installing packages from AUR."
-else
-	echo "Installing Yay."
-	aur_tmp_dir=$(mktemp -d) && cd "$aur_tmp_dir" || exit 1
-  	git clone "https://aur.archlinux.org/yay.git" "$aur_tmp_dir"
-  	makepkg -sim --noconfirm
-fi
-yay -S --needed --noconfirm "${dependencies_aur[@]}"
+clear
+echo -e "\n"
+echo "Install dependencies?"
+read -p "Y/n > " deps
+case $deps in
+	Y|y)
+		sudo pacman -Syu --noconfirm
+		install_dependencies "${dependencies[@]}"
+		sleep 3
+	;;
+esac
 
-echo "Copying dotfiles for new user"
-{
+clear
+echo -e "\n"
+echo "Install dependencies from AUR? (this will install an aur helper, if you dont have one!)"
+read -p "Y/n > " deps
+case $deps in
+	Y|y)
+		aur_deps
+	;;
+esac
+
+copy_dots(){
 	url="https://github.com/yrwq/dotfiles.git"
 	temp_directory_dotfiles=$(mktemp -d)
   	git clone "$url" "$temp_directory_dotfiles"
-  	sudo cp -rb "$temp_directory_dotfiles"/. /home/$username/
+  	sudo yes | cp -rf "$temp_directory_dotfiles"/. ~
+	walls="https://github.com/yrwq/walls.git"
+  	sudo git clone "$walls" ~/.wp
+}
+
+copy_dots_new(){
+	url="https://github.com/yrwq/dotfiles.git"
+	temp_directory_dotfiles=$(mktemp -d)
+  	git clone "$url" "$temp_directory_dotfiles"
+  	sudo cp -rf "$temp_directory_dotfiles"/. /home/$username/
 	walls="https://github.com/yrwq/walls.git"
   	sudo git clone "$walls" /home/$username/.wp
 }
 
-# finalize
-{
-  sudo chsh -s /usr/bin/zsh $username
-  echo "${username} ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/${username}
-  sudo chown -R ${username} /home/${username}
-  sudo rm -rf /home/${username}/.git
-  sudo rm -rf /home/${username}/install
-  sudo rm -rf /home/${username}/README.md
-}
+case "$@" in
+	new)
+		read -p "New username:" username
+		sudo useradd -m $username
+		sudo passwd $username
 
-echo "Installation finished, now you can login as ${username}."
+		copy_dots_new
+
+  		sudo chsh -s /usr/bin/zsh $username
+  		echo "${username} ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/${username}
+  		sudo chown -R ${username} /home/${username}
+  		sudo rm -rf /home/${username}/.git
+  		sudo rm -rf /home/${username}/install
+  		sudo rm -rf /home/${username}/README.md
+	;;
+	*)
+		copy_dots
+	;;
+esac
