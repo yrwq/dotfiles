@@ -49,13 +49,25 @@ The window manager of my choice is [awesome](https://awesomewm.org), because it'
 
 As a file manager, i choose [lf](https://github.com/gokcehan/lf) (as in "list files"), a terminal based one written in Go.
 
-I got the configuration files for lf from Luke Smith, and added some extra features.
+- Basic keybindings:
+	- `hjkl`: navigation
+	- `e`: open file in $EDITOR
+	- `g`: go to top
+	- `G`: go to bottom
+	- `D`: delete selected file(s)
+	- `C`: copy selected file(s)
+	- `M`: move selected file(s)
+	- `Ctrl + n`: make a directory
+	- `B`: bulk rename
+	- `b`: set selected picture as wallpaper
+	- `sd`: open a terminal in the same directory
+	- `Pp`: preview image
 
 ## The terminal emulator
 
 As a terminal, i choose [st](https://st.suckless.org), because it's fast and minimal.
 
-You can find my build at `.local/src/st`, it is based on Luke's.
+You can find the build at `.local/src/st`, it is based on Luke's.
 
 - Basic keybindings:
 	- `Alt + j`: scroll up
