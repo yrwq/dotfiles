@@ -24,7 +24,7 @@ run these commands in your terminal:
 
 `chmod +x install`
 
-`./install`
+`./install` or `./install new` to create a new user for the dotfiles
 
 # Software
 
