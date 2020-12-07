@@ -86,5 +86,5 @@ For the colors, i use [flavours](https://github.com/Misterio77/flavours), a [bas
 
 # Gallery
 
-![preview](https://0x0.st/i7OX.png)
-![preview](https://0x0.st/i7Tl.png)
+![preview](https://0x0.st/ihaD.png)
+![preview](https://0x0.st/ihaG.png)
