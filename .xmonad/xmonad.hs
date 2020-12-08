@@ -36,13 +36,8 @@ myModMask       = mod4Mask
 myWorkspaces    = ["1","2","3","4","5"]
 
 myTerminal = "$TERMINAL"
-myNormalBorderColor  = "#3c3836"
-myFocusedBorderColor = "#fbf1c7"
-
-xmobarTitleColor = "#22CCDD"
-
--- Color of current workspace in xmobar.
-xmobarCurrentWorkspaceColor = "#CEFFAC"
+myNormalBorderColor  = "#262626"
+myFocusedBorderColor = "#d65d0e"
 
 myKeys :: [(String, X ())]
 myKeys =
@@ -63,7 +58,7 @@ myKeys =
   , ("M1-e", spawn "rofimoji")
   , ("<Print>", spawn "lien -s -f")
   , ("M-w", runOrRaise "qutebrowser" (className =? "qutebrowser"))
-  , ("M-e", runOrRaise "emacsclient -c" (className =?  "emacs"))
+  , ("M-x", runOrRaise "discocss" (className =?  "Discord"))
  ]
 
 myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
