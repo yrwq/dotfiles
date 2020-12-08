@@ -63,3 +63,9 @@ subtemplate = 'css-variables'
 rewrite = false
 start= '/* Start flav */'
 end = '/* End flav */'
+
+[[item]]
+file = '~/.config/dunst/dunstrc'
+template = 'dunst'
+rewrite = false
+hook = 'killall dunst'

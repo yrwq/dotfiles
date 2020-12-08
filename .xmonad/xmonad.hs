@@ -8,13 +8,16 @@ import Data.Function (on)
 import Data.List as DL
 import Data.Char as DC
 import Data.Bifunctor
+import Data.Ratio
 
 import XMonad.Layout.Spacing
 import XMonad.Layout.Gaps
-
+import XMonad.Hooks.InsertPosition
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.ManageHelpers
+import XMonad.Hooks.Place
 
 import XMonad.Util.Run
 import XMonad.Util.SpawnOnce (spawnOnce)
@@ -23,8 +26,9 @@ import XMonad.Util.Run (safeSpawn)
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
-import XMonad.Util.EZConfig (additionalKeysP)
 import XMonad.Actions.WindowGo
+
+import XMonad.Util.EZConfig (additionalKeysP)
 import Control.Monad (forM_, join)
 import XMonad.Util.NamedWindows (getName)
 
@@ -55,10 +59,12 @@ myKeys =
   , ("M-e", spawn "emacsclient -c")
   , ("M-r", spawn "st -c files -e lf")
   , ("M-n", spawn "st -c news -e newsboat")
+  , ("M-m", spawn "st -c music -e ncmpcpp")
   , ("M-s", spawn "rofi -show drun")
   , ("M-S-m", spawn "st -c mail -e neomutt")
   , ("M-S-r", spawn "xmonad --recompile;xmonad --restart")
   , ("M-S-e", io exitSuccess)
+  , ("M-y", spawn "ytw")
   , ("M-q", kill)
   , ("M-.", incWindowSpacing 5)
   , ("M-,", decWindowSpacing 5)
@@ -67,7 +73,11 @@ myKeys =
   , ("M1-y", spawn "nerdy")
   , ("M1-e", spawn "rofimoji")
   , ("<Print>", spawn "lien -s -f")
-  , ("M-w", runOrRaise "qutebrowser" (className =? "qutebrowser"))
+  , ("M-<Print>", spawn "lien -a -f")
+  , ("M1-<Print>", spawn "rec start")
+  , ("S-<Print>", spawn "pkill ffmpeg")
+  , ("M-w", runOrRaise "firefox" (className =? "firefox"))
+  , ("M-S-w", spawn "surf duckduckgo.com")
   , ("M-x", runOrRaise "discocss" (className =?  "Discord"))
  ]
 
@@ -85,7 +95,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 
     ]
 
-myLayout = avoidStruts (gaps [(U,35), (R,5), (D,5), (L,5)] $ tiled ||| Mirror tiled ||| Full)
+myLayout = avoidStruts (gaps [(U,35), (R,5), (D,5), (L,5)] $ tiled ||| Full)
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = spacing 5 $ Tall nmaster delta ratio
@@ -99,25 +109,19 @@ myLayout = avoidStruts (gaps [(U,35), (R,5), (D,5), (L,5)] $ tiled ||| Mirror ti
      -- Percent of screen to increment by when resizing panes
      delta   = 3/100
 
-myManageHook = composeAll
-    [ className =? "mpv"        --> doFloat
-    , className =? "news"        --> doFloat
-    , className =? "files"        --> doFloat
-    , className =? "mail"        --> doFloat
-    , className =? "Sxiv"        --> doFloat
-    , resource  =? "desktop_window" --> doIgnore
+myManageHook = insertPosition Below Newer <+> composeAll
+    [ resource  =? "desktop_window" --> doIgnore
     , resource  =? "kdesktop"       --> doIgnore ]
 
 myEventHook = mconcat [ fullscreenEventHook
           ]
 
 myStartupHook = do
-              spawn "flavours apply gruvbox-dark-pale"
-              spawn "xrdb ~/.Xresources"
-              spawn "$HOME/.config/polybar/launch.sh"
-              spawnOnce "picom"
-              spawnOnce "emacs --daemon"
-              spawnOnce "nitrogen --restore"
+              spawn "$HOME/.config/polybar/launch.sh &"
+              spawnOnce "picom &"
+              spawnOnce "dunst &"
+              spawnOnce "nitrogen --restore &"
+              spawnOnce "emacs --daemon &"
 
 updateGaps :: (Functor f, Bifunctor p) => (c -> d) -> f (p b c) -> f (p b d)
 updateGaps f = fmap $ bimap id f
@@ -164,7 +168,7 @@ main = do
       -- hooks, layouts
         layoutHook         = myLayout,
         -- logHook            = eventLogHook,
-        manageHook         = manageDocks <+> manageHook def,
+        manageHook         = insertPosition Master Newer <+> myManageHook,
         handleEventHook    = myEventHook,
         startupHook        = myStartupHook
 } `additionalKeysP` myKeys

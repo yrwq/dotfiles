@@ -11,19 +11,16 @@ offset-x = 0
 offset-y = 0
 padding-right = 2
 padding-left = 2
-
 background = ${colors.bg}
 foreground = ${colors.fg}
-
 font-0 = Iosevka Custom:pixelsize=10;1
 font-1 = Iosevka Nerd Font:pixelsize=10;1
-
 separator = " "
 modules-left = title
 modules-center = ewmh
 modules-right = sep weather sep downspeed sep disk sep pkg sep pulseaudio sep date
-
 override-redirect = true
+tray-position = right
 
 
 ;;
