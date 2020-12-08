@@ -4,7 +4,6 @@
 #[ -x "$(command -v nvim)" ] && alias vim="nvim" vimdiff="nvim -d"
 
 alias \
-	cp="cp -iv" \
 	mv="mv -iv" \
 	rm="rm -vI" \
 	mkd="mkdir -pv" \

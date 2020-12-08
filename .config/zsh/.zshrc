@@ -81,27 +81,27 @@ autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
 
 # Start flavours
-# Base16 Material Vivid
-# Author: joshyrobot
+# Base16 Gruvbox dark, pale
+# Author: Dawid Kurek (dawikur@gmail.com), morhetz (https://github.com/morhetz/gruvbox)
 
 _gen_fzf_default_opts() {
 
-local color00='#202124'
-local color01='#27292c'
-local color02='#323639'
-local color03='#44464d'
-local color04='#676c71'
-local color05='#80868b'
-local color06='#9e9e9e'
-local color07='#ffffff'
-local color08='#f44336'
-local color09='#ff9800'
-local color0A='#ffeb3b'
-local color0B='#00e676'
-local color0C='#00bcd4'
-local color0D='#2196f3'
-local color0E='#673ab7'
-local color0F='#8d6e63'
+local color00='#262626'
+local color01='#3a3a3a'
+local color02='#4e4e4e'
+local color03='#8a8a8a'
+local color04='#949494'
+local color05='#dab997'
+local color06='#d5c4a1'
+local color07='#ebdbb2'
+local color08='#d75f5f'
+local color09='#ff8700'
+local color0A='#ffaf00'
+local color0B='#afaf00'
+local color0C='#85ad85'
+local color0D='#83adad'
+local color0E='#d485ad'
+local color0F='#d65d0e'
 
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS"\
 " --color=bg+:$color01,bg:$color00,spinner:$color0C,hl:$color0D"\

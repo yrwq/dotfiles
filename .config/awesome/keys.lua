@@ -41,27 +41,6 @@ local function shift_focus_and_move_client(move_back)
   end
 end
 
-local fire_rule = { class = { "emacs", "Emacs" } }
-for group_name, group_data in pairs({
-    ["Emacs: org"] = { color = x.color1, rule_any = fire_rule }
-}) do
-    hotkeys_popup.add_group_rules(group_name, group_data)
-end
-
--- Table with all of our hotkeys
-local firefox_keys = {
-
-    ["Emacs: org"] = {{
-        modifiers = { "Ctrl-C" },
-        keys = {
-            ["C-s"] = "Schedule"
-        }
-    }
-    }
-}
-
-hotkeys_popup.add_hotkeys(firefox_keys)
-
 awful.keyboard.append_global_keybindings({
 
 	-- launch scratchpad terminal
@@ -112,19 +91,23 @@ awful.keyboard.append_global_keybindings({
 
 	-- take a screenshot and upload it to 0x0(select area)
     awful.key({ }, "Print",  function() awful.spawn.with_shell("lien -s -f") end,
-		{description = "(screenshot) select area", group = "launch"}),
+		{description = "(screenshot) select area", group = "capture"}),
 
 	-- take a screenshot and upload it to 0x0(whole screen)
     awful.key({ modkey }, "Print",  function() awful.spawn.with_shell("lien -a -f") end,
-		{description = "(screenshot) whole screen", group = "launch"}),
+		{description = "(screenshot) whole screen", group = "capture"}),
 
 	-- start recording the whole screen
     awful.key({ altkey }, "Print",  function() awful.spawn.with_shell("rec start") end,
-		{description = "(recording) start", group = "launch"}),
+		{description = "(recording) start", group = "capture"}),
 
 	-- stop recording
     awful.key({ altkey, shiftkey }, "Print",  function() awful.spawn.with_shell("rec stop") end,
-		{description = "(recording) stop", group = "launch"}),
+		{description = "(recording) stop", group = "capture"}),
+
+	-- pick color
+    awful.key({ modkey, altkey }, "v",  function() awful.spawn.with_shell("clr") end,
+		{description = "pick color and show notification", group = "launch"}),
 
     -- apps
     awful.key({ modkey }, "s", function() app_drawer_show() end,
@@ -157,10 +140,6 @@ awful.keyboard.append_global_keybindings({
 	-- toggle bars
 	awful.key({ modkey }, "b", function() wibars_toggle() end,
 		{description = "toggle bar", group = "ui"}),
-
-    -- show shoot screen
-    awful.key({ altkey }, "f", function() shoot_screen_show() end,
-		{description = "screenshot menu", group = "ui"}),
 
     -- toggle microphone on/off
     awful.key({ modkey }, "v",  function() awful.spawn.with_shell("amixer -D pulse sset Capture toggle &> /dev/null") end,
@@ -271,37 +250,43 @@ client.connect_signal("request::default_keybindings", function()
 	-- fullscreen client
     awful.key({ modkey }, "f", function (c)
 		c.fullscreen = not c.fullscreen
-        c:raise()
-    end),
+        c:raise() end,
+	{description = "fullscreen focused client", group = "client"}),
 
 	-- kill client
-    awful.key({ modkey }, "q", function (c) c:kill() end),
+    awful.key({ modkey }, "q", function (c) c:kill() end,
+	{description = "kill focused", group = "client"}),
 
 	-- toggle floating
-    awful.key({ modkey, shiftkey }, "space",  awful.client.floating.toggle),
+    awful.key({ modkey, shiftkey }, "space",  awful.client.floating.toggle,
+	{description = "toggle floating", group = "client"}),
 
 	-- move client to master
-    awful.key({ modkey, shiftkey }, "Return", function (c) c:swap(awful.client.getmaster()) end),
+    awful.key({ modkey, shiftkey }, "Return", function (c) c:swap(awful.client.getmaster()) end,
+	{description = "move to master", group = "client"}),
 
 	-- toggle client on top
     awful.key({ modkey, shiftkey }, "t",      function (c)
 		c.ontop = not c.ontop
-		c.sticky = not c.sticky
-	end),
+		c.sticky = not c.sticky end,
+	{description = "toggle sticky and ontop", group = "client"}),
 
 	-- toggle titlebar
-    awful.key({ modkey }, "t", function (c) awful.titlebar.toggle(c) end),
+    awful.key({ modkey }, "t", function (c) awful.titlebar.toggle(c) end,
+	{description = "toggle titlebars", group = "ui"}),
 
 	-- minimize
-    awful.key({modkey}, "n", function(c) c.minimized = true end),
+    awful.key({modkey}, "n", function(c) c.minimized = true end,
+	{description = "minimize client", group = "client"}),
 
 	awful.key({ ctrlkey }, "-", function(c)
-        c.opacity = c.opacity + 0.1
-    end),
+        c.opacity = c.opacity + 0.05 end,
+	{description = "increase opacity", group = "client"}),
 
 	awful.key({ ctrlkey, shiftkey }, "-", function(c)
-        c.opacity = c.opacity - 0.1
-    end)
+        c.opacity = c.opacity - 0.05 end,
+	{description = "decrease opacity", group = "client"})
+
     })
 end)
 

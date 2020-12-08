@@ -58,7 +58,7 @@ cmd copyto ${{
 	clear; echo "Copy to where?"
 	dest="$(cut -d'	' -f2- ${XDG_CONFIG_HOME:-$HOME/.config}/directories | fzf | sed 's|~|$HOME|' )" &&
 	for x in $fx; do
-		eval cp -ivr \"$x\" \"$dest\"
+		eval cp -rf \"$x\" \"$dest\"
 	done &&
 	notify-send "隷 File(s) copied." "File(s) copies to $dest."
 }}

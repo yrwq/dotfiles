@@ -9,7 +9,7 @@ local helpers = require("helpers")
 -- require("module.notification.volume")
 
 naughty.config.defaults.ontop = true
-naughty.config.defaults.icon_size = dpi(32)
+naughty.config.defaults.icon_size = dpi(80)
 naughty.config.defaults.screen = awful.screen.focused()
 naughty.config.defaults.timeout = 3
 naughty.config.defaults.title = "System Notification"

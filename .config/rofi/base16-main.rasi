@@ -1,19 +1,19 @@
 /**
- * Base16 Material Vivid ROFI Color theme
+ * Base16 Gruvbox dark, pale ROFI Color theme
  *
  * Authors
- *  Scheme: joshyrobot
+ *  Scheme: Dawid Kurek (dawikur@gmail.com), morhetz (https://github.com/morhetz/gruvbox)
  *  Template: Jordi Pakey-Rodriguez (https://github.com/0xdec), Andrea Scarpino (https://github.com/ilpianista)
  */
 
 * {
-    red:                         rgba ( 244, 67, 54, 100 % );
-    blue:                        rgba ( 33, 150, 243, 100 % );
-    lightfg:                     rgba ( 158, 158, 158, 100 % );
-    lightbg:                     rgba ( 39, 41, 44, 100 % );
-    foreground:                  rgba ( 128, 134, 139, 100 % );
-    background:                  rgba ( 32, 33, 36, 100 % );
-    background-color:            rgba ( 32, 33, 36, 0 % );
+    red:                         rgba ( 215, 95, 95, 100 % );
+    blue:                        rgba ( 131, 173, 173, 100 % );
+    lightfg:                     rgba ( 213, 196, 161, 100 % );
+    lightbg:                     rgba ( 58, 58, 58, 100 % );
+    foreground:                  rgba ( 218, 185, 151, 100 % );
+    background:                  rgba ( 38, 38, 38, 100 % );
+    background-color:            rgba ( 38, 38, 38, 0 % );
     separatorcolor:              @foreground;
     border-color:                @foreground;
     selected-normal-foreground:  @lightbg;
