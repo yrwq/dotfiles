@@ -1,0 +1,5 @@
+#!/bin/sh
+
+color=$(colorpicker)
+convert -size 800x800 xc:${color} /tmp/color.png
+notify-send -i /tmp/color.png "${color}"
