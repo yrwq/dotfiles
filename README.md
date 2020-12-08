@@ -1,10 +1,3 @@
-<p align="center">
-    <a href="#introduction"> <img width="150px" src=".assets/introduction.png"/> </a>
-    <a href="#software"> <img width="150px" src=".assets/software.png"/> </a>
-    <a href="#setup"> <img width="150px" src=".assets/setup.png"/> </a>
-    <a href="#gallery"> <img width="150px" src=".assets/gallery.png"/> </a>
-</p>
-
 # Introduction
 
 This repository contains my personal collection of configuration files for linux.
