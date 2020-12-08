@@ -1,8 +1,13 @@
 import XMonad
 import Data.Monoid
 import System.Exit
+import System.IO.Unsafe
+import Data.Maybe
 import Data.List (sortBy)
 import Data.Function (on)
+import Data.List as DL
+import Data.Char as DC
+import Data.Bifunctor
 
 import XMonad.Layout.Spacing
 import XMonad.Layout.Gaps
@@ -23,26 +28,31 @@ import XMonad.Actions.WindowGo
 import Control.Monad (forM_, join)
 import XMonad.Util.NamedWindows (getName)
 
-
 myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = True
 
 myClickJustFocuses :: Bool
 myClickJustFocuses = False
 
-myBorderWidth   = 5
+myBorderWidth   = 2
 myModMask       = mod4Mask
 
 myWorkspaces    = ["1","2","3","4","5"]
 
 myTerminal = "$TERMINAL"
-myNormalBorderColor  = "#262626"
-myFocusedBorderColor = "#d65d0e"
+
+
+clrbg = getColor "*background"
+clrfg = getColor "*foreground"
+
+myNormalBorderColor  = clrbg
+myFocusedBorderColor = clrfg
 
 myKeys :: [(String, X ())]
 myKeys =
  [ ("M-<Return>", spawn "$TERMINAL")
   , ("M-t", spawn "emacsclient -c /mnt/doc/org/todo.org")
+  , ("M-e", spawn "emacsclient -c")
   , ("M-r", spawn "st -c files -e lf")
   , ("M-n", spawn "st -c news -e newsboat")
   , ("M-s", spawn "rofi -show drun")
@@ -108,6 +118,33 @@ myStartupHook = do
               spawnOnce "picom"
               spawnOnce "emacs --daemon"
               spawnOnce "nitrogen --restore"
+
+updateGaps :: (Functor f, Bifunctor p) => (c -> d) -> f (p b c) -> f (p b d)
+updateGaps f = fmap $ bimap id f
+
+getFromXres :: String -> IO String
+getFromXres key = fromMaybe "" . findValue key <$> runProcessWithInput "xrdb" ["-query"] ""
+  where
+    findValue :: String -> String -> Maybe String
+    findValue xresKey xres =
+      snd <$> (
+                DL.find ((== xresKey) . fst)
+                $ catMaybes
+                $ splitAtColon
+                <$> lines xres
+              )
+
+    splitAtColon :: String -> Maybe (String, String)
+    splitAtColon str = splitAtTrimming str <$> (DL.elemIndex ':' str)
+
+    splitAtTrimming :: String -> Int -> (String, String)
+    splitAtTrimming str idx = bimap trim trim . (second tail) $ splitAt idx str
+
+    trim :: String -> String
+    trim = DL.dropWhileEnd (DC.isSpace) . DL.dropWhile (DC.isSpace)
+
+getColor :: String -> String
+getColor = unsafePerformIO . getFromXres
 
 main = do
   xmonad $ ewmh def {
