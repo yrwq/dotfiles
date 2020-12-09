@@ -1,4 +1,4 @@
-# Fork of Luke Smith's config
+#!/bin/sh
 
 # Basic vars
 set previewer ~/.config/lf/scope

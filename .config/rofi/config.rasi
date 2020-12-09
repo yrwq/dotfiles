@@ -8,11 +8,11 @@ configuration{
 }
 
 * {
-	red: rgba ( {{base08-rgb-r}}, {{base08-rgb-g}}, {{base08-rgb-b}}, 100 % );
-	magenta: rgba ( {{base0E-rgb-r}}, {{base0E-rgb-g}}, {{base0E-rgb-b}}, 100 % );
-	orange: rgba ( {{base09-rgb-r}}, {{base09-rgb-g}}, {{base09-rgb-b}}, 100 % );
-	bg: rgba ( {{base00-rgb-r}}, {{base00-rgb-g}}, {{base00-rgb-b}}, 100 % );
-	bg-alt: rgba ( {{base01-rgb-r}}, {{base01-rgb-g}}, {{base01-rgb-b}}, 100 % );
+	red: rgba ( 251, 73, 52, 100 % );
+	magenta: rgba ( 211, 134, 155, 100 % );
+	orange: rgba ( 254, 128, 25, 100 % );
+	bg: rgba ( 29, 32, 33, 100 % );
+	bg-alt: rgba ( 60, 56, 54, 100 % );
 	background-color: @bg;
 	border: 0;
 	margin: 0;

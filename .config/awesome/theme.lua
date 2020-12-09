@@ -47,7 +47,7 @@ theme.taglist_bg_empty = x.trans
 theme.taglist_bg_occupied = x.trans
 theme.taglist_bg_urgent = x.trans
 theme.taglist_bg_focus = x.color8 .. "90"
-theme.taglist_font = "Iosevka Custom 14"
+theme.taglist_font = "Iosevka Nerd Font Mono 16"
 
 -- tasklist
 theme.tasklist_font = theme.font

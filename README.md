@@ -23,6 +23,7 @@ run these commands in your terminal:
 
 ## The window manager
 
+### Awesome
 The window manager of my choice is [awesome](https://awesomewm.org), because it's highly configurable and extensible.
 
 - File structure
@@ -35,6 +36,8 @@ The window manager of my choice is [awesome](https://awesomewm.org), because it'
 	- `module` Notifications, titlebars, other popups.
 	- `shit` Shitty daemons used by widgets
 	- `widgets` Widgets used by bars, popups and panels.
+
+### Xmonad
 
 ## The file manager
 
@@ -78,4 +81,4 @@ For the colors, i use [flavours](https://github.com/Misterio77/flavours), a [bas
 # Gallery
 
 ![preview](https://0x0.st/ihaD.png)
-![preview](https://0x0.st/ihaG.png)
+![preview](https://0x0.st/ihv1.png)

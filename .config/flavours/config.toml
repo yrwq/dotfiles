@@ -33,7 +33,7 @@ template = 'termite'
 rewrite = false
 
 [[item]]
-file = '~/.config/rofi/base16-main.rasi'
+file = '~/.config/rofi/config.rasi'
 template = 'rofi'
 rewrite = true
 
@@ -69,3 +69,11 @@ file = '~/.config/dunst/dunstrc'
 template = 'dunst'
 rewrite = false
 hook = 'killall dunst'
+
+[[item]]
+file = '~/.config/surf/styles/default.css'
+template = 'styles'
+subtemplate = 'css-variables'
+rewrite = false
+start= '/* Start flav */'
+end = '/* End flav */'
