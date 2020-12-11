@@ -25,19 +25,19 @@ scrollbar = off
 
 # Start flavours
 [colors]
-# Base16 Gruvbox dark, hard
+# Base16 Gruvbox dark, soft
 # Author: Dawid Kurek (dawikur@gmail.com), morhetz (https://github.com/morhetz/gruvbox)
 
 foreground          = #d5c4a1
 foreground_bold     = #d5c4a1
 cursor              = #d5c4a1
-cursor_foreground   = #1d2021
-background          = #1d2021
+cursor_foreground   = #32302f
+background          = #32302f
 
 # 16 color space
 
 # Black, Gray, Silver, White
-color0  = #1d2021
+color0  = #32302f
 color8  = #665c54
 color7  = #d5c4a1
 color15 = #fbf1c7

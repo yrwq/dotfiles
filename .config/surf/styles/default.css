@@ -1,0 +1,308 @@
+/* Start flav */
+/* {Gruvbox dark, soft} by {Dawid Kurek (dawikur@gmail.com), morhetz (https://github.com/morhetz/gruvbox)} */
+
+:root {
+  --base00: #32302f;
+  --base01: #3c3836;
+  --base02: #504945;
+  --base03: #665c54;
+  --base04: #bdae93;
+  --base05: #d5c4a1;
+  --base06: #ebdbb2;
+  --base07: #fbf1c7;
+  --base08: #fb4934;
+  --base09: #fe8019;
+  --base0A: #fabd2f;
+  --base0B: #b8bb26;
+  --base0C: #8ec07c;
+  --base0D: #83a598;
+  --base0E: #d3869b;
+  --base0F: #d65d0e;
+}
+/* End flav */
+
+.octicon {
+    display: inline-block;
+    vertical-align: text-top;
+    fill: currentColor;
+    background-color: var(--base00) !important;
+    color: var(--base05) !important;
+}
+
+/*! normalize.css v4.1.1 | MIT License | github.com/necolas/normalize.css */
+html {
+    font-family: Iosevka Custom;
+    -ms-text-size-adjust: 100%;
+    background-color: var(--base00) !important;
+    -webkit-text-size-adjust: 100% color: var(--base05) !important;
+}
+
+body {
+    background-color: var(--base00) !important;
+    margin: 0 color: var(--base05) !important;
+}
+
+p,
+span {
+    color: var(--base04) !important;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+form,
+main,
+menu,
+nav,
+div,
+section {
+    display: block;
+    background-color: var(--base00) !important;
+    color: var(--base05) !important;
+}
+
+summary {
+    display: list-item;
+    background-color: var(--base00) !important;
+    color: var(--base05) !important;
+}
+
+audio,
+canvas,
+progress,
+video {
+    display: inline-block;
+    background-color: var(--base00) !important;
+}
+
+audio:not([controls]) {
+    display: none;
+    height: 0;
+    background-color: var(--base00) !important;
+}
+
+progress {
+    vertical-align: initial;
+    background-color: var(--base00) !important;
+}
+
+[hidden],
+template {
+    display: none !important;
+    background-color: var(--base00) !important;
+}
+
+a {
+    background-color: var(--base00) !important;
+    color: var(--base0F) !important;
+}
+
+a:active,
+a:hover {
+    outline-width: 0;
+    color: var(--base08) !important;
+}
+
+abbr[title] {
+    border-bottom: none;
+    text-decoration: underline;
+    -webkit-text-decoration: underline dotted;
+    text-decoration: underline dotted;
+    background-color: var(--base00) !important;
+}
+
+b,
+strong {
+    font-weight: inherit;
+    font-weight: bolder;
+    background-color: var(--base00) !important;
+}
+
+dfn {
+    font-style: italic;
+    background-color: var(--base00) !important;
+}
+
+h1 {
+    font-size: 2em;
+    margin: .67em 0;
+    background-color: var(--base00) !important;
+    color: var(--base05) !important;
+}
+
+mark {
+    background-color: #ff0;
+    background-color: var(--base00) !important;
+}
+
+small {
+    font-size: 80%;
+    background-color: var(--base00) !important;
+}
+
+sub,
+sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: initial;
+    background-color: var(--base00) !important;
+}
+
+sub {
+    bottom: -.25em;
+    background-color: var(--base00) !important;
+}
+
+sup {
+    top: -.5em;
+    background-color: var(--base00) !important;
+}
+
+img {
+    border-style: none;
+    background-color: var(--base01) !important;
+}
+
+svg:not(:root) {
+    overflow: hidden;
+    background-color: var(--base01) !important;
+}
+
+code,
+kbd,
+pre,
+samp {
+    font-family: monospace, monospace;
+    font-size: 1em;
+    background-color: var(--base00) !important;
+}
+
+figure {
+    margin: 1em 40px;
+    background-color: var(--base00) !important;
+}
+
+hr {
+    box-sizing: initial;
+    height: 0;
+    overflow: visible;
+    background-color: var(--base00) !important;
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+    margin: 0;
+    background-color: var(--base01) !important;
+    color: var(--base04) !important;
+}
+
+optgroup {
+    font-weight: 600;
+    background-color: var(--base00) !important;
+}
+
+button,
+input {
+    overflow: visible;
+    background-color: var(--base01) !important;
+    color: var(--base04) !important;
+}
+
+button,
+select {
+    text-transform: none;
+    background-color: var(--base01) !important;
+}
+
+[type=reset],
+[type=submit],
+button,
+html [type=button] {
+    -webkit-appearance: button;
+    background-color: var(--base00) !important;
+}
+
+[type=button]::-moz-focus-inner,
+[type=reset]::-moz-focus-inner,
+[type=submit]::-moz-focus-inner,
+button::-moz-focus-inner {
+    border-style: none;
+    padding: 0;
+    background-color: var(--base01) !important;
+}
+
+[type=button]:-moz-focusring,
+[type=reset]:-moz-focusring,
+[type=submit]:-moz-focusring,
+button:-moz-focusring {
+    outline: 1px dotted ButtonText;
+    background-color: var(--base01) !important;
+}
+
+fieldset {
+    border: 1px solid var(--base05) !important;
+    margin: 0 2px;
+    padding: .35em .625em .75em;
+    background-color: var(--base00) !important;
+}
+
+legend {
+    box-sizing: border-box;
+    color: inherit;
+    display: table;
+    max-width: 100%;
+    padding: 0;
+    white-space: normal;
+    background-color: var(--base00) !important;
+}
+
+textarea {
+    overflow: auto;
+    background-color: var(--base00) !important;
+}
+
+[type=checkbox],
+[type=radio] {
+    box-sizing: border-box;
+    background-color: var(--base00) !important;
+    padding: 0;
+}
+
+[type=number]::-webkit-inner-spin-button,
+[type=number]::-webkit-outer-spin-button {
+    height: auto;
+    background-color: var(--base01) !important;
+}
+
+[type=search] {
+    -webkit-appearance: textfield;
+    outline-offset: -2px;
+    background-color: var(--base01) !important;
+}
+
+[type=search]::-webkit-search-cancel-button,
+[type=search]::-webkit-search-decoration {
+    -webkit-appearance: none;
+    background-color: var(--base01) !important;
+}
+
+::-webkit-input-placeholder {
+    color: inherit;
+    opacity: .54;
+    background-color: var(--base00) !important;
+    color: var(--base04) !important;
+}
+
+::-webkit-file-upload-button {
+    -webkit-appearance: button;
+    font: inherit;
+    background-color: var(--base01) !important;
+}

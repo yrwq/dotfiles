@@ -11,7 +11,7 @@ configuration{
 	red: rgba ( 251, 73, 52, 100 % );
 	magenta: rgba ( 211, 134, 155, 100 % );
 	orange: rgba ( 254, 128, 25, 100 % );
-	bg: rgba ( 29, 32, 33, 100 % );
+	bg: rgba ( 50, 48, 47, 100 % );
 	bg-alt: rgba ( 60, 56, 54, 100 % );
 	background-color: @bg;
 	border: 0;

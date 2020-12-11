@@ -81,12 +81,12 @@ autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
 
 # Start flavours
-# Base16 Gruvbox dark, hard
+# Base16 Gruvbox dark, soft
 # Author: Dawid Kurek (dawikur@gmail.com), morhetz (https://github.com/morhetz/gruvbox)
 
 _gen_fzf_default_opts() {
 
-local color00='#1d2021'
+local color00='#32302f'
 local color01='#3c3836'
 local color02='#504945'
 local color03='#665c54'

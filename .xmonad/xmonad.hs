@@ -104,9 +104,61 @@ myConfigs = [ ("aliases", myEditor ++ "~/.config/shell/aliasrc", "")
             , ("dwm", myEditor ++ "~/.local/src/dwm/config.h", "")
             ]
 
+myApps :: [(String, String, String)]
+myApps = [ ("Firefox", "firefox", "Firefox web browser")
+            , ("Qutebrowser", "qutebrowser", "Browser with vim bindings")
+            , ("File Manager", "st -c files -e lf", "")
+            , ("News", "st -c news -e newsboat", "")
+            , ("Mail", "st -c mail -e neomutt", "")
+            ]
+            
+myScripts :: [(String, String, String)]
+myScripts = [ ("art", "art", "Notification with album art and current song")
+            , ("chth", "chth", "Choose a theme")
+            , ("chth -r", "chth -r", "Apply a random theme")
+            , ("clr", "clr", "Pick a color and show a notification with the color")
+            , ("dots", "dots", "Sync my dotfiles")
+            , ("horoscope", "noti -hd", "show today's horoscope in notification")
+            , ("horoscope", "noti -ht", "show tomorrow's horoscope in notification")
+            , ("screenshot", "lien -a -f", "Full screen")
+            , ("screenshot", "lien -s -f", "Select")
+            , ("lock", "lock", "Lock the screen")
+            , ("manp", "manp", "Read a man page in zathura")
+            , ("mem", "mem", "Meme picker")
+            , ("nerdy", "nerdy", "Nerd Font picker")
+            , ("newsup", "newsup", "Update newsboat")
+            , ("pickfont", "pickfont", "Pick a font and spawn st")
+            , ("rec", "rec", "Start recording")
+            , ("rec", "pkill ffmpeg", "Stop recording")
+            , ("samedir", "samedir", "Open a terminal in the same directory")
+            , ("shrt", "~/.xinitrc", "")
+            , ("picom", myEditor ++ "~/.config/picom.conf", "")
+            , ("emacs", myEditor ++ "~/.emacs.d/init.el", "")
+            , ("xmonad", myEditor ++ "~/.xmonad/xmonad.hs", "")
+            , ("firefox", myEditor ++ "~/.mozilla/firefox/*.default-release/chrome/userChrome.css", "")
+            , ("flavour templates", myEditor ++ "~/.local/share/flavours/base16/templates", "")
+            , ("flavour schemes", myEditor ++ "~/.local/share/flavours/base16/schemes", "")
+            , ("flavour config", myEditor ++ "~/.config/flavours/config.toml", "")
+            , ("st", myEditor ++ "~/.local/src/st/config.h", "")
+            , ("surf", myEditor ++ "~/.local/src/surf/config.h", "")
+            , ("dwm", myEditor ++ "~/.local/src/dwm/config.h", "")
+            ]
+
 treeselectAction :: TS.TSConfig (X ()) -> X ()
 treeselectAction a = TS.treeselectAction a
-   [ Node (TS.TSNode "Configs" "Edit configuration files" (return ()))
+   [ Node (TS.TSNode "applications" "a list of programs I use often" (return ()))
+     [Node (TS.TSNode (TE.fst3 $ myApps !! n)
+                      (TE.thd3 $ myApps !! n)
+                      (spawn $ TE.snd3 $ myApps !! n)
+           ) [] | n <- [0..(length myApps - 1)]
+     ]
+   , Node (TS.TSNode "scripts" "scripts that can be run without a terminal" (return ()))
+     [Node (TS.TSNode(TE.fst3 $ myScripts !! n)
+                     (TE.thd3 $ myScripts !! n)
+                     (spawn $ TE.snd3 $ myScripts !! n)
+           ) [] | n <- [0..(length myScripts - 1)]
+     ]
+   , Node (TS.TSNode "config files" "config files that edit often" (return ()))
      [Node (TS.TSNode (TE.fst3 $ myConfigs !! n)
                       (TE.thd3 $ myConfigs !! n)
                       (spawn $ TE.snd3 $ myConfigs !! n)
@@ -190,14 +242,13 @@ myKeys =
     , ("M1-<Print>", spawn "rec start")
     , ("S-<Print>", spawn "pkill ffmpeg")
     , ("M-w", runOrRaise "firefox" (className =? "firefox"))
-    , ("M-S-w", spawn "surf duckduckgo.com")
+    , ("M-S-w", spawn "surf")
     , ("M-x", runOrRaise "discocss" (className =?  "Discord"))
     , ("C-e e", spawn "emacsclient -c -a ''")                            -- start emacs
     , ("C-e b", spawn "emacsclient -c -a '' --eval '(ibuffer)'")         -- list emacs buffers
     , ("C-e d", spawn "emacsclient -c -a '' --eval '(dired nil)'")       -- dired emacs file manager
     , ("C-e t", spawn "emacsclient -c -a '' /mnt/doc/org/todo.org")
-    , ("C-a m", spawn "mem") --meme menu
-    , ("C-a a", treeselectAction tsDefaultConfig) -- edit configs
+    , ("C-s s", treeselectAction tsDefaultConfig) -- edit configs
 
   ]
 

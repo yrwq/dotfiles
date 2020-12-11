@@ -1,20 +1,24 @@
 config.load_autoconfig()
 c.tabs.show = "multiple"
 c.tabs.position = "left"
-c.fonts.default_family = "Fira Sans"
+c.fonts.default_family = "Iosevka Custom"
 c.fonts.default_size = "12pt"
 c.tabs.padding = {
-        "left": 10,
-        "right": 10,
+        "left": 20,
+        "right": 20,
         "bottom": 10,
         "top": 10,
 }
+c.tabs.width = '10%'
+
+config.bind('<Ctrl-Shift-k', 'zoom-in')
+config.bind('<Ctrl-Shift-j', 'zoom-out')
 # Start flavours
 # base16-qutebrowser (https://github.com/theova/base16-qutebrowser)
 # Base16 qutebrowser template by theova and Daniel Mulford
-# Gruvbox dark, hard scheme by Dawid Kurek (dawikur@gmail.com), morhetz (https://github.com/morhetz/gruvbox)
+# Gruvbox dark, soft scheme by Dawid Kurek (dawikur@gmail.com), morhetz (https://github.com/morhetz/gruvbox)
 
-base00 = "#1d2021"
+base00 = "#32302f"
 base01 = "#3c3836"
 base02 = "#504945"
 base03 = "#665c54"
