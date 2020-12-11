@@ -18,7 +18,7 @@ font-1 = Iosevka Nerd Font:pixelsize=10;1
 separator = " "
 modules-left = title
 modules-center = ewmh
-modules-right = sep weather sep downspeed sep disk sep pkg sep pulseaudio sep date
+modules-right = downspeed sep disk sep pkg sep pulseaudio sep date
 override-redirect = true
 tray-position = right
 
