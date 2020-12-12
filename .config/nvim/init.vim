@@ -23,7 +23,6 @@ Plug 'camspiers/animate.vim'
 Plug 'camspiers/lens.vim'
 Plug 'ptzz/lf.vim'
 Plug 'rbgrouleff/bclose.vim'
-Plug 'aurieh/discord.nvim', { 'do': ':UpdateRemotePlugins'}
 
 call plug#end()
 

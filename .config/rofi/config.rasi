@@ -8,11 +8,11 @@ configuration{
 }
 
 * {
-	red: rgba ( 251, 73, 52, 100 % );
-	magenta: rgba ( 211, 134, 155, 100 % );
-	orange: rgba ( 254, 128, 25, 100 % );
-	bg: rgba ( 50, 48, 47, 100 % );
-	bg-alt: rgba ( 60, 56, 54, 100 % );
+	red: rgba ( 215, 95, 95, 100 % );
+	magenta: rgba ( 212, 133, 173, 100 % );
+	orange: rgba ( 255, 135, 0, 100 % );
+	bg: rgba ( 38, 38, 38, 100 % );
+	bg-alt: rgba ( 58, 58, 58, 100 % );
 	background-color: @bg;
 	border: 0;
 	margin: 0;

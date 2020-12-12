@@ -67,8 +67,7 @@ end = '/* End flav */'
 [[item]]
 file = '~/.config/dunst/dunstrc'
 template = 'dunst'
-rewrite = false
-hook = 'killall dunst'
+rewrite = true
 
 [[item]]
 file = '~/.config/surf/styles/default.css'
