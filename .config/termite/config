@@ -25,54 +25,54 @@ scrollbar = off
 
 # Start flavours
 [colors]
-# Base16 Dracula
-# Author: Mike Barkmin (http://github.com/mikebarkmin) based on Dracula Theme (http://github.com/dracula)
+# Base16 Zenburn
+# Author: elnawe
 
-foreground          = #e9e9f4
-foreground_bold     = #e9e9f4
-cursor              = #e9e9f4
-cursor_foreground   = #282936
-background          = #282936
+foreground          = #dcdccc
+foreground_bold     = #dcdccc
+cursor              = #dcdccc
+cursor_foreground   = #383838
+background          = #383838
 
 # 16 color space
 
 # Black, Gray, Silver, White
-color0  = #282936
-color8  = #626483
-color7  = #e9e9f4
-color15 = #f7f7fb
+color0  = #383838
+color8  = #6f6f6f
+color7  = #dcdccc
+color15 = #ffffff
 
 # Red
-color1  = #ea51b2
-color9  = #ea51b2
+color1  = #dca3a3
+color9  = #dca3a3
 
 # Green
-color2  = #ebff87
-color10 = #ebff87
+color2  = #5f7f5f
+color10 = #5f7f5f
 
 # Yellow
-color3  = #00f769
-color11 = #00f769
+color3  = #e0cf9f
+color11 = #e0cf9f
 
 # Blue
-color4  = #62d6e8
-color12 = #62d6e8
+color4  = #7cb8bb
+color12 = #7cb8bb
 
 # Purple
-color5  = #b45bcf
-color13 = #b45bcf
+color5  = #dc8cc3
+color13 = #dc8cc3
 
 # Teal
-color6  = #a1efe4
-color14 = #a1efe4
+color6  = #93e0e3
+color14 = #93e0e3
 
 # Extra colors
-color16 = #b45bcf
-color17 = #00f769
-color18 = #3a3c4e
-color19 = #4d4f68
-color20 = #62d6e8
-color21 = #f1f2f8
+color16 = #dfaf8f
+color17 = #000000
+color18 = #404040
+color19 = #606060
+color20 = #808080
+color21 = #c0c0c0
 # End flavours
 
 # vim: ft=dosini cms=#%s

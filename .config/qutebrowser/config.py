@@ -16,24 +16,24 @@ config.bind('<Ctrl-Shift-j', 'zoom-out')
 # Start flavours
 # base16-qutebrowser (https://github.com/theova/base16-qutebrowser)
 # Base16 qutebrowser template by theova and Daniel Mulford
-# Dracula scheme by Mike Barkmin (http://github.com/mikebarkmin) based on Dracula Theme (http://github.com/dracula)
+# Zenburn scheme by elnawe
 
-base00 = "#282936"
-base01 = "#3a3c4e"
-base02 = "#4d4f68"
-base03 = "#626483"
-base04 = "#62d6e8"
-base05 = "#e9e9f4"
-base06 = "#f1f2f8"
-base07 = "#f7f7fb"
-base08 = "#ea51b2"
-base09 = "#b45bcf"
-base0A = "#00f769"
-base0B = "#ebff87"
-base0C = "#a1efe4"
-base0D = "#62d6e8"
-base0E = "#b45bcf"
-base0F = "#00f769"
+base00 = "#383838"
+base01 = "#404040"
+base02 = "#606060"
+base03 = "#6f6f6f"
+base04 = "#808080"
+base05 = "#dcdccc"
+base06 = "#c0c0c0"
+base07 = "#ffffff"
+base08 = "#dca3a3"
+base09 = "#dfaf8f"
+base0A = "#e0cf9f"
+base0B = "#5f7f5f"
+base0C = "#93e0e3"
+base0D = "#7cb8bb"
+base0E = "#dc8cc3"
+base0F = "#000000"
 
 # set qutebrowser colors
 

@@ -2,7 +2,7 @@
 
 dependencies=(git feh slop termite xorg-server alsa-lib alsa-plugins alsa-utils dunst emacs exa ffmpeg ffmpegthumbnailer fzf imagemagick lxappearance maim mpc mpd mpv mupdf ncmpcpp neomutt neovim newsboat nitrogen obconf openbox pamixer poppler pulseaudio pulseaudio-alsa pulsemixer qutebrowser ranger rofi scrot tint2 transmission-cli transmission-gtk ttf-nerd-fonts-symbols urlscan w3m xautolock xclip xdg-user-dirs xdg-utils xdotool xf86-input-libinput xf86-video-intel xmobar xmonad xmonad-contrib xorg-font-util xorg-fonts-misc xorg-mkfontscale xorg-xinit xorg-xrandr xorg-xsetroot xorg-server-common xorg-server-devel xorg-setxkbmap xorg-xclipboard xorg-xdpyinfo xorg-xev xorg-xfontsel xorg-xinput xorg-xmodmap xorg-xprop xorg-xrandr xorg-xrdb xorg-xset xorg-xsetroot xorg-xwininfo xscreensaver youtube-dl zathura zathura-pdf-poppler zsh unzip ueberzug sxiv man-db libnotify jq rofimoji i3lock haskell-extra)
 
-dependencies_aur=(awesome-git brave-dev-bin urlview nerd-fonts-iosevka vidir lf-bin picom-jonaburg-git libxft-bgra-git polybar-dwm-module gruvbox-dark-gtk gruvbox-dark-icons-gtk mutt-wizard-git libxft-bgra)
+dependencies_aur=(awesome-git urlview nerd-fonts-iosevka vidir lf-bin picom-jonaburg-git libxft-bgra-git polybar-dwm-module gruvbox-dark-gtk gruvbox-dark-icons-gtk mutt-wizard-git libxft-bgra)
 
 
 install_dependencies() {

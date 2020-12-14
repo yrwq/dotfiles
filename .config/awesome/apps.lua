@@ -16,7 +16,7 @@ apps.news = function()
 end
 
 apps.browser = function ()
-    awful.spawn.with_shell("brave-dev", { switchtotag = true })
+    awful.spawn.with_shell("qutebrowser yrwq.github.io/termstart", { switchtotag = true })
 end
 
 apps.file_manager = function ()
@@ -24,7 +24,7 @@ apps.file_manager = function ()
 end
 
 apps.discord = function ()
-    helpers.run_or_raise({class = 'discord'}, false, "discocss")
+    helpers.run_or_raise({class = 'Discord'}, false, "discocss")
 end
 
 apps.mail = function ()

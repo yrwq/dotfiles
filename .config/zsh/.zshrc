@@ -81,27 +81,27 @@ autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
 
 # Start flavours
-# Base16 Dracula
-# Author: Mike Barkmin (http://github.com/mikebarkmin) based on Dracula Theme (http://github.com/dracula)
+# Base16 Zenburn
+# Author: elnawe
 
 _gen_fzf_default_opts() {
 
-local color00='#282936'
-local color01='#3a3c4e'
-local color02='#4d4f68'
-local color03='#626483'
-local color04='#62d6e8'
-local color05='#e9e9f4'
-local color06='#f1f2f8'
-local color07='#f7f7fb'
-local color08='#ea51b2'
-local color09='#b45bcf'
-local color0A='#00f769'
-local color0B='#ebff87'
-local color0C='#a1efe4'
-local color0D='#62d6e8'
-local color0E='#b45bcf'
-local color0F='#00f769'
+local color00='#383838'
+local color01='#404040'
+local color02='#606060'
+local color03='#6f6f6f'
+local color04='#808080'
+local color05='#dcdccc'
+local color06='#c0c0c0'
+local color07='#ffffff'
+local color08='#dca3a3'
+local color09='#dfaf8f'
+local color0A='#e0cf9f'
+local color0B='#5f7f5f'
+local color0C='#93e0e3'
+local color0D='#7cb8bb'
+local color0E='#dc8cc3'
+local color0F='#000000'
 
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS"\
 " --color=bg+:$color01,bg:$color00,spinner:$color0C,hl:$color0D"\
