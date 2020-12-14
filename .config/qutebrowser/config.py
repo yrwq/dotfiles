@@ -16,24 +16,24 @@ config.bind('<Ctrl-Shift-j', 'zoom-out')
 # Start flavours
 # base16-qutebrowser (https://github.com/theova/base16-qutebrowser)
 # Base16 qutebrowser template by theova and Daniel Mulford
-# Gruvbox dark, pale scheme by Dawid Kurek (dawikur@gmail.com), morhetz (https://github.com/morhetz/gruvbox)
+# Dracula scheme by Mike Barkmin (http://github.com/mikebarkmin) based on Dracula Theme (http://github.com/dracula)
 
-base00 = "#262626"
-base01 = "#3a3a3a"
-base02 = "#4e4e4e"
-base03 = "#8a8a8a"
-base04 = "#949494"
-base05 = "#dab997"
-base06 = "#d5c4a1"
-base07 = "#ebdbb2"
-base08 = "#d75f5f"
-base09 = "#ff8700"
-base0A = "#ffaf00"
-base0B = "#afaf00"
-base0C = "#85ad85"
-base0D = "#83adad"
-base0E = "#d485ad"
-base0F = "#d65d0e"
+base00 = "#282936"
+base01 = "#3a3c4e"
+base02 = "#4d4f68"
+base03 = "#626483"
+base04 = "#62d6e8"
+base05 = "#e9e9f4"
+base06 = "#f1f2f8"
+base07 = "#f7f7fb"
+base08 = "#ea51b2"
+base09 = "#b45bcf"
+base0A = "#00f769"
+base0B = "#ebff87"
+base0C = "#a1efe4"
+base0D = "#62d6e8"
+base0E = "#b45bcf"
+base0F = "#00f769"
 
 # set qutebrowser colors
 

@@ -503,7 +503,12 @@
     (setq eshell-destroy-buffer-when-process-dies t)
     (setq eshell-visual-commands '("htop" "zsh" "vim")))
 
+
   (eshell-git-prompt-use-theme 'powerline))
+
+
+(use-package haskell-mode)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

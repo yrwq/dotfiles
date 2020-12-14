@@ -11,7 +11,8 @@ fi
 pulseaudio --start
 
 chth -r &
-
+setxkbmap hu
 sleep 1
 exec awesome
+# exec xmonad
 # exec openbox-session

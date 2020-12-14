@@ -1,63 +1,50 @@
 configuration{
 	display-run: " ";
-	display-drun: "  ";
+	display-drun: " ";
 	display-window: "  ";
-	drun-display-format: "{name}";
-	font: "JetBrainsMono Nerd Font Medium 10";
+	font: "Iosevka Custom 10";
 	modi: "window,run,drun";
 }
 
 * {
-	red: rgba ( 215, 95, 95, 100 % );
-	magenta: rgba ( 212, 133, 173, 100 % );
-	orange: rgba ( 255, 135, 0, 100 % );
-	bg: rgba ( 38, 38, 38, 100 % );
-	bg-alt: rgba ( 58, 58, 58, 100 % );
-	background-color: @bg;
-	border: 0;
-	margin: 0;
-	padding: 0;
-	spacing: 0;
+  /* Size */
+  /* Sidebox */
+  mode-switcher-padding: 0 0 50% 0;
+  button-margin: 0.5em;
+  button-padding: 1.5em 2em;
+  button-selected-border: 0 0 0 0.3em;
+  /* Mainbox */
+  mainbox-padding: @button-margin; /* 0.5em */
+  inputbar-padding: @button-margin; /* 0.5em */
+  element-margin: 0.3em;
+  element-padding: 1em;
+
+  /* Color */
+
+  bg: rgba ( 40, 41, 54, 100 % );
+  sel-bg: rgba ( 58, 60, 78, 100 % );
+  fg: rgba ( 233, 233, 244, 100 % );
+
+  background-color: @bg;
+  text-color: @fg;
 }
 
-element {
- 	padding: 12;
-	orientation: vertical;
-	text-color: @red;
+#window {
+  location: center;
+  padding: 2em;
+  border: 3px;
+  border-color: @sel-bg;
 }
 
-element selected {
-  	text-color: @magenta;
-  	background-color: @bg-alt;
+#listview {
+  layout: vertical;
+  padding: 2em;
 }
 
-entry {
-        background-color: @bg-alt;
-	padding: 12 0 12 3;
-	text-color: @magenta;
+#element {
+  padding: 0.5em;
 }
 
-inputbar {
-	 children: [prompt, entry];
-}
-
-listview {
-columns: 1;
-lines: 8;
-}
-
-mainbox {
-  children: [inputbar, listview];
-}
-
-prompt {
-  background-color: @bg-alt;
-  enabled: true;
-  font: "Iosevka Custom 12";
-  padding: 12 0 0 12;
-  text-color: @magenta;
-}
-
-window {
-  transparency: "real";
+#element.selected {
+  background-color: @sel-bg; 
 }

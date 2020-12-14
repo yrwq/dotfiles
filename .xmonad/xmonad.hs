@@ -7,7 +7,6 @@ import Data.List (sortBy)
 import Data.Function (on)
 import Data.List as DL
 import Data.Char as DC
-import Data.Bifunctor
 import Data.Ratio
 import Data.Char (isSpace)
 import Data.Monoid
@@ -21,6 +20,16 @@ import XMonad.Layout.Accordion
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Spiral
 import XMonad.Layout.Grid
+
+import XMonad.Prompt
+import XMonad.Prompt.Input
+import XMonad.Prompt.FuzzyMatch
+import XMonad.Prompt.Man
+import XMonad.Prompt.Pass
+import XMonad.Prompt.Shell
+import XMonad.Prompt.Ssh
+import XMonad.Prompt.XMonad
+import Control.Arrow (first)
 
 import XMonad.Hooks.InsertPosition
 import XMonad.Hooks.ManageDocks
@@ -49,6 +58,16 @@ import XMonad.Util.EZConfig (additionalKeysP)
 import Control.Monad (forM_, join)
 import XMonad.Util.NamedWindows (getName)
 
+--
+-- Variables
+--
+
+myFont :: String
+myFont = "xft:Iosevka Custom:size=12"
+
+myTerminal :: String
+myTerminal = "$TERMINAL"
+
 myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = True
 
@@ -56,22 +75,28 @@ myClickJustFocuses :: Bool
 myClickJustFocuses = False
 
 myBorderWidth   = 2
+
 myModMask       = mod4Mask
+altMask = mod4Mask
 
 myEditor :: String
-myEditor = "emacsclient -c -a emacs " -- cuz im not autist.
-
-myFont = "xft:Iosevka Custom:size=12"
+myEditor = "emacsclient -c -a emacs "
 
 myWorkspaces    = ["1","2","3","4","5"]
 
-myTerminal = "$TERMINAL"
+myNormalBorderColor  = "#1d2021"
+myFocusedBorderColor = "#bdae93"
 
-clrbg = getColor "*background"
-clrfg = getColor "*foreground"
+--
+-- Autostart
+--
 
-myNormalBorderColor  = clrbg
-myFocusedBorderColor = clrfg
+myStartupHook = do
+              spawn "$HOME/.config/polybar/launch.sh &"
+              spawnOnce "picom &"
+              spawnOnce "dunst &"
+              spawnOnce "nitrogen --restore &"
+              spawnOnce "emacs --daemon &"
 
 myConfigs :: [(String, String, String)]
 myConfigs = [ ("aliases", myEditor ++ "~/.config/shell/aliasrc", "")
@@ -104,6 +129,10 @@ myConfigs = [ ("aliases", myEditor ++ "~/.config/shell/aliasrc", "")
             , ("dwm", myEditor ++ "~/.local/src/dwm/config.h", "")
             ]
 
+--
+-- treeselect often used applications
+--
+
 myApps :: [(String, String, String)]
 myApps = [ ("Firefox", "firefox", "Firefox web browser")
             , ("Qutebrowser", "qutebrowser", "Browser with vim bindings")
@@ -111,7 +140,11 @@ myApps = [ ("Firefox", "firefox", "Firefox web browser")
             , ("News", "st -c news -e newsboat", "")
             , ("Mail", "st -c mail -e neomutt", "")
             ]
-            
+
+--
+-- treeselect scripts
+--
+
 myScripts :: [(String, String, String)]
 myScripts = [ ("art", "art", "Notification with album art and current song")
             , ("chth", "chth", "Choose a theme")
@@ -144,6 +177,10 @@ myScripts = [ ("art", "art", "Notification with album art and current song")
             , ("dwm", myEditor ++ "~/.local/src/dwm/config.h", "")
             ]
 
+--
+-- treeselect
+--
+
 treeselectAction :: TS.TSConfig (X ()) -> X ()
 treeselectAction a = TS.treeselectAction a
    [ Node (TS.TSNode "applications" "a list of programs I use often" (return ()))
@@ -166,18 +203,6 @@ treeselectAction a = TS.treeselectAction a
      ]
    ]
 
-spawnSelected' :: [(String, String)] -> X ()
-spawnSelected' lst = gridselect conf lst >>= flip whenJust spawn
-    where conf = def
-                   { gs_cellheight   = 40
-                   , gs_cellwidth    = 200
-                   , gs_cellpadding  = 6
-                   , gs_originFractX = 0.5
-                   , gs_originFractY = 0.5
-                   , gs_font         = myFont
-                   }
-
--- Configuration options for treeSelect
 tsDefaultConfig :: TS.TSConfig a
 tsDefaultConfig = TS.TSConfig { TS.ts_hidechildren = True
                               , TS.ts_background   = 0xe61d2021 -- 90% transparent background
@@ -194,10 +219,6 @@ tsDefaultConfig = TS.TSConfig { TS.ts_hidechildren = True
                               , TS.ts_navigate     = myTreeNavigation
                               }
 
--- Keybindings for treeSelect menus. Use h-j-k-l to navigate.
--- Use 'o' and 'i' to move forward/back in the workspace history.
--- Single KEY's are for top-level nodes. SUPER+KEY are for the
--- second-level nodes. SUPER+ALT+KEY are third-level nodes.
 myTreeNavigation = M.fromList
     [ ((0, xK_Escape),   TS.cancel)
     , ((0, xK_Return),   TS.select)
@@ -208,25 +229,113 @@ myTreeNavigation = M.fromList
     , ((0, xK_l),        TS.moveChild)
     ]
 
+--
+-- Prompt
+--
+
+myXPConfig :: XPConfig
+myXPConfig = def
+      { font                = myFont
+      , bgColor             = "#1d2021"
+      , fgColor             = "#bdae93"
+      , bgHLight            = "#3c3836"
+      , fgHLight            = "#bdae93"
+      , borderColor         = "#3c3836"
+      , promptBorderWidth   = 4
+      , promptKeymap        = myXPKeymap
+      , position            = CenteredAt { xpCenterY = 0.3, xpWidth = 0.3 }
+      , height              = 20
+      , historySize         = 256
+      , historyFilter       = id
+      , defaultText         = []
+      , autoComplete        = Just 100000
+      , showCompletionOnTab = False
+      , searchPredicate     = fuzzyMatch
+      , alwaysHighlight     = True
+      , maxComplRows        = Nothing
+      }
+
+myXPConfig' :: XPConfig
+myXPConfig' = myXPConfig
+      { autoComplete        = Nothing
+      }
+
+promptList :: [(String, XPConfig -> X ())]
+promptList = [ ("m", manPrompt)          -- manpages prompt
+             , ("p", passPrompt)         -- get passwords (requires 'pass')
+             , ("g", passGeneratePrompt) -- generate passwords (requires 'pass')
+             , ("r", passRemovePrompt)   -- remove passwords (requires 'pass')
+             , ("s", sshPrompt)          -- ssh prompt
+             , ("x", xmonadPrompt)       -- xmonad prompt
+             ]
+
+myXPKeymap :: M.Map (KeyMask,KeySym) (XP ())
+myXPKeymap = M.fromList $
+     map (first $ (,) controlMask)   -- control + <key>
+     [ (xK_z, killBefore)            -- kill line backwards
+     , (xK_k, killAfter)             -- kill line forwards
+     , (xK_a, startOfLine)           -- move to the beginning of the line
+     , (xK_e, endOfLine)             -- move to the end of the line
+     , (xK_m, deleteString Next)     -- delete a character foward
+     , (xK_b, moveCursor Prev)       -- move cursor forward
+     , (xK_f, moveCursor Next)       -- move cursor backward
+     , (xK_BackSpace, killWord Prev) -- kill the previous word
+     , (xK_y, pasteString)           -- paste a string
+     , (xK_g, quit)                  -- quit out of prompt
+     , (xK_bracketleft, quit)
+     ]
+     ++
+     map (first $ (,) altMask)       -- meta key + <key>
+     [ (xK_BackSpace, killWord Prev) -- kill the prev word
+     , (xK_f, moveWord Next)         -- move a word forward
+     , (xK_b, moveWord Prev)         -- move a word backward
+     , (xK_d, killWord Next)         -- kill the next word
+     , (xK_n, moveHistory W.focusUp')   -- move up thru history
+     , (xK_p, moveHistory W.focusDown') -- move down thru history
+     ]
+     ++
+     map (first $ (,) 0) -- <key>
+     [ (xK_Return, setSuccess True >> setDone True)
+     , (xK_KP_Enter, setSuccess True >> setDone True)
+     , (xK_BackSpace, deleteString Prev)
+     , (xK_Delete, deleteString Next)
+     , (xK_Left, moveCursor Prev)
+     , (xK_Right, moveCursor Next)
+     , (xK_Home, startOfLine)
+     , (xK_End, endOfLine)
+     , (xK_Down, moveHistory W.focusUp')
+     , (xK_Up, moveHistory W.focusDown')
+     , (xK_Escape, quit)
+     ]
+
+
+--
+-- Keybinds
+--
+
 myKeys :: [(String, X ())]
 myKeys =
   [ ("M-<Return>", spawn "$TERMINAL")
     , ("M-S-<Return>", dwmpromote)
     , ("M-d", nextWS)
     , ("M-a", prevWS)
-    , ("M1-C-j", withFocused (keysResizeWindow (-10,-10) (1,1)))
-    , ("M1-C-k", withFocused (keysResizeWindow (10,10) (1,1)))
-    -- center focused window, x and y is half of your resolution
-    -- , ("M-c", withFocused (keysMoveWindowTo (x,y) (1%2,1%2)))
-    , ("M-c", withFocused (keysMoveWindowTo (640,512) (1/2,1/2)))
     , ("M-S-d", shiftToNext >> nextWS)
     , ("M-S-a", shiftToPrev >> prevWS)
-    , ("M-r", spawn "st -c files -e lf")
-    , ("M1-n", spawn "st -c news -e newsboat")
-    , ("M-m", spawn "st -c music -e ncmpcpp")
+    , ("M1-C-j", withFocused (keysResizeWindow (-10,-10) (1,1)))
+    , ("M1-C-k", withFocused (keysResizeWindow (10,10) (1,1)))
+    -- center focused window, x and y is should be half of your resolution
+    -- , ("M-c", withFocused (keysMoveWindowTo (x,y) (1%2,1%2)))
+    , ("M-c", withFocused (keysMoveWindowTo (640,512) (1/2,1/2)))
+    
     , ("M-s", spawn "rofi -show drun")
-    , ("M-S-s", spawn "dmenu_run")
-    , ("M-S-m", spawn "st -c mail -e neomutt")
+    -- , ("M-S-s", spawn "dmenu_run")
+
+    , ("C-g s", shellPrompt myXPConfig)
+    , ("C-g m", manPrompt myXPConfig)
+    , ("C-g p", passPrompt myXPConfig)
+    , ("C-g g", passGeneratePrompt myXPConfig)
+    , ("C-g r", passRemovePrompt myXPConfig)
+    
     , ("M-S-r", spawn "xmonad --recompile;xmonad --restart")
     , ("M-S-e", io exitSuccess)
     , ("M-y", spawn "ytw")
@@ -236,18 +345,19 @@ myKeys =
     , ("M1-<Up>", spawn "pamixer -i 5")
     , ("M1-<Down>", spawn "pamixer -d 5")
     , ("M1-y", spawn "nerdy")
-    , ("M1-e", spawn "rofimoji")
     , ("<Print>", spawn "lien -s -f")
     , ("M-<Print>", spawn "lien -a -f")
-    , ("M1-<Print>", spawn "rec start")
-    , ("S-<Print>", spawn "pkill ffmpeg")
-    , ("M-w", runOrRaise "firefox" (className =? "firefox"))
-    , ("M-S-w", spawn "surf")
+    , ("M-w", runOrRaise "qutebrowser" (className =? "qutebrowser"))
+    , ("M-S-w", spawn "surf duckduckgo.com")
     , ("M-x", runOrRaise "discocss" (className =?  "Discord"))
     , ("C-e e", spawn "emacsclient -c -a ''")                            -- start emacs
     , ("C-e b", spawn "emacsclient -c -a '' --eval '(ibuffer)'")         -- list emacs buffers
     , ("C-e d", spawn "emacsclient -c -a '' --eval '(dired nil)'")       -- dired emacs file manager
     , ("C-e t", spawn "emacsclient -c -a '' /mnt/doc/org/todo.org")
+    , ("M-r", spawn "st -c files -e lf")
+    , ("M1-q n", spawn "st -c news -e newsboat")
+    , ("M1-q m", spawn "st -c music -e ncmpcpp")
+    , ("M1-q e", spawn "st -c mail -e neomutt")
     , ("C-s s", treeselectAction tsDefaultConfig) -- edit configs
 
   ]
@@ -266,6 +376,10 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 
     ]
 
+--
+-- layouts
+--
+
 gapp = gaps [(U,35), (R,10), (D,10), (L,10)]
 
 myLayout = avoidStruts (gapp $ tiled ||| myaccord ||| myspiral ||| grid)
@@ -278,47 +392,12 @@ myLayout = avoidStruts (gapp $ tiled ||| myaccord ||| myspiral ||| grid)
      myaccord = spacing 5 $ Accordion
      grid = spacing 5 $ Grid
 
-
 myManageHook = insertPosition Below Newer <+> composeAll
     [ resource  =? "desktop_window" --> doIgnore
     , resource  =? "kdesktop"       --> doIgnore ]
 
 myEventHook = mconcat [ fullscreenEventHook
           ]
-
-myStartupHook = do
-              spawn "$HOME/.config/polybar/launch.sh &"
-              spawnOnce "picom &"
-              spawnOnce "dunst &"
-              spawnOnce "nitrogen --restore &"
-              spawnOnce "emacs --daemon &"
-
-updateGaps :: (Functor f, Bifunctor p) => (c -> d) -> f (p b c) -> f (p b d)
-updateGaps f = fmap $ bimap id f
-
-getFromXres :: String -> IO String
-getFromXres key = fromMaybe "" . findValue key <$> runProcessWithInput "xrdb" ["-query"] ""
-  where
-    findValue :: String -> String -> Maybe String
-    findValue xresKey xres =
-      snd <$> (
-                DL.find ((== xresKey) . fst)
-                $ catMaybes
-                $ splitAtColon
-                <$> lines xres
-              )
-
-    splitAtColon :: String -> Maybe (String, String)
-    splitAtColon str = splitAtTrimming str <$> (DL.elemIndex ':' str)
-
-    splitAtTrimming :: String -> Int -> (String, String)
-    splitAtTrimming str idx = bimap trim trim . (second tail) $ splitAt idx str
-
-    trim :: String -> String
-    trim = DL.dropWhileEnd (DC.isSpace) . DL.dropWhile (DC.isSpace)
-
-getColor :: String -> String
-getColor = unsafePerformIO . getFromXres
 
 main = do
   xmonad $ ewmh def {
