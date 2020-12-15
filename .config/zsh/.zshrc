@@ -81,27 +81,27 @@ autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
 
 # Start flavours
-# Base16 Zenburn
-# Author: elnawe
+# Base16 Material Darker
+# Author: Nate Peterson
 
 _gen_fzf_default_opts() {
 
-local color00='#383838'
-local color01='#404040'
-local color02='#606060'
-local color03='#6f6f6f'
-local color04='#808080'
-local color05='#dcdccc'
-local color06='#c0c0c0'
-local color07='#ffffff'
-local color08='#dca3a3'
-local color09='#dfaf8f'
-local color0A='#e0cf9f'
-local color0B='#5f7f5f'
-local color0C='#93e0e3'
-local color0D='#7cb8bb'
-local color0E='#dc8cc3'
-local color0F='#000000'
+local color00='#212121'
+local color01='#303030'
+local color02='#353535'
+local color03='#4A4A4A'
+local color04='#B2CCD6'
+local color05='#EEFFFF'
+local color06='#EEFFFF'
+local color07='#FFFFFF'
+local color08='#F07178'
+local color09='#F78C6C'
+local color0A='#FFCB6B'
+local color0B='#C3E88D'
+local color0C='#89DDFF'
+local color0D='#82AAFF'
+local color0E='#C792EA'
+local color0F='#FF5370'
 
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS"\
 " --color=bg+:$color01,bg:$color00,spinner:$color0C,hl:$color0D"\

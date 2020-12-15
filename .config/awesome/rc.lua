@@ -69,7 +69,8 @@ awful.screen.connect_for_each_screen(function(s)
 
     -- tags
     -- local tagnames = { "一", "二", "三", "四", "五" }
-    local tagnames = { "", "爵", "", "", "" }
+    -- local tagnames = { "", "爵", "", "", "" }
+    local tagnames = { "", "", "", "", "" }
     awful.tag(tagnames, s, layouts)
 end)
 

@@ -6,7 +6,7 @@ local awful = require("awful")
 local dpi = beautiful.xresources.apply_dpi
 local helpers = require("helpers")
 
--- require("module.notification.volume")
+require("module.notification.volume")
 
 naughty.config.defaults.ontop = true
 naughty.config.defaults.icon_size = dpi(80)
@@ -22,6 +22,6 @@ naughty.config.defaults.shape = helpers.rrect(10)
 naughty.config.padding = dpi(10)
 naughty.config.spacing = dpi(5)
 naughty.config.icon_dirs = {
-    "/usr/share/icons/Archdroid-Grey/apps/scalable/", "/usr/share/pixmaps/"
+    "/usr/share/icons/gruvbox-dark-icons-gtk/16x16/apps/", "/usr/share/pixmaps/"
 }
 naughty.config.icon_formats = {"png", "svg"}
