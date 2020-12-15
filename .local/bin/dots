@@ -55,6 +55,7 @@ cp $sharedir/applications $dotshare/ -r
 cp $sharedir/fonts $dotshare/ -r
 cp $sharedir/chars.csv $dotshare/ -r
 cp $bindir $dotdir/.local -r
+rm -rf $dotbin/ytw
 
 # home
 rm -rf $dotdir/.emacs.d
