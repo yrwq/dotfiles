@@ -92,7 +92,7 @@ label-urgent-foreground = ${colors.fg}
 label-urgent-underline = ${colors.bg}
 label-urgent-padding = 1
 
-label-empty = 
+label-empty = 
 label-empty-foreground = ${colors.fg}
 label-empty-underline = ${colors.bg}
 label-empty-padding = 1

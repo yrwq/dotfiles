@@ -9,7 +9,7 @@ else
 fi
 
 pulseaudio --start
-
+unclutter --timeout=1 &
 chth -r &
 setxkbmap hu
 sleep 1

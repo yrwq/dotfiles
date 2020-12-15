@@ -1,0 +1,16 @@
+#!/bin/sh
+#
+# list all scripts and run of them
+
+
+case $1 in
+	-c)
+		menu=$(ls ~/.local/bin/ | rofi -dmenu -i -matching fuzzy -p )
+		sh $menu >/dev/null 2>&1 &
+	;;
+esac
+
+if [ -z "$1" ]; then
+	fuzz=$(ls ~/.local/bin/ | fzf)
+	sh $fuzz >/dev/null 2>&1 &
+fi

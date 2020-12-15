@@ -21,6 +21,7 @@ import XMonad.Layout.Accordion
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Spiral
 import XMonad.Layout.Grid
+import XMonad.Layout.Drawer
 
 import XMonad.Prompt
 import XMonad.Prompt.Input
@@ -138,6 +139,7 @@ myKeys =
     , ("C-e e", spawn "emacsclient -c -a ''")
     , ("C-e t", spawn "emacsclient -c -a '' /mnt/doc/org/todo.org")
     , ("M-r", spawn "st -c files -e lf")
+    , ("M1-r", spawn "runs -c")
     , ("M1-q n", spawn "st -c news -e newsboat")
     , ("M1-q m", spawn "st -c music -e ncmpcpp")
     , ("M1-q e", spawn "st -c mail -e neomutt")
