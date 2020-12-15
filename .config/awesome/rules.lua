@@ -5,21 +5,21 @@ require("awful.autofocus")
 
 -- Determines how floating clients should be placed
 local floating_client_placement = function(c)
-    -- If the layout is floating or there are no other visible
-    -- clients, center client
-    if awful.layout.get(mouse.screen) ~= awful.layout.suit.floating or #mouse.screen.clients == 1 then
-        return awful.placement.centered(c,{honor_padding = true, honor_workarea=true})
-    end
-
+   -- If the layout is floating or there are no other visible
+   -- clients, center client
+   if awful.layout.get(mouse.screen) ~= awful.layout.suit.floating or #mouse.screen.clients == 1 then
+      return awful.placement.centered(c,{honor_padding = true, honor_workarea=true})
+   end
+   
     -- Else use this placement
-    local p = awful.placement.no_overlap + awful.placement.no_offscreen
-    return p(c, {honor_padding = true, honor_workarea=true, margins = beautiful.useless_gap * 2})
+   local p = awful.placement.no_overlap + awful.placement.no_offscreen
+   return p(c, {honor_padding = true, honor_workarea=true, margins = beautiful.useless_gap * 2})
 end
 
 local centered_client_placement = function(c)
-    return gears.timer.delayed_call(function ()
-        awful.placement.centered(c, {honor_padding = true, honor_workarea=true})
-    end)
+   return gears.timer.delayed_call(function ()
+	 awful.placement.centered(c, {honor_padding = true, honor_workarea=true})
+   end)
 end
 
 ruled.client.connect_signal("request::rules", function()
@@ -43,129 +43,127 @@ ruled.client.connect_signal("request::rules", function()
 
     -- Floating and centered clients
     ruled.client.append_rule {
-        id       = "floating",
-        rule_any = {
-            class    = {
-        		"music",
-            	"mail",
-            	"news",
-        		"Sxiv",
-            	"feh",
-            	"Surf",
-            	"Tor Browser",
-            	"Thunar",
-            	"Pavucontrol",
-            	"Lxappearance"
-            },
-            name    = {
-                "Event Tester",  -- xev.
-            },
-            role    = {
-                "AlarmWindow",    -- Thunderbird's calendar.
-                "ConfigManager",  -- Thunderbird's about:config.
-                "GtkFileChooserDialog", -- File chooser
-                "pop-up",         -- e.g. Google Chrome's (detached) Developer Tools.
-            },
-            type = {
-              "dialog",
-            }
-        },
-        properties = {
-          	floating = true,
-		  	width = awful.screen.focused().workarea.width * 0.8,
-        	height = awful.screen.focused().workarea.height * 0.8
-        },
-        callback = function (c)
+       id       = "floating",
+       rule_any = {
+	  class    = {
+	     "music",
+	     "mail",
+	     "news",
+	     "Sxiv",
+	     "feh",
+	     "Surf",
+	     "Tor Browser",
+	     "Thunar",
+	     "Pavucontrol",
+	     "Lxappearance"
+	  },
+	  name    = {
+	     "Event Tester",  -- xev.
+	  },
+	  role    = {
+	     "AlarmWindow",    -- Thunderbird's calendar.
+	     "ConfigManager",  -- Thunderbird's about:config.
+	     "GtkFileChooserDialog", -- File chooser
+	     "pop-up",         -- e.g. Google Chrome's (detached) Developer Tools.
+	  },
+	  type = {
+	     "dialog",
+	  }
+       },
+       properties = {
+	  floating = true,
+	  width = awful.screen.focused().workarea.width * 0.8,
+	  height = awful.screen.focused().workarea.height * 0.8
+       },
+       callback = function (c)
           awful.placement.centered(c)
-        end
+       end
     }
-
+    
     -- Add titlebars to normal clients and dialogs
     ruled.client.append_rule {
-        id         = "titlebars",
-        rule_any   = { type = { "normal", "dialog" } },
-        properties = { titlebars_enabled = true      }
+       id         = "titlebars",
+       rule_any   = { type = { "normal", "dialog" } },
+       properties = { titlebars_enabled = true      }
     }
-
+    
     -- File chooser dialog
     ruled.client.append_rule {
-        rule_any = { role = { "GtkFileChooserDialog" } },
-        properties = { floating = true, width = screen_width * 0.55, height = screen_height * 0.65 }
+       rule_any = { role = { "GtkFileChooserDialog" } },
+       properties = { floating = true, width = screen_width * 0.55, height = screen_height * 0.65 }
     }
     -- MPV
     ruled.client.append_rule {
-        rule = { class = "mpv" },
-        properties = {
+       rule = { class = "mpv" },
+       properties = {
           floating = true,
           width = 900,
           height = 700,
-        },
-        callback = function (c)
-            c.ontop = true
+       },
+       callback = function (c)
+	  c.ontop = true
         end
     }
 
-	ruled.client.append_rule {
-		rule = { class = "scratch" },
-      	properties = {
-			floating = true,
-			placement=awful.placement.centered
-		},
-        callback = function (c)
-            c.ontop = true
-        end
-	}
-
+    ruled.client.append_rule {
+       rule = { class = "scratch" },
+       properties = {
+	  floating = true,
+	  placement=awful.placement.centered
+       },
+       callback = function (c)
+	  c.ontop = true
+       end
+    }
+    
     -- i use tag 1 for terminals, but i use terminals on any other tags too
     -- tag 2
     -- browser
-    ruled.client.append_rule {
-        rule_any = {
-            class = {
-                "firefox",
-                "Nightly",
-                "brave-browser-dev",
-                "Brave-browser-dev",
-                "brave-dev",
-                "qutebrowser",
-            },
-        },
-        except_any = {
-            instance = { "Toolkit" },
-            type = { "dialog" }
-        },
-        properties = {
-			titlebars_enabled = false,
-			screen = 1,
-			tag = awful.screen.focused().tags[2]
-		},
-    }
+    -- ruled.client.append_rule {
+    --    rule_any = {
+    --         class = {
+    -- 	       "firefox",
+    -- 	       "Nightly",
+    -- 	       "brave-browser-dev",
+    -- 	       "Brave-browser-dev",
+    -- 	       "brave-dev",
+    -- 	       "qutebrowser",
+    --         },
+    --     },
+    --     except_any = {
+    --         instance = { "Toolkit" },
+    --         type = { "dialog" }
+    --     },
+    --     properties = {
+    -- 			titlebars_enabled = false,
+    -- 			screen = 1,
+    -- 			tag = awful.screen.focused().tags[2]
+    -- 		},
+    -- }
 
     -- tag 3
     -- editors
-    ruled.client.append_rule {
-        rule_any = {
-            class = {
-                "emacs",
-            },
-        },
-        properties = { screen = 1, tag = awful.screen.focused().tags[3] },
-    }
-
-
+    -- ruled.client.append_rule {
+    --     rule_any = {
+    --         class = {
+    --             "emacs",
+    --         },
+    --     },
+    --     properties = { screen = 1, tag = awful.screen.focused().tags[3] },
+    -- }
 
     -- tag 4
     -- chat
-    ruled.client.append_rule {
-        rule_any = {
-            class = {
-                "lightcord",
-				-- "discord",
-                "whatsapp-nativefier-dark",
-            },
-        },
-        properties = { screen = 1, tag = awful.screen.focused().tags[4] },
-    }
+    -- ruled.client.append_rule {
+    --     rule_any = {
+    --         class = {
+    --             "lightcord",
+    -- 		"discord",
+    --             "whatsapp-nativefier-dark",
+    --         },
+    --     },
+    --     properties = { screen = 1, tag = awful.screen.focused().tags[4] },
+    -- }
 
 end)
 

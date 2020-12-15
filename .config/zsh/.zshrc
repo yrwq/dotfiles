@@ -1,6 +1,4 @@
 #!/usr/bin/env zsh
-export PATH="$HOME/.bin:$PATH"
-export PATH="$HOME/.cargo/bin:$PATH"
 autoload -U colors && colors
 
 PS1='%F{magenta}%~%f %(?.%f.%F{red})%F{red} %f '
@@ -8,6 +6,16 @@ PS1='%F{magenta}%~%f %(?.%f.%F{red})%F{red} %f '
 setopt autocd		# Automatically cd into typed directory.
 stty stop undef		# Disable ctrl-s to freeze terminal.
 setopt interactive_comments
+
+# window titles
+precmd() {
+    printf '\033]0;%s\007' "$(dirs)"
+}
+
+command_not_found_handler() {
+    printf 'Not found ->\033[32;05;16m %s\033[0m \n' "$0" >&2
+    return 127
+}
 
 # History in cache directory:
 HISTSIZE=10000000
@@ -70,8 +78,6 @@ lfcd () {
 }
 bindkey -s '^o' 'lfcd\n'
 
-bindkey -s '^a' 'bc -lq\n'
-
 bindkey -s '^f' 'cd "$(dirname "$(fzf)")"\n'
 
 bindkey '^[[P' delete-char
@@ -80,28 +86,30 @@ bindkey '^[[P' delete-char
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
 
+# Fzf
+
 # Start flavours
-# Base16 Material Darker
-# Author: Nate Peterson
+# Base16 Gruvbox dark, hard
+# Author: Dawid Kurek (dawikur@gmail.com), morhetz (https://github.com/morhetz/gruvbox)
 
 _gen_fzf_default_opts() {
 
-local color00='#212121'
-local color01='#303030'
-local color02='#353535'
-local color03='#4A4A4A'
-local color04='#B2CCD6'
-local color05='#EEFFFF'
-local color06='#EEFFFF'
-local color07='#FFFFFF'
-local color08='#F07178'
-local color09='#F78C6C'
-local color0A='#FFCB6B'
-local color0B='#C3E88D'
-local color0C='#89DDFF'
-local color0D='#82AAFF'
-local color0E='#C792EA'
-local color0F='#FF5370'
+local color00='#1d2021'
+local color01='#3c3836'
+local color02='#504945'
+local color03='#665c54'
+local color04='#bdae93'
+local color05='#d5c4a1'
+local color06='#ebdbb2'
+local color07='#fbf1c7'
+local color08='#fb4934'
+local color09='#fe8019'
+local color0A='#fabd2f'
+local color0B='#b8bb26'
+local color0C='#8ec07c'
+local color0D='#83a598'
+local color0E='#d3869b'
+local color0F='#d65d0e'
 
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS"\
 " --color=bg+:$color01,bg:$color00,spinner:$color0C,hl:$color0D"\

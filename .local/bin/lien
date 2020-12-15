@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 # Lien
 # Dead simple file upload program
 # - Upload to a file host
@@ -66,10 +65,7 @@ copy() {
 screenshot() {
 	case $1 in
 		1)
-			read -r X Y W H < <(slop -f "%x %y %w %h" -b 4 -c 0.8,0.8,0.8,0.8 -t 0 )
-			g=${W}x${H}+${X}+${Y}
-            sleep "$2"
-			maim -g "$g" "$fname"
+			scrot -s "$fname"
 			;;
 		2)
 			maim -d "$2" "$fname"

@@ -8,7 +8,11 @@ local helpers = require("helpers")
 local apps = {}
 
 apps.org = function()
-	helpers.run_or_raise({class = 'emacs'}, false, "emacsclient -c")
+   helpers.run_or_raise({class = 'emacs'}, false, "emacsclient -c")
+end
+
+apps.todo = function()
+   awful.spawn.with_shell("emacsclient -c /mnt/doc/org/todo.org")
 end
 
 apps.news = function()

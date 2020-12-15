@@ -1,5 +1,14 @@
 #!/bin/sh
+# https://github.com/ym1234/colorpicker
+# Color picker
 
-color=$(colorpicker)
-convert -size 800x800 xc:${color} /tmp/color.png
-notify-send -i /tmp/color.png "${color}"
+clr_path="/tmp/color.png"
+
+color=$(colorpicker -od)
+
+if [[ -f "$clr_path" ]]; then
+    rm -rf $clr_path
+fi
+
+convert -size 100x100 xc:${color} $clr_path
+notify-send -i $clr_path "${color}"

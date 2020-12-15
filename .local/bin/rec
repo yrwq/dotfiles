@@ -3,7 +3,7 @@
 case "$@" in
 	start)
 		ffmpeg -f x11grab\
-    		-framerate 60 \
+    		-framerate 20 \
     		-thread_queue_size 512 \
     		-i "$DISPLAY".0+"$X","$Y"\
     		-vcodec libx264\

@@ -182,5 +182,5 @@ return {
     position = "top",
     size = size,
     bg_normal = bg_normal,
-    bg_focus = bg_focus
+    bg_focus = x.bg
 }

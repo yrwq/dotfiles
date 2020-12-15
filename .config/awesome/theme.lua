@@ -14,9 +14,9 @@ local theme = dofile(themes_path .. "default/theme.lua")
 theme.font = "Iosevka Custom 9"
 
 -- colors
-theme.bg_normal = x.trans40
-theme.bg_dark = x.transbg
-theme.bg_focus = x.transbg
+theme.bg_normal = x.bg
+theme.bg_dark = x.bg
+theme.bg_focus = x.bg
 theme.bg_urgent = x.color3
 theme.bg_minimize = x.trans40
 theme.bg_systray = x.trans
@@ -78,7 +78,7 @@ theme.mstab_border_radius = dpi(10)
 -- bling tabbar
 theme.tabbar_style = "modern"
 theme.tabbar_size = dpi(30)
-theme.tabbar_bg_focus = x.transbg
+theme.tabbar_bg_focus = x.bg
 theme.tabbar_bg_normal = x.trans40
 theme.tabbed_spawn_in_tab = true
 theme.tabbar_radius = dpi(3)

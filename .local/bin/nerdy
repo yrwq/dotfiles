@@ -5,7 +5,7 @@
 
 [ $# -eq 0 ] && {
     # get location of chars.csv relative to script
-    chars_csv="/home/$USER/.cache/chars.csv"
+    chars_csv="/home/$USER/.local/share/chars.csv"
 } || {
     chars_csv="${1}"
 }

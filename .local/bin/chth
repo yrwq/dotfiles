@@ -5,43 +5,60 @@
 rand=false
 flavours=true
 
-themes_path="$HOME/xfiles"
-wp_path="$HOME/.wp"
+# get current window manager
+wm=$(wmctrl -m | grep "Name:" | awk '{print $2}')
+
+# wallpaper
+wp=$(shuf -e -n1 ~/.wp/*)
+short_wp=$(echo $wp | sed "s|/home/$USER/.wp/||g" | sed 's/.png//g' )
 
 while getopts 'rc' flag; do
     case "${flag}" in
-		f)
-			flavours='true'
-			rand='false'
-			choose='false'
-			;;
+	f)
+	    flavours='true'
+	    rand='false'
+	    choose='false'
+	    ;;
         r)
             rand='true'
             choose='false'
-			flavours='false'
-			;;
+	    flavours='false'
+	    ;;
     esac
 done
 
 if [ $rand = 'true' ]; then
-	theme=$(flavours list | sed 's/ / \n/g' | grep -v light | sort -R |  head -n1)
+    theme=$(flavours list | sed 's/ / \n/g' | sort -R |  head -n1)
 fi
 
 if [ $flavours = 'true' ]; then
-	theme=$(flavours list | sed 's/ / \n/g' | grep -v light | rofi -dmenu)
+    theme=$(flavours list | sed 's/ / \n/g' | rofi -dmenu)
 fi
 
 [[ -z "$theme" ]] && { exit 1; }
-flavours apply $theme
-xrdb ~/.Xresources
 
-echo 'awesome.restart()' | awesome-client
-cat ~/.config/Lightcord_BD/themes/style.css | xclip -sel clip
+apply(){
+    flavours apply $theme
+    xrdb ~/.Xresources
+}
 
-wp=$(shuf -e -n1 ~/.wp/*)
-feh --bg-scale $wp
-short_wp=$(echo $wp | sed "s|/home/$USER/.wp/||g" | sed 's/.png//g' )
+restart(){
+    case $wm in
+	awesome)
+	    echo 'awesome.restart()' | awesome-client
+	    ;;
+	xmonad)
+	    pkill dunst
+	    dunst &
+	    xmonad --restart
+	    ;;
+    esac
+    feh --bg-scale $wp
+    pkill emacs
+    emacs --daemon &
+}
 
-notify-send "Successfully changed theme." "Theme: ${theme} \nWallpaper: ${short_wp}"
+apply
+restart
 
-# nitrogen --restore
+notify-send "Theme changed!" "Theme: ${theme} \nWallpaper: ${short_wp}"

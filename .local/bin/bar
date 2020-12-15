@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+running=$(pidof polybar)
+
+[[ -z "$running" ]] && { polybar main & };
+[[ "$running" ]] && { pkill polybar & };
