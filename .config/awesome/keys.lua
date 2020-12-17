@@ -4,15 +4,12 @@ local wibox = require("wibox")
 local apps = require("apps")
 local bling = require("bling")
 
-local scratchpad = require("module.scratchpad")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 
 modkey = "Mod4"
 shiftkey = "Shift"
 altkey = "Mod1"
 ctrlkey = "Control"
-
-local dashPop = require("candy.panel.dash")
 
 local function shift_focus_and_move_client(move_back)
    local t = client.focus and client.focus.first_tag or nil
@@ -43,10 +40,6 @@ end
 
 awful.keyboard.append_global_keybindings({
       
-      -- launch scratchpad terminal
-      awful.key({ modkey, ctrlkey }, "Return", function () scratchpad.toggle("st -c scratch", {class = "scratch"}) 	end,
-	 {description = "scratchpad terminal", group = "launch"}),
-      
 	-- show keys
       awful.key({ modkey }, "p",      hotkeys_popup.show_help),
       
@@ -56,10 +49,6 @@ awful.keyboard.append_global_keybindings({
 	       c:emit_signal("request::activate", "key.unminimize", {raise = true})
         end end,
 	 {description = "unminimize client", group = "client"}),
-      
-      -- toggle dashboard
-      awful.key({ altkey }, "q", function () dashPop.visible = not dashPop.visible end,
-	 {description = "dashboard", group = "ui"}),
       
       -- add client to tabbed
       awful.key({ altkey }, "a", function () bling.module.tabbed.pick() end,

@@ -1,0 +1,5 @@
+#!/bin/sh
+
+notify-send -u critical "critical"
+notify-send -u normal "normal"
+notify-send -u low "low"

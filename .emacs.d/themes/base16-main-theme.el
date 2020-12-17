@@ -12,7 +12,7 @@
 (require 'base16-theme)
 
 (defvar base16-main-colors
-  '(:base00 "#1d2021"
+  '(:base00 "#282828"
     :base01 "#3c3836"
     :base02 "#504945"
     :base03 "#665c54"

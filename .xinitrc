@@ -10,9 +10,10 @@ fi
 
 pulseaudio --start
 unclutter --timeout=1 &
+mpd-discord-rpc &
 chth -r &
 setxkbmap hu
 sleep 1
-# exec awesome
-exec xmonad
+exec awesome
+# exec xmonad
 # exec openbox-session

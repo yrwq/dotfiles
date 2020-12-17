@@ -3,8 +3,6 @@
 # Extract cover from audio file
 
 music_library="/mnt/music"
-# music_library="$HOME/Music"
-
 ext="$(mpc --format %file% current | sed 's/^.*\.//')"
 if [ "$ext" = "flac" ]; then
 	metaflac --export-picture-to=/tmp/mpd_cover.jpg \

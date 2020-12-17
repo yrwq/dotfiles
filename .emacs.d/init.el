@@ -2,10 +2,11 @@
 (defvar efs/default-font-size 100)
 (defvar efs/default-variable-font-size 100)
 
-;; Turn off backing up
+;; Turn off backing up and auto saving
 (setq make-backup-files nil)
 (add-to-list 'backup-directory-alist
              (cons tramp-file-name-regexp nil))
+(setq auto-save-default nil)
 
 ;; Initialize package sources
 (require 'package)
@@ -429,10 +430,9 @@
   :ensure t
   :init (elcord-mode))
 
-(use-package neotree
-  :ensure t)
-(global-set-key (kbd "C-c f") 'neotree-toggle)
-(setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+(use-package rainbow-mode
+  :ensure t
+  :init (rainbow-mode))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

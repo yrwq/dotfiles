@@ -51,7 +51,7 @@ bling.module.flash_focus.enable()
 -- layouts
 awful.layout.layouts = {
     awful.layout.suit.tile,
-    bling.layout.mstab,
+    -- bling.layout.mstab,
     bling.layout.centered,
     awful.layout.suit.floating,
 }
@@ -60,9 +60,9 @@ awful.screen.connect_for_each_screen(function(s)
     local l = awful.layout.suit
     local b = bling.layout
     local layouts = {
-      b.mstab,
       l.tile,
-      b.mstab,
+      l.tile,
+      l.tile,
       l.tile,
       l.tile,
     }
