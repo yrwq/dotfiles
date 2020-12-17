@@ -89,26 +89,26 @@ bindkey '^e' edit-command-line
 # Fzf
 
 # Start flavours
-# Base16 Gruvbox dark, medium
+# Base16 Gruvbox dark, pale
 # Author: Dawid Kurek (dawikur@gmail.com), morhetz (https://github.com/morhetz/gruvbox)
 
 _gen_fzf_default_opts() {
 
-local color00='#282828'
-local color01='#3c3836'
-local color02='#504945'
-local color03='#665c54'
-local color04='#bdae93'
-local color05='#d5c4a1'
-local color06='#ebdbb2'
-local color07='#fbf1c7'
-local color08='#fb4934'
-local color09='#fe8019'
-local color0A='#fabd2f'
-local color0B='#b8bb26'
-local color0C='#8ec07c'
-local color0D='#83a598'
-local color0E='#d3869b'
+local color00='#262626'
+local color01='#3a3a3a'
+local color02='#4e4e4e'
+local color03='#8a8a8a'
+local color04='#949494'
+local color05='#dab997'
+local color06='#d5c4a1'
+local color07='#ebdbb2'
+local color08='#d75f5f'
+local color09='#ff8700'
+local color0A='#ffaf00'
+local color0B='#afaf00'
+local color0C='#85ad85'
+local color0D='#83adad'
+local color0E='#d485ad'
 local color0F='#d65d0e'
 
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS"\

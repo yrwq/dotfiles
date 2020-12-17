@@ -1,5 +1,5 @@
 #!/bin/sh
-#  simple script to download from multiple places
+# simple script to download from multiple places
 
 fun() {
 	[ "$1" = m ] && return

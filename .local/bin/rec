@@ -1,19 +1,21 @@
 #!/bin/sh
+#
+# Record whole screen
 
 case "$@" in
-	start)
-		ffmpeg -f x11grab\
-    		-framerate 20 \
-    		-thread_queue_size 512 \
-    		-i "$DISPLAY".0+"$X","$Y"\
-    		-vcodec libx264\
-    		-qp 18\
-    		-preset ultrafast \
-    		"$HOME/etc/vid/rec/$(date +'%a_%I:%M').mp4" &
-			notify-send "  Recording started"
+    start)
+	ffmpeg -f x11grab\
+    	       -framerate 25 \
+    	       -thread_queue_size 512 \
+    	       -i "$DISPLAY".0+"$X","$Y"\
+    	       -vcodec libx264\
+    	       -qp 18\
+    	       -preset ultrafast \
+    	       "$HOME/etc/vid/rec/Rec_$(date +'%d_%I:%M').mp4" &
+	notify-send "  Recording started"
 	;;
-	stop)
-		killall ffmpeg
-		notify-send "  Recording stopped"
+    stop)
+	killall ffmpeg
+	notify-send "  Recording stopped"
 	;;
 esac

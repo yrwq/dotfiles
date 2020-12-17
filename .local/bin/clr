@@ -1,6 +1,6 @@
 #!/bin/sh
-# https://github.com/ym1234/colorpicker
 # Color picker
+# Requires: https://github.com/ym1234/colorpicker
 
 clr_path="/tmp/color.png"
 

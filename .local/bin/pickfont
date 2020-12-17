@@ -1,4 +1,6 @@
 #! /bin/sh
+#
+# 
 
 command -v "st" >"/dev/null" || exit 1
 

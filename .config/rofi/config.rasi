@@ -21,9 +21,9 @@ configuration{
 
   /* Color */
 
-  bg: rgba ( 40, 40, 40, 100 % );
-  sel-bg: rgba ( 60, 56, 54, 100 % );
-  fg: rgba ( 213, 196, 161, 100 % );
+  bg: rgba ( 38, 38, 38, 100 % );
+  sel-bg: rgba ( 58, 58, 58, 100 % );
+  fg: rgba ( 218, 185, 151, 100 % );
 
   background-color: @bg;
   text-color: @fg;

@@ -84,7 +84,7 @@ client.connect_signal("request::titlebars", function(c)
 						 function() c.floating = not c.floating end)
 			 
 			 local min = create_title_button(c, x.color3, x.color0)
-			 min:connect_signal("button::press", function() c.minimized = true end)
+			 min:connect_signal("button::press", function() c.fullscreen = true end)
 			 
 			 local top_bg = x.bg
 			 

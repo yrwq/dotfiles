@@ -37,24 +37,24 @@
     force_xinerama = false
 
 # Start flavours
-frame_color = "#d5c4a1"
-separator_color = "#d5c4a1"
+frame_color = "#dab997"
+separator_color = "#dab997"
 
 [base16_low]
     msg_urgency = low
-    background = "#282828"
-    foreground = "#d5c4a1"
+    background = "#262626"
+    foreground = "#dab997"
 	timeout = 3
 
 [base16_normal]
     msg_urgency = normal
-    background = "#3c3836"
-    foreground = "#d5c4a1"
+    background = "#3a3a3a"
+    foreground = "#dab997"
 	timeout = 5
 
 [base16_critical]
     msg_urgency = critical
-    background = "#d5c4a1"
-    foreground = "#282828"
+    background = "#dab997"
+    foreground = "#262626"
 	timeout = 15
 # End flavours
