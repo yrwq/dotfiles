@@ -1,25 +1,26 @@
-#!/bin/sh
-# Basic Settings
-set shell zsh
+#!/bin/bash
+set shell bash
 set shellopts '-eu'
 set ifs "\n"
 set scrolloff 10
+set icons
 set period 1
-set incsearch on
-set tabstop 4
-set drawbox on
-set findlen 0
-set hiddenfiles ".*:*.aux:*.log:*.synctex.gz:*.out:run.xml:lost+found"
+set hiddenfiles ".*:*.aux:*.log:*.bbl:*.bcf:*.blg:*.run.xml"
 
+# Vars that depend on environmental variables
+$lf -remote "send $id set previewer ${XDG_CONFIG_HOME:-$HOME/.config}/lf/scope"
+
+# cmds/functions
 cmd open ${{
     case $(file --mime-type $f -b) in
-        image/vnd.djvu|application/pdf) setsid -f zathura $fx >/dev/null 2>&1 ;;
+	image/vnd.djvu|application/pdf|application/octet-stream) setsid -f zathura $fx >/dev/null 2>&1 ;;
         text/*) $EDITOR $fx;;
-        text/docx) libreoffice $fx >/dev/null 2>&1;;
-        image/x-xcf|image/svg+xml) setsid -f gimp $f >/dev/null 2>&1 ;;
-        image/*) sxiv $f ;;
-        audio/*) mpv --audio-display=no $f ;;
-        video/*) setsid -f mpv $f -quiet >/dev/null 2>&1 ;;
+	image/x-xcf) setsid -f gimp $f >/dev/null 2>&1 ;;
+	image/svg+xml) display -- $f ;;
+	image/*) rotdir $f | grep -i "\.\(png\|jpg\|jpeg\|gif\|webp\|tif\|ico\)\(_large\)*$" | sxiv -aio 2>/dev/null | lf-select ;;
+	audio/*) mpv --audio-display=no $f ;;
+	video/*) setsid -f mpv $f -quiet >/dev/null 2>&1 ;;
+	application/pdf|application/vnd*|application/epub*) setsid -f zathura $fx >/dev/null 2>&1 ;;
         *) for f in $fx; do setsid -f $OPENER $f >/dev/null 2>&1; done;;
     esac
 }}
@@ -32,36 +33,34 @@ cmd delete ${{
 	printf "%s\n\t" "$fx"
 	printf "delete?[y/N]"
 	read ans
-	[ $ans = "y" ] && rm -rf $fx
+	[ $ans = "y" ] && rm -rf -- $fx
 }}
 
 cmd moveto ${{
 	clear; tput cup $(($(tput lines)/3)); tput bold
 	set -f
 	clear; echo "Move to where?"
-	dest="$(cut -d'	' -f2- ${XDG_CONFIG_HOME:-$HOME/.config}/directories | fzf | sed 's|~|$HOME|' )" &&
+	dest="$(cut -d'	' -f2- ${XDG_CONFIG_HOME:-$HOME/.config}/shell/bm-dirs | fzf | sed 's|~|$HOME|' )" &&
 	for x in $fx; do
 		eval mv -iv \"$x\" \"$dest\"
 	done &&
-	notify-send " File(s) moved." "File(s) moved to $dest."
+	notify-send "🚚 File(s) moved." "File(s) moved to $dest."
 }}
 
 cmd copyto ${{
 	clear; tput cup $(($(tput lines)/3)); tput bold
 	set -f
 	clear; echo "Copy to where?"
-	dest="$(cut -d'	' -f2- ${XDG_CONFIG_HOME:-$HOME/.config}/directories | fzf | sed 's|~|$HOME|' )" &&
+	dest="$(cut -d'	' -f2- ${XDG_CONFIG_HOME:-$HOME/.config}/shell/bm-dirs | fzf | sed 's|~|$HOME|' )" &&
 	for x in $fx; do
 		eval cp -ivr \"$x\" \"$dest\"
 	done &&
-	notify-send "  File(s) copied." "File(s) copies to $dest."
+	notify-send "📋 File(s) copied." "File(s) copies to $dest."
 }}
 
 cmd on-cd &{{
 	printf "\033]0; lf - $(pwd | sed "s|$HOME|~|")\007" > /dev/tty
 }}
-
-# also run at startup
 on-cd
 
 cmd bulkrename $vidir

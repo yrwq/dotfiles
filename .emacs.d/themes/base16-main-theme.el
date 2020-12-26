@@ -4,7 +4,7 @@
 ;; Base16: (https://github.com/chriskempson/base16)
 
 ;;; Authors:
-;; Scheme: Nate Peterson
+;; Scheme: arcticicestudio
 ;; Template: Kaleb Elwert <belak@coded.io>
 
 ;;; Code:
@@ -12,22 +12,22 @@
 (require 'base16-theme)
 
 (defvar base16-main-colors
-  '(:base00 "#212121"
-    :base01 "#303030"
-    :base02 "#353535"
-    :base03 "#4A4A4A"
-    :base04 "#B2CCD6"
-    :base05 "#EEFFFF"
-    :base06 "#EEFFFF"
-    :base07 "#FFFFFF"
-    :base08 "#F07178"
-    :base09 "#F78C6C"
-    :base0A "#FFCB6B"
-    :base0B "#C3E88D"
-    :base0C "#89DDFF"
-    :base0D "#82AAFF"
-    :base0E "#C792EA"
-    :base0F "#FF5370")
+  '(:base00 "#2E3440"
+    :base01 "#3B4252"
+    :base02 "#434C5E"
+    :base03 "#4C566A"
+    :base04 "#D8DEE9"
+    :base05 "#E5E9F0"
+    :base06 "#ECEFF4"
+    :base07 "#8FBCBB"
+    :base08 "#88C0D0"
+    :base09 "#81A1C1"
+    :base0A "#5E81AC"
+    :base0B "#BF616A"
+    :base0C "#D08770"
+    :base0D "#EBCB8B"
+    :base0E "#A3BE8C"
+    :base0F "#B48EAD")
   "All colors for Base16 main are defined here.")
 
 ;; Define the theme

@@ -6,6 +6,10 @@ else
 	. "$HOME/.xprofile"
 fi
 
+eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh) &
+
+export SSH_AUTH_SOCK &
+
 unclutter --timeout=1 &
 mpd-discord-rpc &
 chth -r &

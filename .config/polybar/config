@@ -17,7 +17,7 @@ font-0 = Iosevka Custom:pixelsize=10;1
 font-1 = Iosevka Nerd Font:pixelsize=10;1
 separator = " "
 line-size = 2
-modules-left = title
+modules-left = title ;polywins
 modules-center = ewmh
 modules-right = downspeed sep disk sep pkg sep pulseaudio sep date
 override-redirect = true

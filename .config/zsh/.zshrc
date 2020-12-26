@@ -92,27 +92,27 @@ bindkey '^e' edit-command-line
 # Fzf
 
 # Start flavours
-# Base16 Material Darker
-# Author: Nate Peterson
+# Base16 Nord
+# Author: arcticicestudio
 
 _gen_fzf_default_opts() {
 
-local color00='#212121'
-local color01='#303030'
-local color02='#353535'
-local color03='#4A4A4A'
-local color04='#B2CCD6'
-local color05='#EEFFFF'
-local color06='#EEFFFF'
-local color07='#FFFFFF'
-local color08='#F07178'
-local color09='#F78C6C'
-local color0A='#FFCB6B'
-local color0B='#C3E88D'
-local color0C='#89DDFF'
-local color0D='#82AAFF'
-local color0E='#C792EA'
-local color0F='#FF5370'
+local color00='#2E3440'
+local color01='#3B4252'
+local color02='#434C5E'
+local color03='#4C566A'
+local color04='#D8DEE9'
+local color05='#E5E9F0'
+local color06='#ECEFF4'
+local color07='#8FBCBB'
+local color08='#88C0D0'
+local color09='#81A1C1'
+local color0A='#5E81AC'
+local color0B='#BF616A'
+local color0C='#D08770'
+local color0D='#EBCB8B'
+local color0E='#A3BE8C'
+local color0F='#B48EAD'
 
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS"\
 " --color=bg+:$color01,bg:$color00,spinner:$color0C,hl:$color0D"\
