@@ -31,7 +31,6 @@ cp $confdir/ranger $dotconf/ -r
 cp $confdir/rofi $dotconf/ -r
 cp $confdir/shell $dotconf/ -r
 cp $confdir/termite $dotconf/ -r
-cp $confdir/x11 $dotconf/ -r
 cp $confdir/zsh $dotconf/ -r
 cp $confdir/directories $dotconf/ -r
 cp $confdir/mimeapps.list $dotconf/ -r
