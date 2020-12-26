@@ -3,7 +3,7 @@ local gears = require("gears")
 local awful = require("awful")
 
 awful.spawn.with_shell("picom")
-awful.spawn.with_shell("mpd")
+awful.spawn.with_shell("mopidy")
 
 editor = "st -c editor -e nvim"
 terminal = "st"
@@ -17,7 +17,6 @@ local beautiful = require("beautiful")
 local xrdb = beautiful.xresources.get_current_theme()
 
 x = {
-    --           xrdb variable
     bg = xrdb.background,
     fg = xrdb.foreground,
     trans = "#00000000",   -- fully transparent
@@ -51,9 +50,11 @@ bling.module.flash_focus.enable()
 -- layouts
 awful.layout.layouts = {
     awful.layout.suit.tile,
-    -- bling.layout.mstab,
+    bling.layout.mstab,
     bling.layout.centered,
-    awful.layout.suit.floating,
+    awful.layout.suit.fair,
+    awful.layout.suit.tile.bottom,
+    awful.layout.suit.tile.top,
 }
 
 awful.screen.connect_for_each_screen(function(s)
@@ -65,6 +66,7 @@ awful.screen.connect_for_each_screen(function(s)
       l.tile,
       l.tile,
       l.tile,
+      l.fair,
     }
 
     -- tags

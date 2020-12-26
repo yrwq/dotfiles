@@ -4,15 +4,21 @@ local wibox = require("wibox")
 local naughty = require("naughty")
 local beautiful = require("beautiful")
 local helpers = require("helpers")
-
+local naughty = require("naughty")
 local apps = {}
 
+-- I define often used applications here so i can easily start them later
+
 apps.org = function()
-   helpers.run_or_raise({class = 'Emacs'}, false, "emacsclient -c")
+   awful.spawn.with_shell("emacsclient -c")
+end
+
+apps.notif_toggle = function()
+   naughty.toggle()
 end
 
 apps.todo = function()
-   awful.spawn.with_shell("emacsclient -c /mnt/doc/org/todo.org")
+   awful.spawn.with_shell("emacsclient -c ~/doc/agenda.org")
 end
 
 apps.news = function()
@@ -20,7 +26,7 @@ apps.news = function()
 end
 
 apps.browser = function ()
-   awful.spawn.with_shell("qutebrowser yrwq.github.io/termstart")
+   awful.spawn.with_shell("brave-dev yrwq.github.io/termstart")
 end
 
 apps.file_manager = function ()
@@ -37,6 +43,10 @@ end
 
 apps.volume = function ()
    awful.spawn.with_shell("st -c volume -e pulsemixer")
+end
+
+apps.syncmail = function ()
+   awful.spawn.with_shell("syncmail")
 end
 
 apps.editor = function ()

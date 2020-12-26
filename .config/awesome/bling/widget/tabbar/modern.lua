@@ -15,10 +15,10 @@ local size = beautiful.tabbar_size or dpi(40)
 local border_radius =
     beautiful.mstab_border_radius or beautiful.border_radius or 6
 local position = beautiful.tabbar_orientation or "top"
-local close_color = beautiful.tabbar_color_close or beautiful.xcolor1 or
+local close_color = beautiful.tabbar_color_close or x.color1 or
                         "#f9929b"
-local min_color = beautiful.tabbar_color_min or beautiful.xcolor3 or "#fbdf90"
-local float_color = beautiful.tabbar_color_float or beautiful.xcolor5 or
+local min_color = beautiful.tabbar_color_min or x.color3 or "#fbdf90"
+local float_color = beautiful.tabbar_color_float or x.color5 or
                         "#ccaced"
 
 -- Helper to create buttons
@@ -111,6 +111,10 @@ local function create(c, focused_bool, buttons)
     if focused_bool then
         tab_content = wibox.widget {
             {
+                {min, floating, close, layout = wibox.layout.fixed.horizontal},
+                top = dpi(10),
+                left = dpi(10),
+                bottom = dpi(10),
                 widget = wibox.container.margin
             },
 			{
@@ -119,10 +123,6 @@ local function create(c, focused_bool, buttons)
 				widget = wibox.container.margin
 			},
             {
-                {min, floating, close, layout = wibox.layout.fixed.horizontal},
-                top = dpi(10),
-                right = dpi(10),
-                bottom = dpi(10),
                 widget = wibox.container.margin
             },
             expand = "none",

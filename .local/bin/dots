@@ -65,7 +65,7 @@ mkdir -p $dotdir/.xmonad
 
 cp $HOME/.emacs.d/init.el $dotdir/.emacs.d/ -r
 cp $HOME/.emacs.d/themes/base16-main-theme.el $dotdir/.emacs.d/themes/ -r
-cp $HOME/.xmonad/xmonad.hs $dotdir/.xmonad/ -r
+# cp $HOME/.xmonad/xmonad.hs $dotdir/.xmonad/ -r
 cp $HOME/.zprofile $dotdir/ -r
 cp $HOME/.Xresources $dotdir/ -r
 cp $HOME/.xprofile $dotdir/ -r

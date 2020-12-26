@@ -7,23 +7,20 @@ flavours=true
 
 # get current window manager
 wm=$(wmctrl -m | grep "Name:" | awk '{print $2}')
-
-# wallpaper
-wp=$(shuf -e -n1 ~/.wp/*)
-short_wp=$(echo $wp | sed "s|/home/$USER/.wp/||g" | sed 's/.png//g' )
+wp_dir="$HOME/.wp"
 
 while getopts 'rc' flag; do
     case "${flag}" in
-	f)
-	    flavours='true'
-	    rand='false'
-	    choose='false'
-	    ;;
-        r)
-            rand='true'
-            choose='false'
-	    flavours='false'
-	    ;;
+    f)
+        flavours='true'
+        rand='false'
+        choose='false'
+        ;;
+    r)
+        rand='true'
+        choose='false'
+        flavours='false'
+        ;;
     esac
 done
 
@@ -42,23 +39,35 @@ apply(){
     xrdb ~/.Xresources
 }
 
-restart(){
+
+res(){
     case $wm in
-	awesome)
-	    echo 'awesome.restart()' | awesome-client
-	    ;;
-	xmonad)
-	    pkill dunst
-	    dunst &
-	    xmonad --restart
-	    ;;
+    awesome)
+        echo 'awesome.restart()' | awesome-client
+        ;;
+    xmonad)
+        pkill dunst
+        dunst &
+        xmonad --restart
+        ;;
     esac
-    feh --bg-scale $wp
+
+
+	if [ $theme = "clow-dark" ]
+  	then
+    	wp=$wp_dir/gray_mountains.jpg
+	else
+		wp=$(shuf -e -n1 ~/.wp/*)
+	fi
+
+	feh --bg-scale $wp
     pkill emacs
     emacs --daemon &
+
 }
 
 apply
-restart
+res
 
+short_wp=$(echo $wp | sed "s|/home/$USER/.wp/||g" | sed 's/.png//g' | sed 's/.jpg//g' )
 notify-send "Theme changed!" "Theme: ${theme} \nWallpaper: ${short_wp}"

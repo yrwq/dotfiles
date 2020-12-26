@@ -19,11 +19,11 @@ theme.bg_dark = x.bg
 theme.bg_focus = x.bg
 theme.bg_urgent = x.color3
 theme.bg_minimize = x.trans40
-theme.bg_systray = x.trans
+theme.bg_systray = x.bg
 theme.fg_normal = x.fg
-theme.fg_focus = x.color1
+theme.fg_focus = x.color5
 theme.fg_urgent = x.color3
-theme.fg_minimize = x.fg
+theme.fg_minimize = x.color8
 
 -- hotkeys
 theme.hotkeys_bg = x.bg
@@ -40,24 +40,26 @@ theme.taglist_squares_sel = theme_assets.taglist_squares_sel(
 theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
                                   taglist_square_size, theme.fg_normal)
 theme.taglist_fg_empty = x.color0
-theme.taglist_fg_occupied = x.color13
+theme.taglist_fg_occupied = x.fg
 theme.taglist_fg_urgent = x.color11
-theme.taglist_fg_focus = x.color5
+theme.taglist_fg_focus = x.color4
 theme.taglist_bg_empty = x.trans
 theme.taglist_bg_occupied = x.trans
 theme.taglist_bg_urgent = x.trans
-theme.taglist_bg_focus = x.color8 .. "90"
+theme.taglist_bg_focus = x.trans
 theme.taglist_font = "Iosevka Nerd Font Mono 16"
 
 -- tasklist
 theme.tasklist_font = theme.font
-theme.tasklist_fg_focus = x.fg
+theme.tasklist_fg_focus = x.color4
+theme.tasklist_fg_urgent = x.color3
 theme.tasklist_fg_normal = x.color8
 
 -- other
 theme = theme_assets.recolor_layout(theme, x.fg)
 theme.wibar_height = dpi(35)
 theme.systray_icon_spacing = dpi(8)
+theme.systray_icon_size = dpi(20)
 theme.useless_gap = dpi(10)
 theme.gap_single_client = true
 theme.border_width = dpi(0)
@@ -66,7 +68,7 @@ theme.border_focus = x.color9
 theme.bar_radius = dpi(7)
 theme.border_radius = dpi(30)
 theme.client_radius = dpi(30)
-theme.titlebar_size = dpi(25)
+theme.titlebar_size = dpi(30)
 
 
 -- bling mstab

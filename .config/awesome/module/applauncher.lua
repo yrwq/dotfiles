@@ -13,7 +13,7 @@ local function create_button(symbol, color, hover_color, cmd, key)
         markup = helpers.colorize_text(symbol, color),
         align = "center",
         valign = "center",
-        font = "Hasklug Nerd Font 50",
+        font = "Iosevka Nerd Font 50",
         forced_width = dpi(180),
         forced_height = dpi(200),
         widget = wibox.widget.textbox
@@ -61,14 +61,17 @@ local function create_button(symbol, color, hover_color, cmd, key)
 end
 
 -- Create app buttons
-local browser = create_button("爵", x.color8, x.fg, apps.browser, "q")
-local discord = create_button("", x.color8, x.fg, apps.discord, "w")
-local mail = create_button("", x.color8, x.fg, apps.mail, "e")
-local news = create_button("", x.color8, x.fg, apps.news, "r")
-local lxappearance = create_button("嗀", x.color8, x.fg, apps.lxappearance, "a")
-local volume = create_button("奔", x.color8, x.fg, apps.volume, "s")
-local nitrogen = create_button("", x.color8, x.fg, apps.nitrogen, "d")
-local yt = create_button("", x.color8, x.fg, apps.youtube, "f")
+local browser = create_button("爵", x.color1, x.fg, apps.browser, "q")
+local discord = create_button("", x.color2, x.fg, apps.discord, "w")
+local mail = create_button("", x.color3, x.fg, apps.mail, "e")
+local news = create_button("", x.color4, x.fg, apps.news, "r")
+local lxappearance = create_button("嗀", x.color1, x.fg, apps.lxappearance, "a")
+local volume = create_button("奔", x.color2, x.fg, apps.volume, "s")
+local nitrogen = create_button("", x.color3, x.fg, apps.nitrogen, "d")
+local yt = create_button("", x.color4, x.fg, apps.youtube, "f")
+local todo = create_button("", x.color1, x.fg, apps.todo, "t")
+local syncmail = create_button("痢", x.color2, x.fg, apps.syncmail, "z")
+local nottogle = create_button("", x.color2, x.fg, apps.notif_toggle, "u")
 
 -- Create the widget
 app_drawer = wibox({visible = false, ontop = true, type = "dock"})
@@ -178,6 +181,7 @@ app_drawer:setup {
         -- Stripes
         create_stripe({ browser, discord, mail, news}, "#00000000"),
         create_stripe({ lxappearance, volume, nitrogen, yt}, "#00000000"),
+        create_stripe({ todo, syncmail, nottogle}, "#00000000"),
         layout = wibox.layout.flex.vertical
     },
     bg = x.bg .. "A0",

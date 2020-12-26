@@ -11,15 +11,6 @@
 # start = '# Start flavours' (if not rewriting, where to start replacing)
 # end = '# End flavours' (if not rewriting, where to stop replacing)
 # hook = '' (command to execute after injecting)
-#
-# Example for i3
-#
-# [[item]]
-# file = '~/.config/i3/config'
-# template = 'i3'
-# subtemplate = 'colors'
-# hook = 'i3-msg reload'
-# rewrite = false
 
 [[item]]
 file = '~/.Xresources'
@@ -37,11 +28,6 @@ file = '~/.config/rofi/config.rasi'
 template = 'rofi'
 rewrite = true
 
-[[item]]
-file = '~/.config/qutebrowser/config.py'
-template = 'qutebrowser'
-subtemplate = 'minimal'
-
 # [[item]]
 # file= '~/.config/zathura/zathurarc'
 # template = 'zathura'
@@ -52,11 +38,6 @@ template = 'fzf'
 rewrite = false
 
 [[item]]
-file= '~/.emacs.d/themes/base16-main-theme.el'
-template = 'emacs'
-rewrite = true
-
-[[item]]
 file = '~/.config/discocss/custom.css'
 template = 'styles'
 subtemplate = 'css-variables'
@@ -65,9 +46,9 @@ start= '/* Start flav */'
 end = '/* End flav */'
 
 [[item]]
-file = '~/.config/dunst/dunstrc'
-template = 'dunst'
-rewrite = false
+file = '~/.emacs.d/themes/base16-main-theme.el'
+template = 'emacs'
+rewrite = true
 
 # [[item]]
 # file = '~/.config/surf/styles/default.css'

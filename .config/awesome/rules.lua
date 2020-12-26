@@ -18,7 +18,7 @@ end
 
 local centered_client_placement = function(c)
    return gears.timer.delayed_call(function ()
-	 awful.placement.centered(c, {honor_padding = true, honor_workarea=true})
+         awful.placement.centered(c, {honor_padding = true, honor_workarea=true})
    end)
 end
 
@@ -104,66 +104,6 @@ ruled.client.connect_signal("request::rules", function()
 	  c.ontop = true
         end
     }
-
-    ruled.client.append_rule {
-       rule = { class = "scratch" },
-       properties = {
-	  floating = true,
-	  placement=awful.placement.centered
-       },
-       callback = function (c)
-	  c.ontop = true
-       end
-    }
-    
-    -- i use tag 1 for terminals, but i use terminals on any other tags too
-    -- tag 2
-    -- browser
-    -- ruled.client.append_rule {
-    --    rule_any = {
-    --         class = {
-    -- 	       "firefox",
-    -- 	       "Nightly",
-    -- 	       "brave-browser-dev",
-    -- 	       "Brave-browser-dev",
-    -- 	       "brave-dev",
-    -- 	       "qutebrowser",
-    --         },
-    --     },
-    --     except_any = {
-    --         instance = { "Toolkit" },
-    --         type = { "dialog" }
-    --     },
-    --     properties = {
-    -- 			titlebars_enabled = false,
-    -- 			screen = 1,
-    -- 			tag = awful.screen.focused().tags[2]
-    -- 		},
-    -- }
-
-    -- tag 3
-    -- editors
-    -- ruled.client.append_rule {
-    --     rule_any = {
-    --         class = {
-    --             "emacs",
-    --         },
-    --     },
-    --     properties = { screen = 1, tag = awful.screen.focused().tags[3] },
-    -- }
-
-    -- tag 4
-    -- chat
-    -- ruled.client.append_rule {
-    --     rule_any = {
-    --         class = {
-    --             "lightcord",
-    -- 		"discord",
-    --             "whatsapp-nativefier-dark",
-    --         },
-    --     },
-    --     properties = { screen = 1, tag = awful.screen.focused().tags[4] },
-    -- }
 
 end)
 

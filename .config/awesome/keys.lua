@@ -41,14 +41,18 @@ end
 awful.keyboard.append_global_keybindings({
       
 	-- show keys
-      awful.key({ modkey }, "p",      hotkeys_popup.show_help),
+   awful.key({ modkey }, "p",      hotkeys_popup.show_help),
       
-      -- unminimize
-      awful.key({modkey, shiftkey }, "n", function() local c = awful.client.restore()
-	    if c then
-	       c:emit_signal("request::activate", "key.unminimize", {raise = true})
-        end end,
-	 {description = "unminimize client", group = "client"}),
+   -- unminimize
+   awful.key({modkey, shiftkey }, "n", function() local c = awful.client.restore()
+	   if c then
+	      c:emit_signal("request::activate", "key.unminimize", {raise = true})
+      end end,
+      {description = "unminimize client", group = "client"}),
+
+      -- destroy notifs
+      awful.key({ ctrlkey }, "space", function () naughty.destroy_all_notifications() end,
+	 {description = "destroy all notifications", group = "awesome"}),
       
       -- add client to tabbed
       awful.key({ altkey }, "a", function () bling.module.tabbed.pick() end,
@@ -102,11 +106,8 @@ awful.keyboard.append_global_keybindings({
       awful.key({ modkey }, "s", function() app_drawer_show() end,
 	 {description = "app launcher", group = "launch"}),
 
-    awful.key({ modkey }, "e", apps.editor,
+    awful.key({ modkey }, "e", apps.org,
 		{description = "editor", group = "launch"}),
-
-    awful.key({ altkey, shiftkey }, "e", apps.org,
-		{description = "emacs", group = "launch"}),
 
     awful.key({ modkey }, "m", apps.music,
 		{description = "music player", group = "launch"}),
@@ -149,12 +150,20 @@ awful.keyboard.append_global_keybindings({
     -- decrease volume
     awful.key({ altkey }, "Down",     function () awful.spawn.with_shell("pamixer --allow-boost -d 5") end,
 		{description = "decrease volume", group = "launch"}),
-
-	-- toggle music on/off
+    
+    -- toggle music on/off
     awful.key({ altkey }, "space",  function() awful.spawn.with_shell("mpc toggle") end,
-		{description = "toggle music", group = "launch"}),
+       {description = "toggle music", group = "launch"}),
 
-	-- toggle volume on/off
+    -- seek music +5
+    awful.key({ altkey }, "Right",  function() awful.spawn.with_shell("mpc seek +5%") end,
+       {description = "seek music +5", group = "launch"}),
+    
+    -- seek music -5
+    awful.key({ altkey }, "Left",  function() awful.spawn.with_shell("mpc seek -5%") end,
+		{description = "seek music -5", group = "launch"}),
+    
+    -- toggle volume on/off
     awful.key({ altkey }, "m", function() awful.spawn.with_shell("amixer set Master toggle") end,
 		{description = "toggle volume", group = "launch"}),
 
@@ -229,8 +238,6 @@ awful.keyboard.append_global_keybindings({
     awful.key({ modkey}, "Return", function () awful.spawn(terminal) end,
 		{description = "terminal", group = "launch"}),
 
-    awful.key({ altkey }, "Return", function () awful.spawn.with_shell("termite") end,
-		{description = "alternative terminal", group = "launch"})
 })
 
 client.connect_signal("request::default_keybindings", function()
@@ -238,6 +245,7 @@ client.connect_signal("request::default_keybindings", function()
 
 	-- fullscreen client
     awful.key({ modkey }, "f", function (c)
+		awful.titlebar.toggle(c)
 		c.fullscreen = not c.fullscreen
         c:raise() end,
 	{description = "fullscreen focused client", group = "client"}),

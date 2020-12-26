@@ -144,18 +144,19 @@ awful.screen.connect_for_each_screen(function(s)
       }
 end)
 
-local function no_wibar_ontop(c)
+local function no_wibar_visble(c)
    local s = awful.screen.focused()
-   if c.fullscreen then
-      s.mywibox.ontop = false
-   else
-      s.mywibox.ontop = true
-   end
+   s.mywibox.visible = not s.mywibox.visible
 end
 
-client.connect_signal("focus", no_wibar_ontop)
-client.connect_signal("unfocus", no_wibar_ontop)
-client.connect_signal("property::fullscreen", no_wibar_ontop)
+local function no_wibar(c)
+   local s = awful.screen.focused()
+   s.mywibox.visible = false
+end
+
+client.connect_signal("focus", no_wibar_visble)
+client.connect_signal("unfocus", no_wibar_visble)
+client.connect_signal("property::fullscreen", no_wibar)
 
 -- Every bar theme should provide these fuctions
 function wibars_toggle()

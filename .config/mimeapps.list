@@ -17,3 +17,5 @@ application/rss+xml=rss.desktop
 video/x-matroska=video.desktop
 x-scheme-handler/lbry=lbry.desktop
 inode/directory=file.desktop
+x-scheme-handler/discord-575056170788585472=discord-575056170788585472.desktop
+x-scheme-handler/etcher=balena-etcher-electron.desktop

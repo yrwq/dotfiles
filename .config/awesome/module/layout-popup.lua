@@ -13,15 +13,14 @@ client.connect_signal("manage", function(c) c.shape = helpers.rrect(0) end)
 
 local mstab = bling.layout.mstab
 local centered = bling.layout.centered
-local vertical = bling.layout.vertical
-local horizontal = bling.layout.horizontal
+local floating = awful.layout.suit.floating
+local tile = awful.layout.suit.tile
 
 -- Set the layouts
 
 tag.connect_signal("request::default_layouts", function()
     awful.layout.append_default_layouts({
-        awful.layout.suit.tile, awful.layout.suit.floating, centered, mstab,
-        vertical, horizontal
+        tile, centered, floating
     })
 end)
 

@@ -6,6 +6,7 @@ dependencies_aur=(awesome-git urlview nerd-fonts-iosevka vidir lf-bin picom-jona
 
 
 install_dependencies() {
+	sudo pacman -Rsc libxft
   	sudo pacman -S --needed --noconfirm "$@"
 }
 
