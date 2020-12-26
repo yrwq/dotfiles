@@ -70,3 +70,6 @@ cp $HOME/.Xresources $dotdir/ -r
 cp $HOME/.xprofile $dotdir/ -r
 cp $HOME/.xinitrc $dotdir/ -r
 cp $HOME/.gitconfig $dotdir/ -r
+
+# Cleanup
+rm -rf $dotconf/zsh/.zcompdump
