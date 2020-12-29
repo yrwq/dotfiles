@@ -2,7 +2,7 @@
 
 dependencies=(git feh slop termite xorg-server alsa-lib alsa-plugins alsa-utils dunst emacs exa ffmpeg ffmpegthumbnailer fzf imagemagick lxappearance maim mpc mpd mpv mupdf ncmpcpp neomutt neovim newsboat nitrogen obconf openbox pamixer poppler pulseaudio pulseaudio-alsa pulsemixer qutebrowser ranger rofi scrot tint2 transmission-cli transmission-gtk ttf-nerd-fonts-symbols urlscan w3m xautolock xclip xdg-user-dirs xdg-utils xdotool xf86-input-libinput xf86-video-intel xmobar xmonad xmonad-contrib xorg-font-util xorg-fonts-misc xorg-mkfontscale xorg-xinit xorg-xrandr xorg-xsetroot xorg-server-common xorg-server-devel xorg-setxkbmap xorg-xclipboard xorg-xdpyinfo xorg-xev xorg-xfontsel xorg-xinput xorg-xmodmap xorg-xprop xorg-xrandr xorg-xrdb xorg-xset xorg-xsetroot xorg-xwininfo xscreensaver youtube-dl zathura zathura-pdf-poppler zsh unzip ueberzug sxiv man-db libnotify jq rofimoji i3lock haskell-extra unclutter highlight)
 
-dependencies_aur=(awesome-git urlview nerd-fonts-iosevka vidir lf-bin picom-jonaburg-git libxft-bgra-git polybar-dwm-module gruvbox-dark-gtk gruvbox-dark-icons-gtk mutt-wizard-git libxft-bgra)
+dependencies_aur=(awesome-git urlview nerd-fonts-iosevka vidir lf-bin picom-jonaburg-git polybar-dwm-module gruvbox-dark-gtk gruvbox-dark-icons-gtk mutt-wizard-git libxft-bgra)
 
 
 install_dependencies() {
@@ -27,30 +27,32 @@ aur_deps(){
   		makepkg -sim --noconfirm
 	fi
 	install_aur "${dependencies_aur[@]}"
-	sleep 3
 }
 
-clear
-echo -e "\n"
-echo "Install dependencies?"
-read -p "Y/n > " deps
-case $deps in
-	Y|y)
-		sudo pacman -Syu --noconfirm
-		install_dependencies "${dependencies[@]}"
-		sleep 3
-	;;
-esac
+install_deps(){
+	clear
+	echo -e "\n"
+	echo "Install dependencies?"
+	read -p "Y/n > " deps
+	case $deps in
+		Y|y)
+			sudo pacman -Syu --noconfirm
+			install_dependencies "${dependencies[@]}"
+		;;
+	esac
+}
 
-clear
-echo -e "\n"
-echo "Install dependencies from AUR? (this will install an aur helper, if you dont have one!)"
-read -p "Y/n > " deps
-case $deps in
-	Y|y)
-		aur_deps
-	;;
-esac
+install_aur_deps(){
+	clear
+	echo -e "\n"
+	echo "Install dependencies from AUR? (this will install an aur helper, if you dont have one!)"
+	read -p "Y/n > " deps
+	case $deps in
+		Y|y)
+			aur_deps
+		;;
+	esac
+}
 
 copy_dots(){
 	url="https://github.com/yrwq/dotfiles.git"
@@ -61,15 +63,6 @@ copy_dots(){
   	sudo git clone "$walls" ~/.wp
 }
 
-copy_dots_new(){
-	url="https://github.com/yrwq/dotfiles.git"
-	temp_directory_dotfiles=$(mktemp -d)
-  	git clone "$url" "$temp_directory_dotfiles"
-  	sudo cp -rf "$temp_directory_dotfiles"/. /home/$username/
-	walls="https://github.com/yrwq/walls.git"
-  	sudo git clone "$walls" /home/$username/.wp
-}
-
 install_others(){
 	# st
 	cd ~/.local/src/st
@@ -77,25 +70,12 @@ install_others(){
 }
 
 case "$@" in
-	new)
-		read -p "New username:" username
-		sudo useradd -m $username
-		sudo passwd $username
-
-		copy_dots_new
-
-  		sudo chsh -s /usr/bin/zsh $username
-  		echo "${username} ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/${username}
-  		sudo chown -R ${username} /home/${username}
-  		sudo rm -rf /home/${username}/.git
-  		sudo rm -rf /home/${username}/install
-  		sudo rm -rf /home/${username}/README.md
-
-		# st
-		cd /home/${username}/.local/src/st
-		make && sudo make install
+	-c)
+		copy_dots
 	;;
 	*)
+		install_deps
+		install_aur_deps
 		copy_dots
 		install_others
   		sudo chsh -s /usr/bin/zsh $USER
