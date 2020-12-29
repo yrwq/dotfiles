@@ -3,8 +3,8 @@
 . "$HOME/.xprofile"
 
 unclutter --timeout=1 &
-chth -r &
 setxkbmap hu &
+remaps &
 
 exec awesome
 # exec xmonad

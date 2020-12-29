@@ -1,7 +1,0 @@
-[Desktop Entry]
-Name=Game 575056170788585472
-Exec=/usr/lib/ld-2.32.so %u
-Type=Application
-NoDisplay=true
-Categories=Discord;Games;
-MimeType=x-scheme-handler/discord-575056170788585472;

@@ -1,38 +1,37 @@
-#define base00 #2E3440
-#define base01 #3B4252
-#define base02 #434C5E
-#define base03 #4C566A
-#define base04 #D8DEE9
-#define base05 #E5E9F0
-#define base06 #ECEFF4
-#define base07 #8FBCBB
-#define base08 #88C0D0
-#define base09 #81A1C1
-#define base0A #5E81AC
-#define base0B #BF616A
-#define base0C #D08770
-#define base0D #EBCB8B
-#define base0E #A3BE8C
-#define base0F #B48EAD
+! special
+*.foreground:   #ffffff
+*.background:   #1f1d29
+*.cursorColor:  #ffffff
 
-*foreground:   base05
-*background:   base00
-*cursorColor:  base05
+! black
+*.color0:       #403c58
+*.color8:       #6f6e85
 
-*color0:       base01
-*color1:       base08
-*color2:       base0B
-*color3:       base0A
-*color4:       base0D
-*color5:       base0E
-*color6:       base0C
-*color7:       base05
+! red
+*.color1:       #ea6f91
+*.color9:       #ea6f91
 
-*color8:       base02
-*color9:       base09
-*color10:      base01
-*color11:      base02
-*color12:      base04
-*color13:      base06
-*color14:      base0F
-*color15:      base07
+! green
+*.color2:       #9bced7
+*.color10:      #9bced7
+
+! yellow
+*.color3:       #f1ca93
+*.color11:      #f1ca93
+
+! blue
+*.color4:       #34738e
+*.color12:      #34738e
+
+! magenta
+*.color5:       #c3a5e6
+*.color13:      #c3a5e6
+
+! cyan
+*.color6:       #eabbb9
+*.color14:      #eabbb9
+
+! white
+*.color7:       #faebd7
+*.color15:      #ffffff
+
