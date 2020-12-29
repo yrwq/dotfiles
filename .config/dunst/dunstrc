@@ -42,19 +42,19 @@ separator_color = "#8ea594"
 
 [base16_low]
     msg_urgency = low
-    background = "#1a1c1a"
-    foreground = "#8ea594"
-	timeout = 3
+    background = "#1f1d29"
+    foreground = "#ffffff"
+    timeout = 3
 
 [base16_normal]
     msg_urgency = normal
-    background = "#363636"
-    foreground = "#8ea594"
-	timeout = 5
+    background = "#403c58"
+    foreground = "#faebd7"
+    timeout = 5
 
 [base16_critical]
     msg_urgency = critical
-    background = "#8ea594"
-    foreground = "#1a1c1a"
+    background = "#6f6e85"
+    foreground = "#faebd7"
 	timeout = 15
 # End flavours
