@@ -20,7 +20,7 @@ rst="\e[0m"
 ####### Configuration ########
 
 # path to save screenshots and logs
-save_dir="$HOME/pics/scrots"
+save_dir="$HOME/etc/pic"
 
 # application to open when lien is called
 # with the -e tag
@@ -65,7 +65,7 @@ copy() {
 screenshot() {
 	case $1 in
 		1)
-			scrot -s "$fname"
+			maim -s "$fname"
 			;;
 		2)
 			maim -d "$2" "$fname"

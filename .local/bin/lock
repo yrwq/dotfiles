@@ -1,9 +1,12 @@
 #!/bin/bash
 #
-# Locks the screen
+# Blurs and locks the screen
+# Requires i3lock
 
-sleep 1.5
 rm -rf /tmp/screenshot.png
+
 scrot /tmp/screenshot.png
+
 convert /tmp/screenshot.png -blur 0x3 /tmp/screenshotblur.png
+
 i3lock -u -i /tmp/screenshotblur.png

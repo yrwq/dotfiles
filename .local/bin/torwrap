@@ -1,4 +1,6 @@
 #!/bin/sh
+#
+# Requires github.com/salman-abedin/tide
 
 ! pidof transmission-daemon >/dev/null && transmission-daemon && notify-send "Starting torrent daemon..."
 

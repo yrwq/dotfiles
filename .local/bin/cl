@@ -22,7 +22,7 @@ cat << EOF
 EOF
 }
 
-current() {
+heart() {
     printf '\n'
 
     for i in 0 1 2 3 4 5 6 8 9 10 11 14; do
@@ -37,10 +37,10 @@ current() {
 }
 
 case "$@" in
-	block)
+	b)
 		block
 		;;
-	heart)
+	h)
 		current
 	;;
 esac
