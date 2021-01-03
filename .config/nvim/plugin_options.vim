@@ -7,12 +7,12 @@ let g:NERDTreeDirArrowCollapsible = "•"
 let g:NERDTreeWinSize = 31
 map <C-n> :NERDTreeToggle<CR>
 
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_enter = 0
-let g:ale_linters = {
-\   'javascript': ['jshint'],
-\   'python': ['flake8']
-\}
+" let g:ale_lint_on_text_changed = 'never'
+" let g:ale_lint_on_enter = 0
+" let g:ale_linters = {
+" \   'javascript': ['jshint'],
+" \   'python': ['flake8']
+" \}
 
 let g:gitgutter_enabled=1
 
@@ -33,5 +33,5 @@ autocmd BufRead,BufNewFile *.tex set filetype=tex
 autocmd BufWritePost bm-files,bm-dirs !shortcuts
 autocmd BufRead,BufNewFile xresources,xdefaults set filetype=xdefaults
 
-let g:ycm_key_list_select_completion = ['<C-j>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-k>', '<Up>']
+" let g:ycm_key_list_select_completion = ['<C-j>', '<Down>']
+" let g:ycm_key_list_previous_completion = ['<C-k>', '<Up>']

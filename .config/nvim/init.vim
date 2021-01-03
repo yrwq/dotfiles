@@ -11,18 +11,22 @@ Plug 'ap/vim-css-color'
 Plug 'tpope/vim-commentary'
 Plug 'fehawen/cs.vim'
 Plug 'scrooloose/nerdtree'
-Plug 'fehawen/sl.vim'
-Plug 'dense-analysis/ale'
 Plug 'glepnir/dashboard-nvim'
 Plug 'junegunn/fzf.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'machakann/vim-sandwich'
 Plug 'sheerun/vim-polyglot'
-Plug 'Valloric/YouCompleteMe'
 Plug 'honza/vim-snippets'
 Plug 'majutsushi/tagbar'
 Plug 'ptzz/lf.vim'
 Plug 'rbgrouleff/bclose.vim'
+
+" Statusline
+" Plug 'fehawen/sl.vim'
+
+" Auto complete
+" Plug 'dense-analysis/ale'
+" Plug 'Valloric/YouCompleteMe'
 
 call plug#end()
 
