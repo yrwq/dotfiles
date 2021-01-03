@@ -1,8 +1,9 @@
 "query: Linux:tags # \"linux\""
-http://onethingwell.org/rss "~  └─ One Thing Well" linux
 http://lukesmith.xyz/rss.xml "~  └─ Luke's Blog" linux
-https://www.youtube.com/feeds/videos.xml?channel_id=UC2eYFnH61tmytImy1mTYvhA "~  └─ Luke's YT" linux
 https://www.reddit.com/r/unixporn/.rss "~  └─ r/unixporn" linux
+
+"query: Youtube:tags # \"youtube\""
+https://www.youtube.com/feeds/videos.xml?channel_id=UC2eYFnH61tmytImy1mTYvhA "~  └─ Luke's YT" youtube
 
 "query: Git:tags # \"git\""
 https://github.com/lukesmithxyz/voidrice/commits/master.atom "~  └─ Voidrice commits" git
