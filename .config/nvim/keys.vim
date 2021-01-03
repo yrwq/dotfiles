@@ -38,3 +38,6 @@ map <C-l> <C-w>l
 
 " Lf file manager
 map <leader>d :LfCurrentFile <CR>
+
+map <leader>l :> <CR>
+map <leader>h :< <CR>

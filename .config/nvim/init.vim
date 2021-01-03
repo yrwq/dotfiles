@@ -22,6 +22,7 @@ Plug 'Valloric/YouCompleteMe'
 Plug 'honza/vim-snippets'
 Plug 'majutsushi/tagbar'
 Plug 'ptzz/lf.vim'
+Plug 'rbgrouleff/bclose.vim'
 
 call plug#end()
 
