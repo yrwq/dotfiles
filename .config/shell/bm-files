@@ -10,3 +10,4 @@ bd	${XDG_CONFIG_HOME:-$HOME/.config}/shell/bm-dirs		# A list of bookmarked direc
 cfz	$ZDOTDIR/.zshrc						# zsh (shell) config
 cfu	${XDG_CONFIG_HOME:-$HOME/.config}/newsboat/urls		# RSS urls for newsboat
 cfl	${XDG_CONFIG_HOME:-$HOME/.config}/lf/lfrc		# lf (file browser) config
+cfv ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/init.vim     # init.vim

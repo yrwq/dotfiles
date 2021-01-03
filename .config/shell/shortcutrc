@@ -14,3 +14,4 @@ bd="$EDITOR /home/yrwq/.config/shell/bm-dirs" \
 cfz="$EDITOR /home/yrwq/.config/zsh/.zshrc" \
 cfu="$EDITOR /home/yrwq/.config/newsboat/urls" \
 cfl="$EDITOR /home/yrwq/.config/lf/lfrc" \
+cfv="$EDITOR /home/yrwq/.config/nvim/init.vim" \

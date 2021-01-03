@@ -10,6 +10,7 @@ alias \
 	ffmpeg="ffmpeg -hide_banner" \
 	slop="slop -o" \
 	ls="exa --icons" \
+	l="exa -l --icons" \
 	grep="grep --color=auto" \
 	diff="diff --color=auto" \
 	ccat="highlight --out-format=ansi" \
@@ -19,7 +20,7 @@ alias \
 	gp="git push -u origin main" \
 	mk="make && sudo make install" \
 	f="$FILE" \
-	v="$EDITOR" \
+	v="nvim" \
 	z="zathura" \
-	pac="sudo pacman -Sy " \
+	# pac="sudo pacman -Sy " \
 	ref="shortcuts >/dev/null; source ${XDG_CONFIG_HOME:-$HOME/.config}/shortcutrc ; source ${XDG_CONFIG_HOME:-$HOME/.config}/zshnameddirrc" \
