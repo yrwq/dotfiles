@@ -31,9 +31,8 @@ color article white default bold
 
 browser linkhandler
 macro , open-in-browser
-macro q set browser "brave-dev" ; open-in-browser ; set browser linkhandler
+macro q set browser "brave" ; open-in-browser ; set browser linkhandler
 macro w set browser "setsid -f mpv" ; open-in-browser ; set browser linkhandler
-macro e set browser "dmenuhandler" ; open-in-browser ; set browser linkhandler
 
 highlight all "---.*---" yellow
 highlight feedlist ".*(0/0))" black
