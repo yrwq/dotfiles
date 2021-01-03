@@ -17,7 +17,7 @@ font-0 = Iosevka Custom:pixelsize=10;1
 font-1 = Iosevka Nerd Font:pixelsize=10;1
 separator = " "
 line-size = 2
-modules-left = title ;polywins
+modules-left = title
 modules-center = ewmh
 modules-right = downspeed sep disk sep pkg sep pulseaudio sep date
 override-redirect = true
@@ -145,15 +145,3 @@ interval = 1800
 label = 摒  %output%糖
 format-foreground = ${colors.fg}
 format-background = ${colors.bg}
-
-;;
-;; polywins
-;;
-
-[module/polywins]
-type = custom/script
-exec = ~/.config/polybar/scripts/polywins.sh 2>/dev/null
-format = <label>
-label = %output%
-label-padding = 2
-tail = true
