@@ -6,6 +6,7 @@
 
 arch_package_list() {
     printf '%s ' \
+        "xcape" \
         "git" \
         "feh" \
         "slop" \
