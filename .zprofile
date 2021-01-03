@@ -2,14 +2,19 @@
 
 # Adds `~/.local/bin` to $PATH
 export PATH="$PATH:$(du "$HOME/.local/bin" | cut -f2 | paste -sd ':')"
+export PATH="$PATH:$HOME/.bin"
 export PATH="$PATH:$HOME.gem/ruby/2.7.0/bin"
 
+# Dirty directories to watch with drt script
+DRT_PATH=~/dev/dotfiles:~/dev/yemacs:~/dev/yafetch:~/dev/ytw:~/dev/yth
+export DRT_PATH
+
 # Default programs:
-export EDITOR="$(which nvim)"
-export TERMINAL="$(which st)"
-export BROWSER="$(which brave-dev)"
-export READER="$(which zathura)"
-export VISUAL="emacsclient -c"
+export EDITOR="nvim"
+export TERMINAL="st"
+export BROWSER="brave"
+export READER="zathura"
+export VISUAL="st -e nvim"
 export PAGER="${EDITOR:="$(which nvim)"} -R"
 export OPENER="${HOME:="/home/$USER"}/.local/bin/open"
 export MANPAGER="${EDITOR:="$(which nvim)"} -c 'set ft=man' -"
@@ -19,12 +24,10 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
 
-export GPG_AGENT_INFO=""
 #export XINITRC="${XDG_CONFIG_HOME:-$HOME/.config}/x11/xinitrc"
 export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority" # This line will break some DMs.
 export NOTMUCH_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/notmuch-config"
 export DOOMDIR="${XDG_CONFIG_HOME:-$HOME/.config}/doom"
-export GTK2_RC_FILES="${XDG_CONFIG_HOME:-$HOME/.config}/gtk-2.0/gtkrc-2.0"
 export LESSHISTFILE="-"
 export WGETRC="${XDG_CONFIG_HOME:-$HOME/.config}/wget/wgetrc"
 export INPUTRC="${XDG_CONFIG_HOME:-$HOME/.config}/shell/inputrc"
@@ -52,7 +55,6 @@ export LESS_TERMCAP_se="$(printf '%b' '[0m')"
 export LESS_TERMCAP_us="$(printf '%b' '[1;32m')"
 export LESS_TERMCAP_ue="$(printf '%b' '[0m')"
 export LESSOPEN="| /usr/bin/highlight -O ansi %s 2>/dev/null"
-export QT_QPA_PLATFORMTHEME="gtk2"	# Have QT use gtk2 theme.
 export MOZ_USE_XINPUT2="1"		# Mozilla smooth scrolling/touchpads.
 export AWT_TOOLKIT="MToolkit wmname LG3D"	#May have to install wmname
 export _JAVA_AWT_WM_NONREPARENTING=1	# Fix for Java applications in dwm
