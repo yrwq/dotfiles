@@ -1,5 +1,7 @@
 #!/bin/sh
+
 #
-# clone a repo
+# clone - clone a repo
+# usage:clone user/repo
 
 git clone "https://github.com/$1"

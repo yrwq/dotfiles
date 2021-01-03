@@ -1,0 +1,76 @@
+#!/usr/bin/env bash
+
+#
+# tg - toggle on/off stuff
+#
+
+
+_bar(){
+    running=$(pidof polybar)
+
+    [[ -z "$running" ]] && { polybar main & } && notify-send "鸞 Bar" "Turned on"
+    [[ "$running" ]] && { pkill polybar & } && notify-send "鸞 Bar" "Turned off";
+}
+
+_torrent(){
+    running=$(pidof transmission-daemon)
+
+    [[ -z "$running" ]] && { transmission-daemon & } && notify-send " Torrent" "Daemon started"
+    [[ "$running" ]] && { pkill transmission-da & } && notify-send " Torrent" "Daemon stopped";
+}
+
+_compositor(){
+    running=$(pidof picom)
+
+    [[ -z "$running" ]] && { picom --experimental-backends & } && notify-send "異 Compositor" "Turned on"
+    [[ "$running" ]] && { pkill picom & } && notify-send "異 Compositor" "Turned off";
+}
+
+_volume(){
+    amixer set Master toggle
+}
+
+_microphone(){
+    amixer -D pulse sset Capture toggle &> /dev/null
+}
+
+_redshift(){
+    running=$(pidof redshift)
+
+    [[ -z "$running" ]] && { redshift -l 0:0 -t 3700:3700 & } && notify-send "嗀 Redshift" "Turned on"
+    [[ "$running" ]] && { pkill redshift & } && notify-send "嗀 Redshift" "Turned off";
+}
+
+_help(){
+    printf "\n"
+    printf "tg bar|torrent|compositor|volume|redshift|microphone\n"
+    printf "\n"
+}
+
+
+case "$@" in
+bar)
+    _bar
+    ;;
+torrent)
+    _torrent
+    ;;
+compositor)
+    _compositor
+    ;;
+volume)
+    _volume
+    ;;
+microphone)
+    _microphone
+    ;;
+redshift)
+    _redshift
+    ;;
+help)
+    _help
+    ;;
+*)
+    _help
+    ;;
+esac

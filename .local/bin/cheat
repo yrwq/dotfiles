@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-#
-# Cheat from terminal
-
-command curl -fsL "cheat.sh/$@"

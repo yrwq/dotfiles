@@ -1,0 +1,14 @@
+#!/bin/sh
+
+#
+# mks - make script
+#
+
+[ "$1" ] || {
+    printf 'No name for new shell executable provided.\n'
+    exit 1
+}
+
+printf '#!/bin/sh\n\n#\n# %s\n#' "$1" > "$1"
+chmod +x "$1"
+nvim "$1"

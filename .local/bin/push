@@ -1,9 +1,12 @@
 #!/bin/sh
-# push a repo to main branch
+
+#
+# push - im so fcking lazy
+#
 
 [ -z "$1" ] && \
     msg="update" || \
-	msg="$1"
+    msg="$1"
 
 git add .
 git commit -m "${msg}"

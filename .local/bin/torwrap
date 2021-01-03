@@ -1,7 +1,9 @@
 #!/bin/sh
+
 #
+# torwrap - open torrent client
 # Requires github.com/salman-abedin/tide
 
 ! pidof transmission-daemon >/dev/null && transmission-daemon && notify-send "Starting torrent daemon..."
 
-$TERMINAL -e tide
+st -c torrent -e tide

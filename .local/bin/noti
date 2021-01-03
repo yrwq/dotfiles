@@ -1,38 +1,37 @@
 #!/bin/sh
 
+#
+# noti - notification
+#
+
+
 wm=$(wmctrl -m | grep "Name:" | awk '{print $2}')
 
-urgency(){
-	case $wm in
-	awesome)
-		awesome-client "
-			naughty = require('naughty')
-			naughty.notify({
-			preset='low',
-			timeout=3,
-			title='low'})
 
-			naughty.notify({
-			preset='normal',
-			timeout=3,
-			title='normal'})
+_help(){
+cat <<EOF
 
-			naughty.notify({
-			preset='critical',
-			timeout=3,
-			title='critical'})
+noti "title here" "message here" "image path here"
 
-		"
-		;;
-	*)
-		notify-send -u "low" "low"
-		notify-send -u "normal" "normal"
-		notify-send -u "critical" "critical"
-		;;
-esac
-
-case "$@" in
-	urg)
-		urgency
-		;;
-esac
+EOF
+}
+if [[ -e $1 ]]; then
+    _help
+else
+    case $wm in
+    awesome)
+        awesome-client "
+            naughty = require('naughty')
+            naughty.notify({
+                urgency='normal',
+                title='$1',
+                message='$2',
+                image='$3'
+            })
+        "
+    ;;
+    *)
+        notify-send -u "normal" "normal"
+    ;;
+    esac
+fi

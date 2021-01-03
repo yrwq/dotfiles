@@ -1,12 +1,68 @@
-#!/bin/bash
+#!/bin/sh
+
 #
-# Blurs and locks the screen
-# Requires i3lock
+# lock - auto lock screen after x minutes
+# I have this script run after 10  mins of inactivity (see ~/.xinitrc)
 
-rm -rf /tmp/screenshot.png
+# get current window manager
+wm=$(wmctrl -m | grep "Name:" | awk '{print $2}')
 
-scrot /tmp/screenshot.png
+awesome_lock(){
+awesome-client "
+naughty = require('naughty')
+local lock_screen = require('module.lockscreen')
+naughty.notify({
+urgency='normal',
+message='Screen locked!'
+})
+lock_screen.init()
+lock_screen_show()
+"
+}
 
-convert /tmp/screenshot.png -blur 0x3 /tmp/screenshotblur.png
+other_lock(){
+notify-send 'Screen locked'
+scrot /tmp/i3lock.png
+convert /tmp/i3lock.png -blur 2x8 /tmp/i3lock.png
+i3lock -i /tmp/i3lock.png
+rm /tmp/i3lock.png
+}
 
-i3lock -u -i /tmp/screenshotblur.png
+before_notify(){
+case $wm in
+    awesome)
+        awesome-client "
+naughty = require('naughty')
+naughty.notify({
+urgency='critical',
+message='Screen will be locked in a minute!'
+})
+"
+    ;;
+    *)
+        notify-send -u 'critical' 'Screen will be locked in a minute!'
+    ;;
+esac
+}
+
+lock(){
+# Handle window managers
+case $wm in
+    awesome)
+        awesome_lock
+    ;;
+    *)
+        other_lock
+    ;;
+esac
+}
+
+case $1 in
+    -n|--notify)
+        before_notify
+    ;;
+esac
+
+if [ -z $1 ]; then
+    lock
+fi

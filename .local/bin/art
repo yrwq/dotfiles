@@ -1,15 +1,17 @@
 #!/bin/sh
-#
-# Extract cover from audio file
 
-music_library="/mnt/music"
+#
+# art - extract cover from audio file
+# requires ffmpeg, metaflac, mpc, mpd, wmctrl
+
+music_library="~/music"
 ext="$(mpc --format %file% current | sed 's/^.*\.//')"
 if [ "$ext" = "flac" ]; then
-	metaflac --export-picture-to=/tmp/mpd_cover.jpg \
+    metaflac --export-picture-to=/tmp/mpd_cover.jpg \
         "$(mpc --format "$music_library"/%file% current)" &&
         cover_path="/tmp/mpd_cover.jpg"
 else
-	ffmpeg -y -i "$(mpc --format "$music_library"/%file% | head -n 1)" \
+    ffmpeg -y -i "$(mpc --format "$music_library"/%file% | head -n 1)" \
         /tmp/mpd_cover.jpg &&
         cover_path="/tmp/mpd_cover.jpg"
 fi
@@ -17,16 +19,16 @@ fi
 wm=$(wmctrl -m | grep "Name:" | awk '{print $2}')
 
 case $wm in
-	# awesome)
-	# 	awesome-client "
-	# 		naughty = require('naughty')
-	# 		naughty.notify({
-	# 		image='/tmp/mpd_cover.jpg',
-	# 		title='$(mpc current -f %artist%)',
-	# 		text='$(mpc current -f %title%)'})
-	# 	"
-	# ;;
-	*)
-		notify-send -i "/tmp/mpd_cover.jpg" "$(mpc current -f %artist%)" "$(mpc current -f %title%)"
-	;;
+    awesome)
+        awesome-client "
+        naughty = require('naughty')
+        naughty.notify({
+        icon='/tmp/mpd_cover.jpg',
+        title='$(mpc current -f %artist%)',
+        text='$(mpc current -f %title%)'})
+        "
+        ;;
+    *)
+        notify-send -i "/tmp/mpd_cover.jpg" "$(mpc current -f %artist%)" "$(mpc current -f %title%)"
+        ;;
 esac

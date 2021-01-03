@@ -1,7 +1,10 @@
 #!/bin/sh
+
 #
-# Rofi manpage chooser
+# manp - man page chooser
+#
 
-rofi_args="-sort false -dmenu -i"
+man="$(man -k . | cut -d " " -f1 | rofi -dmenu)"
 
-man -k . | rofi $rofi_args | awk '{print $1}' | xargs -r man -Tpdf | zathura -
+[ -z "$man" ] && exit 1
+man -Tpdf "$man" | "${READER:="$(which zathura)"}" -

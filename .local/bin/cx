@@ -1,5 +1,8 @@
 #!/bin/sh
-# chmod +x toggle
+
+#
+# cx - chmod +x toggle
+#
 
 for file ; do
     #check if already executable

@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-#
-# Toggle polybar
-
-running=$(pidof polybar)
-
-[[ -z "$running" ]] && { polybar main & };
-[[ "$running" ]] && { pkill polybar & };

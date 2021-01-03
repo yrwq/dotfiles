@@ -1,0 +1,43 @@
+#!/bin/sh
+
+#
+# open
+#
+
+case "$1" in
+
+        *.mp3|*.flac|*.wav)
+
+          st -c media -e mpv --no-video "$1"
+          ;;
+
+        *.mp4|*.mkv|*.webm|*.mov|*.gif)
+
+          setsid -f mpv "$1"
+          ;;
+
+        *.epub)
+
+          st -g 60x30 -e epr.py "$1"
+          ;;
+
+        *.png|*.jpg|*.jpe|*.jpeg)
+
+          setsid -f sxiv "$1"
+          ;;
+
+        *.pdf|*.PDF)
+
+          setsid -f zathura "$1"
+          ;;
+
+        *.odt|*.ppt|*.csv)
+
+          setsid -f libreoffice "$1"
+          ;;
+
+        *)
+          "${EDITOR:=nvim}" "$1"
+          ;;
+
+esac

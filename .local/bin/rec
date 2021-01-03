@@ -1,6 +1,8 @@
 #!/bin/sh
+
 #
-# Record whole screen
+# rec - record whole screen
+#
 
 case "$@" in
     start)

@@ -1,5 +1,9 @@
 #!/bin/sh
 
+#
+# remaps - remap keys
+# requires xorg-setxkbmap, xcape, xorg-xmodmap, xorg-xset
+
 # This script is called on startup to remap keys.
 # Increase key speed via a rate change
 xset r rate 300 50

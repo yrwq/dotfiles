@@ -1,0 +1,54 @@
+#!/bin/sh
+
+#
+# drt - dirty directory checker
+#
+
+log() {
+    printf '%s: %s\n' "$1" "${2##*/}"
+}
+
+main() {
+    [ -z "$DRT_PATH" ] && {
+        printf '%s\n' "DRT_PATH is not set."
+        exit
+    }
+
+    set -f
+
+    IFS=':'
+
+    # shellcheck disable=2086
+    set -- $DRT_PATH
+
+    for dir in "$@"; do
+        (
+            [ -d "$dir" ] || {
+                log "Not a directory" "$dir"
+            }
+
+            cd "$dir" 2> /dev/null || {
+                log "Failed to change directory to" "$dir"
+                exit
+            }
+
+            command git rev-parse --is-inside-work-tree 1> /dev/null 2> /dev/null || {
+                log "Not a git directory" "$dir"
+                exit
+            }
+
+            [ -z "$(git status --short 2> /dev/null)" ] || log "dirty" "$dir"
+            [ "$(git status --short 2> /dev/null)" ] || log "ok" "$dir"
+        )
+    done
+
+    set +f
+}
+
+# case $1 in
+# 	*)
+# 		export DRT_PATH="$1"
+# 	;;
+# esac
+
+main
