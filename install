@@ -1,83 +1,43 @@
 #!/bin/bash
 
-dependencies=(git feh slop termite xorg-server alsa-lib alsa-plugins alsa-utils dunst emacs exa ffmpeg ffmpegthumbnailer fzf imagemagick lxappearance maim mpc mpd mpv mupdf ncmpcpp neomutt neovim newsboat nitrogen obconf openbox pamixer poppler pulseaudio pulseaudio-alsa pulsemixer qutebrowser ranger rofi scrot tint2 transmission-cli transmission-gtk ttf-nerd-fonts-symbols urlscan w3m xautolock xclip xdg-user-dirs xdg-utils xdotool xf86-input-libinput xf86-video-intel xmobar xmonad xmonad-contrib xorg-font-util xorg-fonts-misc xorg-mkfontscale xorg-xinit xorg-xrandr xorg-xsetroot xorg-server-common xorg-server-devel xorg-setxkbmap xorg-xclipboard xorg-xdpyinfo xorg-xev xorg-xfontsel xorg-xinput xorg-xmodmap xorg-xprop xorg-xrandr xorg-xrdb xorg-xset xorg-xsetroot xorg-xwininfo xscreensaver youtube-dl zathura zathura-pdf-poppler zsh unzip ueberzug sxiv man-db libnotify jq rofimoji i3lock haskell-extra unclutter highlight)
+#
+# install - install my dotfiles
+#
 
-dependencies_aur=(awesome-git urlview nerd-fonts-iosevka vidir lf-bin picom-jonaburg-git polybar-dwm-module gruvbox-dark-gtk gruvbox-dark-icons-gtk mutt-wizard-git libxft-bgra)
-
-
-install_dependencies() {
-  	sudo pacman -S --needed --noconfirm "$@"
+install_dependencies(){
+    sh $PWD/pkgs
 }
 
-# Only installs a package from aur, if you don't already have
-# https://github.com/Jguer/yay/issues/885
-install_aur(){
-	yay -S $(yay -Qi $@ 2>&1 >/dev/null | grep "error: package" | grep "was not found" | cut -d"'" -f2 | tr "\n" " ")
-}
-
-aur_deps(){
-	if command -v yay &> /dev/null
-	then
-		echo "Installing packages from AUR."
-	else
-		echo "Installing Yay."
-		sleep 3
-		aur_tmp_dir=$(mktemp -d) && cd "$aur_tmp_dir" || exit 1
-  		git clone "https://aur.archlinux.org/yay.git" "$aur_tmp_dir"
-  		makepkg -sim --noconfirm
-	fi
-	install_aur "${dependencies_aur[@]}"
-}
-
-install_deps(){
-	clear
-	echo -e "\n"
-	echo "Install dependencies?"
-	read -p "Y/n > " deps
-	case $deps in
-		Y|y)
-			sudo pacman -Syu --noconfirm
-			install_dependencies "${dependencies[@]}"
-		;;
-	esac
-}
-
-install_aur_deps(){
-	clear
-	echo -e "\n"
-	echo "Install dependencies from AUR? (this will install an aur helper, if you dont have one!)"
-	read -p "Y/n > " deps
-	case $deps in
-		Y|y)
-			aur_deps
-		;;
-	esac
+ask(){
+    clear
+    printf "\n"
+    read -rp "${1} " ans
+    case $ans in
+        y*|Y*)
+            $2
+        ;;
+    esac
 }
 
 copy_dots(){
-	url="https://github.com/yrwq/dotfiles.git"
-	temp_directory_dotfiles=$(mktemp -d)
-  	git clone "$url" "$temp_directory_dotfiles"
-  	sudo yes | cp -rf "$temp_directory_dotfiles"/. ~
-	walls="https://github.com/yrwq/walls.git"
-  	sudo git clone "$walls" ~/.wp
+    url="https://github.com/yrwq/dotfiles.git"
+    temp_directory_dotfiles=$(mktemp -d)
+    git clone "$url" "$temp_directory_dotfiles"
+    sudo yes | cp -rf "$temp_directory_dotfiles"/. ~
+    walls="https://github.com/yrwq/walls.git"
+    sudo git clone "$walls" ~/.wp
 }
 
 install_others(){
-	# st
-	cd ~/.local/src/st
-	make && sudo make install
+    # st
+    cd ~/.local/src/st
+    make && sudo make install
+    # colorpicker
+    git clone https://github.com/ym1234/colorpicker ~/.local/src/colorpcker
+    cd ~/.local/src/colorpicker
+    make && sudo make install
 }
 
-case "$@" in
-	-c)
-		copy_dots
-	;;
-	*)
-		install_deps
-		install_aur_deps
-		copy_dots
-		install_others
-  		sudo chsh -s /usr/bin/zsh $USER
-	;;
-esac
+ask "Install dependencies?" install_dependencies
+ask "Copy dotfiles?" copy_dots
+ask "Install other requirements?" install_others
