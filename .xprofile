@@ -2,5 +2,5 @@
 
 remaps & # remap keys
 setxkbmap hu &
-xautolock -time 10 -locker lock & # automatically lock the screen after 10 mins
+# xautolock -time 10 -locker lock & # automatically lock the screen after 10 mins
 xset r rate 300 50 & # faster scrolling with hjkl
