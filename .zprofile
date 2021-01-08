@@ -1,13 +1,11 @@
 #!/bin/zsh
 
-# Adds `~/.local/bin` to $PATH
 export PATH="$PATH:$(du "$HOME/.local/bin" | cut -f2 | paste -sd ':')"
 export PATH="$PATH:$HOME/.bin"
 export PATH="$PATH:$HOME.gem/ruby/2.7.0/bin"
 
 # Dirty directories to watch with drt script
-DRT_PATH=~/dev/dotfiles:~/dev/yemacs:~/dev/yafetch:~/dev/ytw:~/dev/yth
-export DRT_PATH
+export DRT_PATH=~/dev/dotfiles:~/dev/yemacs:~/dev/yafetch:~/dev/ytw:~/dev/yth
 
 # Default programs:
 export EDITOR="nvim"
