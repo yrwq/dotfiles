@@ -13,7 +13,7 @@ local function create_button(symbol, color, hover_color, cmd, key)
         markup = helpers.colorize_text(symbol, color),
         align = "center",
         valign = "center",
-        font = "Iosevka Nerd Font 50",
+        font = beautiful.ifont .. "50",
         forced_width = dpi(180),
         forced_height = dpi(200),
         widget = wibox.widget.textbox
@@ -70,8 +70,9 @@ local volume = create_button("奔", x.color2, x.fg, apps.volume, "s")
 local nitrogen = create_button("", x.color3, x.fg, apps.nitrogen, "d")
 local yt = create_button("", x.color4, x.fg, apps.youtube, "f")
 local todo = create_button("", x.color1, x.fg, apps.todo, "t")
-local syncmail = create_button("痢", x.color2, x.fg, apps.syncmail, "z")
-local nottogle = create_button("", x.color2, x.fg, apps.notif_toggle, "u")
+local syncmail = create_button("﯍", x.color2, x.fg, apps.syncmail, "z")
+local compositor = create_button("異", x.color1, x.fg, apps.compositor, "u")
+local night_mode = create_button("望", x.color1, x.fg, apps.night_mode, "i")
 
 -- Create the widget
 app_drawer = wibox({visible = false, ontop = true, type = "dock"})
@@ -176,14 +177,8 @@ local function create_stripe(widgets, bg)
 end
 
 app_drawer:setup {
-    -- Background
-    {
-        -- Stripes
-        create_stripe({ browser, discord, mail, news}, "#00000000"),
-        create_stripe({ lxappearance, volume, nitrogen, yt}, "#00000000"),
-        create_stripe({ todo, syncmail, nottogle}, "#00000000"),
+        create_stripe({ browser, discord, mail, news}, x.color8 .. "99"),
+        create_stripe({ lxappearance, volume, nitrogen, yt}, x.color0 .. "99"),
+        create_stripe({ todo, syncmail, compositor, night_mode}, x.bg .. "99"),
         layout = wibox.layout.flex.vertical
-    },
-    bg = x.bg .. "A0",
-    widget = wibox.container.background
 }

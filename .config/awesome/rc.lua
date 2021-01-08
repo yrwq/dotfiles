@@ -1,14 +1,35 @@
+-- Theme
+local themes = {
+    "dear", -- 1 --
+    "kory", -- 2 --
+}
+local theme = themes[2]
+
+-- Bar
+local bar_themes = {
+    "dear", -- 1 -- full width transparent
+    "kory", -- 2 -- full width
+    "xo",   -- 3 -- workspaces, date at center, hides when a client is focused
+}
+local bar_theme = bar_themes[2]
+
+-- Titlebar
+local titlebar_themes = {
+    "dear", -- 1 -- 3 block buttons at right
+    "kory", -- 2 -- 3 symbol buttons at left
+}
+local titlebar_theme = titlebar_themes[2]
+
 pcall(require, "luarocks.loader")
 local gears = require("gears")
 local awful = require("awful")
-
-awful.spawn.with_shell("picom")
-awful.spawn.with_shell("mopidy")
+local naughty = require("naughty")
 
 editor = "st -c editor -e nvim"
 terminal = "st"
 music = "st -c music -e ncmpcpp"
 mail = "st -c mail -e neomutt"
+
 screen_width = awful.screen.focused().geometry.width
 screen_height = awful.screen.focused().geometry.height
 
@@ -42,10 +63,13 @@ x = {
     color15    = xrdb.color15,
 }
 
-beautiful.init(require("theme"))
+local theme_dir = os.getenv("HOME") .. "/.config/awesome/themes/" .. theme .. "/"
+beautiful.init(theme_dir .. "theme.lua")
 
+-- bling needs to be loaded after initializing beautiful
 local bling = require("bling")
 bling.module.flash_focus.enable()
+bling.module.window_swallowing.start()
 
 -- layouts
 awful.layout.layouts = {
@@ -66,18 +90,42 @@ awful.screen.connect_for_each_screen(function(s)
       l.tile,
       l.tile,
       l.tile,
-      l.fair,
     }
 
     -- tags
     -- local tagnames = { "一", "二", "三", "四", "五" }
     -- local tagnames = { "", "爵", "", "", "" }
+    -- local tagnames = { "I", "II", "III", "IV", "V" }
+    -- local tagnames = { "1", "2", "3", "4", "5" }
     local tagnames = { "", "", "", "", "" }
     awful.tag(tagnames, s, layouts)
 end)
 
 require("shit") -- daemons
-require("keys") -- key binds
-require("candy") -- bar, panels
-require("module") -- titlebar, popups
 require("rules") -- rules
+
+require("module.exitscreen")
+-- initialize lockscreen
+-- needed before loading keys
+local lock_screen = require("module.lockscreen")
+lock_screen.init()
+
+-- initialize keys
+require("keys") -- key binds
+
+-- initialize applauncher
+require("module.applauncher")
+
+-- initialize layout popup
+require("module.layout-popup")
+
+-- initialize titlebar theme
+require("candy.titlebar." .. titlebar_theme)
+
+-- initialize bar theme
+require("candy.bar." .. bar_theme)
+
+-- initialize notifications
+require("candy.notifs")
+
+require("module.shotscreen")

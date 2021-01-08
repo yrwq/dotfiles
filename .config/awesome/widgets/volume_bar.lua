@@ -13,8 +13,8 @@ local active_color = {
 }
 
 local muted_color = x.trans
-local active_background_color = x.color0
-local muted_background_color = x.trans
+local active_background_color = x.bg
+local muted_background_color = x.bg
 
 local volume_bar = wibox.widget {
     max_value = 100,

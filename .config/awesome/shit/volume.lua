@@ -1,6 +1,3 @@
--- stolen from JavaCafe01's dotfiles
--- https://github.com/JavaCafe01/dotfiles
-
 local awful = require("awful")
 
 local volume_old = -1

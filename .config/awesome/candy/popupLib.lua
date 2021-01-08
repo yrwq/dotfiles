@@ -17,26 +17,26 @@ popupLib.create = function(x, y, height, width, widget)
     }
 
     local popupWidget = awful.popup {
-    	widget = {
-			{
-				{
-					{
-						widgetContainer,
-						widget = wibox.container.margin
-					},
-					bg = beautiful.popup_bg,
-					clip = true,
-					widget = wibox.widget.background
-				},
-				layout = wibox.layout.fixed.vertical,
-			},
-			widget = wibox.container.margin
-		},
-        shape = helpers.rrect(beautiful.client_radius),
-        visible = false,
-        ontop = true,
-        x = x,
-        y = y,
+    widget = {
+        {
+            {
+                {
+                    widgetContainer,
+                    widget = wibox.container.margin
+                },
+                bg = beautiful.popup_bg,
+                clip = true,
+                widget = wibox.widget.background
+            },
+            layout = wibox.layout.fixed.vertical,
+        },
+        widget = wibox.container.margin
+    },
+    shape = helpers.rrect(beautiful.popup_radius),
+    visible = false,
+    ontop = true,
+    x = x,
+    y = y,
     }
 
     local mouseInPopup = false

@@ -1,26 +1,11 @@
 local gears = require("gears")
 local awful = require("awful")
 local ruled = require("ruled")
+local beautiful = require("beautiful")
+local xresources = require("beautiful.xresources")
+local dpi = xresources.apply_dpi
+local helpers = require ("helpers")
 require("awful.autofocus")
-
--- Determines how floating clients should be placed
-local floating_client_placement = function(c)
-   -- If the layout is floating or there are no other visible
-   -- clients, center client
-   if awful.layout.get(mouse.screen) ~= awful.layout.suit.floating or #mouse.screen.clients == 1 then
-      return awful.placement.centered(c,{honor_padding = true, honor_workarea=true})
-   end
-   
-    -- Else use this placement
-   local p = awful.placement.no_overlap + awful.placement.no_offscreen
-   return p(c, {honor_padding = true, honor_workarea=true, margins = beautiful.useless_gap * 2})
-end
-
-local centered_client_placement = function(c)
-   return gears.timer.delayed_call(function ()
-         awful.placement.centered(c, {honor_padding = true, honor_workarea=true})
-   end)
-end
 
 ruled.client.connect_signal("request::rules", function()
     -- All clients will match this rule.
@@ -36,72 +21,65 @@ ruled.client.connect_signal("request::rules", function()
             honor_padding = true,
             maximized = false,
             maximized_horizontal = false,
-            maximized_vertical = false,
-            placement = floating_client_placement
+            maximized_vertical = false
         }
     }
 
     -- Floating and centered clients
     ruled.client.append_rule {
-       id       = "floating",
-       rule_any = {
-	  class    = {
-	     "music",
-	     "mail",
-	     "news",
-	     "Sxiv",
-	     "feh",
-	     "Surf",
-	     "Tor Browser",
-	     "Thunar",
-	     "Pavucontrol",
-	     "Lxappearance"
-	  },
-	  name    = {
-	     "Event Tester",  -- xev.
-	  },
-	  role    = {
-	     "AlarmWindow",    -- Thunderbird's calendar.
-	     "ConfigManager",  -- Thunderbird's about:config.
-	     "GtkFileChooserDialog", -- File chooser
-	     "pop-up",         -- e.g. Google Chrome's (detached) Developer Tools.
-	  },
-	  type = {
-	     "dialog",
-	  }
-       },
-       properties = {
-	  floating = true,
-	  width = awful.screen.focused().workarea.width * 0.8,
-	  height = awful.screen.focused().workarea.height * 0.8
-       },
-       callback = function (c)
-          awful.placement.centered(c)
-       end
+        id = "floating",
+        rule_any = {
+            class    = {
+                "music",
+                "mail",
+                "news",
+                "Sxiv",
+                "feh",
+                "Surf",
+                "Tor Browser",
+                "Thunar",
+                "Pavucontrol",
+                "Lxappearance"
+            },
+            role    = {
+                "AlarmWindow",    -- Thunderbird's calendar.
+                "ConfigManager",  -- Thunderbird's about:config.
+                "GtkFileChooserDialog", -- File chooser
+                "pop-up",         -- e.g. Google Chrome's (detached) Developer Tools.
+            },
+            type = {
+                "dialog",
+            }
+        },
+        properties = {
+            floating = true,
+            width = screen_width * 0.6,
+            height = screen_height * 0.6
+        },
+        callback = function (c)
+            awful.placement.centered(c)
+        end
     }
-    
+
     -- Add titlebars to normal clients and dialogs
     ruled.client.append_rule {
-       id         = "titlebars",
-       rule_any   = { type = { "normal", "dialog" } },
-       properties = { titlebars_enabled = true      }
+        id         = "titlebars",
+        rule_any   = { type = { "normal", "dialog" } },
+        properties = { titlebars_enabled = true      }
     }
-    
+
     -- File chooser dialog
     ruled.client.append_rule {
-       rule_any = { role = { "GtkFileChooserDialog" } },
-       properties = { floating = true, width = screen_width * 0.55, height = screen_height * 0.65 }
+        rule_any = { role = { "GtkFileChooserDialog" } },
+        properties = { floating = true, width = screen_width * 0.6, height = screen_height * 0.6 }
     }
+
     -- MPV
     ruled.client.append_rule {
-       rule = { class = "mpv" },
-       properties = {
-          floating = true,
-          width = 900,
-          height = 700,
-       },
-       callback = function (c)
-	  c.ontop = true
+        rule = { class = "mpv" },
+        callback = function (c)
+            awful.placement.centered(c)
+            c.ontop = true
         end
     }
 
