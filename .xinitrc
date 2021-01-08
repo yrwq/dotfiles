@@ -2,17 +2,25 @@
 
 . "$HOME/.xprofile"
 
-cht -t rosepine &
+# Random theme
+cht -r &
+
+# Network Manager
 nm-applet &
+
+# Turn off screenlocking applet
+caffeine &
+
+# Hide cursor after a second
 unclutter --timeout=1 &
+
+# Compositor
 picom --experimental-backends &
 
-# Notify before lock
-xautolock -time 9 -locker lock -n &
 # Lock after 10 mins
 xautolock -time 10 -locker lock &
 
+# Remap keys
 remaps &
-setxkbmap hu &
 
 exec awesome
