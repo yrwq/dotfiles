@@ -4,34 +4,24 @@
 # noti - notification
 #
 
-
+image=0
+urgency=0
 wm=$(wmctrl -m | grep "Name:" | awk '{print $2}')
-
 
 _help(){
 cat <<EOF
 
-noti "title here" "message here" "image path here"
+noti "title" "message" "image path"
 
 EOF
 }
-if [[ -e $1 ]]; then
-    _help
-else
-    case $wm in
-    awesome)
-        awesome-client "
-            naughty = require('naughty')
-            naughty.notify({
-                urgency='normal',
-                title='$1',
-                message='$2',
-                image='$3'
-            })
-        "
-    ;;
-    *)
-        notify-send -u "normal" "normal"
-    ;;
-    esac
-fi
+
+awesome-client "
+local naughty = require('naughty')
+naughty.notify({
+    image='$3',
+    title='$1',
+    message='$2'
+})
+"
+exit 1

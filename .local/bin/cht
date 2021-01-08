@@ -4,31 +4,6 @@
 # cht - change theme
 # requires feh, libnotify
 
-# arguments
-case "$1" in
-    # define a theme with "-t theme-name"
-    -t)
-        _clr="$HOME/.clr/$2"
-        case $2 in
-            rosepine)
-                _wp="$HOME/.wp/abstract.png"
-            ;;
-            *)
-                _wp=$(shuf -n1 -e ~/.wp/*)
-            ;;
-        esac
-    ;;
-    # random
-    -r)
-        _clr=$(shuf -n1 -e ~/.clr/*)
-        _wp=$(shuf -n1 -e ~/.wp/*)
-    ;;
-esac
-xrdb $_clr
-
-# define which wallpaper to use with some themes
-feh --bg-scale $_wp
-
 reset(){
     _wm=$(wmctrl -m | grep "Name:" | awk '{print $2}')
     case $_wm in
@@ -43,10 +18,25 @@ reset(){
     esac
 }
 
-reset
+apply(){
+    xrdb $_clr
+    feh --bg-fill $_wp
+}
+
+# arguments
+case "$1" in
+    -r)
+        _clr=$(shuf -n1 -e ~/.clr/*)
+        _wp=$(shuf -n1 -e ~/.wp/*)
+        apply
+        sleep 1
+        wait
+        reset
+    ;;
+esac
 
 _shortwp=$(echo $_wp | sed "s@.*/@@" | sed "s/.jpg//g" | sed "s/.png//g" )
 _shortclr=$(echo $_clr | sed "s@.*/@@")
 
 wait
-notify-send "Theme changed" "Theme: ${_shortclr} \nWp: ${_shortwp}"
+noti "Theme changed" "Theme: ${_shortclr} \nWp: ${_shortwp}"

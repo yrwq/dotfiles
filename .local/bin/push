@@ -4,10 +4,13 @@
 # push - im so fcking lazy
 #
 
+# get current branch
+branch=$(git branch | grep "*" | awk '{print $2}')
+
 [ -z "$1" ] && \
     msg="update" || \
     msg="$1"
 
 git add .
 git commit -m "${msg}"
-git push origin main
+git push origin $branch

@@ -16,19 +16,4 @@ else
         cover_path="/tmp/mpd_cover.jpg"
 fi
 
-wm=$(wmctrl -m | grep "Name:" | awk '{print $2}')
-
-case $wm in
-    awesome)
-        awesome-client "
-        naughty = require('naughty')
-        naughty.notify({
-        icon='/tmp/mpd_cover.jpg',
-        title='$(mpc current -f %artist%)',
-        text='$(mpc current -f %title%)'})
-        "
-        ;;
-    *)
-        notify-send -i "/tmp/mpd_cover.jpg" "$(mpc current -f %artist%)" "$(mpc current -f %title%)"
-        ;;
-esac
+noti "$(mpd current -f %artist%)" "$(mpd current -f %title%)" "/tmp/mpd_cover.jpg"

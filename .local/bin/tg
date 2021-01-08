@@ -8,22 +8,39 @@
 _bar(){
     running=$(pidof polybar)
 
-    [[ -z "$running" ]] && { polybar main & } && notify-send "鸞 Bar" "Turned on"
-    [[ "$running" ]] && { pkill polybar & } && notify-send "鸞 Bar" "Turned off";
+    [[ -z "$running" ]] && { polybar main & } && noti "鸞 Bar" "Turned on"
+    [[ "$running" ]] && { pkill polybar & } && noti "鸞 Bar" "Turned off";
+}
+
+rec-start(){
+    ffmpeg -f x11grab\
+        -framerate 20 \
+        -thread_queue_size 512 \
+        -i "$DISPLAY".0+"$X","$Y"\
+        -vcodec libx264\
+        -qp 18\
+        -preset ultrafast \
+        "$HOME/etc/vid/rec/Rec_$(date +'%d_%I:%M').mp4" &
+}
+
+_rec(){
+    running=$(pidof ffmpeg)
+    [[ -z "$running" ]] && { rec-start & } && noti " Recording" "Started"
+    [[ "$running" ]] && { pkill ffmpeg & } && noti " Recording" "Stopped";
 }
 
 _torrent(){
     running=$(pidof transmission-daemon)
 
-    [[ -z "$running" ]] && { transmission-daemon & } && notify-send " Torrent" "Daemon started"
-    [[ "$running" ]] && { pkill transmission-da & } && notify-send " Torrent" "Daemon stopped";
+    [[ -z "$running" ]] && { transmission-daemon & } && noti " Torrent" "Daemon started"
+    [[ "$running" ]] && { pkill transmission-da & } && noti " Torrent" "Daemon stopped";
 }
 
 _compositor(){
     running=$(pidof picom)
 
-    [[ -z "$running" ]] && { picom --experimental-backends & } && notify-send "異 Compositor" "Turned on"
-    [[ "$running" ]] && { pkill picom & } && notify-send "異 Compositor" "Turned off";
+    [[ -z "$running" ]] && { picom --experimental-backends & } && noti "異 Compositor" "Turned on"
+    [[ "$running" ]] && { pkill picom & } && noti "異 Compositor" "Turned off";
 }
 
 _volume(){
@@ -37,18 +54,21 @@ _microphone(){
 _redshift(){
     running=$(pidof redshift)
 
-    [[ -z "$running" ]] && { redshift -l 0:0 -t 3700:3700 & } && notify-send "嗀 Redshift" "Turned on"
-    [[ "$running" ]] && { pkill redshift & } && notify-send "嗀 Redshift" "Turned off";
+    [[ -z "$running" ]] && { redshift -l 0:0 -t 3700:3700 & } && noti "嗀 Redshift" "Turned on"
+    [[ "$running" ]] && { pkill redshift & } && noti "嗀 Redshift" "Turned off";
 }
 
 _help(){
     printf "\n"
-    printf "tg bar|torrent|compositor|volume|redshift|microphone\n"
+    printf "tg bar|torrent|compositor|volume|redshift|microphone|rec\n"
     printf "\n"
 }
 
 
 case "$@" in
+rec)
+    _rec
+    ;;
 bar)
     _bar
     ;;

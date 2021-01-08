@@ -16,21 +16,6 @@ fi
 convert -size 100x100 xc:${color} $clr_path
 wait
 
-_wm=$(wmctrl -m | grep "Name:" | awk '{print $2}')
-
-case $_wm in
-    awesome)
-        awesome-client "
-        naughty = require('naughty')
-        naughty.notify({
-        image='$clr_path',
-        title='$color'
-        })
-        "
-        ;;
-    *)
-        notify-send -i $clr_path "${color}"
-        ;;
-esac
+noti " Colorpicker" "${color}" "$clr_path"
 
 echo $color | xclip -sel clip

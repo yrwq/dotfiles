@@ -1,0 +1,78 @@
+#!/usr/bin/env python
+
+# author:yrwq
+# rwal - get a random wallpaper from unsplash
+# requires below modules and an unsplash api token
+# Usage:
+#   rwal -s "query"
+# example:
+#   rwal -s "mountain"
+# Running with -s argument will save the random image locally named as <photo_id>.jpg
+
+import os
+import sys
+import getopt
+import random
+import subprocess
+import requests
+import urllib.request
+from pyunsplash import PyUnsplash
+
+api_key = os.environ.get("UNS_TOKEN")
+
+argumentList = sys.argv[1:]
+
+# Options
+options = "hs:"
+
+# Long options
+long_options = ["help", "save"]
+
+uns = PyUnsplash(api_key=api_key)
+
+# Get a random wallpaper from unsplash
+def getwall(query):
+    rand = random.randint(1,30)
+    search = uns.search(type_="photos", per_page=rand, page=rand, query=query)
+
+    for entry in search.entries:
+        url = entry.link_download
+
+    for entry in search.entries:
+        photo_id = entry.id
+    return url, photo_id
+
+# Unshorten url
+def unshorten(url):
+    session = requests.Session()
+    r = session.head(url, allow_redirects=True)
+
+    return r.url
+
+def dl():
+    url = getwall(sys.argv[2])
+
+    dl_url = unshorten(url[0])
+    photo_id = url[1]
+    urllib.request.urlretrieve(dl_url, photo_id + ".jpg")
+
+    return photo_id
+
+try:
+    # Parsing argument
+    arguments, values = getopt.getopt(argumentList, options, long_options)
+
+    # checking each argument
+    for currentArgument, currentValue in arguments:
+
+        if currentArgument in ("-h", "--help"):
+            help()
+
+        elif currentArgument in ("-s", "--save"):
+            dl()
+
+        else:
+            help()
+except getopt.error as err:
+    # output error, and return with an error code
+    print(str(err))

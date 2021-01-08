@@ -1,0 +1,127 @@
+#!/bin/sh
+
+#
+# scr - screenshot utility
+#
+
+save_dir="$HOME/etc/pic"
+
+doUpload=0
+method=0
+copy=0
+delay=0
+
+print_help() {
+cat <<EOF
+
+Usage:
+scr [options]
+
+-h                  Display this help message and exit.
+-u [file]           Upload a file to a file host.
+Auto upload screenshots when '-u' is given, example:
+-au
+
+-s [file]           Take an interactive screenshot.
+-a [file]           Take a full screenshot.
+-d <num>            Wait for <num> seconds before taking a screenshot.
+
+Examples:
+
+scr -u xyz.txt # upload a text file
+scr -au -d 2   # upload a screenshot of the entire root window after 2 seconds
+
+EOF
+}
+
+upload(){
+    local id=$(curl -sF "file=@${1}" http://0x0.st)
+    if [[ -z "${id// }" ]]
+    then
+        noti "Failed to upload ${1}"
+        exit 1
+    else
+        noti "Successfully uploaded"
+        echo $id | xclip -sel clip
+    fi
+}
+
+shot(){
+    case $1 in
+        full)
+            maim -d $delay "$fname"
+        ;;
+        select)
+            maim -s "$fname"
+        ;;
+    esac
+}
+
+while getopts :acsuhd: options
+do
+    case $options in
+        a) method="full" ;;
+        s) method="select" ;;
+        c) copy=1 ;;
+        u) doUpload=1 ;;
+        d) delay="$OPTARG" ;;
+        h) print_help ;;
+    esac
+done
+
+shift $(( $OPTIND -1 ))
+
+# Process the remaining args
+if [ $# -gt 1 ]
+then
+    echo "Too many arguments."
+    exit 0
+elif [ $# -lt 0 ]
+then
+    echo "Too few arguments."
+    exit 0
+elif [ $# -eq 0 ]
+then
+    fname=$( date +"%a-%d_%H:%M" )
+    fname="$fname.png"
+else
+    fname=$1
+fi
+
+main() {
+    case $doUpload in
+        1)
+            case $method in
+                0)
+                    upload $fname
+                ;;
+                *)
+                    shot $method $delay
+                    upload $fname
+                    rm $fname
+                ;;
+            esac
+        ;;
+        0)
+            case $method in
+                full|select)
+                    case $copy in
+                        0)
+                            shot $method $delay
+                            mv $fname $save_dir/$fname
+                        ;;
+                        *)
+                            shot $method
+                            xclip -sel clip -t image/png $fname
+                            mv $fname $save_dir/$fname
+                        ;;
+                    esac
+                ;;
+            esac
+        ;;
+    esac
+}
+
+main
+
+exit 1
