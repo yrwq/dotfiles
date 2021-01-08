@@ -23,9 +23,7 @@ copy_dots(){
     url="https://github.com/yrwq/dotfiles.git"
     temp_directory_dotfiles=$(mktemp -d)
     git clone "$url" "$temp_directory_dotfiles"
-    sudo yes | cp -rf "$temp_directory_dotfiles"/. ~
-    walls="https://github.com/yrwq/walls.git"
-    sudo git clone "$walls" ~/.wp
+    yes | cp -rf "$temp_directory_dotfiles"/. ~
 }
 
 install_others(){
