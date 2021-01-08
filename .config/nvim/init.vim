@@ -1,32 +1,31 @@
-" Automatic vim-plug installation
-if empty(glob('~/.config/nvim/autoload/plug.vim'))
-    silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    autocmd VimEnter * PlugInstall --sync | source ~/.config/nvim/init.vim
-endif
-
 call plug#begin('~/.config/nvim/plugged')
 
 Plug 'ap/vim-css-color'
 Plug 'tpope/vim-commentary'
 Plug 'fehawen/cs.vim'
 Plug 'scrooloose/nerdtree'
-Plug 'glepnir/dashboard-nvim'
 Plug 'junegunn/fzf.vim'
-Plug 'airblade/vim-gitgutter'
-Plug 'machakann/vim-sandwich'
 Plug 'sheerun/vim-polyglot'
-Plug 'honza/vim-snippets'
 Plug 'majutsushi/tagbar'
 Plug 'ptzz/lf.vim'
 Plug 'rbgrouleff/bclose.vim'
+Plug 'ryanoasis/vim-devicons'
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'airblade/vim-gitgutter'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
-" Statusline
-" Plug 'fehawen/sl.vim'
+" Snipptes
 
-" Auto complete
-" Plug 'dense-analysis/ale'
-" Plug 'Valloric/YouCompleteMe'
+
+Plug 'garbas/vim-snipmate'
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim'
+Plug 'honza/vim-snippets'
+Plug 'SirVer/ultisnips'
+
+" Plug 'klen/python-mode'
+" Plug 'w0rp/ale'
+" Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install() }}
 
 call plug#end()
 

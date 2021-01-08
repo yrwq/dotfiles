@@ -1,6 +1,5 @@
 " Lanuage options
 function! SetLuaOptions()
-  :call tagbar#autoopen(0)
   let lua_highlight_functions = 1
   let lua_highlight_all = 1
 endfunction
@@ -18,7 +17,6 @@ function! SetRustOptions()
 endfunction
 
 function! SetShOptions()
-  :call tagbar#autoopen(0)
   let sh_highlight_functions = 1
   let sh_highlight_all = 1
 endfunction

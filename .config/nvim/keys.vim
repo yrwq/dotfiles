@@ -1,14 +1,4 @@
-nnoremap <silent> <Leader>fh :DashboardFindHistory<CR>
-nnoremap <silent> <Leader>ff :DashboardFindFile<CR>
-nnoremap <silent> <Leader>tc :DashboardChangeColorscheme<CR>
-nnoremap <silent> <Leader>fa :DashboardFindWord<CR>
-nnoremap <silent> <Leader>fb :DashboardJumpMark<CR>
-nnoremap <silent> <Leader>cn :DashboardNewFile<CR>
-
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <cr>    pumvisible() ? "\<C-y>" : "\<cr>"
-imap <c-space> <Plug>(asyncomplete_force_refresh)
+map <C-n> :NERDTreeToggle<CR>
 
 map <Tab> :noh<CR>
 map <C-f> :Files<CR>
@@ -17,7 +7,7 @@ map <C-f> :Files<CR>
 nnoremap <C-A-j> :m .+1<CR>==
 nnoremap <C-A-k> :m .-2<CR>==
 
-" Open current file with given application
+" Open current file with corresponding program
 map <C-o> :!opout <c-r>%<CR><CR>
 
 " Write as sudo
@@ -26,14 +16,8 @@ cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 " Compile
 map <C-c> :w! \| !compile "<c-r>%"<CR>
 
-" Manage tabs
-map <leader>t :tabnew<CR>
-map <leader>w :tabclose<CR>
-map <leader>q :tabprev<CR>
-map <leader>e :tabnext<CR>
-
 " Toggle tag bar
-nnoremap <leader>f :TagbarToggle<CR>
+map <leader>s :TagbarToggle<CR>
 
 " Shortcut navigations
 map <C-h> <C-w>h
@@ -46,3 +30,9 @@ map <leader>d :LfCurrentFile <CR>
 
 map <leader>l :> <CR>
 map <leader>h :< <CR>
+map <leader>p :Snippets <CR>
+
+map <leader>t :badd .<CR>
+map <leader>w :Bclose<CR>
+map <leader>q :bprevious<CR>
+map <leader>e :bnext<CR>
