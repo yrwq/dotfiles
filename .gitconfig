@@ -1,3 +1,5 @@
 [user]
 	email = yrwqid@gmail.com
-	name = yrwq
+    name = yrwq
+[pager]
+    branch = false
