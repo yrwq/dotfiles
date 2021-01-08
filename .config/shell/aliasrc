@@ -4,23 +4,24 @@
 #[ -x "$(command -v nvim)" ] && alias vim="nvim" vimdiff="nvim -d"
 
 alias \
-	mv="mv -iv" \
-	rm="rm -vI" \
-	mkd="mkdir -pv" \
-	ffmpeg="ffmpeg -hide_banner" \
-	slop="slop -o" \
-	ls="exa --icons" \
-	l="exa -l --icons" \
-	grep="grep --color=auto" \
-	diff="diff --color=auto" \
-	ccat="highlight --out-format=ansi" \
-	ka="killall" \
-	ga="git add" \
-	gc="git commit -m" \
-	gp="git push -u origin main" \
-	mk="make && sudo make install" \
-	f="$FILE" \
-	v="nvim" \
-	z="zathura" \
-	pac="sudo pacman -Sy " \
-	ref="shortcuts >/dev/null; source ${XDG_CONFIG_HOME:-$HOME/.config}/shell/shortcutrc ; source ${XDG_CONFIG_HOME:-$HOME/.config}/shell/zshnameddirrc" \
+    mv="mv -iv" \
+    rm="rm -vI" \
+    mkd="mkdir -pv" \
+    ffmpeg="ffmpeg -hide_banner" \
+    slop="slop -o" \
+    ls="exa --icons" \
+    l="exa -l --icons" \
+    la="exa -l -a --icons" \
+    grep="grep --color=auto" \
+    diff="diff --color=auto" \
+    ccat="highlight --out-format=ansi" \
+    ka="killall" \
+    ga="git add" \
+    gc="git commit -m" \
+    gp="git push -u origin main" \
+    mk="make && sudo make install" \
+    f="$FILE" \
+    v="nvim" \
+    z="zathura" \
+    pac="sudo pacman -Sy " \
+    ref="shortcuts >/dev/null; source ${XDG_CONFIG_HOME:-$HOME/.config}/shell/shortcutrc ; source ${XDG_CONFIG_HOME:-$HOME/.config}/shell/zshnameddirrc" \
