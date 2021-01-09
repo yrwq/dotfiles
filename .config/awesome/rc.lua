@@ -140,4 +140,4 @@ require("candy.notifs")
 
 require("module.shotscreen")
 
-require("module.dock.".. "kory")
+require("module.dock.".. icon_theme)
