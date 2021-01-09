@@ -58,17 +58,17 @@ end
 
 -- browser
 apps.browser = function ()
-   awful.spawn.with_shell("brave yrwq.github.io/termstart")
+   -- awful.spawn.with_shell("brave yrwq.github.io/termstart")
    -- awful.spawn.with_shell("firefox yrwq.github.io/termstart")
    -- awful.spawn.with_shell("qutebrowser yrwq.github.io/termstart")
-   -- awful.spawn.with_shell("brave")
+   awful.spawn.with_shell("brave")
 end
 
 -- file manager
 apps.file_manager = function ()
-   awful.spawn.with_shell("st -c files -e lf")
+   awful.spawn.with_shell("thunar")
    -- awful.spawn.with_shell("st -c files -e ranger")
-   -- awful.spawn.with_shell("st --class files -e lf")
+   -- awful.spawn.with_shell("st -c lf -e lf")
    -- awful.spawn.with_shell("kitty --class files -e ranger")
 end
 

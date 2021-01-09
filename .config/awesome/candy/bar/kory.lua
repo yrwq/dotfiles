@@ -18,9 +18,7 @@ local function format_progress_bar(bar, icon)
         nil,
         {
             icon,
-            helpers.horizontal_pad(dpi(8)),
             bar,
-            helpers.horizontal_pad(dpi(8)),
             layout = wibox.layout.fixed.horizontal
         },
         expand = "none",
@@ -321,7 +319,6 @@ awful.screen.connect_for_each_screen(function(s)
                         {
                             microphone,
                             volume,
-                            brightness,
                             layout = wibox.layout.fixed.horizontal
                         },
                         top = dpi(2),

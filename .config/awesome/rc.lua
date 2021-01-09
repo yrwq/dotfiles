@@ -20,6 +20,13 @@ local titlebar_themes = {
 }
 local titlebar_theme = titlebar_themes[2]
 
+-- Icons
+local icon_themes = {
+    "dear", -- 1 --
+    "kory", -- 2 --
+}
+local icon_theme = icon_themes[2]
+
 pcall(require, "luarocks.loader")
 local gears = require("gears")
 local awful = require("awful")
@@ -62,6 +69,9 @@ x = {
     color14    = xrdb.color14,
     color15    = xrdb.color15,
 }
+
+local icons = require("icons")
+icons.init(icon_theme)
 
 local theme_dir = os.getenv("HOME") .. "/.config/awesome/themes/" .. theme .. "/"
 beautiful.init(theme_dir .. "theme.lua")
@@ -129,3 +139,5 @@ require("candy.bar." .. bar_theme)
 require("candy.notifs")
 
 require("module.shotscreen")
+
+require("module.dock.".. "kory")

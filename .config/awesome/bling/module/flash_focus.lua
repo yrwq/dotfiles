@@ -1,7 +1,7 @@
 local gears = require("gears")
 local beautiful = require("beautiful")
 
-local op = beautiful.flash_focus_start_opacity or 0.8
+local op = beautiful.flash_focus_start_opacity or 0.6
 local stp = beautiful.flash_focus_step or 0.01
 
 local flashfocus = function(c)

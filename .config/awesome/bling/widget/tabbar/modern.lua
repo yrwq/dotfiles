@@ -12,13 +12,16 @@ local bg_focus = beautiful.tabbar_bg_focus or beautiful.bg_focus or "#000000"
 local fg_focus = beautiful.tabbar_fg_focus or beautiful.fg_focus or "#ffffff"
 local font = beautiful.tabbar_font or beautiful.font or "Hack 15"
 local size = beautiful.tabbar_size or dpi(40)
-local border_radius = beautiful.mstab_border_radius or beautiful.border_radius or 6
+local border_radius =
+    beautiful.mstab_border_radius or beautiful.border_radius or 6
 local position = beautiful.tabbar_orientation or "top"
-local close_color = beautiful.tabbar_color_close or x.color1 or "#f9929b"
-local min_color = beautiful.tabbar_color_min or x.color3 or "#fbdf90"
-local float_color = beautiful.tabbar_color_float or x.color5 or "#ccaced"
+local close_color = beautiful.tabbar_color_close or beautiful.xcolor1 or
+                        "#f9929b"
+local min_color = beautiful.tabbar_color_min or beautiful.xcolor3 or "#fbdf90"
+local float_color = beautiful.tabbar_color_float or beautiful.xcolor5 or
+                        "#ccaced"
 
--- helper to create button
+-- helper function to create buttons
 local function create_title_button(c, color, symbol)
 
     local tb_icon = wibox.widget {
@@ -62,20 +65,22 @@ local function create(c, focused_bool, buttons)
 
     local tab_content = wibox.widget {
         {
-            top = dpi(10),
-            right = dpi(10),
-            bottom = dpi(10),
+            awful.widget.clienticon(c),
+            top = dpi(5),
+            left = dpi(15),
+            bottom = dpi(5),
             widget = wibox.container.margin
         },
-		{
+        {
             text_temp,
-			forced_width = dpi(100),
-			widget = wibox.container.margin
-		},
+            forced_width = dpi(50),
+            widget = wibox.container.margin
+        },
         nill,
         expand = "none",
         layout = wibox.layout.align.horizontal
     }
+
 
     local close = create_title_button(c, beautiful.titlebar_close_color or x.color1, beautiful.titlebar_close_button or " ")
     close:connect_signal("button::press", function() c:kill() end)
@@ -89,10 +94,10 @@ local function create(c, focused_bool, buttons)
     if focused_bool then
         tab_content = wibox.widget {
             {
-                {close, floating, full, layout = wibox.layout.fixed.horizontal},
-                top = dpi(10),
-                left = dpi(10),
-                bottom = dpi(10),
+                awful.widget.clienticon(c),
+                top = dpi(5),
+                left = dpi(15),
+                bottom = dpi(5),
                 widget = wibox.container.margin
             },
             {
@@ -101,6 +106,10 @@ local function create(c, focused_bool, buttons)
                 widget = wibox.container.margin
             },
             {
+                {full, floating, close, layout = wibox.layout.fixed.horizontal},
+                top = dpi(7),
+                right = dpi(10),
+                bottom = dpi(7),
                 widget = wibox.container.margin
             },
             expand = "none",
@@ -120,8 +129,10 @@ local function create(c, focused_bool, buttons)
                     widget = wibox.container.background
                 },
                 bg = bg_temp,
+                shape = gears.rectangle,
                 widget = wibox.container.background
             },
+            width = border_radius + (border_radius / 2),
             height = size,
             strategy = "exact",
             layout = wibox.layout.constraint
@@ -130,8 +141,10 @@ local function create(c, focused_bool, buttons)
             {
                 tab_content,
                 bg = bg_temp,
+                shape = helpers.prrect(border_radius, true, true, false, false),
                 widget = wibox.container.background
             },
+            top = dpi(5),
             widget = wibox.container.margin
         },
         {
@@ -139,11 +152,15 @@ local function create(c, focused_bool, buttons)
                 {
                     wibox.widget.textbox(),
                     bg = bg_normal,
+                    shape = helpers.prrect(border_radius, false, false, false,
+                                           true),
                     widget = wibox.container.background
                 },
                 bg = bg_temp,
+                shape = gears.rectangle,
                 widget = wibox.container.background
             },
+            width = border_radius + (border_radius / 2),
             height = size,
             strategy = "exact",
             layout = wibox.layout.constraint
@@ -160,5 +177,5 @@ return {
     position = "top",
     size = size,
     bg_normal = bg_normal,
-    bg_focus = x.bg
+    bg_focus = bg_focus
 }

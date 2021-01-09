@@ -94,6 +94,10 @@ awful.keyboard.append_global_keybindings({
     awful.key({ modkey }, "s", function() app_drawer_show() end,
     {description = "app launcher", group = "launch"}),
 
+    -- apps
+    awful.key({ modkey,shiftkey }, "s", function() awful.spawn.with_shell("rofi -show drun -show-icons") end,
+    {description = "app launcher", group = "launch"}),
+
     awful.key({ modkey }, "e", apps.editor,
     {description = "editor", group = "launch"}),
 
@@ -132,12 +136,14 @@ awful.keyboard.append_global_keybindings({
     -- increase volume
     awful.key({ }, "XF86AudioRaiseVolume",     function () awful.spawn.with_shell("pamixer --allow-boost -i 5") end,
     {description = "increase volume", group = "launch"}),
+
     awful.key({ modkey }, "F10",     function () awful.spawn.with_shell("pamixer --allow-boost -i 5") end,
     {description = "increase volume", group = "launch"}),
 
     -- decrease volume
     awful.key({ }, "XF86AudioLowerVolume",     function () awful.spawn.with_shell("pamixer --allow-boost -d 5") end,
     {description = "decrease volume", group = "launch"}),
+
     awful.key({ modkey }, "F9",     function () awful.spawn.with_shell("pamixer --allow-boost -d 5") end,
     {description = "decrease volume", group = "launch"}),
 
@@ -223,7 +229,7 @@ client.connect_signal("request::default_keybindings", function()
     {description = "kill focused", group = "client"}),
 
     -- toggle floating
-    awful.key({ modkey, shiftkey }, "s",  awful.client.floating.toggle,
+    awful.key({ modkey, shiftkey }, "space",  awful.client.floating.toggle,
     {description = "toggle floating", group = "client"}),
 
     -- move client to master

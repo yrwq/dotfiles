@@ -7,7 +7,11 @@ local gears = require("gears")
 local gfs = require("gears.filesystem")
 local themes_path = gfs.get_themes_dir()
 local helpers = require("helpers")
-local theme = dofile(themes_path .. "default/theme.lua")
+
+local theme = dofile("/usr/share/awesome/themes/default/theme.lua")
+
+-- from /usr/share/icons and /usr/share/icons/hicolor will be used.
+-- theme.icon_theme = "/usr/share/icons/Adwaita"
 
 -- fonts
 -- fallback
@@ -81,8 +85,8 @@ theme.mstab_tabbar_orientation = "top"
 theme.mstab_border_radius = dpi(10)
 
 -- bling tabbar
-theme.tabbar_style = "modern"
-theme.tabbar_size = dpi(30)
+theme.tabbar_style = "boxes"
+theme.tabbar_size = dpi(40)
 theme.tabbar_bg_focus = x.bg
 theme.tabbar_bg_normal = x.color0
 theme.tabbed_spawn_in_tab = true
