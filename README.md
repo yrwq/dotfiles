@@ -7,21 +7,8 @@ The configuration probably won't match your setup out-of-the-box, so you should 
 
 # Setup
 
-The install script provides a fully usable system, installing dependencies, an aur helper, my dotfiles and my wallpaper collection.
+## Dependencies
 
-If you are brave enought to use it, and you are running an Arch based distro (other distros are not supported yet),
+`sudo pacman -Syu wmctrl git feh slop xorg exa ffmpeg fzf imagemagick maim mpc mpd mpv ncmpcpp neomutt neovim pamixer pulsemixer ranger rofi transmission-cli ttf-nerd-fonts-symbols w3m xclip xautolock xdg-user-dirs xdg-utils xdotool xf86-input-libinput xf86-video-intel xorg-font-util xorg-fonts-misc xorg-xinit xorg-server xorg-setxkbmap xorg-xclipboard youtube-dl zsh unclutter ueberzug sxiv man-db libnotify jq rofimoji highlight inotify-tools`
 
-run these commands in your terminal:
-
-`git clone https://github.com/yrwq/dotfiles && cd dotfiles`
-
-`chmod +x install && chmod +x pkgs`
-
-`./install`
-
-This will take a while ...
-
-# Gallery
-
-![preview](https://0x0.st/ihaD.png)
-![preview](https://0x0.st/ihv1.png)
+`yay -S nerd-fonts-iosevka urlview vidir lf-bin picom-jonaburg-git mutt-wizard-git libxft-bgra brave-bin awesome-git`
