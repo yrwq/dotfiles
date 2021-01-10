@@ -44,17 +44,15 @@ notifbox.create = function(icon, title, message, width)
     dismiss.forced_width = dpi(24)
 
     local img_icon = wibox.widget {
-        image = icon,
-        forced_width = dpi(40),
-        forced_height = dpi(40),
-        resize = true,
-        clip_shape = function(cr)
-            gears.shape.rounded_rect(cr, dpi(35), dpi(35), dpi(6))
-        end,
-        widget = wibox.widget.imagebox
+        markup = helpers.colorize_text(icon, x.color1),
+        font = beautiful.ifont .. "30",
+        -- forced_width = dpi(40),
+        -- forced_height = dpi(40),
+        -- resize = true,
+        widget = wibox.widget.textbox
     }
 
-    local center1 = wibox.container.margin(img_icon, 20, 0, 14, 0)
+    local center1 = wibox.container.margin(img_icon, 20, 0, 0, 0)
 
     box = wibox.widget {
         {

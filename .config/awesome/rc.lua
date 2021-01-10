@@ -27,6 +27,13 @@ local icon_themes = {
 }
 local icon_theme = icon_themes[2]
 
+-- Panel
+local panel_themes = {
+    "dear", -- 1 --
+    "kory", -- 2 --
+}
+local panel_theme = panel_themes[2]
+
 pcall(require, "luarocks.loader")
 local gears = require("gears")
 local awful = require("awful")
@@ -70,16 +77,18 @@ x = {
     color15    = xrdb.color15,
 }
 
+-- load icons
 local icons = require("icons")
 icons.init(icon_theme)
 
+-- load theme
 local theme_dir = os.getenv("HOME") .. "/.config/awesome/themes/" .. theme .. "/"
 beautiful.init(theme_dir .. "theme.lua")
 
 -- bling needs to be loaded after initializing beautiful
 local bling = require("bling")
 bling.module.flash_focus.enable()
-bling.module.window_swallowing.start()
+-- bling.module.window_swallowing.start()
 
 -- layouts
 awful.layout.layouts = {
@@ -111,6 +120,7 @@ awful.screen.connect_for_each_screen(function(s)
     awful.tag(tagnames, s, layouts)
 end)
 
+
 require("shit") -- daemons
 require("rules") -- rules
 
@@ -138,6 +148,11 @@ require("candy.bar." .. bar_theme)
 -- initialize notifications
 require("candy.notifs")
 
+-- initialize shotscreen
 require("module.shotscreen")
 
-require("module.dock.".. icon_theme)
+-- initialize dock
+require("module.dock.dock")
+
+-- initialize panel
+require("candy.panel.kory")

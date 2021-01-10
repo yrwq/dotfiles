@@ -34,6 +34,22 @@ end
 -- Add empty notification message on start-up
 notifbox_layout:insert(1, empty_notifbox)
 
+local app_config = {
+    ['discord'] = { icon = "", title = true },
+    ['mail'] = { icon = "", title = false },
+    ['theme'] = { icon = "嗀", title = true },
+    ['music'] = { icon = "", title = false },
+    ['colorpicker'] = { icon = "", title = false },
+    ['git'] = { icon = "", title = false },
+    ['scr'] = { icon = "", title = false },
+    ['bar'] = { icon = "鸞", title = false },
+    ['rec'] = { icon = "", title = false },
+    ['torrent'] = { icon = "", title = false },
+    ['comp'] = { icon = "", title = false },
+    ['redshift'] = { icon = "嗀", title = false },
+}
+
+local default_icon = ""
 -- Connect to naughty
 naughty.connect_signal("added", function(n)
 
@@ -50,11 +66,20 @@ naughty.connect_signal("added", function(n)
         notifbox_color = x.color8 .. '66'
     end
     -- Check if there's an icon
-    local appicon = n.icon or n.app_icon
-    if not appicon then appicon = beautiful.notification_icon end
+    -- local appicon = n.icon or n.app_icon
+    -- if not appicon then appicon = "" end
 
     local box = require("candy.notifs.notif-center.build-notifbox.notifbox")
-    notifbox_layout:insert(1, box.create(appicon, n.title, n.message, width))
+
+    local icon, title_visible
+
+    if app_config[n.app_name] then
+        icon = app_config[n.app_name].icon
+    else
+        icon = default_icon
+    end
+
+    notifbox_layout:insert(1, box.create(icon, n.title, n.message, width))
 end)
 
 return notifbox_layout

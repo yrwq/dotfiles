@@ -177,8 +177,8 @@ local function create_stripe(widgets, bg)
 end
 
 app_drawer:setup {
-        create_stripe({ browser, discord, mail, news}, x.color8 .. "99"),
-        create_stripe({ lxappearance, volume, nitrogen, yt}, x.color0 .. "99"),
-        create_stripe({ todo, syncmail, compositor, night_mode}, x.bg .. "99"),
+        create_stripe({ browser, discord, mail, news}, x.color8),
+        create_stripe({ lxappearance, volume, nitrogen, yt}, x.color0),
+        create_stripe({ todo, syncmail, compositor, night_mode}, x.bg),
         layout = wibox.layout.flex.vertical
 }

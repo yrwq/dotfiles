@@ -3,6 +3,7 @@ local gears = require("gears")
 local wibox = require("wibox")
 local apps = require("apps")
 local bling = require("bling")
+local helpers = require("helpers")
 
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 
@@ -98,7 +99,7 @@ awful.keyboard.append_global_keybindings({
     awful.key({ modkey,shiftkey }, "s", function() awful.spawn.with_shell("rofi -show drun -show-icons") end,
     {description = "app launcher", group = "launch"}),
 
-    awful.key({ modkey }, "e", apps.editor,
+    awful.key({ modkey }, "e", apps.org,
     {description = "editor", group = "launch"}),
 
     awful.key({ modkey }, "r", apps.file_manager,
@@ -122,7 +123,7 @@ awful.keyboard.append_global_keybindings({
     {description = "toggle microphone", group = "launch"}),
 
     -- toggle volume on/off
-    awful.key({ modkey }, "m", function() awful.spawn.with_shell("tg volume") end,
+    awful.key({ modkey }, "m", function() helpers.volume_control(0) end,
     {description = "toggle volume", group = "launch"}),
 
     -- spawn emoji picker
@@ -153,6 +154,14 @@ awful.keyboard.append_global_keybindings({
 
     -- decrease brightness
     awful.key({ }, "XF86MonBrightnessDown",  function() awful.spawn.with_shell("light -U 5") end,
+    {description = "decrease brightness", group = "launch"}),
+
+    -- increase brightness
+    awful.key({ modkey }, "F2",  function() awful.spawn.with_shell("bri down") end,
+    {description = "increase brightness", group = "launch"}),
+
+    -- decrease brightness
+    awful.key({ modkey }, "F3",  function() awful.spawn.with_shell("bri up") end,
     {description = "decrease brightness", group = "launch"}),
 
     -- show exit screen

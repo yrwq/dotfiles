@@ -5,6 +5,9 @@ local beautiful = require("beautiful")
 local xresources = require("beautiful.xresources")
 local dpi = xresources.apply_dpi
 local helpers = require("helpers")
+local icons = require("icons")
+local class_icons = icons.text.by_class
+local capi = { screen = screen, client = client }
 
 -- helper function to create progress bar
 local function format_progress_bar(bar, icon)
@@ -197,12 +200,16 @@ local tasklist_buttons = gears.table.join(
         end
     end),
 
-    awful.button({}, 3, function() awful.menu.client_list({theme = {width = 250}}) end),
+    awful.button({}, 3, function(c) c:kill() end),
     awful.button({}, 4, function() awful.client.focus.byidx(1) end),
     awful.button({}, 5, function() awful.client.focus.byidx(-1) end))
 
-
 awful.screen.connect_for_each_screen(function(s)
+
+    local function set_icon(item, c)
+        local i = class_icons[c.class] or class_icons['_']
+        item:get_children_by_id('text_icon')[1].markup = helpers.colorize_text(i.symbol, i.color)
+    end
     -- Create layoutbox widget
     s.mylayoutbox = awful.widget.layoutbox(s)
 
@@ -239,25 +246,39 @@ awful.screen.connect_for_each_screen(function(s)
 
 
     s.mytasklist = awful.widget.tasklist {
-      screen = s,
-      filter = awful.widget.tasklist.filter.currenttags,
-      buttons = tasklist_buttons,
-      style = {bg = x.transbg, shape = helpers.rrect(beautiful.bar_widget_radius)},
-      layout = {spacing = 10, layout = wibox.layout.flex.horizontal},
-      widget_template = {
-        {
-          {
-            {id = 'text_role',align = "center", widget = wibox.widget.textbox},
-            layout = wibox.layout.flex.horizontal
-          },
-          forced_width = dpi(150),
-          left = dpi(12),
-          right = dpi(12),
-          widget = wibox.container.margin
+        screen   = s,
+        filter   = awful.widget.tasklist.filter.currenttags,
+        buttons  = tasklist_buttons,
+        style    = {
+            font = beautiful.tasklist_font,
+            shape = helpers.rrect(dpi(10)),
+            bg = x.color0,
         },
-        id = 'background_role',
-        widget = wibox.container.background
-      }
+
+        layout   = {
+            layout  = wibox.layout.flex.horizontal
+        },
+
+        widget_template = {
+            {
+                {
+                    id     = 'text_icon',
+                    font   = beautiful.ifont .. "25",
+                    forced_width = dpi(40),
+                    align  = "center",
+                    valign = "center",
+                    widget = wibox.widget.textbox,
+                },
+                layout  = wibox.layout.fixed.horizontal
+            },
+            id = "background_role",
+            widget = wibox.container.background,
+            create_callback = function(self, c, _, __)
+                set_icon(self, c)
+                -- Handle clients which change their own class
+                c:connect_signal("property::class", function() set_icon(self, c) end)
+            end,
+        },
     }
 
     -- Add widgets to the wibox
@@ -283,10 +304,10 @@ awful.screen.connect_for_each_screen(function(s)
           {
             {
               s.mytasklist,
-              top = 4,
-              bottom = 4,
-              right = 5,
-              left = 5,
+              top = dpi(4),
+              bottom = dpi(4),
+              right = dpi(5),
+              left = dpi(5),
               widget = wibox.container.margin
             },
             layout = wibox.layout.flex.horizontal
@@ -411,6 +432,18 @@ end)
 -- client.connect_signal("unfocus", no_wibar_visble)
 -- client.connect_signal("property::fullscreen", no_wibar)
 --
+
+client.connect_signal("manage", function(c)
+   local s = awful.screen.focused()
+    if c.fullscreen then
+        s.mywibox.visible = false
+    else
+        if not c.fullscreen then
+            s.mywibox.visible = true
+        end
+    end
+end)
+
 client.connect_signal("property::fullscreen", function(c)
    local s = awful.screen.focused()
     if c.fullscreen then

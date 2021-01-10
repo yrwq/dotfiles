@@ -39,8 +39,6 @@ icons.text.by_class = {
     ['Steam'] = { symbol = "", color = x.color2 },
     ['editor'] = { symbol = "", color = x.color5 },
     ['Emacs'] = { symbol = "", color = x.color2 },
-    ['thunar'] = { symbol = "", color = x.color2 },
-    ['Thunar'] = { symbol = "", color = x.color2 },
     ['mail'] = { symbol = "", color = x.color6 },
     ['tide'] = { symbol = "", color = x.color6 },
     ['lf'] = { symbol = "", color = x.color6 },

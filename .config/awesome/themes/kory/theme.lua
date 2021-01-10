@@ -11,7 +11,9 @@ local helpers = require("helpers")
 local theme = dofile("/usr/share/awesome/themes/default/theme.lua")
 
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.
--- theme.icon_theme = "/usr/share/icons/Adwaita"
+-- theme.icon_theme = "/usr/share/icons/gruvbox-dark-icons-gtk/16x16/apps/"
+theme.icon_theme = "/usr/share/icons/Adwaita/64x64/apps/"
+theme.weather_city = "Pécs"
 
 -- fonts
 -- fallback
@@ -137,8 +139,8 @@ theme.notification_bg = x.color0
 theme.notification_max_width = dpi(350)
 theme.notification_max_height = dpi(180)
 theme.notification_margin = dpi(10)
-theme.notification_border_radius = dpi(5)
-theme.notification_border_width = dpi(5)
+theme.notification_border_radius = dpi(10)
+theme.notification_border_width = dpi(0)
 theme.notification_border_color = x.color0
 theme.notification_spacing = dpi(5)
 theme.notification_padding = dpi(5)

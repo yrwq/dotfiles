@@ -11,6 +11,7 @@ local cairo = require("lgi").cairo
 local icons = require("icons")
 local class_icons = icons.text.by_class
 
+
 local item_font = beautiful.ifont .. "20"
 local item_bg = x.color0
 local item_size = dpi(50)
