@@ -26,18 +26,24 @@ local function create_title_button(c, color, symbol)
     return tb
 end
 
-client.connect_signal("manage", function(c)
-    awful.titlebar.show(c, beautiful.titlebar_position)
-end)
 
-client.connect_signal("property::fullscreen", function(c)
-    if c.fullscreen then
-        awful.titlebar.hide(c, beautiful.titlebar_position)
+client.connect_signal("manage", function(c)
+
+    if c.class == "firefox" then
+        awful.titlebar.hide(c, "top")
     else
-        if not c.fullscreen then
-            awful.titlebar.show(c, beautiful.titlebar_position)
-        end
+        awful.titlebar.show(c, "top")
     end
+
+    if c.fullscreen then
+        awful.titlebar.hide(c, "top")
+    end
+
+    if c.type == "dialog" then
+        awful.titlebar.hide(c, "top")
+    end
+
+
 end)
 
 -- enable titlebar
@@ -78,14 +84,6 @@ client.connect_signal("request::titlebars", function(c)
 
     local full = create_title_button(c, beautiful.titlebar_full_color or x.color3,beautiful.titlebar_full_button or " ")
     full:connect_signal("button::press", function(c) c.fullscreen = true end)
-
-    local top_bg = x.bg
-
-    -- if c.class == "brave" or c.class == "Discord" then
-    --     top_bg = x.color0
-    -- else
-    --     top_bg = x.bg
-    -- end
 
     awful.titlebar(c, {
         position = "top",

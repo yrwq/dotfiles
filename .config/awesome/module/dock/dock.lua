@@ -58,8 +58,17 @@ awful.screen.connect_for_each_screen(function(s)
             s.dock_activator.ontop = true
         end
     end
-    client.connect_signal("focus", no_dock_activator_ontop)
-    client.connect_signal("unfocus", no_dock_activator_ontop)
+
+    local function no_dock_visible(c)
+        s.dock.visible = false
+    end
+
+    local function dock_visible(c)
+        s.dock.visible = true
+    end
+
+    client.connect_signal("focus", no_dock_visible)
+    client.connect_signal("unfocus", dock_visible)
     client.connect_signal("property::fullscreen", no_dock_activator_ontop)
 
     s:connect_signal("removed", function (s)

@@ -44,6 +44,7 @@ terminal = "st"
 music = "st -c music -e ncmpcpp"
 mail = "st -c mail -e neomutt"
 
+
 screen_width = awful.screen.focused().geometry.width
 screen_height = awful.screen.focused().geometry.height
 
@@ -75,6 +76,17 @@ x = {
     color13    = xrdb.color13,
     color14    = xrdb.color14,
     color15    = xrdb.color15,
+}
+
+-- directiories used in custom thunar titlebar
+dir = {
+    home = "$HOME",
+    config = "$HOME/.config",
+    download = "$HOME/etc/dl",
+    video = "$HOME/etc/vid",
+    picture = "$HOME/etc/pic",
+    dev = "$HOME/dev",
+    doc = "$HOME/doc",
 }
 
 -- load icons
@@ -130,29 +142,30 @@ require("module.exitscreen")
 local lock_screen = require("module.lockscreen")
 lock_screen.init()
 
--- initialize keys
 require("keys") -- key binds
 
--- initialize applauncher
+-- application launcher
 require("module.applauncher")
 
--- initialize layout popup
+-- layout popup
 require("module.layout-popup")
 
--- initialize titlebar theme
+-- titlebar(s)
 require("candy.titlebar." .. titlebar_theme)
+require("candy.titlebar.thunar")
 
--- initialize bar theme
+-- bar
 require("candy.bar." .. bar_theme)
 
--- initialize notifications
+-- notifications
 require("candy.notifs")
 
--- initialize shotscreen
+-- screenshot screen
 require("module.shotscreen")
 
--- initialize dock
+-- dock
 require("module.dock.dock")
 
--- initialize panel
+-- panel
 require("candy.panel.kory")
+
