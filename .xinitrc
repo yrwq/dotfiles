@@ -2,8 +2,20 @@
 
 . "$HOME/.xprofile"
 
+
 # Random theme
-cht -r &
+# cht -r &
+xrdb ~/.clr/salvation
+feh --bg-fill ~/.wp/teemu-paananen.jpg &
+
+# Emacs
+emacs --daemon &
+
+# Thunar
+thunar --daemon &
+
+# Discord
+discord &
 
 # Network Manager
 nm-applet &
@@ -16,6 +28,7 @@ unclutter --timeout=1 &
 
 # Compositor
 picom --experimental-backends &
+# xcompmgr &
 
 # Lock after 10 mins
 xautolock -time 10 -locker lock &
