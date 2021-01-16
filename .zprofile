@@ -5,7 +5,7 @@ export PATH="$PATH:$HOME/.bin"
 export PATH="$PATH:$HOME.gem/ruby/2.7.0/bin"
 
 # Dirty directories to watch with drt script
-export DRT_PATH=~/dev/dotfiles:~/dev/yemacs:~/dev/yafetch:~/dev/ytw:~/dev/yth
+export DRT_PATH=~/dev/dotfiles:~/dev/yemacs:~/dev/yafetch:~/dev/ytw:~/dev/yth:~/dev/termstart
 
 # Default programs:
 export EDITOR="nvim"
