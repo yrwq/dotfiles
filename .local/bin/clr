@@ -16,6 +16,6 @@ fi
 convert -size 100x100 xc:${color} $clr_path
 wait
 
-noti " Colorpicker" "${color}" "$clr_path"
+notify-send -a colorpicker "${color}"
 
 echo $color | xclip -sel clip

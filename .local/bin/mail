@@ -4,10 +4,8 @@
 # mail - sync mails and open mail client
 #
 
-noti " Mail" "Syncing ..."
-
 mw -Y
 
 unread="$(find "${XDG_DATA_HOME:-$HOME/.local/share}"/mail/*/[Ii][Nn][Bb][Oo][Xx]/new/* -type f | wc -l 2>/dev/null)"
 
-noti " Mail" "Successfully synced"
+notify-send -a mail "${unread} unread"

@@ -15,5 +15,3 @@ else
         /tmp/mpd_cover.jpg &&
         cover_path="/tmp/mpd_cover.jpg"
 fi
-
-noti "$(mpd current -f %artist%)" "$(mpd current -f %title%)" "/tmp/mpd_cover.jpg"

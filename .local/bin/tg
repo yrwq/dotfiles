@@ -8,8 +8,8 @@
 _bar(){
     running=$(pidof polybar)
 
-    [[ -z "$running" ]] && { polybar main & } && noti "鸞 Bar" "Turned on"
-    [[ "$running" ]] && { pkill polybar & } && noti "鸞 Bar" "Turned off";
+    [[ -z "$running" ]] && { polybar main & } && notify-send -a bar "Turned on"
+    [[ "$running" ]] && { pkill polybar & } && notify-send -a bar "Turned off";
 }
 
 rec-start(){
@@ -25,22 +25,22 @@ rec-start(){
 
 _rec(){
     running=$(pidof ffmpeg)
-    [[ -z "$running" ]] && { rec-start & } && noti " Recording" "Started"
-    [[ "$running" ]] && { pkill ffmpeg & } && noti " Recording" "Stopped";
+    [[ -z "$running" ]] && { rec-start & } && notify-send -a rec "Started"
+    [[ "$running" ]] && { pkill ffmpeg & } && notify-send -a rec "Stopped";
 }
 
 _torrent(){
     running=$(pidof transmission-daemon)
 
-    [[ -z "$running" ]] && { transmission-daemon & } && noti " Torrent" "Daemon started"
-    [[ "$running" ]] && { pkill transmission-da & } && noti " Torrent" "Daemon stopped";
+    [[ -z "$running" ]] && { transmission-daemon & } && notify-send -a torrent "Daemon started"
+    [[ "$running" ]] && { pkill transmission-da & } && notify-send -a torrent "Daemon stopped";
 }
 
 _compositor(){
     running=$(pidof picom)
 
-    [[ -z "$running" ]] && { picom --experimental-backends & } && noti "異 Compositor" "Turned on"
-    [[ "$running" ]] && { pkill picom & } && noti "異 Compositor" "Turned off";
+    [[ -z "$running" ]] && { picom --experimental-backends & } && notify-send -a comp "Turned on"
+    [[ "$running" ]] && { pkill picom & } && notify-send -a comp "Turned off";
 }
 
 _volume(){
@@ -54,8 +54,8 @@ _microphone(){
 _redshift(){
     running=$(pidof redshift)
 
-    [[ -z "$running" ]] && { redshift -l 0:0 -t 3700:3700 & } && noti "嗀 Redshift" "Turned on"
-    [[ "$running" ]] && { pkill redshift & } && noti "嗀 Redshift" "Turned off";
+    [[ -z "$running" ]] && { redshift -l 0:0 -t 3700:3700 & } && notify-send -a redshift "Turned on"
+    [[ "$running" ]] && { pkill redshift & } && notify-send -a redshift "Turned off";
 }
 
 _help(){
