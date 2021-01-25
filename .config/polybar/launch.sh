@@ -2,4 +2,4 @@
 
 killall -q polybar
 
-polybar main
+polybar main -c $HOME/.config/polybar/config.ini

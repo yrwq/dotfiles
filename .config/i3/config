@@ -1,0 +1,100 @@
+set $mod Mod4
+
+font pango:monospace 8
+
+floating_modifier $mod
+bindsym $mod+Return exec st
+bindsym $mod+q kill
+
+bindsym $mod+s exec --no-startup-id rofi -show drun -show-icons
+bindsym $mod+r exec --no-startup-id st -e lf
+bindsym $mod+e exec --no-startup-id st -e nvim
+
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# bindsym $mod+Left focus left
+# bindsym $mod+Down focus down
+# bindsym $mod+Up focus up
+# bindsym $mod+Right focus right
+
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# bindsym $mod+Shift+Left move left
+# bindsym $mod+Shift+Down move down
+# bindsym $mod+Shift+Up move up
+# bindsym $mod+Shift+Right move right
+#
+bindsym $mod+i split vertical
+bindsym $mod+o split horizontal
+bindsym $mod+f fullscreen toggle
+
+bindsym $mod+b layout stacking
+bindsym $mod+n layout tabbed
+bindsym $mod+m layout toggle split
+
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space focus mode_toggle
+
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec i3-msg exit
+
+gaps top 25
+gaps inner 15
+
+for_window [class="^.*"] border pixel 5
+new_window 1pixel
+
+set $base00 #212121
+set $base01 #303030
+set $base02 #353535
+set $base03 #4A4A4A
+set $base04 #B2CCD6
+set $base05 #EEFFFF
+set $base06 #EEFFFF
+set $base07 #FFFFFF
+set $base08 #F07178
+set $base09 #F78C6C
+set $base0A #FFCB6B
+set $base0B #C3E88D
+set $base0C #89DDFF
+set $base0D #82AAFF
+set $base0E #C792EA
+set $base0F #FF5370
+
+client.focused          $base01 $base01 $base00 $base03 $base03
+client.focused_inactive $base01 $base01 $base05 $base03 $base01
+client.unfocused        $base01 $base00 $base05 $base01 $base01
+client.urgent           $base08 $base08 $base00 $base08 $base08
+client.placeholder      $base00 $base00 $base05 $base00 $base00
+client.background       $base07
+
+bar {
+  i3bar_command $HOME/.config/polybar/launch.sh
+}
+
+# exec_always --no-startup-id $HOME/.config/polybar/launch.sh
