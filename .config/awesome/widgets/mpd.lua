@@ -154,7 +154,7 @@ local script = [[bash -c '
   file=`mpc current -f %file%`
   info=`mpc -f "%artist%@@%title%@"`
 
-  ~/.bin/art &
+  art &
   cover="/tmp/mpd_cover.jpg"
   echo $info"##"$cover"##"
 ']]

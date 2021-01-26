@@ -1,0 +1,327 @@
+:root {
+  --yrwq-font-family: "Iosevka Custom";
+  --yrwq-font-size: 16px;
+
+  --yrwq-bg-dark: #282828;
+  --yrwq-bg-darkisher: #282828;
+  --yrwq-bg-darkish: #282828;
+  --yrwq-bg-normal: #282828;
+  --yrwq-bg-brighter: #282828;
+
+  --yrwq-border: #db7464;
+
+  --yrwq-fg-brighter: #cdc1c1;
+  --yrwq-fg-normal: #9ea894;
+  --yrwq-fg-darker: #c9d0c2;
+  --yrwq-fg-dark: #9ea894;
+  --yrwq-fg-inactive: #c9d0c2;
+
+  --yrwq-red: #db7464;
+  --yrwq-purple: #a073d6;
+  --yrwq-blue: #dbd560;
+  --yrwq-green: #a7e160;
+  --yrwq-aqua: #69b2d6;
+  --yrwq-yellow: #69e1d3;
+  --yrwq-orange: #dba08f;
+
+  --yrwq-accent: var(--yrwq-red);
+
+  /* other stuff */
+  --button: #db7464;
+  -moz-tab-size: 2;
+}
+
+.theme-dark {
+  --header-primary: var(--yrwq-fg-brighter);
+  --header-secondary: var(--yrwq-fg-darker);
+  --text-normal: var(--yrwq-fg-brighter);
+  --text-muted: var(--yrwq-fg-darker);
+  --text-link: var(--yrwq-accent);
+  --channels-default: var(--yrwq-fg-darker);
+  --interactive-normal: var(--yrwq-fg-darker);
+  --interactive-hover: var(--yrwq-fg-brighter);
+  --interactive-active: var(--yrwq-fg-brighter);
+  --interactive-muted: var(--yrwq-fg-darker);
+  --background-primary: var(--yrwq-bg-normal);
+  --background-secondary: var(--yrwq-bg-darkish);
+  --background-secondary-alt: var(--yrwq-bg-normal);
+  --background-tertiary: var(--yrwq-bg-normal);
+  --background-accent: var(--yrwq-accent);
+  --background-floating: var(--yrwq-bg-normal);
+  --background-modifier-hover: rgba(79, 84, 92, 0.16);
+  --background-modifier-active: rgba(79, 84, 92, 0.24);
+  /*--background-modifier-accent: hsla(0, 0%, 100%, 0.06);*/
+  --background-modifier-accent: rgba(0, 0, 0, 0);
+  --elevation-high: 0 8px 16px rgba(0, 0, 0, 0.24);
+  --guild-header-text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
+  --channeltextarea-background: var(--yrwq-bg-normal);
+  --activity-card-background: var(--yrwq-bg-darkish);
+  --deprecated-panel-background: var(--yrwq-bg-dark);
+  --background-modifier-selected: var(--yrwq-bg-normal);
+  --elevation-low: none !important;
+  --background-message-hover: var(--yrwq-bg-darkish) !important;
+}
+
+* {
+  font-family: var(--yrwq-font-family) !important;
+  font-weight: normal !important;
+  font-size: var(--yrwq-font-size) !important;
+}
+
+
+/* more dense sidebar */
+
+[class*="sidebar"] [class*="containerDefault"] [class*="mainContent"] {
+    height: 25px !important;
+}
+[class*="sidebar"] [class*="containerDefault"] [class*="mainContent"] > * {
+    font-size: 15px !important;
+}
+
+::-webkit-scrollbar,
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-track-handle,
+::-webkit-scrollbar-track-piece {
+  border-color: rgba(0, 0, 0, 0) !important;
+  background-color: rgba(0, 0, 0, 0) !important;
+}
+
+/* general */
+[class*="colorBrand"] {
+  color: var(--yrwq-accent);
+}
+
+[class*="colorDanger"] {
+  color: var(--yrwq-red);
+}
+
+[class*="lookBlank"] {
+  color: var(--yrwq-fg-darker);
+}
+
+[class*="input"]:focus {
+  border-color: var(--yrwq-accent);
+}
+
+/* sections */
+
+[id*="popout"] [class*="container"] {
+  background-color: var(--yrwq-bg-normal);
+  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.4);
+  color: var(--yrwq-fg-brighter) !important;
+}
+[id*="popout"] [class*="container"] ::after {
+  background-image: none !important;
+}
+
+[class*="live"][class*="textBadge"] {
+  background-color: var(--yrwq-red) !important;
+  color: var(--yrwq-fg-brighter);
+}
+
+[class*="navButtonActive"] {
+  background-color: unset;
+  color: var(--yrwq-fg-brighter);
+}
+
+[class*="option"][class*="selected"] {
+  background-color: var(--yrwq-bg-darkish) !important;
+}
+
+[class*="resultsGroup"] * {
+  color: var(--yrwq-fg-darker) !important;
+}
+[class*="resultsGroup"] [class*="filter"] {
+  color: var(--yrwq-fg-brighter) !important;
+}
+[class*="resultsGroup"] [class*="header"] {
+  color: var(--yrwq-fg-brighter) !important;
+}
+
+[class*="peopleColumn"] {
+  background-color: var(--yrwq-bg-darkish);
+}
+
+[class*="section"] {
+  background-color: var(--yrwq-bg-dark);
+}
+[class*="sidebar"] [class*="container"] [class*="header"] {
+  background-color: var(--yrwq-bg-normal) !important;
+  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
+}
+
+[class*="sidebar"] > [class*="container"],
+[class*="members"][class*="scroller"] {
+  box-shadow: inset 0 0 15px 0 rgba(0, 0, 0, 0.2);
+}
+
+[class*="scrollerWrap"] {
+  border-radius: 10px !important;
+}
+
+[class*="membersWrap"] {
+  /*border-top-left-radius: 15px;*/
+  overflow: hidden;
+}
+
+/* message input area */
+
+[class*="chatContent"] [class*="form"] {
+  padding-top: 0.5rem;
+  background-color: var(--yrwq-bg-normal);
+  box-shadow: 0 -30px 20px -30px rgba(0, 0, 0, 0.3);
+}
+
+[class*="textAreaSlate"] {
+  background-color: var(--yrwq-bg-dark);
+  border-radius: 13px;
+  color: var(--fg-2);
+  box-shadow: inset 0 0 10px 0 rgba(0, 0, 0, 0.1);
+}
+
+[class*="textAreaSlate"] > * {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+[class*="userPopout"] [class*="body"],
+[class*="userPopout"] [class*="footer"] {
+  background-color: var(--yrwq-bg-normal);
+}
+[class*="userPopout"] [class*="headerNormal"] {
+  background-color: var(--yrwq-bg-darkish);
+}
+
+[class*="headerPlaying"] * {
+  background-color: var(--yrwq-accent) !important;
+}
+
+/* components */
+
+button[class*="lookFilled"] {
+  background-color: var(--button) !important;
+}
+button[class*="buttonActive"][class*="lookFilled"] {
+  background-color: var(--yrwq-accent) !important;
+  color: var(--yrwq-bg-normal) !important;
+}
+
+button[class*="lookLink"] {
+  color: var(--yrwq-fg-brighter) !important;
+}
+
+[class*="sprite"] {
+  filter: brightness(80%) sepia(80%) saturate(60%) !important;
+}
+[class*="username"] {
+  filter: sepia(30%) !important;
+  transition: filter 0.2s;
+}
+[class*="username"]:hover {
+  filter: sepia(20%) !important;
+}
+
+[class*="newMessagesBar-"] {
+  background-color: var(--yrwq-accent);
+  opacity: 1;
+}
+[class*="newMessagesBar-"] button {
+  color: var(--yrwq-bg-normal) !important;
+}
+
+img[class*="avatar"] {
+  filter: sepia(30%) !important;
+  border-radius: 50%;
+  overflow: hidden;
+  transition: filter 0.1s, transform 0.1s ease-in-out;
+}
+img[class*="avatar"]:hover {
+  filter: sepia(0%) !important;
+  transform: scale(1.05);
+}
+
+[class*="pictureInPictureWindow"] {
+  box-shadow: 0 8px 15px 0px rgba(0, 0, 0, 0.5) !important;
+}
+
+[class*="divider"] {
+  border-color: var(--yrwq-bg-dark);
+}
+[class*="divider"][class*="isUnread"] {
+  border-color: var(--yrwq-red) !important;
+}
+
+[class*="unreadPill-"] {
+  background-color: var(--yrwq-red);
+}
+
+[class*="unreadPillCap"] {
+  fill: var(--yrwq-red);
+}
+button[class*="lookFilled"] {
+  color: var(--yrwq-fg-brighter) !important;
+}
+
+[class*="live"][class*="textBadge"] {
+  background-color: var(--yrwq-red) !important;
+  color: var(--yrwq-fg-brighter);
+}
+
+[class*="modal"] [class*="queryContainer-"],
+[class*="modal"] [class*="resultsGroup-"],
+[class*="modal"] [class*="bodyInner-"],
+[class*="modal"] [class*="quickMessage-"],
+[class*="modal"] [class*="inner-"],
+[class*="modal"] [class*="header-"]:not(header):not(h2),
+[class*="modal"] [class*="uploadModal-"],
+[role*="dialog"] form {
+  background-color: var(--yrwq-bg-normal) !important;
+}
+
+[role*="dialog"] form [class*="footer"] {
+  background-color: var(--yrwq-bg-darkish);
+}
+
+[class*="modal"] [class*="sourceScroller"],
+[class*="modal"] [class*="segmentContainer-"] [class*="segmentControl"] /*go live source selector header bar*/ {
+  background-color: var(--yrwq-bg-dark) !important;
+}
+[class*="modal"] [class*="header"] {
+  padding-top: unset;
+  padding: 0.4rem;
+}
+
+[class*="modal"] [class*="footer-"] {
+  background-color: var(--yrwq-bg-dark) !important;
+  filter: brightness(110%);
+}
+
+[class*="panels"] > *:nth-child(2) {
+  height: 4.6rem;
+  padding-bottom: 0.5rem;
+}
+
+div[class*="chat"] div[class*="root"] {
+  background-color: var(--yrwq-bg-normal);
+}
+
+div[class*="rtcConnectionStatus"] *,
+[class*="circleIconButton"] {
+  color: var(--yrwq-accent) !important;
+}
+/* display info about code blocks  */
+code.hljs:not(.inline)::before {
+  content: attr(class) !important;
+  float: right;
+  display: block;
+  width: auto;
+  max-width: 100px;
+  text-align: right;
+  min-width: auto;
+  margin-top: -107px;
+  line-height: 20px;
+  overflow-x: hidden;
+  scrollbar-width: none;
+  color: var(--yrwq-fg-darker);
+  opacity: 0.6;
+}

@@ -11,10 +11,10 @@ set mat=2
 set scrolloff=8
 set magic
 set hlsearch
-set tabstop=4
-set softtabstop=4
+set tabstop=2
+set softtabstop=2
 set expandtab
-set shiftwidth=4
+set shiftwidth=2
 set cursorline
 set ffs=unix,dos,mac
 set wrap

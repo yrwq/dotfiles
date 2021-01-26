@@ -1,11 +1,10 @@
 #!/bin/sh
-# POLYWINS
 
-# SETTINGS {{{ ---
+active_text_color=$(xrdb ~/.Xresources -query all | grep foreground | cut -f2 | head -n 1)
 
-active_text_color=$(xrdb ~/.Xresources -query all | grep color6 | cut -f2 | head -n 1)
+# inactive_text_color=$(xrdb ~/.Xresources -query all | grep color8 | cut -f2 | head -n 1)
 
-inactive_text_color=$(xrdb ~/.Xresources -query all | grep foreground | cut -f2 | head -n 1)
+inactive_text_color="#696969"
 
 separator=" "
 show="window_class" # options: window_title, window_class, window_classname
@@ -17,9 +16,7 @@ max_windows=15
 char_case="normal" # normal, upper, lower
 add_spaces="true"
 resize_increment=16
-wm_border_width=1 # setting this might be required for accurate resize position
-
-# --- }}}
+wm_border_width=4 # setting this might be required for accurate resize position
 
 
 main() {
@@ -39,60 +36,10 @@ main() {
 	fi
 }
 
-
-
-# ON-CLICK FUNCTIONS {{{ ---
-
-#raise_or_minimize() {
-#	if [ "$(get_active_wid)" = "$1" ]; then
-#		wmctrl -ir "$1" -b toggle,hidden
-#	else
-#		wmctrl -ia "$1"
-#	fi
-#}
-
-#close() {
-#	wmctrl -ic "$1"
-#}
-
 slop_resize() {
 	wmctrl -ia "$1"
 	wmctrl -ir "$1" -e "$(slop -f 0,%x,%y,%w,%h)"
 }
-
-#increment_size() {
-#	while IFS="[ .]" read -r wid ws wx wy ww wh _; do
-#		test "$wid" != "$1" && continue
-#		x=$(( wx - wm_border_width * 2 - resize_increment / 2 ))
-#		y=$(( wy - wm_border_width * 2 - resize_increment / 2 ))
-#		w=$(( ww + resize_increment ))
-#		h=$(( wh + resize_increment ))
-#	done <<-EOF
-#	$(wmctrl -lG)
-#	EOF
-#
-#	wmctrl -ir "$1" -e "0,$x,$y,$w,$h"
-#}
-
-#decrement_size() {
-#	while IFS="[ .]" read -r wid ws wx wy ww wh _; do
-#		test "$wid" != "$1" && continue
-#		x=$(( wx - wm_border_width * 2 + resize_increment / 2 ))
-#		y=$(( wy - wm_border_width * 2 + resize_increment / 2 ))
-#		w=$(( ww - resize_increment ))
-#		h=$(( wh - resize_increment ))
-#	done <<-EOF
-#	$(wmctrl -lG)
-#	EOF
-#
-#	wmctrl -ir "$1" -e "0,$x,$y,$w,$h"
-#}
-
-# --- }}}
-
-
-
-# WINDOW LIST SETUP {{{ ---
 
 active_left="%{F$active_text_color}"
 active_right="%{F-}"
@@ -280,10 +227,7 @@ generate_window_list() {
 		printf "%s" "$empty_desktop_message"
 	fi
 
-	# Print newline
 	echo ""
 }
-
-# --- }}}
 
 main "$@"

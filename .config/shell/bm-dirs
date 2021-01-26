@@ -3,10 +3,11 @@
 cf  ${XDG_CONFIG_HOME:-$HOME/.config}
 cfa ${XDG_CONFIG_HOME:-$HOME/.config}/awesome
 D   ${XDG_DOWNLOAD_DIR:-$HOME/etc/dl}
-d   ${XDG_DOCUMENTS_DIR:-$HOME/mnt/doc}
-m   ${XDG_MUSIC_DIR:-$HOME/mnt/music}
-pp  ${XDG_PICTURES_DIR:-$HOME/mnt/pic}
+d   ${XDG_DOCUMENTS_DIR:-$HOME/doc}
+m   ${XDG_MUSIC_DIR:-$HOME/etc/music}
+pp  ${XDG_PICTURES_DIR:-$HOME/etc/pic}
 sc  $HOME/.local/bin
 src $HOME/.local/src
-vv  ${XDG_VIDEOS_DIR:-$HOME/mnt/vid}
+vv  ${XDG_VIDEOS_DIR:-$HOME/etc/vid}
 DD  $HOME/dev/dotfiles
+bb  $HOME/.bin
