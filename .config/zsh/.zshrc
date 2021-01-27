@@ -1,10 +1,18 @@
 #!/usr/bin/env zsh
 autoload -U colors && colors
 
+zmodload zsh/datetime
+
 PS1='%F{magenta}%~%f %(?.%f.%F{red})%F{red} %f '
+
+# Create a hash table for globally stashing variables without polluting main
+# scope with a bunch of identifiers.
+
+PLUGIN_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh/plugins"
 
 setopt autocd
 stty stop undef
+
 
 setopt interactive_comments
 
@@ -24,6 +32,10 @@ HISTSIZE=10000000
 SAVEHIST=10000000
 HISTFILE=~/.cache/zsh/history
 
+source $PLUGIN_DIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $PLUGIN_DIR/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $PLUGIN_DIR/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+
 # Load aliases and shortcuts if existent.
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shell/shortcutrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/shortcutrc"
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliasrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliasrc"
@@ -37,6 +49,11 @@ zmodload zsh/complist
 compinit
 _comp_options+=(globdots)
 
+# Colorize completions using default `ls` colors.
+zstyle ':completion:*' list-colors ''
+# # Categorize completion suggestions with headings:
+zstyle ':completion:*' group-name ''
+
 # vi mode
 bindkey -v
 export KEYTIMEOUT=1
@@ -46,7 +63,13 @@ bindkey -M menuselect 'h' vi-backward-char
 bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
-bindkey -v '^?' backward-delete-char
+bindkey '^n' expand-or-complete
+bindkey '^p' reverse-menu-complete
+
+bindkey '^k' up-history
+bindkey '^j' down-history
+bindkey '^h' backward-delete-char
+bindkey '^w' backward-kill-word
 
 # Change cursor shape for different vi modes.
 function zle-keymap-select {

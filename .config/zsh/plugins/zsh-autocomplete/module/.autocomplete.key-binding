@@ -1,0 +1,57 @@
+#!/bin/zsh
+zmodload zsh/complist
+
+.autocomplete.key-binding.precmd() {
+  emulate -L zsh; setopt $_autocomplete__options
+  add-zsh-hook -d precmd ${(%):-%N}
+  unfunction ${(%):-%N}
+
+  [[ -z $key[Tab] || -z $key[Backtab] ]] &&
+    .autocomplete.key
+
+  local tab_style; zstyle -s :autocomplete:tab: widget-style tab_style ||
+    tab_style=complete-word
+
+  if zstyle -t :autocomplete:tab: fzf || zstyle -t :autocomplete:tab: fzf-completion; then
+    export -H fzf_default_completion=$tab_style
+
+    functions[.autocomplete.fzf-completion]=$functions[fzf-completion]
+    fzf-completion() {
+      zle() {
+        builtin zle "$@" ${${(M)funcstack[2]:#.autocomplete.fzf-completion}:+-w}
+      }
+      {
+        .autocomplete.fzf-completion "$@"
+      } always {
+        [[ -v functions[zle] ]] &&
+          unfunction zle
+      }
+    }
+
+  else
+    bindkey $key[Tab] $tab_style
+  fi
+  bindkey $key[Backtab] ${tab_style:/menu-complete/reverse-menu-complete}
+}
+
+bindkey $key[ControlSpace] list-expand
+bindkey $key[Up] up-line-or-search
+bindkey $key[Down] down-line-or-select
+bindkey $key[PageUp] history-search
+bindkey $key[PageDown] menu-select
+
+bindkey -M menuselect $key[Tab] menu-complete
+bindkey -M menuselect $key[Backtab] reverse-menu-complete
+
+bindkey -M menuselect $key[Return] .accept-line
+bindkey -M menuselect $key[Alt]$key[Return] accept-line
+bindkey -M menuselect $key[ControlSpace] accept-and-hold
+
+bindkey -M menuselect $key[BackwardWord] vi-backward-blank-word
+bindkey -M menuselect $key[ForwardWord] vi-forward-blank-word
+bindkey -M menuselect $key[PageUp] backward-word
+bindkey -M menuselect $key[PageDown] forward-word
+bindkey -M menuselect $key[BeginningOfBuffer] beginning-of-history
+bindkey -M menuselect $key[EndOfBuffer] end-of-history
+
+add-zsh-hook precmd .autocomplete.key-binding.precmd

@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+get_bri="$(xrandr --verbose | grep -i brightness | cut -f2 -d ' ' | head -n1)"
+
+change=0.1
+
+case $1 in
+    up)
+        new=$(bc <<< ${get_bri}+${change})
+        ;;
+    down)
+        new=$(bc <<< ${get_bri}-${change})
+        ;;
+esac
+
+xrandr --output VGA1 --brightness ${new}

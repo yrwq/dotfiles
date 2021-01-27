@@ -1,0 +1,27 @@
+#!/bin/zsh
+
+.autocomplete.complete-word.completion-widget() {
+  local +h -a comppostfuncs=( "$comppostfuncs[@]" .autocomplete.complete-word.comppostfunc )
+  _main_complete
+  unset curcontext
+}
+
+.autocomplete.complete-word.comppostfunc() {
+  local keyname="${(kL)key[(Re)$KEYS]}"
+
+  if zstyle -t ":autocomplete:${keyname}:" insert-unambiguous &&
+      (( compstate[nmatches] > 1 && $#compstate[unambiguous] > $#words[CURRENT] )); then
+    compstate[insert]="${${(M)WIDGET:#menu-*}:+automenu-}unambiguous"
+    return 0
+  fi
+
+  local -i nmatches=$_lastcomp[nmatches]; [[ $compstate[old_list] == keep ]] ||
+    nmatches=$compstate[nmatches]
+
+  compstate[insert]=1; (( nmatches > 1 )) &&
+    compstate[insert]="${${(M)WIDGET:#menu-*}:+menu:}${${${keyname:#backtab}:+1}:-0}"
+
+  (( nmatches > 0 ))
+}
+
+.autocomplete.complete-word.completion-widget "$@"

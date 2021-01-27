@@ -11,10 +11,10 @@ set mat=2
 set scrolloff=8
 set magic
 set hlsearch
-set tabstop=2
-set softtabstop=2
+set tabstop=4
+set softtabstop=4
 set expandtab
-set shiftwidth=2
+set shiftwidth=4
 set cursorline
 set ffs=unix,dos,mac
 set wrap
@@ -32,7 +32,6 @@ set formatoptions-=cro
 autocmd VimResized * wincmd =
 autocmd BufWritePre * %s/\s\+$//e
 autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 set list
 set listchars=

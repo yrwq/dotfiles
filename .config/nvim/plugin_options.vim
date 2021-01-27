@@ -27,3 +27,43 @@ let g:tex_flavor='latex'
 let g:vimtex_view_method='zathura'
 let g:vimtex_quickfix_mode=0
 let g:tex_conceal='abdmg'
+
+" let bufferline = {}
+" let bufferline.animation = v:true
+" let bufferline.auto_hide = v:false
+" let bufferline.icons = v:true
+
+" let bufferline.icon_separator_active = ''
+" let bufferline.icon_separator_inactive = ''
+" let bufferline.icon_close_tab = ''
+" let bufferline.icon_close_tab_modified = '●'
+
+" let bufferline.closable = v:true
+" let bufferline.clickable = v:true
+" let bufferline.semantic_letters = v:true
+
+" let bufferline.letters =
+"   \ 'asdfjklqweruio'
+
+" let bufferline.maximum_padding = 8
+
+lua << EOF
+require'bufferline'.setup{
+  options = {
+    view = "multiwindow",
+    mappings = true,
+    buffer_close_icon= '',
+    modified_icon = '●',
+    close_icon = '',
+    left_trunc_marker = '',
+    right_trunc_marker = '',
+    max_name_length = 18,
+    max_prefix_length = 15,
+    tab_size = 18,
+    show_buffer_close_icons = true,
+    separator_style = "thin",
+    enforce_regular_tabs = true,
+    always_show_bufferline = true,
+  }
+}
+EOF

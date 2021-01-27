@@ -1,0 +1,18 @@
+#autoload
+
+[[ $curcontext == history-*:* ]] &&
+  return 1
+[[ -z $BUFFER ]] &&
+  return 1
+
+if zstyle -t :autocomplete:tab: insert-unambiguous &&
+    (( compstate[nmatches] > 1 && $#compstate[unambiguous] > $#words[CURRENT] )); then
+  ZLS_COLORS="=*(#bi)(${(b)compstate[unambiguous]})*==07:$ZLS_COLORS"
+  return
+fi
+
+_autocomplete.alias_expansions ||
+  _autocomplete.requoted ||
+  _autocomplete.unambiguous
+
+(( compstate[nmatches] > 0 ))

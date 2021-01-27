@@ -4,7 +4,7 @@
 # art - extract cover from audio file
 # requires ffmpeg, metaflac, mpc, mpd, wmctrl
 
-music_library="~/music"
+music_library="$HOME/etc/music"
 ext="$(mpc --format %file% current | sed 's/^.*\.//')"
 if [ "$ext" = "flac" ]; then
     metaflac --export-picture-to=/tmp/mpd_cover.jpg \

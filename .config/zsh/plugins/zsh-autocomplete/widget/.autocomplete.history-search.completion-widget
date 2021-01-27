@@ -1,0 +1,19 @@
+#!/bin/zsh
+
+.autocomplete.history-search.completion-widget() {
+  typeset -gH curcontext=${WIDGET}:::
+
+  local +h -a comppostfuncs=( "$comppostfuncs[@]" .autocomplete.history-search.comppostfunc )
+  unset 'compstate[old_list]'
+  _main_complete _autocomplete.history_lines
+  (( compstate[nmatches] > 0 ))
+
+  unset curcontext
+}
+
+.autocomplete.history-search.comppostfunc() {
+  compstate[insert]='menu:0'
+  compstate[list]='list force'
+}
+
+.autocomplete.history-search.completion-widget "$@"

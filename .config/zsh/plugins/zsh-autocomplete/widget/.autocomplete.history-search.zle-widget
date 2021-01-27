@@ -1,0 +1,34 @@
+#!/bin/zsh
+{
+  local lbuffer="$LBUFFER" rbuffer="$RBUFFER"
+  local keymap_menuselect="$(bindkey -M menuselect -L)"
+  local -i ret=1
+  () {
+    emulate -L zsh; setopt $_autocomplete__options
+
+    local -A keymap_historysearch=(
+      $key[Left] .backward-char
+      $key[Right] .forward-char
+      $key[ForwardWord] .backward-word
+      $key[BackwardWord] .forward-word
+      $key[Home] .beginning-of-line
+      $key[End] .end-of-line
+    )
+    local k v; for k v in ${(kv@)keymap_historysearch}; do
+      bindkey -M menuselect $k $v
+    done
+    LBUFFER=${${(b)LBUFFER}//[[:space:]]##/$'\0'}
+    RBUFFER=${${(b)RBUFFER}//[[:space:]]##/$'\0'}
+  }
+  local buffer="$BUFFER"
+
+  zle _history_search; ret=$?
+
+} always {
+  if [[ $buffer == $BUFFER ]] then
+    LBUFFER="$lbuffer"
+    RBUFFER="$rbuffer"
+  fi
+  eval "$keymap_menuselect"
+}
+return ret

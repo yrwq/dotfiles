@@ -18,4 +18,4 @@ wait
 
 notify-send -a colorpicker "${color}"
 
-echo $color | xclip -sel clip
+echo -ne $color | xclip -sel clip

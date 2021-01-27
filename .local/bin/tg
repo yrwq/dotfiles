@@ -8,7 +8,7 @@
 _bar(){
     running=$(pidof polybar)
 
-    [[ -z "$running" ]] && { polybar main & } && notify-send -a bar "Turned on"
+    [[ -z "$running" ]] && { $HOME/.config/polybar/launch.sh & } && notify-send -a bar "Turned on"
     [[ "$running" ]] && { pkill polybar & } && notify-send -a bar "Turned off";
 }
 

@@ -2,32 +2,32 @@
   --yrwq-font-family: "Iosevka Custom";
   --yrwq-font-size: 16px;
 
-  --yrwq-bg-dark: #282828;
-  --yrwq-bg-darkisher: #282828;
-  --yrwq-bg-darkish: #282828;
-  --yrwq-bg-normal: #282828;
-  --yrwq-bg-brighter: #282828;
+  --yrwq-bg-dark: #1d2021;
+  --yrwq-bg-darkisher: #1d2021;
+  --yrwq-bg-darkish: #1d2021;
+  --yrwq-bg-normal: #1d2021;
+  --yrwq-bg-brighter: #1d2021;
 
-  --yrwq-border: #db7464;
+  --yrwq-border: #ea6962;
 
-  --yrwq-fg-brighter: #cdc1c1;
-  --yrwq-fg-normal: #9ea894;
-  --yrwq-fg-darker: #c9d0c2;
-  --yrwq-fg-dark: #9ea894;
-  --yrwq-fg-inactive: #c9d0c2;
+  --yrwq-fg-brighter: #d4be98;
+  --yrwq-fg-normal: #d4be98;
+  --yrwq-fg-darker: #b69b6c;
+  --yrwq-fg-dark: #d4be98;
+  --yrwq-fg-inactive: #b69b6c;
 
-  --yrwq-red: #db7464;
-  --yrwq-purple: #a073d6;
-  --yrwq-blue: #dbd560;
-  --yrwq-green: #a7e160;
-  --yrwq-aqua: #69b2d6;
-  --yrwq-yellow: #69e1d3;
-  --yrwq-orange: #dba08f;
+  --yrwq-red: #ea6962;
+  --yrwq-purple: #d3869b;
+  --yrwq-blue: #e78a4e;
+  --yrwq-green: #a9b665;
+  --yrwq-aqua: #7daea3;
+  --yrwq-yellow: #89b482;
+  --yrwq-orange: #e0362c;
 
   --yrwq-accent: var(--yrwq-red);
 
   /* other stuff */
-  --button: #db7464;
+  --button: #ea6962;
   -moz-tab-size: 2;
 }
 

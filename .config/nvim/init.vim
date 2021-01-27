@@ -21,16 +21,17 @@ Plug 'rbgrouleff/bclose.vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'airblade/vim-gitgutter'
-
-
+Plug 'sainnhe/gruvbox-material'
+Plug 'akinsho/nvim-bufferline.lua'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
 Plug 'honza/vim-snippets'
 Plug 'SirVer/ultisnips'
 Plug 'lervag/vimtex'
+Plug 'romgrk/doom-one.vim'
 
 
-" Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install() }}
+Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install() }}
 
 " Plug 'ycm-core/YouCompleteMe'
 
@@ -45,6 +46,7 @@ autocmd VimEnter *
   \|   PlugInstall --sync | q
   \| endif
 
+
 " Basic settings
 so ~/.config/nvim/settings.vim
 
@@ -53,3 +55,7 @@ so ~/.config/nvim/plugin_options.vim
 
 " Key bindings
 so ~/.config/nvim/keys.vim
+
+" Lanuage specific settings
+so ~/.config/nvim/language.vim
+

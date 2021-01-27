@@ -2,18 +2,13 @@
 
 . "$HOME/.xprofile"
 
-yth -t pastel &
+xrdb ~/.Xresources &
+feh --bg-scale ~/.wp/abstract.png
 thunar --daemon &
 unclutter --timeout=1 &
-
+emacs --daemon &
 picom --experimental-backends &
-# xcompmgr &
 
 remaps &
 
-# exec i3
 exec awesome
-# exec openbox
-# exec xfce4-session
-# exec xfwm4
-# exec xmonad

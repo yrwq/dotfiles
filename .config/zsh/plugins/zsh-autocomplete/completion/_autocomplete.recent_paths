@@ -1,0 +1,38 @@
+#autoload
+
+_autocomplete.recent_paths() {
+  local -aU reply=()
+  _tags recent-directories recent-files
+  while _tags; do
+
+    _requested recent-directories && [[ -v functions[_autocomplete.recent_dirs] ]] &&
+        _autocomplete.recent_dirs $words[CURRENT] &&
+      .autocomplete.recent_paths.add recent-directories 'recent directory' $reply[@]
+
+    _requested recent-files && [[ -v functions[_autocomplete.recent_files] ]] &&
+        _autocomplete.recent_files $words[CURRENT] &&
+      .autocomplete.recent_paths.add recent-files 'recent file' $reply[@]
+  done
+
+  (( compstate[nmatches] > nmatches ))
+}
+
+.autocomplete.recent_paths.add() {
+  local expl
+  _description -V $1 expl $2
+  shift 2
+
+  local -a display=()
+  local path_ prefix
+  for path_ in ${@:a}; do
+
+    [[ -e $path_ ]] ||
+      continue
+
+    prefix=$path_:h; prefix+=${${prefix:#/}:+/}
+    display=( "${(D)path_}" )
+    compadd "$expl[@]" -fQ -P ${(q)prefix} -W $prefix -d display - ${(q)path_:t}
+  done
+}
+
+_autocomplete.recent_paths "$@"
