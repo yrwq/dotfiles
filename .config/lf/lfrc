@@ -13,15 +13,25 @@ $lf -remote "send $id set previewer ${XDG_CONFIG_HOME:-$HOME/.config}/lf/scope"
 # cmds/functions
 cmd open ${{
     case $(file --mime-type $f -b) in
+
         image/vnd.djvu|application/pdf|application/octet-stream) setsid -f zathura $fx >/dev/null 2>&1 ;;
+
         text/*) $EDITOR $fx;;
+
         image/x-xcf) setsid -f gimp $f >/dev/null 2>&1 ;;
+
         image/svg+xml) display -- $f ;;
-        image/*) rdir $f | grep -i "\.\(png\|jpg\|jpeg\|gif\|webp\|tif\|ico\)\(_large\)*$" | sxiv -aio 2>/dev/null | lfs;;
+
+        image/*) setsid -f sxiv $fx >/dev/null 2>&1 ;;
+
         audio/*) mpv --audio-display=no $f ;;
+
         video/*) setsid -f mpv $f -quiet >/dev/null 2>&1 ;;
+
         application/pdf|application/vnd*|application/epub*) setsid -f zathura $fx >/dev/null 2>&1 ;;
-        *) for f in $fx; do setsid -f $OPENER $f >/dev/null 2>&1; done;;
+
+        *) $EDITOR $fx ;;
+
     esac
 }}
 
@@ -61,15 +71,14 @@ on-cd
 cmd bulkrename $vidir
 
 # Bindings
-map e $emacsclient -c $f &
+map e $st -e $EDITOR $f &
 map gg top
 map D delete
 map C copyto
 map M moveto
 map <c-n> push :mkdir<space>
 map <enter> shell
-map o &mimeopen $f
 
 map B bulkrename
 map bg $feh --bg-scale $f
-map sd $samedir $f # open a terminal in the same directory
+map gp $push

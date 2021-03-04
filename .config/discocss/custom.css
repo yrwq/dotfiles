@@ -1,81 +1,71 @@
 :root {
-  --yrwq-font-family: "Iosevka Custom";
-  --yrwq-font-size: 16px;
+  --font-family: "Bedstead";
+  --font-size: 16px;
 
-  --yrwq-bg-dark: #1d2021;
-  --yrwq-bg-darkisher: #1d2021;
-  --yrwq-bg-darkish: #1d2021;
-  --yrwq-bg-normal: #1d2021;
-  --yrwq-bg-brighter: #1d2021;
+  --bg-dark: #282828;
+  --bg-darkisher: #202020;
+  --bg-darkish: #1d2021;
+  --bg-normal: #1d2021;
+  --bg-brighter: #504945;
 
-  --yrwq-border: #ea6962;
+  --border: #353331;
 
-  --yrwq-fg-brighter: #d4be98;
-  --yrwq-fg-normal: #d4be98;
-  --yrwq-fg-darker: #b69b6c;
-  --yrwq-fg-dark: #d4be98;
-  --yrwq-fg-inactive: #b69b6c;
+  --fg-brighter: #fbf1c7;
+  --fg-normal: #ebdbb2;
+  --fg-darker: #d5c4a1;
+  --fg-dark: #a89984;
+  --fg-inactive: #696969;
 
-  --yrwq-red: #ea6962;
-  --yrwq-purple: #d3869b;
-  --yrwq-blue: #e78a4e;
-  --yrwq-green: #a9b665;
-  --yrwq-aqua: #7daea3;
-  --yrwq-yellow: #89b482;
-  --yrwq-orange: #e0362c;
+  --red: #cc241d;
+  --purple: #b16286;
+  --blue: #458588;
+  --green: #98971a;
+  --aqua: #689d6a;
+  --yellow: #d79921;
+  --orange: #d65d0e;
 
-  --yrwq-accent: var(--yrwq-red);
+  --accent: var(--aqua);
 
   /* other stuff */
-  --button: #ea6962;
-  -moz-tab-size: 2;
+  --button: #daddee1a;
+  -moz-tab-size: 1;
 }
 
 .theme-dark {
-  --header-primary: var(--yrwq-fg-brighter);
-  --header-secondary: var(--yrwq-fg-darker);
-  --text-normal: var(--yrwq-fg-brighter);
-  --text-muted: var(--yrwq-fg-darker);
-  --text-link: var(--yrwq-accent);
-  --channels-default: var(--yrwq-fg-darker);
-  --interactive-normal: var(--yrwq-fg-darker);
-  --interactive-hover: var(--yrwq-fg-brighter);
-  --interactive-active: var(--yrwq-fg-brighter);
-  --interactive-muted: var(--yrwq-fg-darker);
-  --background-primary: var(--yrwq-bg-normal);
-  --background-secondary: var(--yrwq-bg-darkish);
-  --background-secondary-alt: var(--yrwq-bg-normal);
-  --background-tertiary: var(--yrwq-bg-normal);
-  --background-accent: var(--yrwq-accent);
-  --background-floating: var(--yrwq-bg-normal);
+  --header-primary: var(--fg-brighter);
+  --header-secondary: var(--fg-darker);
+  --text-normal: var(--fg-brighter);
+  --text-muted: var(--fg-darker);
+  --text-link: var(--accent);
+  --channels-default: var(--fg-darker);
+  --interactive-normal: var(--fg-darker);
+  --interactive-hover: var(--fg-brighter);
+  --interactive-active: var(--fg-brighter);
+  --interactive-muted: var(--fg-darker);
+  --background-primary: var(--bg-normal);
+  --background-secondary: var(--bg-darkish);
+  --background-secondary-alt: var(--bg-normal);
+  --background-tertiary: var(--bg-normal);
+  --background-accent: var(--accent);
+  --background-floating: var(--bg-normal);
   --background-modifier-hover: rgba(79, 84, 92, 0.16);
   --background-modifier-active: rgba(79, 84, 92, 0.24);
   /*--background-modifier-accent: hsla(0, 0%, 100%, 0.06);*/
   --background-modifier-accent: rgba(0, 0, 0, 0);
   --elevation-high: 0 8px 16px rgba(0, 0, 0, 0.24);
   --guild-header-text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
-  --channeltextarea-background: var(--yrwq-bg-normal);
-  --activity-card-background: var(--yrwq-bg-darkish);
-  --deprecated-panel-background: var(--yrwq-bg-dark);
-  --background-modifier-selected: var(--yrwq-bg-normal);
+  --channeltextarea-background: var(--bg-normal);
+  --activity-card-background: var(--bg-darkish);
+  --deprecated-panel-background: var(--bg-dark);
+  --background-modifier-selected: var(--bg-normal);
   --elevation-low: none !important;
-  --background-message-hover: var(--yrwq-bg-darkish) !important;
+  --background-message-hover: var(--bg-darkish) !important;
 }
 
 * {
-  font-family: var(--yrwq-font-family) !important;
+  font-family: var(--font-family) !important;
   font-weight: normal !important;
-  font-size: var(--yrwq-font-size) !important;
-}
-
-
-/* more dense sidebar */
-
-[class*="sidebar"] [class*="containerDefault"] [class*="mainContent"] {
-    height: 25px !important;
-}
-[class*="sidebar"] [class*="containerDefault"] [class*="mainContent"] > * {
-    font-size: 15px !important;
+  font-size: var(--font-size) !important;
 }
 
 ::-webkit-scrollbar,
@@ -88,65 +78,65 @@
 
 /* general */
 [class*="colorBrand"] {
-  color: var(--yrwq-accent);
+  color: var(--accent);
 }
 
 [class*="colorDanger"] {
-  color: var(--yrwq-red);
+  color: var(--red);
 }
 
 [class*="lookBlank"] {
-  color: var(--yrwq-fg-darker);
+  color: var(--fg-darker);
 }
 
 [class*="input"]:focus {
-  border-color: var(--yrwq-accent);
+  border-color: var(--accent);
 }
 
 /* sections */
 
 [id*="popout"] [class*="container"] {
-  background-color: var(--yrwq-bg-normal);
+  background-color: var(--bg-normal);
   box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.4);
-  color: var(--yrwq-fg-brighter) !important;
+  color: var(--fg-brighter) !important;
 }
 [id*="popout"] [class*="container"] ::after {
   background-image: none !important;
 }
 
 [class*="live"][class*="textBadge"] {
-  background-color: var(--yrwq-red) !important;
-  color: var(--yrwq-fg-brighter);
+  background-color: var(--red) !important;
+  color: var(--fg-brighter);
 }
 
 [class*="navButtonActive"] {
   background-color: unset;
-  color: var(--yrwq-fg-brighter);
+  color: var(--fg-brighter);
 }
 
 [class*="option"][class*="selected"] {
-  background-color: var(--yrwq-bg-darkish) !important;
+  background-color: var(--bg-darkish) !important;
 }
 
 [class*="resultsGroup"] * {
-  color: var(--yrwq-fg-darker) !important;
+  color: var(--fg-darker) !important;
 }
 [class*="resultsGroup"] [class*="filter"] {
-  color: var(--yrwq-fg-brighter) !important;
+  color: var(--fg-brighter) !important;
 }
 [class*="resultsGroup"] [class*="header"] {
-  color: var(--yrwq-fg-brighter) !important;
+  color: var(--fg-brighter) !important;
 }
 
 [class*="peopleColumn"] {
-  background-color: var(--yrwq-bg-darkish);
+  background-color: var(--bg-darkish);
 }
 
 [class*="section"] {
-  background-color: var(--yrwq-bg-dark);
+  background-color: var(--bg-dark);
 }
 [class*="sidebar"] [class*="container"] [class*="header"] {
-  background-color: var(--yrwq-bg-normal) !important;
+  background-color: var(--bg-normal) !important;
   box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
 }
 
@@ -168,12 +158,12 @@
 
 [class*="chatContent"] [class*="form"] {
   padding-top: 0.5rem;
-  background-color: var(--yrwq-bg-normal);
+  background-color: var(--bg-normal);
   box-shadow: 0 -30px 20px -30px rgba(0, 0, 0, 0.3);
 }
 
 [class*="textAreaSlate"] {
-  background-color: var(--yrwq-bg-dark);
+  background-color: var(--bg-dark);
   border-radius: 13px;
   color: var(--fg-2);
   box-shadow: inset 0 0 10px 0 rgba(0, 0, 0, 0.1);
@@ -186,14 +176,14 @@
 
 [class*="userPopout"] [class*="body"],
 [class*="userPopout"] [class*="footer"] {
-  background-color: var(--yrwq-bg-normal);
+  background-color: var(--bg-normal);
 }
 [class*="userPopout"] [class*="headerNormal"] {
-  background-color: var(--yrwq-bg-darkish);
+  background-color: var(--bg-darkish);
 }
 
 [class*="headerPlaying"] * {
-  background-color: var(--yrwq-accent) !important;
+  background-color: var(--accent) !important;
 }
 
 /* components */
@@ -202,12 +192,12 @@ button[class*="lookFilled"] {
   background-color: var(--button) !important;
 }
 button[class*="buttonActive"][class*="lookFilled"] {
-  background-color: var(--yrwq-accent) !important;
-  color: var(--yrwq-bg-normal) !important;
+  background-color: var(--accent) !important;
+  color: var(--bg-normal) !important;
 }
 
 button[class*="lookLink"] {
-  color: var(--yrwq-fg-brighter) !important;
+  color: var(--fg-brighter) !important;
 }
 
 [class*="sprite"] {
@@ -222,11 +212,11 @@ button[class*="lookLink"] {
 }
 
 [class*="newMessagesBar-"] {
-  background-color: var(--yrwq-accent);
+  background-color: var(--accent);
   opacity: 1;
 }
 [class*="newMessagesBar-"] button {
-  color: var(--yrwq-bg-normal) !important;
+  color: var(--bg-normal) !important;
 }
 
 img[class*="avatar"] {
@@ -245,26 +235,26 @@ img[class*="avatar"]:hover {
 }
 
 [class*="divider"] {
-  border-color: var(--yrwq-bg-dark);
+  border-color: var(--bg-dark);
 }
 [class*="divider"][class*="isUnread"] {
-  border-color: var(--yrwq-red) !important;
+  border-color: var(--red) !important;
 }
 
 [class*="unreadPill-"] {
-  background-color: var(--yrwq-red);
+  background-color: var(--red);
 }
 
 [class*="unreadPillCap"] {
-  fill: var(--yrwq-red);
+  fill: var(--red);
 }
 button[class*="lookFilled"] {
-  color: var(--yrwq-fg-brighter) !important;
+  color: var(--fg-brighter) !important;
 }
 
 [class*="live"][class*="textBadge"] {
-  background-color: var(--yrwq-red) !important;
-  color: var(--yrwq-fg-brighter);
+  background-color: var(--red) !important;
+  color: var(--fg-brighter);
 }
 
 [class*="modal"] [class*="queryContainer-"],
@@ -275,16 +265,16 @@ button[class*="lookFilled"] {
 [class*="modal"] [class*="header-"]:not(header):not(h2),
 [class*="modal"] [class*="uploadModal-"],
 [role*="dialog"] form {
-  background-color: var(--yrwq-bg-normal) !important;
+  background-color: var(--bg-normal) !important;
 }
 
 [role*="dialog"] form [class*="footer"] {
-  background-color: var(--yrwq-bg-darkish);
+  background-color: var(--bg-darkish);
 }
 
 [class*="modal"] [class*="sourceScroller"],
 [class*="modal"] [class*="segmentContainer-"] [class*="segmentControl"] /*go live source selector header bar*/ {
-  background-color: var(--yrwq-bg-dark) !important;
+  background-color: var(--bg-dark) !important;
 }
 [class*="modal"] [class*="header"] {
   padding-top: unset;
@@ -292,7 +282,7 @@ button[class*="lookFilled"] {
 }
 
 [class*="modal"] [class*="footer-"] {
-  background-color: var(--yrwq-bg-dark) !important;
+  background-color: var(--bg-dark) !important;
   filter: brightness(110%);
 }
 
@@ -302,12 +292,12 @@ button[class*="lookFilled"] {
 }
 
 div[class*="chat"] div[class*="root"] {
-  background-color: var(--yrwq-bg-normal);
+  background-color: var(--bg-normal);
 }
 
 div[class*="rtcConnectionStatus"] *,
 [class*="circleIconButton"] {
-  color: var(--yrwq-accent) !important;
+  color: var(--accent) !important;
 }
 /* display info about code blocks  */
 code.hljs:not(.inline)::before {
@@ -322,6 +312,7 @@ code.hljs:not(.inline)::before {
   line-height: 20px;
   overflow-x: hidden;
   scrollbar-width: none;
-  color: var(--yrwq-fg-darker);
+  color: var(--fg-darker);
   opacity: 0.6;
 }
+

@@ -1,0 +1,151 @@
+configuration {
+    modi: "drun,combi";
+    font: "Iosevka Custom 12";
+    drun-display-format: " {name}";
+    fixed-num-lines: true;
+    show-icons: true;
+    sidebar-mode: true;
+    combi-modi: "window";
+    separator-style: "none";
+    hide-scrollbar: true;
+    fullscreen: false;
+    scroll-method: 1;
+    window-format: "{c} {t}";
+    show-match: false;
+    combi-hide-mode-prefix: false;
+    display-drun: "";
+    display-combi: "練";
+    icon-theme:"Luv-Red";
+
+    kb-cancel:"Escape";
+    click-to-exit: true;
+    kb-remove-word-back: "Alt+d";
+    kb-accept-entry: "Alt+a";
+    kb-mode-next: "Alt+s";
+    kb-row-up: "Alt+k";
+    kb-row-down: "Alt+j";
+    me-select-entry: "";
+    me-accept-entry: "MousePrimary";
+}
+
+* {
+    background-color: @bg ;
+}
+
+window {
+    background-color: @bg;
+    border-radius: 20px  20px 20px 20px;
+    padding: 2px 2px 2px 2px;
+    width: 50%;
+    height: 50%;
+    anchor: north;
+    location:north;
+    y-offset: 25%;
+    border: 4px 4px 4px 4px;
+    border-color: @fg;
+}
+
+mainbox {
+    border-radius: 8px  8px 8px 8px;
+    border:10px;
+
+    padding: 10px 40px 15px 15px;
+}
+
+listview {
+    fixed-height: 0;
+    spacing: 5px;
+    scrollbar: false;
+    padding: 20px 20px 20px 20px ;
+
+}
+
+element {
+    font: "Iosevka Nerd Font 30";
+}
+
+element normal.normal {
+    text-color: @x2;
+}
+
+element normal.urgent {
+    text-color: @x2;
+}
+
+element normal.active {
+    text-color:  @x2;
+}
+
+element selected.normal {
+    text-color:@x3;
+}
+
+element selected.urgent {
+    text-color:@x3;
+}
+
+element selected.active {
+    text-color:@x3;
+}
+
+element alternate.normal {
+    text-color: @x2;
+}
+
+element alternate.urgent {
+    text-color: @x2;
+}
+element alternate.active {
+    text-color: @x2;
+}
+
+element-icon { size: 2ch ; }
+
+button {
+    margin: 5px 5px 10px 5px;
+    text-color: @x0;
+    font: "Iosevka Custom 16";
+}
+
+button selected {
+    text-color: @x2 ;
+    font: "Iosevka Nerd Font Bold 16";
+}
+
+inputbar {
+    text-color: @fg;
+    padding:    0px 0px 0px 20px;
+    children:   [ prompt,textbox-prompt-colon,entry];
+    border: 2px;
+    border-radius: 24px;
+    border-color:  @x8;
+}
+
+entry {
+    font: "Iosevka Custom 16";
+    text-color: @fg;
+    background-color: @bg;
+    border: 2px;
+    border-color: @x8;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+prompt {
+    spacing: 20px;
+    text-color:  @x1;
+    font: "Iosevka Custom 16";
+    padding: 10px;
+    background-color: @bg;
+    border-color: @x8;
+    border-radius: 20px;
+}
+
+textbox-prompt-colon {
+    expand:     false;
+    str:        " ";
+    margin:     1px  ;
+    text-color: inherit;
+}
+
+@import "colors.rasi"

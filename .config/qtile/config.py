@@ -4,114 +4,126 @@ from libqtile import bar, layout, widget, hook
 from libqtile.config import Click, Drag, Group, Key, Screen, Match
 from libqtile.lazy import lazy
 from libqtile.config import ScratchPad
+from libqtile.dgroups import simple_key_binder
 import psutil
 
-home = os.path.expanduser('~')
-mod = 'mod4'
+home = os.path.expanduser("~")
+mod = "mod4"
+alt = "mod1"
 
 fontsize = 14
-font = 'Inter'
-semiboldfont = f'{font} Semibold'
-boldfont = f'{font} Bold'
-font += ' Medium'
+font = "Iosevka Nerd Font"
 
-# sonokai
-bgcolor = '2c2e34'
-gray = '828282'
-yellow = 'e5c463'
-red = 'f85e84'
-green = '9ecd6f'
-magenta = 'ab9df2'
-blue = '7accd7'
-orange = 'ef9062'
-white = 'e3e1e4'
+# Gruvbox
+bgcolor = "212121"
+lightbg = "32302f"
+gray =    "544b45"
+yellow =  "e78a4e"
+red =     "ea6952"
+green =   "a9b665"
+magenta = "d3869b"
+blue =    "7daea3"
+orange =  "e76f22"
+white =   "d4be98"
 
-activeborder = '52596B'
+activeborder = green
 inactiveborder = bgcolor
+
 margin = 14
-barheight = 22
-borderwidth = 2
+barheight = 30
+borderwidth = 4
 
-terminal = 'st'
-browser = 'env MOZ_X11_EGL=1 firefox'
+terminal = "st"
+browser = "firefox"
 
-rofi = ['rofi', '-show']
-
-player_cmd = (
-        'dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify '
-        '/org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.'
-)
+rofi = ["rofi", "-show"]
 
 keys = [
-    Key([mod], 'j', lazy.layout.down()),
-    Key([mod], 'k', lazy.layout.up()),
-    Key([mod], 'h', lazy.layout.shrink_main()),
-    Key([mod], 'l', lazy.layout.grow_main()),
+    Key([mod], "Tab", lazy.layout.next()),
+    Key([mod], "h", lazy.layout.left()),
+    Key([mod], "j", lazy.layout.down()),
+    Key([mod], "k", lazy.layout.up()),
+    Key([mod], "l", lazy.layout.right()),
 
-    Key([mod, 'control'], 'j', lazy.layout.shuffle_down()),
-    Key([mod, 'control'], 'k', lazy.layout.shuffle_up()),
+    Key([mod, "control"], "h", lazy.layout.shrink_main()),
+    Key([mod, "control"], "l", lazy.layout.grow_main()),
 
-    Key([mod], 'space', lazy.layout.next()),
-    Key([mod], 'Return', lazy.spawn(terminal)),
+    Key([mod, "shift"], "h", lazy.layout.shuffle_left()),
+    Key([mod, "shift"], "j", lazy.layout.shuffle_down()),
+    Key([mod, "shift"], "k", lazy.layout.shuffle_up()),
+    Key([mod, "shift"], "l", lazy.layout.shuffle_right()),
 
-    Key([mod], 'q', lazy.window.kill()),
-    Key([mod], 'n', lazy.layout.normalize()),
-    Key([mod], 'm', lazy.layout.maximize()),
-    Key([mod], 'comma', lazy.layout.reset()),
-    Key([mod], 'f', lazy.window.toggle_fullscreen()),
-    Key([mod], 'p', lazy.layout.flip()),
+    Key([mod], "space", lazy.next_layout()),
+    Key([mod], "Return", lazy.spawn(terminal)),
 
-    Key([mod, 'shift'], 'r', lazy.restart()),
-    Key([mod], 'b', lazy.hide_show_bar()),
-    Key([mod, 'shift'], 's', lazy.spawncmd()),
-    Key([mod, 'shift'], 'space', lazy.window.toggle_floating()),
+    Key([mod], "q", lazy.window.kill()),
+    Key([mod, "shift"], "e", lazy.shutdown()),
+    Key([mod], "f", lazy.window.toggle_fullscreen()),
+    Key([mod], "p", lazy.layout.flip()),
 
-    Key([], 'XF86AudioRaiseVolume', lazy.spawn('pactl set-sink-volume 0 +5%')),
-    Key([], 'XF86AudioLowerVolume', lazy.spawn('pactl set-sink-volume 0 -5%')),
-    Key([], 'XF86AudioMute', lazy.spawn('pactl set-sink-mute 0 toggle')),
-    Key([], 'XF86MonBrightnessUp', lazy.spawn('brightnessctl s +100')),
-    Key([], 'XF86MonBrightnessDown', lazy.spawn('brightnessctl s 100-')),
+    Key([mod, "shift"], "r", lazy.restart()),
+    Key([mod], "b", lazy.hide_show_bar()),
+    Key([mod, "shift"], "space", lazy.window.toggle_floating()),
 
-    Key([mod], 's', lazy.spawn(rofi + ['drun'])),
+    Key([mod], "s", lazy.spawn(rofi + ["drun"])),
+    Key([mod], "d", lazy.screen.next_group()),
+    Key([mod], "a", lazy.screen.prev_group()),
+
+    # Nerd Font picker
+    Key([alt], "y", lazy.spawn("nerdy")),
+
+    # Center current window
+    Key([mod], "c", lazy.spawn("ctw")),
 ]
 
-groups = [Group(i) for i in 'asdfui']
-for i in groups:
-    keys.extend(
-        [
-            Key(
-                [mod], i.name,
-                lazy.group[i.name].toscreen(),
-                desc=f'Switch to group {i.name}'
-            ),
-            Key(
-                [mod, 'control'], i.name,
-                lazy.window.togroup(i.name, switch_group=True),
-                desc=f'Switch to & move focused window to group {i.name}'
-            ),
-        ]
-    )
+groups = [
+    Group("Main"),
+    Group("Web"),
+    Group("Code"),
+    Group("Music"),
+    Group("Chat")
+]
+dgroups_key_binder = simple_key_binder("mod4")
 
-
-layout_theme = {
-    'border_width': borderwidth,
-    'border_focus': activeborder,
-    'border_normal': inactiveborder,
-    'margin': margin,
-    'ratio': 0.64,
-    'single_border_width': 0,
-    'min_secondary_size': 220,
-    'change_ratio': 0.015
+lay_monad = {
+    "border_width": borderwidth,
+    "border_focus": activeborder,
+    "border_normal": inactiveborder,
+    "margin": margin,
+    "ratio": 0.64,
+    "single_border_width": 0,
+    "min_secondary_size": 220,
+    "change_ratio": 0.015
 }
-layouts = [layout.MonadTall(**layout_theme)]
+lay_cols = {
+    "border_width": borderwidth,
+    "border_focus": activeborder,
+    "border_normal": inactiveborder,
+    "margin": margin,
+    "fair": True,
+}
+lay_tab = {
+    "active_bg": green,
+    "active_fg": bgcolor,
+    "inactive_bg": bgcolor,
+    "inactive_fg": white,
+    "bg_color": bgcolor,
+    "font": font,
+    "sections": [""],
+}
+layouts = [
+    layout.MonadTall(**lay_monad),
+    layout.Columns(**lay_cols),
+    layout.TreeTab(**lay_tab),
+]
 
 widget_defaults = {
-        'font': font,
-        'fontsize': fontsize,
-        'padding': 12,
-        'foreground': yellow,
-        'background': bgcolor,
-        'highlight_method': 'text'
+        "font": font,
+        "fontsize": fontsize,
+        "padding": 12,
+        "foreground": white,
+        "background": bgcolor,
+        "highlight_method": "text"
 }
 extension_defaults = widget_defaults.copy()
 
@@ -119,121 +131,109 @@ screens = [
     Screen(
         top=bar.Bar(
             [
-                widget.TextBox(
-                    fmt='~',
-                    foreground=gray,
-                    font=boldfont,
-                    mouse_callbacks = {
-                        'Button1': lambda qtile:
-                        qtile.cmd_spawn(rofi + ['drun', '-location', '1']),
-                        'Button2': lambda qtile:
-                        qtile.cmd_spawn(f'{home}/.scripts/power.sh'),
-                        'Button3': lambda qtile:
-                        qtile.cmd_spawn(rofi + ['window', '-location', '1']),
-                    }
-                ),
                 widget.GroupBox(
-                    font=semiboldfont,
                     fontsize=fontsize+2,
                     borderwidth=0,
                     disable_drag=True,
                     active=gray,
-                    inactive=bgcolor,
+                    inactive=gray,
                     this_current_screen_border=yellow,
                     this_screen_border=gray,
                     background=bgcolor,
                     urgent_alert_method='text',
-                    urgent_text=red
+                    urgent_text=red,
+                    hide_unused=True,
+                    visible_groups = ["Main", "Web", "Code", "Chat", "Music"]
                 ),
-                widget.Prompt(
-                    prompt="run: ",
-                    ignore_dups_history=True,
-                ),
+
                 widget.Spacer(),
-                widget.Mpris2(
-                    name='spotify',
-                    foreground=gray,
-                    stop_pause_text='▶',
-                    objname='org.mpris.MediaPlayer2.spotify',
-                    display_metadata=['xesam:artist', 'xesam:title'],
-                    scroll_chars=None,
-                    mouse_callbacks = {
-                        'Button1': lambda qtile:
-                        qtile.cmd_spawn(f'{player_cmd}PlayPause'),
-                        'Button2': lambda qtile:
-                        qtile.cmd_spawn(f'{player_cmd}Previous'),
-                        'Button3': lambda qtile:
-                        qtile.cmd_spawn(f'{player_cmd}Next')
-                    }
-                ),
-                widget.Spacer(),
-                widget.CPU(
-                    format='{load_percent}%',
-                    foreground=gray,
-                    mouse_callbacks = {
-                        'Button1': lambda qtile:
-                        qtile.cmd_spawn(f'perfmon'),
-                        'Button2': lambda qtile:
-                        qtile.cmd_spawn(f'sound'),
-                        'Button3': lambda qtile:
-                        qtile.cmd_spawn(terminal)
-                    }
-                ),
-                widget.ThermalSensor(
-                        foreground=gray,
-                        foreground_alert=red,
-                        threshold=85
-                ),
+
                 widget.Memory(
-                    foreground=gray,
-                    format='{MemUsed} MB',
-                    mouse_callbacks = {
-                        'Button1': lambda qtile:
-                        qtile.cmd_spawn(f'irc'),
-                        'Button3': lambda qtile:
-                        qtile.cmd_spawn(f'term')
-                    }
+                    fmt=" {}",
+                    background=green,
+                    foreground=bgcolor,
                 ),
+
+                widget.Sep(
+                    background=bgcolor,
+                    foreground=bgcolor,
+                    padding=5,
+                ),
+
+                widget.CPU(
+                    fmt=" {}",
+                    format='{load_percent}%',
+                    background=green,
+                    foreground=bgcolor,
+                ),
+
+                widget.Sep(
+                    background=bgcolor,
+                    foreground=bgcolor,
+                    padding=5,
+                ),
+
+                widget.Mpd2(
+                    background=blue,
+                    foreground=bgcolor,
+                    status_format = "ﱘ {artist} - {title}",
+                    idle_format = "ﱙ",
+                ),
+
+                widget.Sep(
+                    background=bgcolor,
+                    foreground=bgcolor,
+                    padding=5,
+                ),
+
                 widget.DF(
+                    background=blue,
+                    foreground=bgcolor,
                     visible_on_warn=False,
                     warn_color=red,
                     warn_space=10,
+                    fmt = " {}",
                     format='{uf} {m}B',
-                    foreground=gray,
-                    mouse_callbacks = {
-                        'Button1': lambda qtile:
-                        qtile.cmd_spawn(f'filemanager'),
-                        'Button2': lambda qtile:
-                        qtile.cmd_spawn(f'-e ncdu'),
-                        'Button3': lambda qtile:
-                        qtile.cmd_spawn(f'e vifm')
-                    }
                 ),
-                widget.PulseVolume(foreground=magenta),
-                widget.Backlight(
-                    foreground=blue,
-                    backlight_name='intel_backlight',
-                    change_command='brightnessctl s {0}'
+
+                widget.Sep(
+                    background=bgcolor,
+                    foreground=bgcolor,
+                    padding=5,
                 ),
-                widget.CheckUpdates(
-                    distro='Arch_checkupdates',
-                    display_format='{updates}',
-                    execute=f'{terminal} -e yay',
-                    colour_have_updates=orange
+
+                widget.KeyboardLayout(
+                    fmt = " {}",
+                    configured_keyboards = ["hu", "us", "de"],
+                    background=orange,
+                    foreground=bgcolor,
                 ),
+
+                widget.Sep(
+                    background=bgcolor,
+                    foreground=bgcolor,
+                    padding=5,
+                ),
+
+                widget.PulseVolume(
+                    background=orange,
+                    foreground=bgcolor,
+                ),
+
+                widget.Sep(
+                    background=bgcolor,
+                    foreground=bgcolor,
+                    padding=5,
+                ),
+
                 widget.Clock(
-                    font=boldfont,
+                    background=magenta,
+                    foreground=bgcolor,
+                    font=font,
                     fontsize=fontsize+1,
-                    format='%H:%M ',
-                    mouse_callbacks = {
-                        'Button1': lambda qtile:
-                        qtile.cmd_spawn(f'rss'),
-                        'Button2': lambda qtile:
-                        qtile.cmd_hide_show_bar(),
-                        'Button3': lambda qtile:
-                        qtile.cmd_spawn(f'calendar')
-                    }
-                )
+                    format='%H:%M',
+                ),
+
             ],
             barheight,
             opacity=1
@@ -260,7 +260,7 @@ mouse = [
 
 follow_mouse_focus = False
 floating_layout = layout.Floating(
-                    **layout_theme,
+                    **lay_monad,
                     float_rules=[
                         {'wmclass': 'confirm'},
                         {'wmclass': 'dialog'},
@@ -290,14 +290,4 @@ def fallback(window):
             return
     qtile.current_screen.toggle_group(qtile.groups[0])
 
-@hook.subscribe.startup_once
-def autostart():
-    processes = [
-        ['nitrogen', '--restore'],
-        ['picom', '-b', '--experimental-backends'],
-        ['redshift'],
-        rofi + ['drun']
-    ]
-
-    for p in processes:
-        subprocess.Popen(p)
+wmname = "qtile"

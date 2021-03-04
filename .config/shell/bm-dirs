@@ -1,13 +1,16 @@
 #!/bin/sh
-# You can add comments to these files with #
-cf  ${XDG_CONFIG_HOME:-$HOME/.config}
-cfa ${XDG_CONFIG_HOME:-$HOME/.config}/awesome
-D   ${XDG_DOWNLOAD_DIR:-$HOME/etc/dl}
-d   ${XDG_DOCUMENTS_DIR:-$HOME/doc}
-m   ${XDG_MUSIC_DIR:-$HOME/etc/music}
-pp  ${XDG_PICTURES_DIR:-$HOME/etc/pic}
-sc  $HOME/.local/bin
-src $HOME/.local/src
-vv  ${XDG_VIDEOS_DIR:-$HOME/etc/vid}
-DD  $HOME/dev/dotfiles
-bb  $HOME/.bin
+
+cf      ${XDG_CONFIG_HOME:-$HOME/.config}
+cfa     ${XDG_CONFIG_HOME:-$HOME/.config}/awesome
+cfv     ${XDG_CONFIG_HOME:-$HOME/.config}/nvim
+cfs     ${XDG_CONFIG_HOME:-$HOME/.config}/shell
+D       ${XDG_DOWNLOAD_DIR:-$HOME/etc/dl}
+d       ${XDG_DOCUMENTS_DIR:-$HOME/doc}
+m       ${XDG_MUSIC_DIR:-$HOME/etc/music}
+pp      ${XDG_PICTURES_DIR:-$HOME/etc/pic}
+sc      $HOME/.local/bin
+src     $HOME/.local/src
+vv      ${XDG_VIDEOS_DIR:-$HOME/etc/vid}
+DD      $HOME/dev/dotfiles
+rr      $HOME/etc/repos
+
