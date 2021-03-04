@@ -38,10 +38,10 @@ upload(){
     local id=$(curl -sF "file=@${1}" http://0x0.st)
     if [[ -z "${id// }" ]]
     then
-        noti "Failed to upload ${1}"
+        notify-send -a scr "Failed to upload ${1}"
         exit 1
     else
-        noti "Successfully uploaded"
+        notify-send -a scr "Successfully uploaded"
         echo $id | xclip -sel clip
     fi
 }
@@ -52,7 +52,7 @@ shot(){
             maim -d $delay "$fname"
         ;;
         select)
-            maim -s "$fname"
+            maim -os "$fname"
         ;;
     esac
 }
