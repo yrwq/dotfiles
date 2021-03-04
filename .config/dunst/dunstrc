@@ -36,7 +36,6 @@
     startup_notification = false
     force_xinerama = false
 
-# Start flavours
 frame_color = "#8ea594"
 separator_color = "#8ea594"
 
@@ -56,5 +55,4 @@ separator_color = "#8ea594"
     msg_urgency = critical
     background = "#6f6e85"
     foreground = "#faebd7"
-	timeout = 15
-# End flavours
+    timeout = 15

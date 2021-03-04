@@ -1,3 +1,0 @@
-polybar main &
-dunst &
-picom --experimental-backends &

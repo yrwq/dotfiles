@@ -1,9 +1,0 @@
-"query: Linux:tags # \"linux\""
-http://lukesmith.xyz/rss.xml "~  └─ Luke" linux
-https://www.reddit.com/r/unixporn/.rss "~  └─ r/unixporn" linux
-
-"query: Youtube:tags # \"youtube\""
-https://www.youtube.com/feeds/videos.xml?channel_id=UC2eYFnH61tmytImy1mTYvhA "~  └─ Luke" youtube
-
-"query: Git:tags # \"git\""
-#your git private feed "~  └─ Feed " git

@@ -11,7 +11,6 @@ import Data.Ratio
 import Data.Char (isSpace)
 import Data.Monoid
 import Data.Tuple
-import qualified Data.Tuple.Extra as TE
 
 import XMonad.Layout.Spacing
 import XMonad.Layout.Gaps
