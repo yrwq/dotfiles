@@ -1,11 +1,7 @@
 #!/bin/zsh
 
 export PATH="$PATH:$(du "$HOME/.local/bin" | cut -f2 | paste -sd ':')"
-export PATH="$PATH:$HOME/.bin"
 export PATH="$PATH:$HOME.gem/ruby/2.7.0/bin"
-
-# Dirty directories to watch with drt script
-export DRT_PATH=~/dev/dotfiles:~/dev/yemacs:~/dev/yafetch:~/dev/ytw:~/dev/yth:~/dev/termstart
 
 # Default programs:
 export EDITOR="nvim"
@@ -13,9 +9,8 @@ export TERMINAL="st"
 export BROWSER="brave"
 export READER="zathura"
 export VISUAL="st -e nvim"
-export PAGER="${EDITOR:="$(which nvim)"} -R"
-export OPENER="${HOME:="/home/$USER"}/.local/bin/open"
-export MANPAGER="${EDITOR:="$(which nvim)"} -c 'set ft=man' -"
+export PAGER="nvim -R"
+export MANPAGER="nvim -c 'set ft=man' -"
 
 # ~/ Clean-up:
 export XDG_CONFIG_HOME="$HOME/.config"
@@ -43,7 +38,6 @@ export UNISON="${XDG_DATA_HOME:-$HOME/.local/share}/unison"
 export HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/history"
 export WEECHAT_HOME="${XDG_CONFIG_HOME:-$HOME/.config}/weechat"
 
-# Other program settings: export DICS="/usr/share/stardict/dic/"
 export LESS=-R
 export LESS_TERMCAP_mb="$(printf '%b' '[1;31m')"
 export LESS_TERMCAP_md="$(printf '%b' '[1;36m')"
@@ -53,9 +47,10 @@ export LESS_TERMCAP_se="$(printf '%b' '[0m')"
 export LESS_TERMCAP_us="$(printf '%b' '[1;32m')"
 export LESS_TERMCAP_ue="$(printf '%b' '[0m')"
 export LESSOPEN="| /usr/bin/highlight -O ansi %s 2>/dev/null"
-export MOZ_USE_XINPUT2="1"		# Mozilla smooth scrolling/touchpads.
-export AWT_TOOLKIT="MToolkit wmname LG3D"	#May have to install wmname
-export _JAVA_AWT_WM_NONREPARENTING=1	# Fix for Java applications in dwm
+
+export AWT_TOOLKIT="MToolkit wmname LG3D"
+export _JAVA_AWT_WM_NONREPARENTING=1
+export XKB_DEFAULT_LAYOUT="hu"
 
 # This is the list for lf icons:
 export LF_ICONS="di= :\
@@ -125,7 +120,3 @@ ex= :\
 *.part= :\
 *.torrent= :\
 "
-
-[ ! -f ${XDG_CONFIG_HOME:-$HOME/.config}/shell/shortcutrc ] && shortcuts >/dev/null 2>&1 &
-
-[ "$(tty)" = "/dev/tty1" ] && ! pidof -s Xorg >/dev/null 2>&1 && exec startx
