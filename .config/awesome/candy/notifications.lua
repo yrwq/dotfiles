@@ -8,6 +8,20 @@ local beautiful = require("beautiful")
 local helpers = require("helpers")
 local dpi = beautiful.xresources.apply_dpi
 
+naughty.config.defaults.icon_size = dpi(100)
+naughty.config.defaults.ontop = true
+naughty.config.defaults.screen = awful.screen.focused()
+naughty.config.defaults.timeout = 5
+naughty.config.defaults.title = "System Notification"
+
+naughty.config.defaults.border_color = x.color8
+naughty.config.defaults.border_width = dpi(5)
+
+naughty.config.defaults.position = "top_right"
+naughty.config.padding = dpi(40)
+naughty.config.spacing = dpi(40)
+naughty.config.defaults.margin = dpi(40)
+
 naughty.config.presets.normal = {
     timeout = 5,
     font = beautiful.nfont .. "12",
@@ -29,17 +43,18 @@ naughty.config.presets.critical = {
     timeout = 0
 }
 
+
 ruled.notification.connect_signal('request::rules', function()
     -- Add a red background for urgent notifications.
     ruled.notification.append_rule {
         rule       = { urgency = 'critical' },
-        properties = { bg = x.color8, fg = x.fg, timeout = 5 }
+        properties = { bg = x.color0, fg = x.fg, timeout = 5 }
     }
 
     -- Or green background for normal ones.
     ruled.notification.append_rule {
         rule       = { urgency = 'normal' },
-        properties = { bg = x.color0, fg = x.fg, timeout = 5}
+        properties = { bg = x.bg, fg = x.fg, timeout = 5}
     }
 
     ruled.notification.append_rule {
@@ -47,6 +62,11 @@ ruled.notification.connect_signal('request::rules', function()
         properties = { bg = x.bg, fg = x.fg, timeout = 5}
     }
 end)
+
+
+naughty.config.presets.ok = naughty.config.presets.normal
+naughty.config.presets.info = naughty.config.presets.normal
+naughty.config.presets.warn = naughty.config.presets.critical
 
 naughty.connect_signal("request::display", function(n)
 
@@ -117,7 +137,7 @@ naughty.connect_signal("request::display", function(n)
                                             },
                                             {
                                                 {
-                                                    markup = " ",
+                                                    markup = helpers.colorize_text(" ", x.fg),
                                                     font = beautiful.nfont .. "20",
                                                     visible = text_visib,
                                                     widget = wibox.widget.textbox,
@@ -152,8 +172,6 @@ naughty.connect_signal("request::display", function(n)
                                         spacing = beautiful.notification_margin,
                                         layout  = wibox.layout.fixed.vertical,
                                     },
-                                    -- Margin between the fake background
-                                    -- Set to 0 to preserve the "titlebar" effect
                                     margins = dpi(10),
                                     widget  = wibox.container.margin,
                                 },
@@ -170,11 +188,9 @@ naughty.connect_signal("request::display", function(n)
                         widget = naughty.container.background,
                     },
                     strategy = "min",
-                    width    = dpi(160),
                     widget   = wibox.container.constraint,
                 },
                 strategy = "max",
-                width    = beautiful.notification_max_width or dpi(500),
                 widget   = wibox.container.constraint
             },
             bg = x.bg,

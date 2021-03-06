@@ -4,6 +4,7 @@ local gears = require('gears')
 local beautiful = require('beautiful')
 local helpers = require("helpers")
 local lain = require("lain")
+local keys = require("keys")
 local dpi = beautiful.xresources.apply_dpi
 
 -- create a container widget with background
@@ -66,11 +67,43 @@ local disk = lain.widget.fs {
     end
 }
 
-local volume = lain.widget.pulse {
-    settings = function()
-        widget:set_text(" " ..  volume_now.left .. "%")
-    end
+local volume = wibox.widget {
+    markup = " ",
+    widget = wibox.widget.textbox
 }
+
+awesome.connect_signal("shit::volume", function(vol, muted)
+    if muted then
+        volume.markup = helpers.colorize_text("ﳌ ", x.fg)
+    else
+        volume.markup = helpers.colorize_text(" " .. vol .. "%", x.fg)
+    end
+end)
+
+local weather = wibox.widget {
+    markup = "望",
+    widget = wibox.widget.textbox
+}
+
+awesome.connect_signal("shit::weather", function(temp, wind, emoji)
+    weather.markup = helpers.colorize_text(emoji .. temp .. "糖 ", x.fg)
+end)
+
+local music = wibox.widget {
+    forced_width = dpi(200),
+    align = "center",
+    markup = "",
+    widget = wibox.widget.textbox,
+}
+
+awesome.connect_signal("shit::mpd", function(artist, title, paused)
+    if paused then
+        music.visible = false
+    else
+        music.visible = true
+        music.markup = helpers.colorize_text(artist .. " - " .. title, x.fg)
+    end
+end)
 
 local mysystray = wibox.widget.systray()
 
@@ -102,14 +135,18 @@ dont_disturb = false
 
 noti_toggle:buttons(gears.table.join(
     awful.button({}, 1, function()
-        dont_disturb = true
-        noti_toggle.markup = ""
-    end),
-    awful.button({}, 3, function()
-        dont_disturb = false
-        noti_toggle.markup = ""
+        dont_disturb = not dont_disturb
+        update_disturb()
     end)
 ))
+function update_disturb()
+    if dont_disturb then
+        noti_toggle.markup = ""
+    else
+        noti_toggle.markup = ""
+    end
+end
+
 
 local sep = helpers.horizontal_pad(dpi(5))
 
@@ -152,11 +189,12 @@ screen.connect_signal("request::desktop_decoration", function(s)
     }
 
     s.mytasklist = awful.widget.tasklist {
+        buttons = keys.tasklist_buttons,
         screen   = s,
         filter   = awful.widget.tasklist.filter.currenttags,
         style    = {
             font = beautiful.nfont .. "10",
-            bg = x.color0j
+            bg = x.bg
         },
         layout   = { layout  = wibox.layout.flex.horizontal },
         widget_template = {
@@ -166,7 +204,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
                     align  = "center",
                     widget = wibox.widget.textbox,
                 },
-                forced_width = dpi(220),
+                forced_width = dpi(180),
                 left = dpi(15),
                 right = dpi(15),
                 top  = dpi(4),
@@ -179,13 +217,47 @@ screen.connect_signal("request::desktop_decoration", function(s)
     }
 
     -- Create the wibox
-    s.mywibox = awful.wibar({
+    s.fullbar = awful.wibar {
+        visible = false,
         position = "top",
         screen = s
-    })
+    }
+
+    s.floatbar = awful.wibar {
+        position = "top",
+        screen = s
+    }
 
     -- Add widgets to the wibox
-    s.mywibox:setup {
+    s.floatbar:setup {
+        layout = wibox.layout.align.horizontal,
+        expand = "none",
+        {
+            bl(s.mytaglist, x.color0),
+            bl(s.mytasklist, x.bg),
+            bl(s.mypromptbox, x.color0),
+            layout = wibox.layout.fixed.horizontal,
+        },
+        {
+            bl(mr(s.mytextclock), x.color0),
+            sep,
+            layout = wibox.layout.fixed.horizontal,
+        },
+        {
+            bl(mr(volume), x.color0),
+            sep,
+            bl(mr(noti_toggle), x.color0),
+            sep,
+            bl(mrl(s.mylayoutbox), x.color0),
+            sep,
+            bl(mr(systray), x.color8),
+            sep,
+            layout = wibox.layout.fixed.horizontal,
+        },
+    }
+
+    -- Add widgets to the wibox
+    s.fullbar:setup {
         layout = wibox.layout.align.horizontal,
         expand = "none",
         {
@@ -196,21 +268,21 @@ screen.connect_signal("request::desktop_decoration", function(s)
         },
         {
             layout = wibox.layout.fixed.horizontal,
-            bl(mr(s.mytextclock), x.color0),
+            bl(mr(s.mytextclock), x.bg),
         },
         {
             layout = wibox.layout.fixed.horizontal,
-            bl(mr(disk.widget), x.color1 .. "60"),
+            bl(mr(music), x.color1 .. "60"),
             sep,
-            bl(mr(mem.widget), x.color2 .. "60"),
+            bl(mr(weather), x.color2 .. "60"),
             sep,
-            bl(mr(cpu.widget), x.color3 .. "60"),
+            bl(mr(disk.widget), x.color3 .. "60"),
             sep,
-            bl(mr(volume.widget), x.color4 .. "60"),
+            bl(mr(volume), x.color1 .. "60"),
             sep,
-            bl(mrl(s.mylayoutbox), x.color5 .. "60"),
+            bl(mrl(s.mylayoutbox), x.color4 .. "60"),
             sep,
-            bl(mr(noti_toggle), x.color1 .. "60"),
+            bl(mr(noti_toggle), x.color5 .. "60"),
             sep,
             bl(mr(systray), x.color6 .. "99"),
             sep,
@@ -219,26 +291,23 @@ screen.connect_signal("request::desktop_decoration", function(s)
 
 end)
 
-client.connect_signal("manage", function(c)
-    if c.fullscreen then
-        s.mywibox.visible = false
-    else
-        s.mywibox.visible = true
-    end
-end)
-
-client.connect_signal("focus", function(c)
-    if c.fullscreen then
-        s.mywibox.visible = false
-    else
-        s.mywibox.visible = true
-    end
-end)
-
 client.connect_signal("property::fullscreen", function(c)
     if c.fullscreen then
-        s.mywibox.visible = false
+        s.fullbar.visible = false
+        s.floatbar.visible = false
     else
-        s.mywibox.visible = true
+        -- s.fullbar.visible = true
+        s.floatbar.visible = true
     end
 end)
+
+function toggle_bar()
+    -- s.floatbar.visible = false
+    -- s.fullbar.visible = not s.fullbar.visible
+    s.floatbar.visible = not s.floatbar.visible
+end
+
+function switch_bar_mode()
+    s.fullbar.visible = not s.fullbar.visible
+    s.floatbar.visible = not s.floatbar.visible
+end

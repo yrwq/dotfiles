@@ -1,0 +1,117 @@
+* {
+    border: none;
+    font-size: 12px;
+    margin-top: 0px;
+    font-family: "Iosevka Custom";
+    font-style: normal;
+    /* opacity: 0.9; */
+    opacity: 1;
+}
+
+window#waybar {
+    /* background-color: transparent; */
+    background-color: #201e1a;
+    color: #947e68;
+}
+
+#workspaces, #tags {
+    background-color: transparent;
+    color: #947e68;
+    border-radius: 10px;
+}
+
+#workspaces button, #tags button {
+    background-color: transparent;
+    color: #947e68;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#window {
+    background-color: #322b28;
+    color: #947e68;
+    color: #947e68;
+    border-radius: 10px;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+#workspaces button:hover, #tags button:hover {
+    box-shadow: inherit;
+    color: #947e68;
+    background-color: #322b28;
+}
+
+#workspaces button.focused, #tags button.focused {
+    background-color: #322b28;
+    color: #7e5d3c;
+}
+
+#workspaces button.urgent, #tags button.urgent {
+    background-color: #322b28;
+    color:  #6d413b;
+}
+
+#tags button {
+    color:  #947e68;
+    font-weight: 600;
+}
+
+#cpu, #memory, #network, #pulseaudio {
+    background-color: #322b28;
+    color:  #947e68;
+    padding-left: 6px;
+    padding-right: 6px;
+}
+
+#pulseaudio {
+    color:  #947e68;
+    border-radius: 10px 0px 0px 10px;
+}
+#cpu {
+    color:  #947e68;
+}
+#memory {
+    color:  #947e68;
+}
+#network {
+    color:  #947e68;
+    border-radius: 0px 10px 10px 0px;
+}
+#pulseaudio.muted {
+    color:  #947e68;
+    border-radius: 10px 0px 0px 10px;
+}
+
+label:focus {
+    background-color: #322b28;
+    color:  #947e68;
+}
+
+#clock {
+    background-color: #322b28;
+    color:  #947e68;
+    border-radius: 10px 10px 10px 10px;
+    padding: 6px 6px 6px 6px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+
+#taskbar button {
+    background-color: #322b28;
+    color:  #947e68;
+}
+
+#taskbar button.minimized {
+    background-color: #201e1a;
+    color:  #947e68;
+}
+
+#taskbar button.active {
+    background-color: #473d3a;
+    color:  #947e68;
+}

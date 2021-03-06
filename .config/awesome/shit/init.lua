@@ -1,1 +1,6 @@
 require("shit.volume")
+-- require("shit.cpu")
+-- require("shit.disk")
+-- require("shit.ram")
+require("shit.weather")
+require("shit.mpd")

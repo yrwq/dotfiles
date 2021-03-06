@@ -1,6 +1,7 @@
 #!/bin/sh
 
-# riverctl spawn 'waybar'
+riverctl spawn 'waybar'
+riverctl spawn 'swaybg -i ~/.wp/forest.jpg'
 
 mod="Mod4"
 riverctl focus-follows-cursor normal
@@ -21,18 +22,8 @@ riverctl map normal $mod+Shift Return zoom
 riverctl map normal $mod H mod-main-factor -0.05
 riverctl map normal $mod L mod-main-factor +0.05
 
-riverctl map normal $mod+Control K mod-main-count +1
-riverctl map normal $mod+Control J mod-main-count -1
-
-riverctl map normal $mod+Mod1 H move left 100
-riverctl map normal $mod+Mod1 J move down 100
-riverctl map normal $mod+Mod1 K move up 100
-riverctl map normal $mod+Mod1 L move right 100
-
-riverctl map normal $mod+Mod1+Shift H resize horizontal -100
-riverctl map normal $mod+Mod1+Shift J resize vertical 100
-riverctl map normal $mod+Mod1+Shift K resize vertical -100
-riverctl map normal $mod+Mod1+Shift L resize horizontal 100
+riverctl map normal $mod+Shift H mod-main-count +1
+riverctl map normal $mod+Shift L mod-main-count -1
 
 riverctl map-pointer normal $mod BTN_LEFT move-view
 riverctl map-pointer normal $mod BTN_RIGHT resize-view
@@ -47,10 +38,10 @@ riverctl map normal $mod+Shift Space toggle-float
 riverctl map normal $mod F toggle-fullscreen
 
 # Mod+{Up,Right,Down,Left} to change master orientation
-riverctl map normal $mod Down layout rivertile top
-riverctl map normal $mod Left layout rivertile right
-riverctl map normal $mod Up layout rivertile down
-riverctl map normal $mod Right layout rivertile left
+riverctl map normal Control+Mod1 j layout rivertile top
+riverctl map normal Control+Mod1 h layout rivertile right
+riverctl map normal Control+Mod1 k layout rivertile down
+riverctl map normal Control+Mod1 l layout rivertile left
 
 # Set repeat rate
 riverctl set-repeat 50 300
@@ -62,13 +53,12 @@ riverctl float-filter-add "popup"
 # Set app-ids of views which should use client side decorations
 riverctl csd-filter-add "swappy"
 riverctl float-filter-add "swappy"
-# riverctl csd-filter-add "firefox"
 
 # Set opacity and fade effect
 riverctl opacity 1.0 0.95 0.0 0.1 20
 
-riverctl border-color-focused '#a9b665'
-riverctl border-color-unfocused '#212121'
+riverctl border-color-focused '#6d413b'
+riverctl border-color-unfocused '#473d3a'
 riverctl border-width 3
 
 riverctl attach-mode bottom

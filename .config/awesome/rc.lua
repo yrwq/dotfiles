@@ -33,6 +33,14 @@ x = {
     color15    = xrdb.color15,
 }
 
+screen_width = awful.screen.focused().geometry.width
+screen_height = awful.screen.focused().geometry.height
+
+theme = "kory"
+
+local theme_dir = os.getenv("HOME") .. "/.config/awesome/themes/" .. theme .. "/"
+beautiful.init(theme_dir .. "theme.lua")
+
 naughty.connect_signal("request::display_error", function(message, startup)
     naughty.notification {
         urgency = "critical",
@@ -40,11 +48,6 @@ naughty.connect_signal("request::display_error", function(message, startup)
         message = message
     }
 end)
-
-theme = "kory"
-
-local theme_dir = os.getenv("HOME") .. "/.config/awesome/themes/" .. theme .. "/"
-beautiful.init(theme_dir .. "theme.lua")
 
 local bling = require("bling")
 local machi = require("machi")
@@ -56,8 +59,6 @@ editor = os.getenv("EDITOR") or "nvim"
 editor_cmd = terminal .. " -e " .. editor
 
 myawesomemenu = {
-    { "hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
-    { "manual", terminal .. " -e man awesome" },
     { "edit config", editor_cmd .. " " .. awesome.conffile },
     { "restart", awesome.restart },
     { "quit", function() awesome.quit() end },
@@ -66,15 +67,19 @@ myawesomemenu = {
 mymainmenu = awful.menu({
     items = {
         { "awesome", myawesomemenu },
-        { "open terminal", terminal }
+        { "terminal", terminal },
+        { "browser",  "brave" },
+        { "discord", "discocss" }
     }
 })
 
-local wallpaper = os.getenv("HOME") .. "/.wp/house.png"
+local wallpaper = os.getenv("HOME") .. "/.wp/forest.jpg"
 gears.wallpaper.maximized(wallpaper, s, true)
 
 awful.layout.layouts = {
     awful.layout.suit.tile,
+    bling.layout.equalarea,
+    bling.layout.centered,
     machi.default_layout,
     lain.layout.centerwork.horizontal,
     awful.layout.suit.fair,
@@ -104,12 +109,13 @@ end)
 require("shit")
 require("rules")
 require("keys")
+
+require("candy.layout-pop")
+require("candy.task-pop")
 require("candy.bar")
-
-titlebar = require("candy.titlebar")
-titlebar.init("kory")
-
+require("candy.titlebar")
 require("candy.notifications")
 
 collectgarbage("setpause", 110)
 collectgarbage("setstepmul", 1000)
+

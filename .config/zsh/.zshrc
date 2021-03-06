@@ -10,19 +10,14 @@ precmd() {
 }
 
 
-# Completion settings
+# should this be in keybindings?
+zstyle ':completion:*:*:*:*:*' menu select
+zstyle ':completion:*' special-dirs true
 zstyle ':completion:*' list-colors ''
-zstyle ':completion:*' menu select
-zstyle ':completion:*' rehash true
-zstyle -e ':completion:*' special-dirs '[[ $PREFIX = (../)#(..) ]] && reply=(..)'
-zstyle ':completion:*' group-name ''
-zstyle ':completion:*' format %F{yellow}%B%U%{$cfg[ITALIC_ON]%}%d%{$cfg[ITALIC_OFF]%}%b%u%f
-zstyle ':completion:*' expand suffix
-zstyle ':completion:*' file-sort modification
-zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
-zstyle ':completion:*' list-suffixes true
-
-zstyle ':completion:*' matcher-list '' '+m:{[:lower:]}={[:upper:]}' '+m:{[:upper:]}={[:lower:]}' '+m:{_-}={-_}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
+zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm -w -w"
+zstyle ':completion:*:cd:*' tag-order local-directories directory-stack path-directories
+zstyle '*' single-ignored show
 
 # options
 setopt AUTO_CD

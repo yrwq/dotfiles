@@ -45,16 +45,16 @@ theme.taglist_font = theme.nfont .. "24"
 
 theme.taglist_bg = x.bg
 
-theme.taglist_bg_focus = x.color8
+theme.taglist_bg_focus = x.color0
 theme.taglist_fg_focus = x.color3
 
 theme.taglist_bg_urgent = x.color3
 theme.taglist_fg_urgent = x.bg
 
-theme.taglist_bg_occupied = x.color0
+theme.taglist_bg_occupied = x.bg
 theme.taglist_fg_occupied = x.fg
 
-theme.taglist_bg_empty = x.color0
+theme.taglist_bg_empty = x.bg
 theme.taglist_fg_empty = x.color8
 
 theme.taglist_bg_volatile = transparent
@@ -68,12 +68,12 @@ theme.tasklist_font = theme.font
 theme.tasklist_plain_task_name = true
 
 theme.tasklist_bg_focus = x.color0
-theme.tasklist_fg_focus = x.color6
+theme.tasklist_fg_focus = x.color3
 
-theme.tasklist_bg_minimize = x.color0 .. "70"
-theme.tasklist_fg_minimize = x.fg .. "70"
+theme.tasklist_bg_minimize = x.bg
+theme.tasklist_fg_minimize = x.color8
 
-theme.tasklist_bg_normal = x.color0
+theme.tasklist_bg_normal = x.bg
 theme.tasklist_fg_normal = x.fg
 
 theme.tasklist_disable_task_name = false
@@ -91,7 +91,7 @@ theme.titlebar_height = dpi(30)
 theme.titlebar_bg_normal = x.bg
 theme.titlebar_fg_normal = x.color8
 
-theme.titlebar_bg_focus = x.bg
+theme.titlebar_bg_focus = x.color0
 theme.titlebar_fg_focus = x.fg
 
 -- Prompt
@@ -135,14 +135,14 @@ theme.wibar_bg = x.bg
 -- Systray
 
 theme.systray_icon_spacing = dpi(10)
-theme.bg_systray = "#5F795B"
+theme.bg_systray = x.color8
 theme.systray_icon_size = dpi(15)
 
 -- Tabs
 
 theme.mstab_bar_height = dpi(60)
 theme.mstab_bar_padding = dpi(0)
-theme.mstab_border_radius = dpi(0)
+theme.mstab_border_radius = dpi(10)
 
 theme.tabbar_style = "modern"
 
@@ -151,5 +151,14 @@ theme.tabbar_bg_normal = x.color0
 theme.tabbar_position = "top"
 
 theme.mstab_bar_ontop = false
+
+-- layout icons
+theme.lain_icons         = os.getenv("HOME") ..  "/.config/awesome/lain/icons/layout/default/"
+theme.layout_termfair    = theme.lain_icons .. "termfair.png"
+theme.layout_centerfair  = theme.lain_icons .. "centerfair.png"  -- termfair.center
+theme.layout_cascade     = theme.lain_icons .. "cascade.png"
+theme.layout_cascadetile = theme.lain_icons .. "cascadetile.png" -- cascade.tile
+theme.layout_centerwork  = theme.lain_icons .. "centerwork.png"
+theme.layout_centerworkh = theme.lain_icons .. "centerworkh.png" -- centerwork.horizontal
 
 return theme
