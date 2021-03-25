@@ -2,6 +2,7 @@
 
 export GOPATH="$HOME/dev/go"
 export PATH="$GOPATH/bin:$PATH"
+export GTK_THEME="yrwqs_phocus"
 
 # Change window title to current working directory
 precmd() {

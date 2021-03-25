@@ -6,10 +6,10 @@
 
 
 _bar(){
-    running=$(pidof polybar)
+    running=$(pidof lemonbar)
 
-    [[ -z "$running" ]] && { $HOME/.config/polybar/launch.sh & herbstclient pad 0 40 0 0 0 & } && notify-send -a bar "Bar on"
-    [[ "$running" ]] && { pkill polybar && herbstclient pad 0 0 0 0 0 & } && notify-send -a bar "Bar off";
+    [[ -z "$running" ]] && { bar & herbstclient pad 0 50 0 0 0 & } && notify-send -a bar "Bar on"
+    [[ "$running" ]] && { pkill lemonbar && herbstclient pad 0 0 0 0 0 & } && notify-send -a bar "Bar off";
 }
 
 rec-start(){

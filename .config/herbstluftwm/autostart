@@ -10,8 +10,9 @@ hc emit_hook reload
 hc keyunbind --all
 
 # Wallpaper early for slightly less ugly startup
-hsetroot -fill ~/.wp/city.png &
+hsetroot -fill ~/.wp/8.png &
 xrdb ~/.Xresources &
+mpd &
 
 Mod=Mod4   # Use the super key as the main modifier
 
