@@ -2,42 +2,43 @@
 
 .theme-dark {
     --background-primary: #201e1a;
-    --background-secondary: #322b28;
-    --background-tertiary: #322b28;
-    --channels-default: #79695a;
-    --background-accent: #84694e;
-    --text-normal: #a99683;
-    --text-spotify: #79695a;
-    --text-muted: #84694e;
-    --text-link: #5d6051;
-    --background-floating: #201e1a;
-    --header-primary: #84694e;
-    --header-secondary: #84694e;
-    --header-spotify: #5d6051;
-    --interactive-normal: #84694e;
-    --interactive-hover: #84694e;
-    --interactive-active: #a99683;
+    --background-secondary: #201e1a;
+    --background-tertiary: #201e1a;
+    --channels-default: #5e4643;
+    --background-accent: #322b28;
+    --text-normal: #947e68;
+    --text-spotify: #947e68;
+    --text-muted: #867564;
+    --text-link: #6d413b;
+    --background-floating: #473d3a;
+    --header-primary: #7e5d3c;
+    --header-secondary: #6b5a48;
+    --header-spotify: #6c4949;
+    --interactive-normal: #4f4141;
+    --interactive-hover: #4f4141;
+    --interactive-active: #867564;
     --background-modifier-hover: rgba(49, 46, 40, 1);
     --background-modifier-selected: rgba(49, 46, 40, 1);
     --background-message-hover: rgba(39, 37, 32);
 }
 
 .theme-light {
-    --background-primary: #79695a;
-    --background-secondary: #79695a;
-    --background-tertiary: #79695a;
-    --background-accent: #79695a;
-    --text-normal: #3c3836;
-    --text-muted: #504945;
-    --text-link: #076678;
-    --header-primary: #3c3836;
-    --header-secondary: #504945;
-    --header-spotify: #98971a;
-    --background-floating: #79695a;
-    --interactive-normal: #665c54;
-    --interactive-muted: #928374;
-    --interactive-hover: #504945;
-    --interactive-active: #7c6f64;
+    --background-primary: #a68e75;
+    --background-secondary: #84715c;
+    --background-tertiary: #84715c;
+    --background-accent: #7a6856;
+    --text-normal: #201e1a;
+    --text-muted: #504b43;
+    --text-link: #50302b;
+    --header-primary: #504b43;
+    --header-secondary: #201e1a;
+    --header-spotify: #50302b;
+    --background-floating: #84715c;
+    --channels-default: #4f4141;
+    --interactive-normal: #201e1a;
+    --interactive-muted: #20131a;
+    --interactive-hover: #5e4643;
+    --interactive-active: #201e1a;
 }
 
 ::-webkit-scrollbar,
@@ -58,17 +59,19 @@
 }
 
 div {
-    font-family: "Iosevka Custom";
-    font-weight:  200;
+    font-family: "DinaRemasterII";
 }
 
 code {
-    font-family: "Iosevka Custom";
+    color: var(--text-normal);
+    background-color: var(--background-secondary);
+    font-family: "DinaRemasterII";
     font-weight: 200;
 }
 
 element.style {
-    color: rgb(84, 94, 94);
+    color: var(--text-normal);
+    background-color: var(--background-secondary);
 }
 
 span {
@@ -85,18 +88,68 @@ div[class*="newMessagesBar"] {
     background-color: var(--background-secondary);
 }
 
+.sidebar-2K8pFh{
+    width: 0px;
+    transition: .3s ease;
+}
+
+.wrapper-1Rf91z:hover+.base-3dtUhz>.content-98HsJk>.sidebar-2K8pFh{
+    width: 200px;
+}
+.sidebar-2K8pFh:hover{
+    width: 200px;
+}
+
+/* Show members on hover */
+div[class*="members"] {
+    min-width: unset;
+}
+
+div[class*="members"] {
+    max-width: 65px;
+    min-width: 65px;
+    transition: .3s ease;
+}
+
+div[class*="members"]:hover {
+    max-width: 240px;
+    min-width: 240px;
+}
+
+/* Hide quickswitcher */
+div[class*="quickswitcher"] {
+    display: none;
+}
+
 /* Mentions (channel, user) */
 span[class*="mention"][class*="interactive"] {
-    color: var(--text-link);
+    color: var(--text-normal) !important;
+    background-color: var(--background-secondary) !important;
 }
 
 /* Mentions (role) */
 span[class*="mention"] {
-    color: var(--text-link);
+    color: var(--text-normal);
+    background-color: var(--background-secondary);
+}
+
+div[class*="repliedTextPreview"] {
+    color: var(--text-normal) !important;
+    background-color: var(--background-secondary) !important;
+}
+
+div[class*="repliedTextContent"] {
+    color: var(--text-normal) !important;
+    background-color: var(--background-secondary) !important;
+}
+
+div[class*="hasReply"] {
+    color: var(--text-normal);
+    background-color: var(--background-secondary);
 }
 
 div[class^="scrollableContainer"] {
-    background-color: var(--background-secondary);
+    background-color: var(--background-secondary) !important;
 }
 
 div[class^="name"] > span {
@@ -587,44 +640,34 @@ div[class="powercord-spotify hover"] > div[class*="spotify-seek"] > div[class*="
     background-color: var(--header-spotify);
 }
 
-/* BetterDiscord toasts */
-/* TODO: Fix shadows of toasts */
-div[class="bd-toast"] {
-    background: var(--background-floating);
-    color: var(--text-normal);
-}
-
 .themed-OHr7kt.item-PXvHYJ {
     color: var(--channels-normal);
 }
 
-/* Sadly colors of other toasts(toast-info, toast-success, toast-warning, toast-error) can't be overridden */
 
-/** Gruvbox (dark) Highlight.js theme. Ported from https://github.com/highlightjs/highlight.js/blob/master/src/styles/gruvbox-dark.css */
-.theme-dark .hljs {
+.theme-light .hljs,
+.hljs-subst {
     display: block;
     overflow-x: auto;
+    color: var(--text-normal);
     padding: 0.5em;
-    background: #1a1815;
-}
-
-.theme-dark .hljs,
-.hljs-subst {
-    color: #a99683;
+    font-size: 18px;
+    background: var(--background-floating);
 }
 
 /* Gruvbox Red */
 .theme-dark
+.theme-light,
 .hljs-deletion,
 .hljs-formula,
 .hljs-keyword,
 .hljs-link,
 .hljs-selector-tag {
-    color: #674441;
+    color: var(--text-link);
 }
 
-/* Gruvbox Blue */
 .theme-dark
+.theme-light,
 .hljs-built_in,
 .hljs-emphasis,
 .hljs-name,
@@ -632,7 +675,7 @@ div[class="bd-toast"] {
 .hljs-strong,
 .hljs-title,
 .hljs-variable {
-    color: #545e5e;
+    color: #314848;
 }
 
 /* Gruvbox Yellow */
@@ -640,42 +683,48 @@ div[class="bd-toast"] {
 .hljs-params,
 .hljs-template-tag,
 .hljs-type {
-    color: #84694e;
+    color: #61482e;
 }
 
 /* Gruvbox Purple */
 .theme-dark
+.theme-light,
 .hljs-builtin-name,
 .hljs-doctag,
 .hljs-literal,
 .hljs-number {
-    color: #614c4c;
+    color: #4e3535;
 }
 
 /* Gruvbox Orange */
 .theme-dark
+.theme-light,
 .hljs-code,
 .hljs-meta,
 .hljs-regexp,
 .hljs-selector-id,
 .hljs-template-variable {
-    color: #fe8019;
+    color: #4f4141;
 }
 
 /* Gruvbox Green */
 .theme-dark
+.theme-light,
 .hljs-addition,
-.hljs-meta-string,
 .hljs-section,
 .hljs-selector-attr,
 .hljs-selector-class,
 .hljs-string,
 .hljs-symbol {
-    color: #5d6051;
+    color: #4e543d;
 }
 
-/* Gruvbox Aqua */
+.hljs-meta-string {
+    color: #4e543d !important;
+}
+
 .theme-dark
+.theme-light,
 .hljs-attribute,
 .hljs-bullet,
 .hljs-class,
@@ -684,30 +733,35 @@ div[class="bd-toast"] {
 .hljs-meta-keyword,
 .hljs-selector-pseudo,
 .hljs-tag {
-    color: #4d5c5c;
+    color: #486262;
 }
 
 /* Gruvbox Gray */
 .theme-dark,
+.theme-light,
+.theme-light,
 .hljs-comment {
-    color: #928374;
+    color: #3d3932;
 }
 
 /* Gruvbox Purple */
 .theme-dark
+.theme-light,
 .hljs-link_label,
 .hljs-literal,
 .hljs-number {
-    color: #614c4c;
+    color: #4e3535;
 }
 
 .theme-dark
+.theme-light,
 .hljs-comment,
 .hljs-emphasis {
     font-style: italic;
 }
 
 .theme-dark
+.theme-light,
 .hljs-section,
 .hljs-strong,
 .hljs-tag {
@@ -791,7 +845,7 @@ theme-dark .selected-1Tbx07 {
 }
 
 .markup-2BOw-j code {
-    background-color: #1a1815;
+    background-color: var(--background-normal);
 }
 
 .role-2irmRk {

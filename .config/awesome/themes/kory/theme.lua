@@ -5,13 +5,50 @@ local dpi = xresources.apply_dpi
 local xrdb = xresources.get_current_theme()
 local gears = require("gears")
 local gfs = require("gears.filesystem")
-local themes_path = gfs.get_themes_dir()
 
 local theme = dofile("/usr/share/awesome/themes/default/theme.lua")
--- Fonts
-theme.font = "Iosevka Custom 10"
-theme.nfont = "Iosevka Custom "
-theme.ifont = "Iosevka Nerd Font Mono "
+
+theme.font = "Cozette 10"
+theme.nfont = "Cozette "
+theme.ifont = "TerminessTTF Nerd Font Mono "
+
+theme.wallpaper = os.getenv("HOME") .. "/.wp/building.png"
+xres_file = os.getenv("HOME") .. "/.config/awesome/themes/kory/xresources"
+
+local config_home = gfs.get_xdg_config_home()
+
+local nvim_colors = config_home .. "/nvim/colors/"
+local zathura_home = config_home .. "zathura/"
+
+awful.spawn.with_shell("cp " .. nvim_colors .. "light.vim " .. nvim_colors .. "current.vim")
+awful.spawn.with_shell("cp " .. zathura_home .. "light " .. zathura_home .. "zathurarc")
+
+menu_cmd = "rofiw light"
+
+awful.spawn.with_shell("xrdb " .. xres_file)
+
+x = {
+    bg = xrdb.background,
+    fg = xrdb.foreground,
+    rans = "#00000000",   -- fully transparent
+    color0     = xrdb.color0,
+    color1     = xrdb.color1,
+    color2     = xrdb.color2,
+    color3     = xrdb.color3,
+    color4     = xrdb.color4,
+    color5     = xrdb.color5,
+    color6     = xrdb.color6,
+    color7     = xrdb.color7,
+    color8     = xrdb.color8,
+    color9     = xrdb.color9,
+    color10    = xrdb.color10,
+    color11    = xrdb.color11,
+    color12    = xrdb.color12,
+    color13    = xrdb.color13,
+    color14    = xrdb.color14,
+    color15    = xrdb.color15,
+}
+
 
 theme.bg_dark = x.bg
 theme.bg_normal = x.color0
@@ -30,9 +67,9 @@ theme.useless_gap = dpi(10)
 
 -- border
 
-theme.border_width = dpi(0)
-theme.border_normal = x.color0
-theme.border_focus = x.color8
+theme.border_width = dpi(4)
+theme.border_normal = x.bg
+theme.border_focus = x.color0
 theme.border_radius = dpi(15)
 
 -- taglist
@@ -46,7 +83,7 @@ theme.taglist_font = theme.nfont .. "24"
 theme.taglist_bg = x.bg
 
 theme.taglist_bg_focus = x.color0
-theme.taglist_fg_focus = x.color3
+theme.taglist_fg_focus = x.fg
 
 theme.taglist_bg_urgent = x.color3
 theme.taglist_fg_urgent = x.bg
@@ -68,7 +105,7 @@ theme.tasklist_font = theme.font
 theme.tasklist_plain_task_name = true
 
 theme.tasklist_bg_focus = x.color0
-theme.tasklist_fg_focus = x.color3
+theme.tasklist_fg_focus = x.fg
 
 theme.tasklist_bg_minimize = x.bg
 theme.tasklist_fg_minimize = x.color8
@@ -89,8 +126,7 @@ theme.tasklist_align = "center"
 theme.titlebar_height = dpi(30)
 
 theme.titlebar_bg_normal = x.bg
-theme.titlebar_fg_normal = x.color8
-
+theme.titlebar_fg_normal = x.fg .. "55"
 theme.titlebar_bg_focus = x.color0
 theme.titlebar_fg_focus = x.fg
 
@@ -140,17 +176,21 @@ theme.systray_icon_size = dpi(15)
 
 -- Tabs
 
-theme.mstab_bar_height = dpi(60)
-theme.mstab_bar_padding = dpi(0)
-theme.mstab_border_radius = dpi(10)
+-- theme.tabbar_style = "modern"
 
-theme.tabbar_style = "modern"
+-- theme.tabbar_bg_focus = x.bg
+-- theme.tabbar_bg_normal = x.color0
+-- theme.tabbar_position = "top"
 
-theme.tabbar_bg_focus = x.bg
-theme.tabbar_bg_normal = x.color0
+theme.tabbar_style = "default"
+theme.tabbar_size = dpi(28)
+theme.tabbar_ontop  = true
 theme.tabbar_position = "top"
+theme.tabbar_bg_normal = x.bg
+theme.tabbar_fg_normal = x.fg
+theme.tabbar_bg_focus  = x.color0
+theme.tabbar_fg_focus  = x.fg
 
-theme.mstab_bar_ontop = false
 
 -- layout icons
 theme.lain_icons         = os.getenv("HOME") ..  "/.config/awesome/lain/icons/layout/default/"

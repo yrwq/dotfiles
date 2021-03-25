@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+pic=$(echo "$(ls ~/etc/pic/meme | sed 's/.png//g')" | rofi -dmenu)
+
+xclip -sel clip -t image/png ~/etc/pic/meme/$pic.png

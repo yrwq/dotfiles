@@ -4,6 +4,7 @@ confdir="${XDG_CONFIG_HOME:=$HOME/.config}/discocss"
 preloadFile="$confdir/preload.js"
 cssFile="$confdir/custom.css"
 
+
 mkdir -p "$confdir"
 
 touch "$cssFile"
@@ -17,12 +18,14 @@ cat <<EOF > "$preloadFile"
     style.innerHTML = fs.readFileSync(cssFile);
   }
   function inject({ document, window }) {
+
     window.addEventListener("load", () => {
       const style = document.createElement("style");
       reload(style);
       document.head.appendChild(style);
       fs.watch(confDir, {}, () => reload(style));
     });
+
   }
   inject(require("electron").webFrame.context);
 })();

@@ -1,3 +1,5 @@
+/* Dark */
+
 *.foreground:   #947e68
 *.background:   #201e1a
 *.cursorColor:  #947e68
@@ -18,3 +20,24 @@
 *.color7:       #867564
 *.color15:      #928374
 
+/* Light */
+
+/* *.foreground:   #201e1a */
+/* *.background:   #a68e75 */
+/* *.cursorColor:  #201e1a */
+/* *.color0:       #84715c */
+/* *.color1:       #50302b */
+/* *.color2:       #4e543d */
+/* *.color3:       #61482e */
+/* *.color4:       #476262 */
+/* *.color5:       #4e3535 */
+/* *.color6:       #314848 */
+/* *.color7:       #3d3932 */
+/* *.color8:       #7a6856 */
+/* *.color9:       #5e4643 */
+/* *.color10:      #484a41 */
+/* *.color11:      #6b5a48 */
+/* *.color12:      #535a5a */
+/* *.color13:      #4f4141 */
+/* *.color14:      #515c5c */
+/* *.color15:      #504b43 */

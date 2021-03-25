@@ -1,8 +1,0 @@
-#!/bin/sh
-
-export DISCORD_TOKEN=""
-export UNS_TOKEN=""
-export UNS_SECRET=""
-export PYPI_USER=""
-export PYPI_PASS=""
-export TMDB_KEY=""

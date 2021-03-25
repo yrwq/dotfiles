@@ -1,9 +1,0 @@
-#autoload
-zmodload -F zsh/parameter p:patchars
-
-_autocomplete.is_glob() {
-  [[ $words[CURRENT] == *[$patchars]*~\~[^$patchars]# &&
-    $words[CURRENT] == ${~${(q)words[CURRENT]}} ]]
-}
-
-_autocomplete.is_glob "$@"

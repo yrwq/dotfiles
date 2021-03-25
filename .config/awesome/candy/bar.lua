@@ -7,6 +7,7 @@ local lain = require("lain")
 local keys = require("keys")
 local dpi = beautiful.xresources.apply_dpi
 
+
 -- create a container widget with background
 local bl = function(widget, clr)
     return wibox.widget {
@@ -68,15 +69,19 @@ local disk = lain.widget.fs {
 }
 
 local volume = wibox.widget {
-    markup = " ",
+    markup = " ",
     widget = wibox.widget.textbox
 }
 
 awesome.connect_signal("shit::volume", function(vol, muted)
     if muted then
-        volume.markup = helpers.colorize_text("ﳌ ", x.fg)
+        volume.markup = helpers.colorize_text("muted", x.fg)
     else
-        volume.markup = helpers.colorize_text(" " .. vol .. "%", x.fg)
+        if vol then
+            volume.markup = helpers.colorize_text("vol " .. vol .. "%", x.fg)
+        else
+            volume.markup = helpers.colorize_text(" %", x.fg)
+        end
     end
 end)
 
@@ -86,22 +91,26 @@ local weather = wibox.widget {
 }
 
 awesome.connect_signal("shit::weather", function(temp, wind, emoji)
-    weather.markup = helpers.colorize_text(emoji .. temp .. "糖 ", x.fg)
+    weather.markup = helpers.colorize_text("摒 " .. temp .. "", x.fg)
 end)
 
 local music = wibox.widget {
     forced_width = dpi(200),
     align = "center",
-    markup = "",
     widget = wibox.widget.textbox,
 }
 
+music:buttons(gears.table.join(
+    awful.button({}, 1, function()
+        helpers.music("toggle")
+    end)
+))
+
 awesome.connect_signal("shit::mpd", function(artist, title, paused)
-    if paused then
-        music.visible = false
-    else
-        music.visible = true
+    if not paused then
         music.markup = helpers.colorize_text(artist .. " - " .. title, x.fg)
+    else
+        music.markup = helpers.colorize_text("", x.fg)
     end
 end)
 
@@ -244,6 +253,10 @@ screen.connect_signal("request::desktop_decoration", function(s)
             layout = wibox.layout.fixed.horizontal,
         },
         {
+            bl(mr(music), x.color0),
+            sep,
+            bl(mr(weather), x.color0),
+            sep,
             bl(mr(volume), x.color0),
             sep,
             bl(mr(noti_toggle), x.color0),

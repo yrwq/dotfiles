@@ -16,29 +16,6 @@ ctrl = "Control"
 shift = "Shift"
 alt = "Mod1"
 
-local timestamp = os.date("%b-%a_%d_%H:%M:%S")
-local filename = os.getenv("HOME") .. "/etc/pic/shot/" .. timestamp .. ".png"
-
-local screenshot_open = naughty.action { name = "Open" }
-local screenshot_copy = naughty.action { name = "Copy" }
-local screenshot_edit = naughty.action { name = "Edit" }
-local screenshot_delete = naughty.action { name = "Delete" }
-
-screenshot_open:connect_signal('invoked', function()
-    awful.spawn.with_shell("sxiv " .. filename .. " >/dev/null")
-end)
-
-screenshot_copy:connect_signal('invoked', function()
-    awful.spawn.with_shell("xclip -selection clipboard -t image/png " .. filename .. " &>/dev/null")
-end)
-
-screenshot_edit:connect_signal('invoked', function()
-    awful.spawn.with_shell("gimp " .. filename .. " >/dev/null")
-end)
-
-screenshot_delete:connect_signal('invoked', function()
-    awful.spawn.with_shell("rm " .. filename)
-end)
 
 awful.mouse.append_global_mousebindings({
     awful.button({ }, 3, function () mymainmenu:toggle() end),
@@ -46,23 +23,9 @@ awful.mouse.append_global_mousebindings({
     awful.button({ }, 5, awful.tag.viewnext),
 })
 
+
+-- scratchpads
 awful.keyboard.append_global_keybindings({
-
-    awful.key {
-        modifiers = { mod },
-        key = "b",
-        on_press = function()
-            toggle_bar()
-        end,
-    },
-
-    awful.key {
-        modifiers = { mod, shift },
-        key = "b",
-        on_press = function()
-            switch_bar_mode()
-        end,
-    },
 
     awful.key {
         modifiers = { mod },
@@ -84,51 +47,32 @@ awful.keyboard.append_global_keybindings({
         modifiers = { mod, shift },
         key = "o",
         on_press = function()
+            -- hack to automatically focus the message box
             scratch.toggle("discord", { class = "discord" })
+            if client.focus then
+                if client.focus.class == "discord" then
+                    awful.spawn.with_shell("sleep 0.3; xdotool mousemove 600 850 click 1")
+                end
+            end
         end,
     },
+})
 
+awful.keyboard.append_global_keybindings({
     awful.key {
-        modifiers = { },
-        key = "Print",
+        modifiers = { mod, shift },
+        key = "p",
         on_press = function()
-            cmd = "maim " .. filename
-            awful.spawn.easy_async_with_shell(cmd, function()
-                naughty.notification({
-                    title = "Screenshot",
-                    message = "Screenshot taken",
-                    icon = filename,
-                    actions = { screenshot_open, screenshot_copy, screenshot_edit, screenshot_delete },
-                    app_name = "screenshot",
-                })
-            end)
+            awful.spawn.with_shell("chm")
         end,
     },
-
     awful.key {
         modifiers = { mod },
-        key = "Print",
+        key = "b",
         on_press = function()
-            cmd = "maim -s " .. filename
-            awful.spawn.easy_async_with_shell(cmd, function()
-                naughty.notification({
-                    title = "Screenshot",
-                    message = "Screenshot taken",
-                    icon = filename,
-                    actions = { screenshot_open, screenshot_copy, screenshot_edit, screenshot_delete },
-                    app_name = "screenshot",
-                })
-            end)
+            toggle_bar()
         end,
     },
-
-    -- awful.key {
-    --     modifiers = { mod },
-    --     key = "z",
-    --     on_press = function()
-    --         noti_center.visible = not noti_center.visible
-    --     end,
-    -- },
 
     awful.key {
         modifiers = { ctrl },
@@ -146,7 +90,7 @@ awful.keyboard.append_global_keybindings({
         group = "launcher",
         description = "notifetch",
         on_press = function(s)
-            awful.spawn.with_shell("rofiw")
+            awful.spawn.with_shell("rofi -show drun")
         end,
     },
 
@@ -604,6 +548,66 @@ awful.keyboard.append_global_keybindings({
         end,
     },
 
+})
+
+local timestamp = os.date("%b-%a_%d_%H:%M:%S")
+local filename = os.getenv("HOME") .. "/etc/pic/shot/" .. timestamp .. ".png"
+
+local screenshot_open = naughty.action { name = "Open" }
+local screenshot_copy = naughty.action { name = "Copy" }
+local screenshot_edit = naughty.action { name = "Edit" }
+local screenshot_delete = naughty.action { name = "Delete" }
+
+screenshot_open:connect_signal('invoked', function()
+    awful.spawn.with_shell("sxiv " .. filename .. " >/dev/null")
+end)
+
+screenshot_copy:connect_signal('invoked', function()
+    awful.spawn.with_shell("xclip -selection clipboard -t image/png " .. filename .. " &>/dev/null")
+end)
+
+screenshot_edit:connect_signal('invoked', function()
+    awful.spawn.with_shell("gimp " .. filename .. " >/dev/null")
+end)
+
+screenshot_delete:connect_signal('invoked', function()
+    awful.spawn.with_shell("rm " .. filename)
+end)
+
+awful.keyboard.append_global_keybindings({
+    awful.key {
+        modifiers = { },
+        key = "Print",
+        on_press = function()
+            cmd = "maim " .. filename
+            awful.spawn.easy_async_with_shell(cmd, function()
+                naughty.notification({
+                    title = "Screenshot",
+                    message = "Screenshot taken",
+                    icon = filename,
+                    actions = { screenshot_open, screenshot_copy, screenshot_edit, screenshot_delete },
+                    app_name = "screenshot",
+                })
+            end)
+        end,
+    },
+
+    awful.key {
+        modifiers = { mod },
+        key = "Print",
+        on_press = function()
+            cmd = "maim -s " .. filename
+            awful.spawn.easy_async_with_shell(cmd, function()
+                naughty.notification({
+                    title = "Screenshot",
+                    message = "Screenshot taken",
+                    icon = filename,
+                    actions = { screenshot_open, screenshot_copy, screenshot_edit, screenshot_delete },
+                    app_name = "screenshot",
+                })
+            end)
+        end,
+    }
 })
 
 keys.tasklist_buttons = gears.table.join(

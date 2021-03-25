@@ -45,5 +45,4 @@ user_interface = "classic"
 lyrics_directory = "~/.config/ncmpcpp/lyrics"
 ncmpcpp_directory = "~/.config/ncmpcpp"
 
-# execute_on_song_change = "art -n > /dev/null 2>&1"
-execute_on_song_change = "albumart"
+execute_on_song_change = "albumart && art -n > /dev/null 2>&1"

@@ -15,6 +15,12 @@ helpers.rrect = function(radius)
     end
 end
 
+helpers.octo = function(radius)
+    return function(cr, width, height)
+        gears.shape.octogon(cr, width, height, radius)
+    end
+end
+
 helpers.colorize_text = function(text, color)
     return "<span foreground='"..color.."'>"..text.."</span>"
 end
@@ -68,6 +74,10 @@ function helpers.volume_control(step)
     awful.spawn.with_shell(cmd)
 end
 
+function helpers.music(func)
+    awful.spawn.with_shell("mpc " .. func)
+end
+
 function helpers.run_or_raise(match, move, spawn_cmd, spawn_args)
     local matcher = function (c)
         return awful.rules.match(c, match)
@@ -92,7 +102,6 @@ function helpers.run_or_raise(match, move, spawn_cmd, spawn_args)
         awful.spawn(spawn_cmd, spawn_args)
     end
 end
-
 function helpers.float_and_resize(c, width, height)
     c.maximized = false
     c.width = width

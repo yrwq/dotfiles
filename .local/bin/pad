@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+case $1 in
+    rofi)
+        herbstclient pad 0 0 0 0 250
+        rofi -show drun
+        herbstclient pad 0 0 0 0 0
+        ;;
+    nerdy)
+        herbstclient pad 0 0 0 0 250
+        nerdy
+        herbstclient pad 0 0 0 0 0
+        ;;
+    sider)
+        if [ "$(pidof eww)" ]; then
+            eww kill
+            herbstclient pad 0 0 0 0 0
+        else
+            herbstclient pad 0 180 0 0 0
+            eww daemon && sleep 0.2
+            eww open sider
+        fi
+        ;;
+    meme)
+        herbstclient pad 0 0 0 0 250
+        chm
+        herbstclient pad 0 0 0 0 0
+esac
+

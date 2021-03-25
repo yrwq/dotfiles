@@ -1,58 +1,79 @@
- [global]
-    font = Iosevka Custom 10
-    follow = mouse
-    geometry = "270x50-19+50"
-    #geometry = "303x80-19+24"
-    indicate_hidden = no
-    shrink = yes
-    transparency = 0
-    notification_height = 0
-    separator_height = 4
-    padding = 16
-    horizontal_padding = 14
+[colors]
+    foreground = "#947e68"
+
+[global]
+    monitor = 0
+    follow = keyboard
+    geometry = "300x8-18+20"    
+
+    indicate_hidden = yes
+    shrink = true
+    transparency = 1
+    notification_height = 3
+    separator_height = 0
+    padding = 24
+    horizontal_padding = 24
     frame_width = 2
+    outer_frame_width = 5
+    corner_radius = 0
+
+    outer_frame_color = "#322b28"
+    separator_color = auto
     sort = yes
     idle_threshold = 120
-    line_height = 4
+
+    font = Dina 8
+    line_height = 1
+
     markup = full
-    format = "<b>%s</b>\n%b"
-    alignment = left
+
+    format = "%s\n%b"
+    alignment = center
     show_age_threshold = 60
-    word_wrap = yes
-    ignore_newline = no
-    stack_duplicates = false
-    hide_duplicate_count = false
-    show_indicators = no
+    word_wrap = true
+    ellipsize = middle
+    ignore_newline = false
+    stack_duplicates = true
+    hide_duplicate_count = true
+    show_indicators = true
+
     icon_position = left
     max_icon_size = 80
-    icon_folders = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
+    #icon_path = /usr/share/icons/PineCone/48x48/status/:/usr/share/icons/PineCone/48x48/apps/:/usr/share/icons/PineCone/48x48/devices/
+
+    ### History ###
     sticky_history = yes
     history_length = 20
-    dmenu = /usr/bin/dmenu -p dunst:
-    browser = /usr/bin/qutebrowser
-    always_run_script = true
+
+    ### Misc/Advanced ###
+    dmenu = /usr/bin/st -e fzf:
+    browser = linkhandler
+    always_run_script = false
     title = Dunst
     class = Dunst
     startup_notification = false
     force_xinerama = false
 
-frame_color = "#8ea594"
-separator_color = "#8ea594"
+[experimental]
+    per_monitor_dpi = false
 
-[base16_low]
-    msg_urgency = low
-    background = "#1f1d29"
-    foreground = "#ffffff"
+[shortcuts]
+    close = shift+space
+    close_all = ctrl+shift+space
+    #context = ctrl+shift+period
+    history = ctrl+period
+
+[urgency_low]
+    background = "#201e1a"
+    frame_color = "#6a7253"
     timeout = 3
 
-[base16_normal]
-    msg_urgency = normal
-    background = "#403c58"
-    foreground = "#faebd7"
+[urgency_normal]
+    background = "#201e1a"
+    frame_color = "#7e5d3c"
     timeout = 5
 
-[base16_critical]
-    msg_urgency = critical
-    background = "#6f6e85"
-    foreground = "#faebd7"
-    timeout = 15
+[urgency_critical]
+    background = "#201e1a"
+    frame_color = "#6d413b"
+    timeout = 0

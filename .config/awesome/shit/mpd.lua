@@ -18,12 +18,12 @@ local function emit_info()
             local status = stdout:match('\n%[(.*)%]')
 
             if not artist or artist == "" then
-              artist = "N/A"
+              artist = ""
             end
             if not title or title == "" then
               title = stdout:match('@FILE@(.*)@')
               if not title or title == "" then
-                  title = "N/A"
+                  title = ""
               end
             end
 

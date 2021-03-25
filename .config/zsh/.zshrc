@@ -1,99 +1,126 @@
 #!/bin/zsh
 
-# Init completions
-autoload -Uz compinit
-compinit
+export GOPATH="$HOME/dev/go"
+export PATH="$GOPATH/bin:$PATH"
 
 # Change window title to current working directory
 precmd() {
+    print ""
     printf '\033]0;%s\007' "$(dirs)"
 }
 
+function preexec () {
+    print ""
+    print -n "\e[4 q"
+}
 
-# should this be in keybindings?
-zstyle ':completion:*:*:*:*:*' menu select
-zstyle ':completion:*' special-dirs true
-zstyle ':completion:*' list-colors ''
-zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
-zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm -w -w"
-zstyle ':completion:*:cd:*' tag-order local-directories directory-stack path-directories
-zstyle '*' single-ignored show
+# Completion {{{1
+autoload -U compinit
+compinit
 
-# options
-setopt AUTO_CD
-setopt RM_STAR_WAIT
-setopt APPEND_HISTORY
-setopt EXTENDED_HISTORY
-setopt HIST_EXPIRE_DUPS_FIRST
-setopt HIST_IGNORE_ALL_DUPS
-setopt HIST_IGNORE_DUPS
-setopt HIST_IGNORE_SPACE
-setopt HIST_REDUCE_BLANKS
-setopt HIST_SAVE_NO_DUPS
-setopt HIST_VERIFY
-setopt AUTOPARAMSLASH
-setopt SHARE_HISTORY
+setopt AUTO_LIST
+setopt AUTO_MENU
+setopt MENU_COMPLETE
+setopt complete_in_word   # complete /v/c/a/p
+setopt no_nomatch		  # enhanced bash wildcard completion
+setopt magic_equal_subst
+setopt noautoremoveslash
+setopt null_glob
+
+zstyle ':completion:*:cd:*' ignore-parents parent pwd
+zstyle ':completion:*' use-cache true
+zstyle ':completion:*' cache-path $HOME/.cache/zsh
+zstyle ':completion:*' verbose yes
+zstyle ':completion:*' menu select
+zstyle ':completion:*:*:default' force-list always
+zstyle ':completion:*' select-prompt '%SSelect:  lines: %L  matches: %M  [%p]'
+zstyle ':completion:*:match:*' original only
+zstyle ':completion::prefix-1:*' completer _complete
+zstyle ':completion:predict:*' completer _complete
+zstyle ':completion:incremental:*' completer _complete _correct
+zstyle ':completion:*' expand 'yes'
+zstyle ':completion:*' squeeze-shlashes 'yes'
+zstyle ':completion::complete:*' '\\'
+zmodload zsh/complist
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
+zstyle ':completion:*:approximate:*' max-errors 1 numeric
+zstyle ':completion:*:default' list-prompt '%S%M matches%s'
+zstyle ':completion:*:default' menu 'select=0'
+
 
 HISTSIZE=100000
 SAVEHIST=100000
 HISTFILE=~/.config/zsh/history
 
-bindkey -v
+# Change cursor to _
+print -n "\e[4 q"
 
-function zle-line-init () {
-    echoti smkx
-}
+bindkey -e
+# key bindings
+bindkey '^r' history-incremental-search-backward
 
-function zle-line-finish () {
-    echoti rmkx
-}
+bindkey '^p' up-history
+bindkey '^n' down-history
+bindkey '^l' autosuggest-accept
 
-zle -N zle-line-init
-zle -N zle-line-finish
-
-function zle-keymap-select () {
-  if
-      [[ "$KEYMAP" == "vicmd" || "$1" = "block" ]]
-  then
-    print -n "\e[2 q"
-  elif
-      [[ "$KEYMAP" == "main" || "$KEYMAP" == "viins" || -z "$KEYMAP" || "$1" = "beam" ]]
-  then
-    print -n "\e[6 q"
-  fi
-}
-zle -N zle-keymap-select
-
-function zle-line-init () {
-  zle -K viins
-  print -n "\e[6 q"
-}
-zle -N zle-line-init
-
-print -n "\e[6 q"
-function preexec () {
-    print -n "\e[6 q"
-}
-
-export KEYTIMEOUT=1
-bindkey ‘^R’ history-incremental-search-backward
-bindkey '^P' up-history
-bindkey '^N' down-history
-bindkey '^K' autosuggest-accept
-
-[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shell/shortcutrc" ] && \
-    source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/shortcutrc"
-
-[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliasrc" ] && \
-    source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliasrc"
-
-[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shell/zshnameddirrc" ] && \
-    source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/zshnameddirrc"
-
-[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shell/tokens" ] && \
-    source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/tokens"
+bindkey '^h' beginning-of-line
+bindkey '^l' end-of-line
+bindkey '^w' backward-kill-word
+bindkey '^k' forward-char
+bindkey '^j' backward-char
+bindkey '^a' backward-word
+bindkey '^d' forward-word
 
 
-PS1="%(?.%F{red}.%F{green})%1~ %(?.%F{green}.%F{red})%(!.#.%(?. . ))%f "
-RPS1="%(?.. %F{red}%B[%(?..%?)]%b)"
-PS2="%F{magenta}%_ %F{green}>%F{white}%f "
+[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/tokens" ] && \
+    source "${XDG_CONFIG_HOME:-$HOME/.config}/tokens"
+
+# Fast syntax highlighting
+[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/fsh/fast-syntax-highlighting.plugin.zsh" ] && \
+    source "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/fsh/fast-syntax-highlighting.plugin.zsh"
+
+alias \
+    mv="mv -iv" \
+    rm="rm -vI" \
+    mkd="mkdir -pv" \
+    ffmpeg="ffmpeg -hide_banner" \
+    ls="exa" \
+    l="exa -l" \
+    la="exa -l -a" \
+    grep="grep --color=auto" \
+    diff="diff --color=auto" \
+    bat="PAGER='' bat" \
+    ga="git add" \
+    gc="git commit -m" \
+    gp="git push -u origin main" \
+    mk="make && sudo make install" \
+    f="$FILE" \
+    v="nvim" \
+    z="zathura"
+
+
+alias \
+    cf="cd /home/yrwq/.config && ls -a" \
+    cfa="cd /home/yrwq/.config/awesome && ls -a" \
+    cfv="cd /home/yrwq/.config/nvim && ls -a" \
+    cfs="cd /home/yrwq/.config/shell && ls -a" \
+    D="cd /home/yrwq/etc/dl && ls -a" \
+    d="cd /home/yrwq/doc && ls -a" \
+    m="cd /home/yrwq/etc/music && ls -a" \
+    pp="cd /home/yrwq/etc/pic && ls -a" \
+    sc="cd /home/yrwq/.local/bin && ls -a" \
+    src="cd /home/yrwq/.local/src && ls -a" \
+    vv="cd /home/yrwq/etc/vid && ls -a" \
+    DD="cd /home/yrwq/dev/dotfiles && ls -a" \
+    rr="cd /home/yrwq/etc/repos && ls -a" \
+    bf="$EDITOR /home/yrwq/.config/shell/bm-files" \
+    bd="$EDITOR /home/yrwq/.config/shell/bm-dirs" \
+    cfz="$EDITOR /home/yrwq/.config/zsh/.zshrc" \
+    cfu="$EDITOR /home/yrwq/.config/newsboat/urls" \
+    cfl="$EDITOR /home/yrwq/.config/lf/lfrc" \
+    cfr="$EDITOR /home/yrwq/.config/river/init" \
+    cfh="$EDITOR /home/yrwq/.config/herbstluftwm/autostart" \
+
+PROMPT="%B%F{1}%1~ %F{3}::%f%b "

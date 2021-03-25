@@ -6,6 +6,7 @@
 
 # get current branch
 branch=$(git branch | grep "*" | awk '{print $2}')
+gitlab=$(git remote | grep "gitlab")
 
 [ -z "$1" ] && \
     msg="update" || \
@@ -13,6 +14,7 @@ branch=$(git branch | grep "*" | awk '{print $2}')
 
 git add .
 git commit -m "${msg}"
+
 git push origin $branch
 
-notify-send -a git "Successfully pushed"
+[ "$gitlab" ] && git push gitlab $branch
