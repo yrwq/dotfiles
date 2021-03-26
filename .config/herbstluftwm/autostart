@@ -32,6 +32,7 @@ hc keybind Mod1-w spawn pad meme
 hc keybind $Mod-b spawn tg bar
 hc keybind $Mod-c spawn ctw
 hc keybind $Mod-y spawn pad nerdy
+hc keybind $Mod-m spawn st -c music -g 90x17 -e music
 
 hc keybind Mod1-p spawn hlc -vol i
 hc keybind Mod1-Shift-p spawn hlc -vol d
@@ -168,8 +169,10 @@ hc unrule -F
 hc rule class=Sxiv floating=on floatplacement=center focus=on
 hc rule class=mpv floating=on floatplacement=center focus=on
 hc rule class=discord floating=on floatplacement=center focus=on
+hc rule class=music floating=on floatplacement=center focus=on
 
 hc rule focus=on
+
 hc rule windowtype~'_NET_WM_WINDOW_TYPE_(DIALOG|UTILITY|SPLASH)' pseudotile=on
 hc rule windowtype='_NET_WM_WINDOW_TYPE_DIALOG' focus=on
 hc rule windowtype~'_NET_WM_WINDOW_TYPE_(NOTIFICATION|DOCK|DESKTOP)' manage=off

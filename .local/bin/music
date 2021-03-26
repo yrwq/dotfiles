@@ -16,4 +16,5 @@ trap cleanup EXIT 2>/dev/null
 tail --follow "$FIFO_UEBERZUG" | ueberzug layer --silent --parser simple >/dev/null 2>&1 &
 
 ncmpcpp
+
 cleanup

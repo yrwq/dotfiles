@@ -10,7 +10,7 @@
     --text-spotify: #947e68;
     --text-muted: #867564;
     --text-link: #6d413b;
-    --background-floating: #473d3a;
+    --background-floating: #322b28;
     --header-primary: #7e5d3c;
     --header-secondary: #6b5a48;
     --header-spotify: #6c4949;
@@ -88,16 +88,36 @@ div[class*="newMessagesBar"] {
     background-color: var(--background-secondary);
 }
 
-.sidebar-2K8pFh{
+/* div[class="sidebar"]:hover { */
+/*     width: 0px; */
+/*     transition: .3s ease; */
+/* } */
+
+/* /1* .wrapper-1Rf91z:hover+.base-3dtUhz>.content-98HsJk>.sidebar-2K8pFh{ *1/ */
+
+/* .wrapper-1Rf91z:hover+.base-3dtUhz>.content-98HsJk>.sidebar-2K8pFh { */
+/*     width: 200px; */
+/* } */
+
+/* div[class*="sidebar"]:hover { */
+/*     width: 200px; */
+/* } */
+
+.sidebar-2K8pFh {
     width: 0px;
-    transition: .3s ease;
+    transition: 0.6s ease;
+    /* position: fixed; */
+    /* height: calc(100% - 47.988px); */
+    /* z-index: 1; */
+    bottom: 0px;
 }
 
-.wrapper-1Rf91z:hover+.base-3dtUhz>.content-98HsJk>.sidebar-2K8pFh{
-    width: 200px;
+.wrapper-3NnKdC:hover+.base-3dtUhz>.content-98HsJk>.sidebar-2K8pFh{
+    width:240px;
 }
-.sidebar-2K8pFh:hover{
-    width: 200px;
+
+.sidebar-2K8pFh:hover {
+    width:240px;
 }
 
 /* Show members on hover */

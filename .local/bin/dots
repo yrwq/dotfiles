@@ -140,4 +140,3 @@ end
 for _, k in ipairs(orig_copy_table) do
     copy(k, to_copy_table[k])
 end
-
