@@ -1,8 +1,6 @@
 #!/bin/sh
 
-#
 # nerdy - nerd font picker
-# if argument is passed, use it as csv, otherwise, look for file relative to dir
 
 [ $# -eq 0 ] && {
     # get location of chars.csv relative to script

@@ -1,8 +1,6 @@
 #!/bin/sh
 
-#
 # scr - screenshot utility
-#
 
 save_dir="$HOME/etc/pic"
 

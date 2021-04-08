@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# notify-send wrapper
+
 test(){
     notify-send -a test -u $1 "${1}"
 }

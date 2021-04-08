@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+"""
+Todo list manager
+"""
 import json
 import os
 import time

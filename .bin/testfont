@@ -1,9 +1,5 @@
 #!/bin/bash
 
-# Just to print every common characters
-# The font name is designed for URxvt
-# Cheers! Addy
-
 # Clean the characters
 clear
 # Print the URxvt.font in the Xresources databases

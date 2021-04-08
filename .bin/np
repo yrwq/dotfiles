@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# np - new post
+
 fname="$(date +'%Y-%m-%d')-$1.md"
 
 touch "${fname}"

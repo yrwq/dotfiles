@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# use a random wallpaper
+
 wp=$(ls ~/.wp | shuf -n 1)
 
 hsetroot -fill ~/.wp/$wp

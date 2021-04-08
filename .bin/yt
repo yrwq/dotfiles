@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# infinite loop youtube downloader
+
 music_dir="$HOME/etc/music"
 
 while :
