@@ -1,0 +1,16 @@
+configuration {
+    font: "ProFont 11";
+    show-icons: false;
+    sidebar-mode: true;
+    theme: "~/.config/rofi/theme.rasi";
+    display-window: "wins";
+    display-run: "run";
+    display-ssh: "ssh";
+    display-drun: "apps";
+    kb-remove-word-back: "Alt+d";
+    kb-accept-entry: "Alt+s";
+    kb-mode-next: "Alt+l,Alt+Tab";
+    kb-mode-previous: "Alt+h";
+    kb-row-up: "Alt+k";
+    kb-row-down: "Alt+j";
+}
