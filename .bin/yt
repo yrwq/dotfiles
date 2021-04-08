@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+music_dir="$HOME/etc/music"
+
+while :
+do
+    clear
+    read -rp "url: " url
+    cd $music_dir
+    youtube-dl $url --add-metadata --embed-thumbnail --extract-audio --audio-format mp3 --restrict-filenames
+
+done

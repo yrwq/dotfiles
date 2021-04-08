@@ -1,0 +1,99 @@
+#!/usr/bin/env lua5.4
+
+dotfiles_path = os.getenv("HOME") .. "/dev/dotfiles"
+
+to_copy = {
+    ".zprofile",
+    ".Xresources",
+    ".gitconfig",
+    ".config/discocss/custom.css",
+    ".config/mpd/mpd.conf",
+    ".config/mpv/mpv.conf",
+    ".config/mpv/input.conf",
+    ".config/ncmpcpp/config",
+    ".config/ncmpcpp/bindings",
+    ".config/zsh/.zshrc",
+    ".config/tokens",
+    ".config/picom.conf",
+    ".config/user-dirs.dirs",
+}
+
+recurse_copy = {
+    ".config/fontconfig",
+    ".config/awesome",
+    ".config/gtk-3.0",
+    ".config/lf",
+    ".config/rofi",
+    ".config/yafetch",
+    ".config/zathura",
+    ".bin",
+}
+
+to_remove = {
+    ".config/fontconfig",
+    ".config/awesome",
+    ".config/gtk-3.0",
+    ".config/lf",
+    ".config/discocss",
+    ".config/mpd",
+    ".config/mpv",
+    ".config/ncmpcpp",
+    ".config/rofi",
+    ".config/yafetch",
+    ".config/zathura",
+    ".config/zsh",
+    ".config/picom.conf",
+    ".config/user-dirs.dirs",
+    ".bin",
+}
+
+make_dir = {
+    ".config/discocss",
+    ".config/mpd",
+    ".config/mpv",
+    ".config/ncmpcpp",
+    ".config/zsh",
+}
+
+print("Deleting: ")
+for k,v in ipairs(to_remove) do
+    dot_path = dotfiles_path .. "/" .. v
+    os.execute("rm -rf " .. dot_path)
+
+    dot_path = dot_path:gsub(os.getenv("HOME"), "~")
+    print(dot_path)
+end
+
+print("\nMaking directory: ")
+for k,v in ipairs(make_dir) do
+    dot_path = dotfiles_path .. "/" .. v
+    os.execute("mkdir " .. dot_path)
+
+    dot_path = dot_path:gsub(os.getenv("HOME"), "~")
+    print(dot_path)
+end
+
+print("\nCopying: ")
+for k,v in ipairs(to_copy) do
+    home_path = os.getenv("HOME") .. "/" .. v
+    dot_path = dotfiles_path .. "/" .. v
+    os.execute("cp " .. home_path .. " " .. dot_path)
+
+    home_path = home_path:gsub(os.getenv("HOME"), "~")
+    dot_path = dot_path:gsub(os.getenv("HOME"), "~")
+    print(home_path .. " to " .. dot_path)
+end
+
+for k,v in ipairs(recurse_copy) do
+    home_path = os.getenv("HOME") .. "/" .. v
+    dot_path = dotfiles_path .. "/" .. v
+    os.execute("cp -r " .. home_path .. " " .. dot_path)
+
+    home_path = home_path:gsub(os.getenv("HOME"), "~")
+    dot_path = dot_path:gsub(os.getenv("HOME"), "~")
+    print(home_path .. " to " .. dot_path)
+end
+
+-- remove passwords and tokens with sed
+os.execute("sed -i 's/app_password = \".*\"/app_password = \"\"/' " .. dotfiles_path .. "/.config/awesome/rc.lua")
+os.execute("sed -i 's/\".*\"/\"\"/g' " .. dotfiles_path .. "/.config/tokens")

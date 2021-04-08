@@ -1,0 +1,96 @@
+#!/usr/bin/env bash
+
+#
+# tg - toggle on/off stuff
+#
+
+
+_bar(){
+    running=$(pidof polybar)
+
+    [[ -z "$running" ]] && { ~/.config/polybar/launch.sh --grayblocks & herbstclient pad 0 50 0 0 0 & } && notify-send -a bar "Bar on"
+    [[ "$running" ]] && { pkill polybar && herbstclient pad 0 0 0 0 0 & } && notify-send -a bar "Bar off";
+}
+
+rec-start(){
+    ffmpeg -f x11grab\
+        -framerate 20 \
+        -thread_queue_size 512 \
+        -i "$DISPLAY".0+"$X","$Y"\
+        -vcodec libx264\
+        -qp 18\
+        -preset ultrafast \
+        "$HOME/etc/vid/rec/Rec_$(date +'%d_%I:%M').mp4" &
+}
+
+_rec(){
+    running=$(pidof ffmpeg)
+    [[ -z "$running" ]] && { rec-start & } && notify-send -a rec "Started"
+    [[ "$running" ]] && { pkill ffmpeg & } && notify-send -a rec "Stopped";
+}
+
+_torrent(){
+    running=$(pidof transmission-daemon)
+
+    [[ -z "$running" ]] && { transmission-daemon & } && notify-send -a torrent "Daemon started"
+    [[ "$running" ]] && { pkill transmission-da & } && notify-send -a torrent "Daemon stopped";
+}
+
+_compositor(){
+    running=$(pidof picom)
+
+    [[ -z "$running" ]] && { picom --experimental-backends & } && notify-send -a comp "Turned on"
+    [[ "$running" ]] && { pkill picom & } && notify-send -a comp "Turned off";
+}
+
+_volume(){
+    amixer set Master toggle
+}
+
+_microphone(){
+    amixer -D pulse sset Capture toggle &> /dev/null
+}
+
+_redshift(){
+    running=$(pidof redshift)
+
+    [[ -z "$running" ]] && { redshift -l 0:0 -t 3700:3700 & } && notify-send -a redshift "Turned on"
+    [[ "$running" ]] && { pkill redshift & } && notify-send -a redshift "Turned off";
+}
+
+_help(){
+    printf "\n"
+    printf "tg bar|torrent|compositor|volume|redshift|microphone|rec\n"
+    printf "\n"
+}
+
+
+case "$@" in
+rec)
+    _rec
+    ;;
+bar)
+    _bar
+    ;;
+torrent)
+    _torrent
+    ;;
+compositor)
+    _compositor
+    ;;
+volume)
+    _volume
+    ;;
+microphone)
+    _microphone
+    ;;
+redshift)
+    _redshift
+    ;;
+help)
+    _help
+    ;;
+*)
+    _help
+    ;;
+esac

@@ -1,0 +1,292 @@
+#!/usr/bin/env python3
+import json
+import os
+import time
+import argparse
+import sys
+from colorama import init, Fore, Back, Style
+
+init()
+
+t = time.localtime()
+added_time = time.strftime("%b %d %a, %H:%M", t)
+
+todos_location = os.getenv("HOME") + "/.local/share/todos.json"
+
+class Todo():
+    """A todo."""
+    def __init__(self):
+        self.task = ""
+        self.done = False
+        self.added = added_time
+
+        try:
+            self.read_todos()
+        except:
+            f = open(todos_location,"w+")
+            f.write("{}")
+            f.close()
+            self.read_todos()
+
+    def err_msg(self, msg):
+        print(f"{Back.RED}  {Style.RESET_ALL} {msg}")
+
+    def read_todos(self):
+        """Parse the todo file as json"""
+
+        with open(todos_location, "r") as f:
+            self.todos = json.load(f)
+
+    def write_todos(self, data):
+        """Write todos to json file"""
+
+        with open(todos_location, "w") as f:
+            json.dump(data, f, indent = 4)
+
+    def add(self, task_name):
+        """Add a new todo item"""
+
+        # Initialize empty string
+        task = ""
+
+        # add requested inputs to empty string
+        for word in task_name:
+            task = task + " " + word
+
+        self.rearrange_ids()
+
+
+        if task == "":
+            print("You should provide the name of the task")
+
+        else:
+            id = self.get_id()
+            self.todos[task] = {}
+            self.todos[task]["id"] = id
+            self.todos[task]["done"] = self.done
+            self.todos[task]["added"] = self.added
+            self.write_todos(self.todos)
+
+    def remove(self, task_id):
+        """Remove a task from todos"""
+
+        # TODO: Can't remove 0 element of todos
+
+        self.rearrange_ids()
+
+        for x in self.todos:
+            if self.todos[x]["id"] == int(task_id):
+                id = x
+
+        try:
+            if id == 0:
+                self.todos = {}
+
+            del(self.todos[id])
+            self.write_todos(self.todos)
+        except:
+            self.err_msg("Item not found")
+
+    def clear_items(self):
+        self.todos = {}
+        self.write_todos(self.todos)
+
+    def mark_done(self, task_id):
+        """Make a todo as done"""
+
+        self.rearrange_ids()
+
+        for x in self.todos:
+            if self.todos[x]["id"] == int(task_id):
+                id = x
+
+        self.todos[id]["done"] = True
+        self.write_todos(self.todos)
+
+    def mark_undone(self, task_id):
+        """Mark a todo as un done"""
+
+        self.rearrange_ids()
+
+        for x in self.todos:
+            if self.todos[x]["id"] == int(task_id):
+                id = x
+
+        if self.todos[id]["done"] == True:
+            self.todos[id]["done"] = False
+
+        self.write_todos(self.todos)
+
+    def list(self):
+        """List all tasks"""
+
+        self.rearrange_ids()
+
+        if len(self.todos) < 1:
+            print(f"{Back.RED}  {Style.RESET_ALL} Wow, such empty!")
+
+
+        # todo refers to the id of the todo
+        for todo in self.todos:
+            td = self.todos[todo]
+            task = td["id"]
+            done = td["done"]
+            added = td["added"]
+
+            if not done:
+                print(f"{Fore.RED} {todo}{Style.RESET_ALL}\n\n\t{Fore.BLUE} {task}\n\t {added}\n{Style.RESET_ALL}")
+
+        for todo in self.todos:
+            td = self.todos[todo]
+            task = td["id"]
+            done = td["done"]
+            added = td["added"]
+
+            if done == True:
+                print(f"{Fore.GREEN} {todo}{Style.RESET_ALL}\n\n\t{Fore.YELLOW} {task}\n\t {added}\n{Style.RESET_ALL}")
+
+    def slist(self):
+        """Simply list tasks"""
+
+        self.rearrange_ids()
+
+        if len(self.todos) < 1:
+            print(f"Wow, such empty!")
+
+        # todo refers to the id of the todo
+        for todo in self.todos:
+            td = self.todos[todo]
+            task = td["id"]
+            done = td["done"]
+            added = td["added"]
+
+            if not done:
+                print("- ", task, todo)
+
+        for todo in self.todos:
+            td = self.todos[todo]
+            task = td["id"]
+            done = td["done"]
+            added = td["added"]
+
+            if done == True:
+                print("- ", task, todo)
+
+    def get_id(self):
+        """
+        Get the highest id of the todos,
+        Returns the index of the new todo
+        """
+
+        todos = self.todos
+        count = 0
+
+        for _ in todos:
+            count = count + 1
+
+        return count
+
+    def rearrange_ids(self):
+        """Rearrange id count for todos"""
+
+        highest = self.get_id()
+        count = 0
+
+        while count != highest:
+            for task in self.todos:
+                self.todos[task]["id"] = count + 1
+                count += 1
+
+        self.write_todos(self.todos)
+
+
+def parse_args():
+    parser = argparse.ArgumentParser(prog="fine", add_help=False)
+
+    parser.add_argument("-a",
+            metavar="<task>",
+            required=False,
+            type=str,
+            nargs="*",
+            default=None,
+            help="\nadd a task\n\n")
+
+    parser.add_argument("-l",
+            action="store_true",
+            default=None,
+            required=False,
+            help="\nlist tasks\n\n")
+
+    parser.add_argument("-sl",
+            action="store_true",
+            default=None,
+            required=False,
+            help="\nsimply list tasks\n\n")
+
+    parser.add_argument("-d",
+            default=None,
+            metavar="<task_id>",
+            required=False,
+            type=int,
+            help="\nmark task as done\n\n")
+
+    parser.add_argument("-u",
+            default=None,
+            metavar="<task_id>",
+            required=False,
+            type=int,
+            help="\nmark task as done\n\n")
+
+    parser.add_argument("-r",
+            default=None,
+            metavar="<task_id>",
+            required=False,
+            type=int,
+            help="Remove a task using it's identifier. \
+                    Can be it's order-id or name")
+
+    parser.add_argument("-c",
+            required=False,
+            action="store_true",
+            help="Clear every items.")
+
+    parser.add_argument("-h",
+            action="store_true",
+            required=False,
+            help="Show this help message you viewing right now.")
+
+    args = parser.parse_args()
+
+    return (args, parser)
+
+
+def main():
+    t = Todo()
+
+    parse = parse_args()
+    args = parse[0]
+    parser = parse[1]
+
+    if not len(sys.argv) > 1:
+        t.list()
+    elif args.sl:
+        t.slist()
+    elif args.r:
+        t.remove(args.r)
+        t.list()
+    elif args.a:
+        t.add(args.a)
+        t.list()
+    elif args.d:
+        t.mark_done(args.d)
+        t.list()
+    elif args.u:
+        t.mark_undone(args.u)
+        t.list()
+    elif args.c:
+        t.clear_items()
+    elif args.h:
+        parser.print_help()
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,5 @@
+#!/bin/sh
+
+font="$(fc-list : family | rofi -dmenu -i )"
+
+st -f "${font}" &

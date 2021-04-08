@@ -1,0 +1,6 @@
+#! /bin/sh
+
+man="$(man -k . | cut -d " " -f1 | rofi -dmenu -i)"
+
+[ -z "$man" ] && exit 1
+man -Tpdf "$man" | "${READER:-"$(which zathura)"}" -

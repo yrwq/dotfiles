@@ -1,0 +1,5 @@
+#!/bin/sh
+
+wp=$(ls ~/.wp | shuf -n 1)
+
+hsetroot -fill ~/.wp/$wp

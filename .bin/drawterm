@@ -1,0 +1,12 @@
+#! /usr/bin/env bash
+
+read -r X Y W H < <(slop -o -f "%x %y %w %h")
+
+(( W /= 10 ))
+(( H /= 20 ))
+(( X /= 1 ))
+(( Y /= 1 ))
+
+g="${W}x${H}+${X}+${Y}"
+
+setsid -f st -c "float" -g "$g" -t "st" "${@}"

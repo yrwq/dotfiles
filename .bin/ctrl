@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+# ctrl - control
+
+bri() {
+    case $1 in
+        i*)
+            get_bri="$(xrandr --verbose | grep -i brightness | cut -f2 -d ' ' | head -n1)"
+            change=0.1
+            new=$(bc <<< ${get_bri}+${change})
+            ;;
+        d*)
+            get_bri="$(xrandr --verbose | grep -i brightness | cut -f2 -d ' ' | head -n1)"
+            change=0.1
+            new=$(bc <<< ${get_bri}-${change})
+            ;;
+    esac
+    xrandr --output VGA1 --brightness ${new}
+}
+
+usage() { echo "Usage: ctrl [-b <i|d>] [-v <i|d>] " 1>&2; exit 1; }
+
+while getopts ":b:v:" o; do
+    case "${o}" in
+        b)
+            bri ${OPTARG}
+            ;;
+        v)
+            ;;
+        *)
+            usage
+            ;;
+    esac
+done
+
+if [ -z ${1} ]; then usage; fi
+
+shift $((OPTIND-1))
