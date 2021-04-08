@@ -1,8 +1,8 @@
 #! /bin/sh
 
-# choose a man page and read it in zathura
+# choose a man page
 
 man="$(man -k . | cut -d " " -f1 | rofi -dmenu -i)"
 
 [ -z "$man" ] && exit 1
-man -Tpdf "$man" | "${READER:-"$(which zathura)"}" -
+st -e man "$man"

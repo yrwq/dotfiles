@@ -122,12 +122,12 @@ awful.keyboard.append_global_keybindings({
             awful.spawn.with_shell("drawterm")
         end,
     },
-    -- read a man page in zathura
+    -- read a man page
     awful.key {
         modifiers = { mod },
         key = ",",
         group = "launcher",
-        description = "man page pdf",
+        description = "man page chooser",
         on_press = function()
             awful.spawn.with_shell("manp")
         end,
