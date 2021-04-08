@@ -1,11 +1,11 @@
 * {
 
-    background-color:            #ffffff;
-    text-color:                  #000000;
-    selbg:                       #4a4a4a;
-    actbg:                       #d2d2d2;
+    background-color:            #e8d69f;
+    text-color:                  #250e07;
+    selbg:                       #c45f61;
+    actbg:                       #dec472;
     urgbg:                       #755a5b;
-    winbg:                       #68755a;
+    winbg:                       #250e07;
 
 
     selected-normal-foreground:  @winbg;

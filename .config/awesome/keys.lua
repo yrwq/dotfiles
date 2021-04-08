@@ -21,12 +21,20 @@ alt = "Mod1"
 -- root window mouse bindings
 awful.mouse.append_global_mousebindings({
     awful.button({ }, 3, function () mymainmenu:toggle() end),
-    awful.button({ }, 4, awful.tag.viewprev),
-    awful.button({ }, 5, awful.tag.viewnext),
+    awful.button({ mod }, 4, awful.tag.viewprev),
+    awful.button({ mod }, 5, awful.tag.viewnext),
 })
 
 -- popups
 awful.keyboard.append_global_keybindings({
+    -- toggle bar
+    awful.key {
+        modifiers = { mod },
+        key = "b",
+        on_press = function()
+            toggle_bar()
+        end,
+    },
     -- notification center
     awful.key {
         modifiers = { mod },
@@ -156,6 +164,7 @@ awful.keyboard.append_global_keybindings({
 
 -- client manipulation
 awful.keyboard.append_global_keybindings({
+
     -- resize left
     awful.key {
         modifiers = { ctrl, alt },
@@ -214,15 +223,6 @@ awful.keyboard.append_global_keybindings({
 })
 
 awful.keyboard.append_global_keybindings({
-
-    -- toggle the bar
-    awful.key {
-        modifiers = { mod },
-        key = "b",
-        on_press = function()
-            toggle_bar()
-        end,
-    },
 
     -- close notifications
     awful.key {
