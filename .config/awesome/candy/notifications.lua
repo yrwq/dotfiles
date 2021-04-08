@@ -8,6 +8,8 @@ local beautiful = require("beautiful")
 local helpers = require("helpers")
 local dpi = beautiful.xresources.apply_dpi
 
+require("candy.volume")
+
 naughty.config.defaults.icon_size = dpi(80)
 naughty.config.defaults.ontop = true
 naughty.config.defaults.screen = awful.screen.focused()
