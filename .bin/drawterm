@@ -1,5 +1,7 @@
 #! /usr/bin/env bash
 
+# draw a terminal
+
 read -r X Y W H < <(slop -o -f "%x %y %w %h")
 
 (( W /= 10 ))

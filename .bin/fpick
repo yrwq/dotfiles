@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# choose a font and open terminal using the font
+
 font="$(fc-list : family | rofi -dmenu -i )"
 
 st -f "${font}" &

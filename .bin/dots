@@ -1,5 +1,7 @@
 #!/usr/bin/env lua5.4
 
+-- script to update my dotfiles
+
 dotfiles_path = os.getenv("HOME") .. "/dev/dotfiles"
 
 to_copy = {

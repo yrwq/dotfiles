@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
+
 # ctrl - control
 
+# TODO: rewrite in lua
+
+# brightness
 bri() {
     case $1 in
         i*)
@@ -17,6 +21,7 @@ bri() {
     xrandr --output VGA1 --brightness ${new}
 }
 
+# show usage
 usage() { echo "Usage: ctrl [-b <i|d>] [-v <i|d>] " 1>&2; exit 1; }
 
 while getopts ":b:v:" o; do

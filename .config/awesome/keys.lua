@@ -122,6 +122,16 @@ awful.keyboard.append_global_keybindings({
             awful.spawn.with_shell("drawterm")
         end,
     },
+    -- read a man page in zathura
+    awful.key {
+        modifiers = { mod },
+        key = ",",
+        group = "launcher",
+        description = "man page pdf",
+        on_press = function()
+            awful.spawn.with_shell("manp")
+        end,
+    },
     -- rofi meme picker script
     awful.key {
         modifiers = { mod, shift },

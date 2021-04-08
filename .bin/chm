@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# chm - choose a meme
+# lists all my ping files in rofi and copies the one i choose
+
 pic=$(echo "$(ls ~/etc/pic/meme | sed 's/.png//g')" | rofi -dmenu)
 
 xclip -sel clip -t image/png ~/etc/pic/meme/$pic.png

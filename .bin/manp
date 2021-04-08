@@ -1,5 +1,7 @@
 #! /bin/sh
 
+# choose a man page and read it in zathura
+
 man="$(man -k . | cut -d " " -f1 | rofi -dmenu -i)"
 
 [ -z "$man" ] && exit 1
