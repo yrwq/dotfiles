@@ -5,7 +5,7 @@ local beautiful = require("beautiful")
 local naughty = require("naughty")
 local wibox = require("wibox")
 
-awful.spawn.with_shell("picom")
+awful.spawn.with_shell("xcompmgr")
 
 -- define screen's width and height globally
 screen_width = awful.screen.focused().geometry.width
