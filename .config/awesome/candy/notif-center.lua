@@ -210,6 +210,7 @@ naughty.connect_signal("added", function(n)
         ['discord'] = { icon = "ﭮ" },
         ['weather'] = { icon = "摒" },
         ['github'] = { icon = "" },
+        ['music'] = { icon = "" },
     }
 
     if app_config[n.app_name] then

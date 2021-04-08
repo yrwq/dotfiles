@@ -93,6 +93,8 @@ local app_config = {
     ['email'] = { icon = "" },
     ['discord'] = { icon = "ﭮ" },
     ['weather'] = { icon = "摒" },
+    ['github'] = { icon = "" },
+    ['music'] = { icon = "" },
 }
 
 local urgency_color = {
