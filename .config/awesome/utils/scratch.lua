@@ -1,6 +1,8 @@
 local client = client
 local awful = require("awful")
 local util = require("awful.util")
+local awestore = require("awestore")
+local gears = require("gears")
 
 local scratch = {}
 local default_rule = {class = "scratch"}
@@ -14,7 +16,6 @@ local function turn_on(c)
     c.above = true
     c:raise()
     client.focus = c
-    awful.placement.centered(c)
 end
 
 -- Turn off this scratch window client (remove current tag from window's tags)

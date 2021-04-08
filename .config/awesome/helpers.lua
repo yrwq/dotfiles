@@ -15,6 +15,33 @@ helpers.rrect = function(radius)
     end
 end
 
+-- Adds a maximized mask to a screen
+function helpers.screen_mask(s, bg)
+    local mask = wibox({
+        visible = false,
+        ontop = true,
+        type = "splash",
+        screen = s
+    })
+    awful.placement.maximize(mask)
+    mask.bg = bg
+    return mask
+end
+
+-- Create partially rounded rect
+helpers.prrect = function(radius, tl, tr, br, bl)
+    return function(cr, width, height)
+        gears.shape.partially_rounded_rect(cr, width, height, tl, tr, br, bl,
+                                           radius)
+    end
+end
+
+helpers.circle = function(radius)
+    return function(cr, width, height)
+        gears.shape.circle(cr, radius, radius)
+    end
+end
+
 helpers.octo = function(radius)
     return function(cr, width, height)
         gears.shape.octogon(cr, width, height, radius)
@@ -23,6 +50,23 @@ end
 
 helpers.colorize_text = function(text, color)
     return "<span foreground='"..color.."'>"..text.."</span>"
+end
+
+local prompt_font = beautiful.nfont .. "12"
+
+function helpers.prompt(textbox, callback)
+    awful.prompt.run {
+        -- prompt       = prompt,
+        prompt       = '<b>Web search: </b>',
+        textbox = textbox,
+        font = prompt_font,
+        history_path = awful.util.get_cache_dir() .. "/history_web",
+        done_callback = callback,
+        exe_callback = function(input)
+            if not input or #input == 0 then return end
+            awful.spawn.with_shell("noglob brave https://google.com/search?q=" .. input)
+        end
+    }
 end
 
 function helpers.vertical_pad(height)
@@ -102,6 +146,7 @@ function helpers.run_or_raise(match, move, spawn_cmd, spawn_args)
         awful.spawn(spawn_cmd, spawn_args)
     end
 end
+
 function helpers.float_and_resize(c, width, height)
     c.maximized = false
     c.width = width
@@ -110,6 +155,30 @@ function helpers.float_and_resize(c, width, height)
     awful.client.property.set(c, 'floating_geometry', c:geometry())
     c.floating = true
     c:raise()
+end
+
+function helpers.resize_dwim(c, direction)
+    if c and c.floating then
+        if direction == "up" then
+            c:relative_move(  0,  0, 0, -dpi(20))
+        elseif direction == "down" then
+            c:relative_move(  0,  0, 0,  dpi(20))
+        elseif direction == "left" then
+            c:relative_move(  0,  0, -dpi(20), 0)
+        elseif direction == "right" then
+            c:relative_move(  0,  0,  dpi(20), 0)
+        end
+    elseif awful.layout.get(mouse.screen) ~= awful.layout.suit.floating then
+        if direction == "up" then
+            awful.client.incwfact(-0.05)
+        elseif direction == "down" then
+            awful.client.incwfact(0.05)
+        elseif direction == "left" then
+            awful.tag.incmwfact(-0.05)
+        elseif direction == "right" then
+            awful.tag.incmwfact(0.05)
+        end
+    end
 end
 
 return helpers

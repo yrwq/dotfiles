@@ -3,73 +3,12 @@ local wibox = require('wibox')
 local gears = require('gears')
 local beautiful = require('beautiful')
 local helpers = require("helpers")
-local lain = require("lain")
 local keys = require("keys")
 local dpi = beautiful.xresources.apply_dpi
-
-
--- create a container widget with background
-local bl = function(widget, clr)
-    return wibox.widget {
-        widget,
-        bg = clr,
-        widget = wibox.container.background
-    }
-end
-
--- create a container widget with margin
-local mr = function(widget)
-    return wibox.widget {
-        widget,
-        top = dpi(6),
-        bottom = dpi(6),
-        right = dpi(6),
-        left = dpi(6),
-        widget = wibox.container.margin
-    }
-end
-
--- create a container widget with margin for bigger items
-local mrl = function(widget)
-    return wibox.widget {
-        widget,
-        top = dpi(8),
-        bottom = dpi(8),
-        right = dpi(8),
-        left = dpi(8),
-        widget = wibox.container.margin
-    }
-end
-
--- create a text box widget
-local tb = function(markup)
-    return wibox.widget {
-        font = beautiful.nfont .. "12",
-        markup = markup,
-        widget = wibox.widget.textbox
-    }
-end
-
-local cpu = lain.widget.cpu {
-    settings = function()
-        widget:set_markup(" " .. cpu_now.usage .. "%")
-    end
-}
-
-local mem = lain.widget.mem {
-    settings = function()
-        widget:set_markup(" " .. mem_now.perc .. "%")
-    end
-}
-
-local disk = lain.widget.fs {
-    settings = function()
-        widget:set_text(" " ..  fs_now["/home"].percentage .. "%")
-    end
-}
+local bling = require("bling")
 
 local volume = wibox.widget {
-    markup = " ",
+    markup = "",
     widget = wibox.widget.textbox
 }
 
@@ -78,39 +17,10 @@ awesome.connect_signal("shit::volume", function(vol, muted)
         volume.markup = helpers.colorize_text("muted", x.fg)
     else
         if vol then
-            volume.markup = helpers.colorize_text("vol " .. vol .. "%", x.fg)
+            volume.markup = helpers.colorize_text("  " .. vol .. "%", x.fg)
         else
-            volume.markup = helpers.colorize_text(" %", x.fg)
+            volume.markup = helpers.colorize_text("  ", x.fg)
         end
-    end
-end)
-
-local weather = wibox.widget {
-    markup = "望",
-    widget = wibox.widget.textbox
-}
-
-awesome.connect_signal("shit::weather", function(temp, wind, emoji)
-    weather.markup = helpers.colorize_text("摒 " .. temp .. "", x.fg)
-end)
-
-local music = wibox.widget {
-    forced_width = dpi(200),
-    align = "center",
-    widget = wibox.widget.textbox,
-}
-
-music:buttons(gears.table.join(
-    awful.button({}, 1, function()
-        helpers.music("toggle")
-    end)
-))
-
-awesome.connect_signal("shit::mpd", function(artist, title, paused)
-    if not paused then
-        music.markup = helpers.colorize_text(artist .. " - " .. title, x.fg)
-    else
-        music.markup = helpers.colorize_text("", x.fg)
     end
 end)
 
@@ -118,29 +28,18 @@ local mysystray = wibox.widget.systray()
 
 mysystray:set_base_size(beautiful.systray_icon_size)
 
-local mysystray_container = {
-    mysystray,
-    left = dpi(4),
-    right = dpi(4),
-    widget = wibox.container.margin
-}
-
-local systray = wibox.widget {
-    {
-        mysystray_container,
-        top = dpi(3),
-        layout = wibox.container.margin
-    },
-    widget = wibox.container.background
-}
-
 local noti_toggle = wibox.widget {
-    markup = "",
+    markup = helpers.colorize_text("", x.fg),
     font = beautiful.ifont .. "20",
     widget = wibox.widget.textbox
 }
 
 dont_disturb = false
+
+local notif_center = require("candy.notif-center")
+noti_toggle:connect_signal("mouse::enter", function()
+    notif_center.visible = true
+end)
 
 noti_toggle:buttons(gears.table.join(
     awful.button({}, 1, function()
@@ -148,34 +47,63 @@ noti_toggle:buttons(gears.table.join(
         update_disturb()
     end)
 ))
+
 function update_disturb()
     if dont_disturb then
-        noti_toggle.markup = ""
+        noti_toggle.markup = helpers.colorize_text("", x.fg)
     else
-        noti_toggle.markup = ""
+        noti_toggle.markup = helpers.colorize_text("", x.fg)
     end
 end
-
 
 local sep = helpers.horizontal_pad(dpi(5))
 
 local s = awful.screen.focused()
 
+date_clock = wibox.widget.textclock("  %b %d %a")
+time_clock = wibox.widget.textclock("  %H:%M")
+
+
 screen.connect_signal("request::desktop_decoration", function(s)
 
-    s.mytextclock = wibox.widget.textclock()
+    -- s.mytextclock = wibox.widget.textclock()
 
     s.mylayoutbox = awful.widget.layoutbox(s)
 
-    s.mypromptbox = awful.widget.prompt {
-        prompt = " "
-    }
+    -- s.mytaglist = awful.widget.taglist {
+    --     screen  = s,
+    --     filter  = awful.widget.taglist.filter.all,
+    --     style = {
+    --         spacing = dpi(5),
+    --         font = beautiful.nfont .. "12",
+    --         shape = helpers.rrect(5)
+    --     },
+    --     widget_template = {
+    --         {
+    --             {
+    --                 {
+    --                     id     = "text_role",
+    --                     widget = wibox.widget.textbox,
+    --                 },
+    --                 layout = wibox.layout.fixed.horizontal,
+    --             },
+    --             left  = dpi(10),
+    --             bottom = dpi(2),
+    --             right = dpi(10),
+    --             widget = wibox.container.margin
+    --         },
+    --         id     = "background_role",
+    --         widget = wibox.container.background,
+    --     },
+    -- }
 
     s.mytaglist = awful.widget.taglist {
         screen  = s,
         filter  = awful.widget.taglist.filter.all,
         style = {
-            font = beautiful.ifont .. "24"
+            spacing = dpi(5),
+            font = beautiful.nfont .. "12",
+            shape = helpers.rrect(5)
         },
         widget_template = {
             {
@@ -186,21 +114,37 @@ screen.connect_signal("request::desktop_decoration", function(s)
                     },
                     layout = wibox.layout.fixed.horizontal,
                 },
-                top = 5,
-                bottom = 5,
-                left  = 10,
-                right = 10,
+                left  = dpi(10),
+                bottom = dpi(2),
+                right = dpi(10),
                 widget = wibox.container.margin
             },
-            id     = "background_role",
+            id     = 'background_role',
             widget = wibox.container.background,
+            -- Add support for hover colors and an index label
+            create_callback = function(self, c3, index, objects) --luacheck: no unused args
+                self:connect_signal('mouse::enter', function()
+                    if #c3:clients() > 0 then
+                        -- BLING: Update the widget with the new tag
+                        awesome.emit_signal("bling::tag_preview::update", c3)
+                        -- BLING: Show the widget
+                        awesome.emit_signal("bling::tag_preview::visibility", s, true)
+                    end
+
+                end)
+                self:connect_signal('mouse::leave', function()
+                    awesome.emit_signal("bling::tag_preview::visibility", s, false)
+                end)
+            end,
         },
+        buttons = taglist_buttons
     }
 
     s.mytasklist = awful.widget.tasklist {
         buttons = keys.tasklist_buttons,
         screen   = s,
-        filter   = awful.widget.tasklist.filter.currenttags,
+        filter   = awful.widget.tasklist.filter.focused,
+        -- filter   = awful.widget.tasklist.filter.currenttags,
         style    = {
             font = beautiful.nfont .. "10",
             bg = x.bg
@@ -213,114 +157,156 @@ screen.connect_signal("request::desktop_decoration", function(s)
                     align  = "center",
                     widget = wibox.widget.textbox,
                 },
-                forced_width = dpi(180),
+                forced_width = dpi(200),
                 left = dpi(15),
                 right = dpi(15),
                 top  = dpi(4),
                 bottom = dpi(4),
                 widget = wibox.container.margin
             },
-            id = "background_role",
+            -- id = "background_role",
             widget = wibox.container.background,
         },
     }
 
-    -- Create the wibox
-    s.fullbar = awful.wibar {
-        visible = false,
-        position = "top",
-        screen = s
-    }
-
-    s.floatbar = awful.wibar {
+    -- create a new bar
+    s.bar = awful.wibar {
         position = "top",
         screen = s
     }
 
     -- Add widgets to the wibox
-    s.floatbar:setup {
+    s.bar:setup {
         layout = wibox.layout.align.horizontal,
         expand = "none",
         {
-            bl(s.mytaglist, x.color0),
-            bl(s.mytasklist, x.bg),
-            bl(s.mypromptbox, x.color0),
+            {
+                {
+                    s.mytaglist,
+                    margins = dpi(5),
+                    widget = wibox.container.margin
+                },
+                widget = wibox.container.constraint
+            },
+            layout = wibox.layout.fixed.horizontal,
+        },
+
+        {
+            s.mytasklist,
             layout = wibox.layout.fixed.horizontal,
         },
         {
-            bl(mr(s.mytextclock), x.color0),
-            sep,
-            layout = wibox.layout.fixed.horizontal,
-        },
-        {
-            bl(mr(music), x.color0),
-            sep,
-            bl(mr(weather), x.color0),
-            sep,
-            bl(mr(volume), x.color0),
-            sep,
-            bl(mr(noti_toggle), x.color0),
-            sep,
-            bl(mrl(s.mylayoutbox), x.color0),
-            sep,
-            bl(mr(systray), x.color8),
-            sep,
+            {
+                {
+                    {
+                        volume,
+                        right = dpi(10),
+                        left = dpi(10),
+                        widget = wibox.container.margin
+                    },
+                    shape = helpers.rrect(dpi(5)),
+                    bg = x.color9,
+                    widget = wibox.container.background,
+                },
+                margins = dpi(3),
+                widget = wibox.container.margin
+            },
+            {
+                {
+                    {
+                        s.mylayoutbox,
+                        right = dpi(10),
+                        left = dpi(10),
+                        top = dpi(5),
+                        bottom = dpi(5),
+                        widget = wibox.container.margin
+                    },
+                    shape = helpers.rrect(dpi(5)),
+                    bg = x.color10,
+                    widget = wibox.container.background,
+                },
+                margins = dpi(3),
+                widget = wibox.container.margin
+            },
+            {
+                {
+                    {
+                        date_clock,
+                        right = dpi(10),
+                        left = dpi(10),
+                        top = dpi(5),
+                        bottom = dpi(5),
+                        widget = wibox.container.margin
+                    },
+                    shape = helpers.rrect(dpi(5)),
+                    bg = x.color11,
+                    widget = wibox.container.background,
+                },
+                margins = dpi(3),
+                widget = wibox.container.margin
+            },
+            {
+                {
+                    {
+                        time_clock,
+                        right = dpi(10),
+                        left = dpi(10),
+                        top = dpi(5),
+                        bottom = dpi(5),
+                        widget = wibox.container.margin
+                    },
+                    shape = helpers.rrect(dpi(5)),
+                    bg = x.color11,
+                    widget = wibox.container.background,
+                },
+                margins = dpi(3),
+                widget = wibox.container.margin
+            },
+            {
+                {
+                    {
+                        mysystray,
+                        right = dpi(10),
+                        left = dpi(10),
+                        top = dpi(4),
+                        widget = wibox.container.margin
+                    },
+                    shape = helpers.rrect(dpi(5)),
+                    bg = x.color5,
+                    widget = wibox.container.background,
+                },
+                margins = dpi(3),
+                widget = wibox.container.margin
+            },
+            {
+                {
+                    {
+                        noti_toggle,
+                        right = dpi(10),
+                        left = dpi(10),
+                        widget = wibox.container.margin
+                    },
+                    shape = helpers.rrect(dpi(5)),
+                    bg = x.color12,
+                    widget = wibox.container.background,
+                },
+                margins = dpi(3),
+                widget = wibox.container.margin
+            },
             layout = wibox.layout.fixed.horizontal,
         },
     }
-
-    -- Add widgets to the wibox
-    s.fullbar:setup {
-        layout = wibox.layout.align.horizontal,
-        expand = "none",
-        {
-            layout = wibox.layout.fixed.horizontal,
-            bl(s.mytaglist, x.color0),
-            bl(s.mypromptbox, x.color0),
-            bl(s.mytasklist, x.bg),
-        },
-        {
-            layout = wibox.layout.fixed.horizontal,
-            bl(mr(s.mytextclock), x.bg),
-        },
-        {
-            layout = wibox.layout.fixed.horizontal,
-            bl(mr(music), x.color1 .. "60"),
-            sep,
-            bl(mr(weather), x.color2 .. "60"),
-            sep,
-            bl(mr(disk.widget), x.color3 .. "60"),
-            sep,
-            bl(mr(volume), x.color1 .. "60"),
-            sep,
-            bl(mrl(s.mylayoutbox), x.color4 .. "60"),
-            sep,
-            bl(mr(noti_toggle), x.color5 .. "60"),
-            sep,
-            bl(mr(systray), x.color6 .. "99"),
-            sep,
-        },
-    }
-
 end)
 
 client.connect_signal("property::fullscreen", function(c)
     if c.fullscreen then
-        s.fullbar.visible = false
-        s.floatbar.visible = false
+        s.bar.visible = false
     else
         -- s.fullbar.visible = true
-        s.floatbar.visible = true
+        s.bar.visible = true
     end
 end)
 
 function toggle_bar()
-    -- s.floatbar.visible = false
-    -- s.fullbar.visible = not s.fullbar.visible
-    s.floatbar.visible = not s.floatbar.visible
-end
-
-function switch_bar_mode()
-    s.fullbar.visible = not s.fullbar.visible
-    s.floatbar.visible = not s.floatbar.visible
+    s.bar.visible = not s.bar.visible
 end

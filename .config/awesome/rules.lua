@@ -62,26 +62,9 @@ ruled.client.connect_signal("request::rules", function()
             height = screen_height * 0.5
         },
         callback = function (c)
-            awful.placement.centered(c)
+            awful.placement.centered(c, { honor_workarea = true, honor_padding = true })
         end
     }
-
-    -- ruled.client.append_rule {
-    --     rule_any = {
-    --         class = {
-    --             "emacs",
-    --             "Emacs"
-    --         },
-    --     },
-    --     properties = {
-    --         floating = true,
-    --         width = screen_width * 0.8,
-    --         height = screen_height * 0.8
-    --     },
-    --     callback = function (c)
-    --         awful.placement.centered(c)
-    --     end
-    -- }
 
     ruled.client.append_rule {
         rule_any = {
@@ -98,7 +81,7 @@ ruled.client.connect_signal("request::rules", function()
             height = screen_height * 0.8
         },
         callback = function (c)
-            awful.placement.centered(c)
+            awful.placement.centered(c, { honor_workarea = true, honor_padding = true })
         end
     }
 
@@ -114,10 +97,16 @@ ruled.client.connect_signal("request::rules", function()
         properties = {
             floating = true,
             height = 352,
-            width = 893
+            width = 500 
         },
         callback = function (c)
-            awful.placement.centered(c)
+            awful.placement.centered(c, { honor_workarea = true, honor_padding = true })
         end
     }
+
+    ruled.client.append_rule {
+        rule_any = { class = { "float" } },
+        properties = { floating = true },
+    }
+
 end)

@@ -1,43 +1,45 @@
-/* Dark */
+Xft.autohint: 0
+Xft.antialias: 1
+Xft.hinting: true
+Xft.hintstyle: hintslight
+Xft.dpi: 96
 
-*.foreground:   #947e68
-*.background:   #201e1a
-*.cursorColor:  #947e68
-*.color0:       #322b28
-*.color8:       #473d3a
-*.color1:       #6d413b
-*.color9:       #5e4643
-*.color2:       #6a7253
-*.color10:      #484a41
-*.color3:       #7e5d3c
-*.color11:      #6b5a48
-*.color4:       #527272
-*.color12:      #535a5a
-*.color5:       #6c4949
-*.color13:      #4f4141
-*.color6:       #3f5c5c
-*.color14:      #515c5c
-*.color7:       #867564
-*.color15:      #928374
+*.foreground:   #250e07
+*.background:   #f2e5bc
+*.cursorColor:  #250e07
+*.color0:       #e8d69f
+*.color8:       #dec472
+*.color1:       #bc4548
+*.color9:       #c45f61
+*.color2:       #96b457
+*.color10:      #a8c66a
+*.color3:       #bda23d
+*.color11:      #bea357
+*.color4:       #6d93cd
+*.color12:      #9ab6e2
+*.color5:       #a860d0
+*.color13:      #dc7d7b
+*.color6:       #68ccbf
+*.color14:      #75b1a9
+*.color7:       #3e3533
+*.color15:      #72635f
 
-/* Light */
-
-/* *.foreground:   #201e1a */
-/* *.background:   #a68e75 */
-/* *.cursorColor:  #201e1a */
-/* *.color0:       #84715c */
-/* *.color1:       #50302b */
-/* *.color2:       #4e543d */
-/* *.color3:       #61482e */
-/* *.color4:       #476262 */
-/* *.color5:       #4e3535 */
-/* *.color6:       #314848 */
-/* *.color7:       #3d3932 */
-/* *.color8:       #7a6856 */
+/* *.foreground:   #947e68 */
+/* *.background:   #201e1a */
+/* *.cursorColor:  #947e68 */
+/* *.color0:       #322b28 */
+/* *.color8:       #473d3a */
+/* *.color1:       #6d413b */
 /* *.color9:       #5e4643 */
+/* *.color2:       #6a7253 */
 /* *.color10:      #484a41 */
+/* *.color3:       #7e5d3c */
 /* *.color11:      #6b5a48 */
+/* *.color4:       #527272 */
 /* *.color12:      #535a5a */
+/* *.color5:       #6c4949 */
 /* *.color13:      #4f4141 */
+/* *.color6:       #3f5c5c */
 /* *.color14:      #515c5c */
-/* *.color15:      #504b43 */
+/* *.color7:       #867564 */
+/* *.color15:      #928374 */

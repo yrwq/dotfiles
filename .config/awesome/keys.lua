@@ -2,50 +2,94 @@ local awful = require("awful")
 local hotkeys_popup = require("awful.hotkeys_popup")
 local bling = require("bling")
 local helpers = require("helpers")
-local machi = require("machi")
-local lain = require("lain")
 local naughty = require("naughty")
 local gears = require("gears")
 local scratch = require("utils.scratch")
 require("awful.hotkeys_popup.keys")
+local notif_center = require("candy.notif-center")
+local sidebar = require("candy.sidebar")
+local dashboard = require("candy.dashboard")
 
 local keys = {}
 
+-- define modifiers
 mod = "Mod4"
 ctrl = "Control"
 shift = "Shift"
 alt = "Mod1"
 
-
+-- root window mouse bindings
 awful.mouse.append_global_mousebindings({
     awful.button({ }, 3, function () mymainmenu:toggle() end),
     awful.button({ }, 4, awful.tag.viewprev),
     awful.button({ }, 5, awful.tag.viewnext),
 })
 
+-- popups
+awful.keyboard.append_global_keybindings({
+    -- notification center
+    awful.key {
+        modifiers = { mod },
+        key = "u",
+        group = "popup",
+        description = "notif_center",
+        on_press = function()
+            notif_center.visible = not notif_center.visible
+        end,
+    },
+    -- dashboard
+    awful.key {
+        modifiers = { alt },
+        key = "q",
+        group = "popup",
+        description = "dashboard",
+        on_press = function()
+            dashboard_show()
+        end,
+    },
+    -- sidebar
+    awful.key {
+        modifiers = { mod },
+        key = "é",
+        group = "popup",
+        description = "sidebar",
+        on_press = function()
+            sidebar.visible = not sidebar.visible
+        end,
+    }
+})
 
 -- scratchpads
 awful.keyboard.append_global_keybindings({
 
+    -- terminal
     awful.key {
         modifiers = { mod },
         key = "o",
+        group = "scratchpad",
+        description = "terminal",
         on_press = function()
             scratch.toggle("st -c scratch", { class = "scratch" })
         end,
     },
 
+    -- music player
     awful.key {
         modifiers = { mod },
         key = "m",
+        group = "scratchpad",
+        description = "music player",
         on_press = function()
-            scratch.toggle("st -c music -e music", { class = "music" })
+            scratch.toggle("st -c music -e ncmpcpp", { class = "music" })
         end,
     },
 
+    -- discord
     awful.key {
         modifiers = { mod, shift },
         key = "o",
+        group = "scratchpad",
+        description = "discord",
         on_press = function()
             -- hack to automatically focus the message box
             scratch.toggle("discord", { class = "discord" })
@@ -58,14 +102,120 @@ awful.keyboard.append_global_keybindings({
     },
 })
 
+-- launchers
 awful.keyboard.append_global_keybindings({
+    -- draw a floating terminal
+    awful.key {
+        modifiers = { mod, shift },
+        key = "t",
+        group = "launcher",
+        description = "draw terminal",
+        on_press = function()
+            awful.spawn.with_shell("drawterm")
+        end,
+    },
+    -- rofi meme picker script
     awful.key {
         modifiers = { mod, shift },
         key = "p",
+        group = "launcher",
+        description = "meme picker",
         on_press = function()
             awful.spawn.with_shell("chm")
         end,
     },
+    -- font picker
+    awful.key {
+        modifiers = { mod, shift },
+        key = "f",
+        group = "launcher",
+        description = "font picker",
+        on_press = function()
+            awful.spawn.with_shell("fpick")
+        end,
+    },
+    awful.key {
+        modifiers = { mod },
+        key = "e",
+        group = "launcher",
+        description = "editor",
+        on_press = function()
+            awful.spawn(editor_cmd)
+        end,
+    },
+    awful.key {
+        modifiers = { mod },
+        key = "r",
+        group = "launcher",
+        description = "file manager",
+        on_press = function()
+            awful.spawn.with_shell("st -c files -e lf")
+        end,
+    }
+})
+
+-- client manipulation
+awful.keyboard.append_global_keybindings({
+    -- resize left
+    awful.key {
+        modifiers = { ctrl, alt },
+        key = "h",
+        group = "client",
+        description = "resize left",
+        on_press = function(c)
+            if client.focus then
+                local c = client.focus
+                helpers.resize_dwim(c, "left")
+            end
+        end,
+    },
+
+    -- resize down
+    awful.key {
+        modifiers = { ctrl, alt },
+        key = "j",
+        group = "client",
+        description = "resize down",
+        on_press = function(c)
+            if client.focus then
+                local c = client.focus
+                helpers.resize_dwim(c, "down")
+            end
+        end,
+    },
+
+    -- resize up
+    awful.key {
+        modifiers = { ctrl, alt },
+        key = "k",
+        group = "client",
+        description = "resize up",
+        on_press = function(c)
+            if client.focus then
+                local c = client.focus
+                helpers.resize_dwim(c, "up")
+            end
+        end,
+    },
+
+    -- resize right
+    awful.key {
+        modifiers = { ctrl, alt },
+        key = "l",
+        group = "client",
+        description = "resize right",
+        on_press = function(c)
+            if client.focus then
+                local c = client.focus
+                helpers.resize_dwim(c, "right")
+            end
+        end,
+    }
+})
+
+awful.keyboard.append_global_keybindings({
+
+    -- toggle the bar
     awful.key {
         modifiers = { mod },
         key = "b",
@@ -74,26 +224,29 @@ awful.keyboard.append_global_keybindings({
         end,
     },
 
+    -- close notifications
     awful.key {
         modifiers = { ctrl },
         key = "space",
         group = "awesome",
-        description = "close notifications",
+        description = "close all notifications",
         on_press = function()
             naughty.destroy_all_notifications()
         end,
     },
 
+    -- app launcher
     awful.key {
         modifiers = { mod },
         key = "s",
         group = "launcher",
-        description = "notifetch",
+        description = "application launcher",
         on_press = function(s)
             awful.spawn.with_shell("rofi -show drun")
         end,
     },
 
+    -- toggle titlebar
     awful.key {
         modifiers = { mod },
         key = "t",
@@ -107,6 +260,7 @@ awful.keyboard.append_global_keybindings({
         end,
     },
 
+    -- center a client
     awful.key {
         modifiers = { mod },
         key = "c",
@@ -120,6 +274,7 @@ awful.keyboard.append_global_keybindings({
         end,
     },
 
+    -- focus mode
     awful.key {
         modifiers = { mod, shift },
         key = "c",
@@ -133,6 +288,7 @@ awful.keyboard.append_global_keybindings({
         end,
     },
 
+    -- add a tag
     awful.key {
         modifiers = { mod },
         key = "ö",
@@ -143,56 +299,7 @@ awful.keyboard.append_global_keybindings({
         end,
     },
 
-    awful.key {
-        modifiers = { mod, shift },
-        key = "ö",
-        group = "tag",
-        description = "add",
-        on_press = function()
-            lain.util.delete_tag()
-        end,
-    },
-
-    awful.key {
-        modifiers = { mod },
-        key = ",",
-        group = "layout",
-        description = "increase gaps",
-        on_press = function()
-            lain.util.useless_gaps_resize(1)
-        end,
-    },
-
-    awful.key {
-        modifiers = { mod, shift },
-        key = ",",
-        group = "layout",
-        description = "increase gaps",
-        on_press = function()
-            lain.util.useless_gaps_resize(-1)
-        end,
-    },
-
-    awful.key {
-        modifiers = { mod, alt },
-        key = "f",
-        group = "client",
-        description = "start editing machi",
-        on_press = function()
-            machi.default_editor.start_interactive()
-        end,
-    },
-
-    awful.key {
-        modifiers = { mod, shift },
-        key = "f",
-        group = "client",
-        description = "start machi switcher",
-        on_press = function()
-            machi.switcher.start()
-        end,
-    },
-
+    -- add a client to bling tabbed
     awful.key {
         modifiers = { mod, alt },
         key = "a",
@@ -203,6 +310,7 @@ awful.keyboard.append_global_keybindings({
         end,
     },
 
+    -- switch tabbed clients
     awful.key {
         modifiers = { mod, alt },
         key = "s",
@@ -213,6 +321,7 @@ awful.keyboard.append_global_keybindings({
         end,
     },
 
+    -- remove a client from bling tabbed
     awful.key {
         modifiers = { mod, alt },
         key = "d",
@@ -223,6 +332,7 @@ awful.keyboard.append_global_keybindings({
         end,
     },
 
+    -- show key bindings in a popup
     awful.key {
         modifiers = { mod },
         key = "p",
@@ -231,6 +341,7 @@ awful.keyboard.append_global_keybindings({
         on_press = hotkeys_popup.show_help
     },
 
+    -- restart awesomewm
     awful.key {
         modifiers = { mod, shift },
         key = "r",
@@ -239,6 +350,7 @@ awful.keyboard.append_global_keybindings({
         on_press = awesome.restart
     },
 
+    -- quit awesomewm
     awful.key {
         modifiers = { mod, shift },
         key = "q",
@@ -247,6 +359,7 @@ awful.keyboard.append_global_keybindings({
         on_press = awesome.quit
     },
 
+    -- launch terminal
     awful.key {
         modifiers = { mod },
         key = "Return",
@@ -257,16 +370,7 @@ awful.keyboard.append_global_keybindings({
         end,
     },
 
-    awful.key {
-        modifiers = { mod },
-        key = "r",
-        group = "launcher",
-        description = "run prompt",
-        on_press = function()
-            awful.screen.focused().mypromptbox:run()
-        end,
-    },
-
+    -- prev tag
     awful.key {
         modifiers = { mod },
         key = "a",
@@ -275,6 +379,7 @@ awful.keyboard.append_global_keybindings({
         on_press = awful.tag.viewprev
     },
 
+    -- next tag
     awful.key {
         modifiers = { mod },
         key = "d",
@@ -302,19 +407,6 @@ awful.keyboard.append_global_keybindings({
             awful.client.focus.byidx(-1)
         end,
     },
-
-    -- awful.key {
-    --     modifiers = { mod },
-    --     key = "Tab",
-    --     group = "client",
-    --     description = "focus prev by history",
-    --     on_press = function()
-    --         awful.client.focus.history.previous()
-    --         if client.focus then
-    --             client.focus:raise()
-    --         end
-    --     end,
-    -- },
 
     awful.key {
         modifiers = { mod, shift },
@@ -489,7 +581,16 @@ awful.keyboard.append_global_keybindings({
         key = "space",
         group = "client",
         description = "toggle floating",
-        on_press = awful.client.floating.toggle
+        on_press = function()
+            local c = client.focus
+            if c.floating then
+                c.floating = False
+            else
+                helpers.float_and_resize(c, screen_width * 0.8, screen_height * 0.8)
+                awful.placement.centered(c, { honor_workarea = true, honor_padding = true })
+            end
+        end,
+        -- end,
     },
 
     awful.key {
@@ -644,6 +745,7 @@ keys.tasklist_buttons = gears.table.join(
     -- Side button down - toggle ontop
     awful.button({ "Any" }, 8, function(c)
         c.ontop = not c.ontop
+        c.sticky = not c.sticky
     end)
 )
 
