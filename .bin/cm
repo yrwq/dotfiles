@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# art - extract cover from audio file
+# cm - current music
 # requires ffmpeg, metaflac, mpc, mpd, wmctrl
 
 music_library="$HOME/etc/music"
@@ -10,10 +10,10 @@ music_library="$HOME/etc/music"
     "$music_library"/%file% | head -n 1)" \
     /tmp/mpd_cover.jpg &&
     cover_path="/tmp/mpd_cover.jpg" && \
-    notify-send -i $cover_path "$(mpc current -f %artist%)" "$(mpc current -f %title%)"
+    notify-send -a music -i $cover_path "$(mpc current -f %artist%)" "$(mpc current -f %title%)"
 
 [ "$(playerctl status | grep 'Playing')" ] &&
-    notify-send -i "$(playerctl metadata | grep 'artUrl' | awk '{print $3}')" \
+    notify-send -a music -i "$(playerctl metadata | grep 'artUrl' | awk '{print $3}')" \
     "  Currently playing" \
     "$(playerctl metadata title)"
 
