@@ -1,17 +1,38 @@
 #!/usr/bin/env bash
 
+# wrapper for todoist cli
+
 t() {
     todoist "${@}"
 }
 
+# delete an item by it's name
 _delete() {
-    item="$(t list | grep "${1}" | awk '{print $1}')"
-    t d "${item}"
+    t list | grep "${2}" | awk '{print $1}' | xargs todoist d
+}
+
+# pretty print
+_list() {
+    b_red="\033[41m"
+    res="\033[m"
+
+    t list | \
+        # remove first to column which is the id of the task
+        awk '{for (i=3; i<NF; i++) printf $i " "; print $NF}' | \
+        # remove hashtags
+        sed 's/^./\n/' | \
+        # insert a new line and a tab after the first found space(the project's name)
+        sed 's/ /\n   /' | \
+        # prefix every line with a red block
+        sed "s/^/$(tput setab 1)  $(tput sgr0) /"
 }
 
 case ${1} in
     d)
-        _delete 
+        _delete "${@}"
+        ;;
+    l)
+        _list
         ;;
     *)
         t ${@}
