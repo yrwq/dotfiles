@@ -733,6 +733,44 @@ email_report:connect_signal(
 
 local email_box = create_boxed_widget(email_report, dpi(300), dpi(150), x.color0)
 
+--
+-- rss
+--
+
+local function open_link(url)
+    awful.spawn.with_shell("brave " .. url)
+    dashboard_hide()
+end
+
+local max_feeds = 6
+local feed_width = 370
+local feed_height = 320
+
+local rss_github = wibox.widget {
+    spacing = 8,
+    layout = wibox.layout.fixed.vertical
+}
+
+local function rss_links(rss, feed_name, w)
+    w:reset()
+    local f, s, b
+    for i = 1, max_feeds do
+        local b = wibox.widget {
+            markup = rss["github"].title[i],
+            margins = 2,
+            width = dpi(310),
+            widget = wibox.widget.textbox
+        }
+        w:add(b)
+  end
+end
+
+awesome.connect_signal("shit::rss", function(rss)
+    rss_links(rss, "github", rss_github)
+end)
+
+local rss_box = create_boxed_widget(rss_github, dpi(300), dpi(150), x.color0)
+
 -- Item placement
 dashboard:setup {
     -- Center boxes vertically
@@ -757,6 +795,7 @@ dashboard:setup {
             },
             {
                 email_box,
+                rss_box,
                 layout = wibox.layout.fixed.vertical
             },
             layout = wibox.layout.fixed.horizontal

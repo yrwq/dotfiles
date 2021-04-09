@@ -1,2 +1,3 @@
 #!/usr/bin/env zsh
 export DISCORD_TOKEN=""
+export GITHUB_TOKEN=""
