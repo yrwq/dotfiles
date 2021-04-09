@@ -18,6 +18,7 @@ to_copy = {
     ".config/tokens",
     ".config/picom.conf",
     ".config/user-dirs.dirs",
+    ".config/nvim/init.lua",
 }
 
 recurse_copy = {
@@ -29,6 +30,8 @@ recurse_copy = {
     ".config/yafetch",
     ".config/zathura",
     ".bin",
+    ".config/nvim/lua",
+    ".config/nvim/colors",
 }
 
 to_remove = {
@@ -44,6 +47,7 @@ to_remove = {
     ".config/yafetch",
     ".config/zathura",
     ".config/zsh",
+    ".config/nvim",
     ".config/picom.conf",
     ".config/user-dirs.dirs",
     ".bin",
@@ -54,6 +58,7 @@ make_dir = {
     ".config/mpd",
     ".config/mpv",
     ".config/ncmpcpp",
+    ".config/nvim",
     ".config/zsh",
 }
 
