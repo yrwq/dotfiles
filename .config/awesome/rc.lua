@@ -127,6 +127,8 @@ require("candy.titlebar")
 -- notifications
 require("candy.notifications")
 
+-- dashboard
+require("candy.dashboard")
 
 -- garbage collection to use less ram
 collectgarbage("setpause", 110)
