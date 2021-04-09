@@ -8,7 +8,7 @@ local naughty = require("naughty")
 
 local helpers = {}
 
--- Create rounded rectangle shape (in one line)
+-- Create rounded rectangle shape
 helpers.rrect = function(radius)
     return function(cr, width, height)
         gears.shape.rounded_rect(cr, width, height, radius)
@@ -31,44 +31,23 @@ end
 -- Create partially rounded rect
 helpers.prrect = function(radius, tl, tr, br, bl)
     return function(cr, width, height)
-        gears.shape.partially_rounded_rect(cr, width, height, tl, tr, br, bl,
-                                           radius)
+        gears.shape.partially_rounded_rect(cr, width, height, tl, tr, br, bl, radius)
     end
 end
 
+-- create a circle
 helpers.circle = function(radius)
-    return function(cr, width, height)
+    return function(cr)
         gears.shape.circle(cr, radius, radius)
     end
 end
 
-helpers.octo = function(radius)
-    return function(cr, width, height)
-        gears.shape.octogon(cr, width, height, radius)
-    end
-end
-
+-- colorize markup text
 helpers.colorize_text = function(text, color)
-    return "<span foreground='"..color.."'>"..text.."</span>"
+    return "<span foreground='" .. color .. "'>" .. text .. "</span>"
 end
 
-local prompt_font = beautiful.nfont .. "12"
-
-function helpers.prompt(textbox, callback)
-    awful.prompt.run {
-        -- prompt       = prompt,
-        prompt       = '<b>Web search: </b>',
-        textbox = textbox,
-        font = prompt_font,
-        history_path = awful.util.get_cache_dir() .. "/history_web",
-        done_callback = callback,
-        exe_callback = function(input)
-            if not input or #input == 0 then return end
-            awful.spawn.with_shell("noglob brave https://google.com/search?q=" .. input)
-        end
-    }
-end
-
+-- add vertical padding to a box
 function helpers.vertical_pad(height)
     return wibox.widget{
         forced_height = height,
@@ -76,6 +55,7 @@ function helpers.vertical_pad(height)
     }
 end
 
+-- add horizontal padding to a box
 function helpers.horizontal_pad(width)
     return wibox.widget{
         forced_width = width,
@@ -107,6 +87,7 @@ function helpers.add_hover_cursor(w, hover_cursor)
     end)
 end
 
+-- control volume
 function helpers.volume_control(step)
     local cmd
     if step == 0 then
@@ -118,11 +99,9 @@ function helpers.volume_control(step)
     awful.spawn.with_shell(cmd)
 end
 
-function helpers.music(func)
-    awful.spawn.with_shell("mpc " .. func)
-end
-
+-- run an application, or bring it to current tag if it's already open
 function helpers.run_or_raise(match, move, spawn_cmd, spawn_args)
+
     local matcher = function (c)
         return awful.rules.match(c, match)
     end
@@ -147,6 +126,8 @@ function helpers.run_or_raise(match, move, spawn_cmd, spawn_args)
     end
 end
 
+-- makes a client floating, then resizes the client
+-- to the given width and height
 function helpers.float_and_resize(c, width, height)
     c.maximized = false
     c.width = width
@@ -157,6 +138,7 @@ function helpers.float_and_resize(c, width, height)
     c:raise()
 end
 
+-- resize a client by direction
 function helpers.resize_dwim(c, direction)
     if c and c.floating then
         if direction == "up" then

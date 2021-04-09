@@ -1,3 +1,5 @@
 #!/usr/bin/env zsh
 export DISCORD_TOKEN=""
 export GITHUB_TOKEN=""
+export TODOIST_TOKEN=""
+export GOOGLE_APP=""
