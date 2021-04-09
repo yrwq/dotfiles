@@ -40,7 +40,7 @@ bling.widget.tag_preview.enable {
     scale = 0.4,
     honor_padding = true,
     honor_workarea = true
-}   
+}
 
 -- define often applications
 terminal = "st"
