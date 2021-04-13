@@ -1,24 +1,34 @@
 local awful = require("awful")
-local notif_center = require("candy.notif-center")
 local hotkeys_popup = require("awful.hotkeys_popup")
+
+local notif_center = require("candy.notif-center")
 local sidebar = require("candy.sidebar")
+local start_menu = require("candy.start")
+
 require("awful.hotkeys_popup.keys")
-
--- require("keys")
-
--- mod = "Mod4"
--- ctrl = "Control"
--- shift = "Shift"
--- alt = "Mod1"
 
 -- popups
 awful.keyboard.append_global_keybindings({
+    -- start menu
+    awful.key {
+        modifiers = { mod },
+        key = "s",
+        group = "popup",
+        description = "start menu",
+        on_press = function()
+            if start_menu.x < -1 then
+	            start_show()
+            else
+                start_hide()
+            end
+        end,
+    },
     -- show key bindings in a popup
     awful.key {
         modifiers = { mod },
         key = "p",
-        group = "awesome",
-        description = "show keybindings",
+        group = "popup",
+        description = "keybindings",
         on_press = hotkeys_popup.show_help
     },
     -- toggle bar

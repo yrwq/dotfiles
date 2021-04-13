@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# im so fucking lazy
+
 repo=$1
 repo=${repo##*/}
 
@@ -9,4 +11,4 @@ case $1 in
     *) git clone "https://github.com/$1" ;;
 esac
 
-notify-send -a 'github' "Git" "Cloned ${repo}"
+notify-send -a "github" "Git" "Cloned ${repo}"

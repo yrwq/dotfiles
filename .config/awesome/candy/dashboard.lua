@@ -4,7 +4,6 @@ local wibox = require("wibox")
 local beautiful = require("beautiful")
 local dpi = require("beautiful.xresources").apply_dpi
 local helpers = require("helpers")
-local naughty = require("naughty")
 local lgi = require("lgi")
 local naughty = require("naughty")
 local watch = require("awful.widget.watch")
@@ -14,8 +13,8 @@ local gfs = require("gears.filesystem")
 
 local keygrabber = require("awful.keygrabber")
 
-local box_radius = dpi(12)
-local box_gap = dpi(6)
+local box_radius = beautiful.dashboard_box_radius
+local box_gap = beautiful.dashboard_box_gap
 
 dashboard = wibox({
     visible = false,
@@ -25,8 +24,7 @@ dashboard = wibox({
 
 awful.placement.maximize(dashboard)
 
-dashboard.bg = "#00000055"
-dashboard.fg = x.fg
+dashboard.bg = beautiful.dashboard_bg
 
 -- Add dashboard or mask to each screen
 awful.screen.connect_for_each_screen(function(s)
@@ -49,17 +47,13 @@ dashboard:buttons(gears.table.join(
     end)
 ))
 
--- Helper function that puts a widget inside a box with a specified background color
--- Invisible margins are added so that the boxes created with this function are evenly separated
--- The widget_to_be_boxed is vertically and horizontally centered inside the box
+-- helper function to create boxes
 local function create_boxed_widget(widget_to_be_boxed, width, height, bg_color)
     local box_container = wibox.container.background()
     box_container.bg = bg_color
     box_container.forced_height = height
     box_container.forced_width = width
     box_container.shape = helpers.rrect(box_radius)
-    -- box_container.shape = helpers.prrect(20, true, true, true, true)
-    -- box_container.shape = helpers.prrect(30, true, true, false, true)
 
     local boxed_widget = wibox.widget {
         -- Add margins
@@ -93,99 +87,14 @@ end
 -- user
 --
 
-local user_picture_container = wibox.container.background()
-
-user_picture_container.shape = helpers.prrect(dpi(40), true, true, false, true)
-user_picture_container.forced_height = dpi(140)
-user_picture_container.forced_width = dpi(140)
-
-local user_picture = wibox.widget {
-    {
-        wibox.widget.imagebox("/home/yrwq/etc/pic/prof.jpeg"),
-        widget = user_picture_container
-    },
-    shape = helpers.circle(dpi(140)),
-    widget = wibox.container.background
-}
-
-local name = {
-    align = "center",
-    valign = "center",
-    markup = helpers.colorize_text("Inhof Dávid", x.color7),
-    font = beautiful.nfont .. "12",
-    widget = wibox.widget.textbox
-}
-
-local username = {
-    align = "center",
-    valign = "center",
-    markup = helpers.colorize_text("@yrwq", x.color15),
-    font = beautiful.nfont .. "10",
-    widget = wibox.widget.textbox
-}
-
-local user_widget = wibox.widget {
-    user_picture,
-    helpers.vertical_pad(dpi(24)),
-    name,
-    helpers.vertical_pad(dpi(4)),
-    username,
-    layout = wibox.layout.fixed.vertical
-}
-
+local user_widget = require("widgets.user")
 local user_box = create_boxed_widget(user_widget, dpi(300), dpi(340), x.color0)
 
 --
 -- fortune
 --
 
-local fortune_command = "fortune -n 50 -s computers"
-local fortune_update_interval = 3600
-
-local fortune = wibox.widget {
-    font = beautiful.nfont .. "12",
-    text = "Loading your cookie...",
-    valign = "center",
-    align = "center",
-    widget = wibox.widget.textbox
-}
-
-local update_fortune = function()
-    awful.spawn.easy_async_with_shell(fortune_command, function(out)
-        -- Remove trailing whitespaces
-        out = out:gsub('^%s*(.-)%s*$', '%1')
-        fortune.markup = "<i>"..helpers.colorize_text(out, x.fg).."</i>"
-    end)
-end
-
-gears.timer {
-    autostart = true,
-    timeout = fortune_update_interval,
-    single_shot = false,
-    call_now = true,
-    callback = update_fortune
-}
-
-local fortune_widget = wibox.widget {
-    {
-        {
-            nil,
-            fortune,
-            layout = wibox.layout.align.horizontal,
-        },
-        margins = dpi(15),
-        widget = wibox.container.margin
-    },
-    widget = wibox.container.background
-}
-
-fortune_widget:buttons(gears.table.join(
-    -- Left click - New fortune
-    awful.button({ }, 1, update_fortune)
-))
-
-helpers.add_hover_cursor(fortune_widget, "hand1")
-
+local fortune_widget = require("widgets.fortune")
 local fortune_box = create_boxed_widget(fortune_widget, dpi(300), dpi(200), x.color0)
 
 --
@@ -263,513 +172,196 @@ local bm_box = create_boxed_widget(bms, dpi(250), dpi(170), "#00000000")
 -- music
 --
 
-local music_header = wibox.widget {
-    markup = "<b>Now playing</b>",
-    font = beautiful.nfont .. "16",
-    align = "center",
-    valign = "center",
-    widget = wibox.widget.textbox
-}
-
-local music_title = wibox.widget {
-    markup = helpers.colorize_text("<b>Now playing</b>", x.color15),
-    font = beautiful.nfont .. "14",
-    align = "center",
-    valign = "center",
-    forced_height = dpi(40),
-    widget = wibox.widget.textbox
-}
-
-local Playerctl = lgi.Playerctl
-local player = Playerctl.Player{}
-update_metadata = function()
-    if player:get_title() then
-        if string.match(player:get_title(), player:get_artist()) then
-            music_title.markup = helpers.colorize_text(player:get_title(), x.color15)
-        else
-            music_title.markup = helpers.colorize_text(player:get_artist() .. " - " .. player:get_title(), x.color15)
-        end
-    else
-        music_title.markup = helpers.colorize_text("Nothing playing", x.color15)
-    end
-end
-player.on_metadata = update_metadata
-
-update_metadata()
-
-local music_prev = wibox.widget {
-    markup = "玲",
-    font = beautiful.ifont .. "16",
-    widget = wibox.widget.textbox
-}
-
-local music_toggle = wibox.widget {
-    markup = "契",
-    font = beautiful.ifont .. "16",
-    widget = wibox.widget.textbox
-}
-
-local music_next = wibox.widget {
-    markup = "怜",
-    font = beautiful.ifont .. "16",
-    widget = wibox.widget.textbox
-}
-
-helpers.add_hover_cursor(music_prev, "hand1")
-helpers.add_hover_cursor(music_next, "hand1")
-helpers.add_hover_cursor(music_toggle, "hand1")
-
-music_prev:connect_signal("button::press", function()
-    awful.spawn.with_shell("playerctl previous")
-end)
-
-music_next:connect_signal("button::press", function()
-    awful.spawn.with_shell("playerctl next")
-end)
-
-local status_cmd = "playerctl status -F"
-local playing = "false"
-
-update_status = function()
-    awful.spawn.easy_async({
-            "pkill", "--full", "--uid", os.getenv("USER"), "^playerctl status" }, function()
-        awful.spawn.with_line_callback(status_cmd, {
-            stdout = function(line)
-                if line:find("Playing") then
-                    playing = "true"
-                    music_toggle.markup = ""
-                else
-                    playing = "false"
-                    music_toggle.markup = "契"
-                end
-            end
-        })
-        collectgarbage("collect")
-    end)
-end
-
-update_status()
-
-music_toggle:connect_signal("button::press", function()
-    awful.spawn.with_shell("playerctl play-pause")
-    update_status()
-end)
-
-
-local music_control = {
-    nil,
-    {
-        {
-            music_prev,
-            music_toggle,
-            music_next,
-            spacing = dpi(30),
-            layout = wibox.layout.fixed.horizontal
-        },
-        widget = wibox.container.margin
-    },
-    expand = "none",
-    layout = wibox.layout.align.horizontal,
-}
-
-local music = wibox.widget {
-    {
-        {
-            {
-                music_header,
-                music_title,
-                music_control,
-                spacing = dpi(10),
-                layout = wibox.layout.fixed.vertical
-            },
-            margins = dpi(15),
-            widget = wibox.container.margin,
-        },
-        widget = wibox.container.background,
-    },
-    layout = wibox.layout.fixed.vertical
-}
-
+local music = require("widgets.playerctl")
 local music_box = create_boxed_widget(music, dpi(250), dpi(157), x.color0)
 
 --
 -- weather
 --
 
-local wtr_temp = wibox.widget {
-    markup = "",
-    font = beautiful.nfont .. "15",
+local weather = require("widgets.weather")
+local wtr_box = create_boxed_widget(weather, dpi(250), dpi(200), x.color0)
+
+--
+-- todo list
+--
+
+local todo_list = wibox.layout.fixed.vertical()
+todo_list.spacing = dpi(10)
+
+local todo_path = os.getenv("HOME") .. "/.cache/todos"
+local remove_todo
+
+local add_todo = wibox.widget {
+    valign = "center",
+    align = "center",
+    font = beautiful.nfont .. "12",
+    markup = helpers.colorize_text("Add a task", x.color7),
     widget = wibox.widget.textbox
 }
 
-local wtr_emoji = wibox.widget {
-    markup = "",
-    font = beautiful.ifont .. "28",
-    widget = wibox.widget.textbox
-}
+local get_todos = function()
+    local store = {}
 
-local wtr_wind = wibox.widget {
-    markup = "",
-    font = beautiful.nfont .. "15",
-    widget = wibox.widget.textbox
-}
+    local todo_file = io.open(todo_path, "r")
+    if todo_file == nil then return end
 
-local wtr_city = wibox.widget {
-    markup = "Pécs",
+
+    for line in todo_file:lines() do
+        table.insert(store, line)
+    end
+    todo_file:close()
+
+    todo_list:reset()
+
+    for k, v in pairs(store) do
+
+        local done_b = wibox.widget {
+            markup = "",
+            font = beautiful.ifont .. "22",
+            widget = wibox.widget.textbox
+        }
+
+        local trash_b = wibox.widget {
+            markup = "",
+            font = beautiful.ifont .. "22",
+            widget = wibox.widget.textbox
+        }
+
+        trash_b:connect_signal("button::press", function() remove_todo(v) end)
+
+        local b = wibox.widget {
+            {
+                {
+                    done_b,
+                    {
+                        align = "center",
+                        valign = "center",
+                        markup = v,
+                        font = beautiful.nfont .. "12",
+                        forced_width = dpi(150),
+                        widget = wibox.widget.textbox,
+                    },
+                    trash_b,
+                    expand = "none",
+                    layout = wibox.layout.align.horizontal
+                },
+                top = dpi(10),
+                bottom = dpi(10),
+                left = dpi(20),
+                right = dpi(20),
+                widget = wibox.container.margin
+            },
+            forced_width = dpi(250),
+            shape = helpers.rrect(dpi(5)),
+            bg = x.color8,
+            widget = wibox.container.background
+        }
+        todo_list:add(b)
+    end
+end
+
+remove_todo = function(line)
+    local line = string.gsub(line, "/", "\\/") -- if contain slash
+
+    local command = "sh -c '[ -f " .. todo_path ..
+        " ] && sed -i \"/" .. line .. "/d\" " .. todo_path .. "'"
+
+    awful.spawn.easy_async_with_shell(command, function()
+        get_todos()
+    end)
+end
+
+get_todos()
+
+local todo_header = wibox.widget {
+    align = "center",
+    valign = "center",
+    markup = "My TODO List",
     font = beautiful.nfont .. "20",
     widget = wibox.widget.textbox
 }
 
-local weather = wibox.widget {
+local todo_add = function(todo)
+    awful.spawn.with_shell("echo " .. todo .. " >> " .. todo_path)
+    get_todos()
+end
+
+function dashboard_activate_prompt()
+    awful.prompt.run {
+        prompt = "",
+        textbox = add_todo,
+        font = beautiful.nfont .. "10",
+        done_callback = function()
+            get_todos()
+        end,
+        exe_callback = function(input)
+            if not input or #input == 0 then return end
+            todo_add(input)
+            get_todos()
+        end
+    }
+end
+
+local add_icon = wibox.widget {
+    valign = "center",
+    align = "center",
+    font = beautiful.ifont .. "18",
+    markup = helpers.colorize_text("", x.color7),
+    widget = wibox.widget.textbox
+}
+
+local task = wibox.widget{
     {
-        wtr_city,
-        helpers.horizontal_pad(dpi(20)),
-        wtr_emoji,
-        layout = wibox.layout.fixed.horizontal
+        {
+            add_icon,
+            add_todo,
+            layout = wibox.layout.align.horizontal
+        },
+        left = dpi(10),
+        widget = wibox.container.margin
     },
-    helpers.vertical_pad(dpi(10)),
+    forced_height = dpi(35),
+    forced_width = dpi(200),
+    bg = x.color8,
+    shape = helpers.rrect(dpi(5)),
+    widget = wibox.container.background()
+}
+
+task:buttons(gears.table.join(
+    awful.button({ }, 1, function ()
+        dashboard_activate_prompt()
+    end)
+))
+
+local todo_widget = wibox.widget {
     {
-        wtr_temp,
-        wtr_wind,
-        layout = wibox.layout.fixed.horizontal
+        {
+            {
+                nil,
+                {
+                    todo_header,
+                    -- helpers.vertical_pad(dpi(20)),
+                    todo_list,
+                    task,
+                    spacing = dpi(20),
+                    expand = "none",
+                    layout = wibox.layout.align.vertical
+                },
+                layout = wibox.layout.align.horizontal,
+                expand = "none",
+            },
+            margins = dpi(20),
+            widget = wibox.container.margin
+        },
+        shape = helpers.rrect(box_radius),
+        forced_width = dpi(300),
+        bg = x.color0,
+        widget = wibox.container.background
     },
-    layout = wibox.layout.fixed.vertical
+    margins = dpi(5),
+    widget = wibox.container.margin
 }
-
-awesome.connect_signal("shit::weather", function(temp, wind, emoji)
-    wtr_temp.markup = temp .. "糖   "
-    wtr_wind.markup = wind .. " km/h  "
-    wtr_emoji.markup = emoji
-end)
-
-local wtr_box = create_boxed_widget(weather, dpi(250), dpi(200), x.color0)
-
--- 
--- email
---
-
-local secrets = {
-	email_address = config.widget.email.address,
-	app_password = config.widget.email.app_password,
-	imap_server = config.widget.email.imap_server,
-	port = config.widget.email.port
-}
-
-local unread_email_count = 0
-local startup_show = true
-
-local email_icon_widget = wibox.widget {
-	{
-		id = 'icon',
-        markup = "",
-        font = beautiful.ifont .. "30",
-		forced_height = dpi(45),
-		forced_width = dpi(45),
-		widget = wibox.widget.textbox,
-	},
-	layout = wibox.layout.fixed.horizontal
-}
-
-local email_from_text = wibox.widget {
-    font = beautiful.nfont .. "12",
-	markup = "From:",
-	align = "left",
-	valign = "center",
-	widget = wibox.widget.textbox
-}
-
-local email_recent_from = wibox.widget {
-    font = beautiful.nfont .. "12",
-	markup = "loading@stdout.sh",
-	align = "left",
-	valign = "center",
-	widget = wibox.widget.textbox
-}
-
-local email_subject_text = wibox.widget {
-    font = beautiful.nfont .. "10",
-	markup = "Subject:",
-	align = "left",
-	valign = "center",
-	widget = wibox.widget.textbox
-}
-
-local email_recent_subject = wibox.widget {
-    font = beautiful.nfont .. "10",
-	markup = "Subject:",
-	align = "left",
-	valign = "center",
-	widget = wibox.widget.textbox
-}
-
-local email_date_text = wibox.widget {
-	font = beautiful.nfont .. "8",
-	markup = "Local Date:",
-	align = "left",
-	valign = "center",
-	widget = wibox.widget.textbox
-}
-
-local email_recent_date = wibox.widget {
-	font = beautiful.nfont .. "8",
-	markup = "Loading date...",
-	align = "left",
-	valign = "center",
-	widget = wibox.widget.textbox
-}
-
-local email_report = wibox.widget{
-	{
-		{
-			layout = wibox.layout.fixed.horizontal,
-			spacing = dpi(10),
-			{
-				layout = wibox.layout.align.vertical,
-				expand = 'none',
-				nil,
-				email_icon_widget,
-				nil
-			},
-			{
-				layout = wibox.layout.align.vertical,
-				expand = 'none',
-				nil,
-				{
-					layout = wibox.layout.fixed.vertical,
-					{
-						email_from_text,
-						email_recent_from,
-						spacing = dpi(5),
-						layout = wibox.layout.fixed.horizontal
-					},
-					{
-						email_subject_text,
-						email_recent_subject,
-						spacing = dpi(5),
-						layout = wibox.layout.fixed.horizontal
-					},
-					{
-						email_date_text,
-						email_recent_date,
-						spacing = dpi(5),
-						layout = wibox.layout.fixed.horizontal
-					}
-				},
-				nil
-			}
-		},
-		margins = dpi(10),
-		widget = wibox.container.margin
-	},
-	-- forced_height = dpi(92),
-	bg = x.color0,
-    widget = wibox.container.background
-}
-
-local fetch_email_command = [[
-python3 - <<END
-import imaplib
-import email
-import datetime
-import re
-import sys
-from email.policy import default
-def process_mailbox(M):
-	rv, data = M.search(None, "(UNSEEN)")
-	if rv != 'OK':
-		print ("No messages found!")
-		return
-	for num in reversed(data[0].split()):
-		rv, data = M.fetch(num, '(BODY.PEEK[])')
-		if rv != 'OK':
-			print ("ERROR getting message", num)
-			return
-		msg = email.message_from_bytes(data[0][1], policy=default)
-		print ('From:', msg['From'])
-		print ('Subject: %s' % (msg['Subject']))
-		date_tuple = email.utils.parsedate_tz(msg['Date'])
-		if date_tuple:
-			local_date = datetime.datetime.fromtimestamp(email.utils.mktime_tz(date_tuple))
-			print ("Local Date:", local_date.strftime("%a, %H:%M:%S %b %d, %Y") + "\n")
-			# with code below you can process text of email
-			# if msg.is_multipart():
-			#     for payload in msg.get_payload():
-			#         if payload.get_content_maintype() == 'text':
-			#             print  payload.get_payload()
-			#         else:
-			#             print msg.get_payload()
-try:
-	M=imaplib.IMAP4_SSL("]] .. secrets.imap_server .. [[", ]] .. secrets.port .. [[)
-	M.login("]] .. secrets.email_address .. [[","]] .. secrets.app_password .. [[")
-	status, counts = M.status("INBOX","(MESSAGES UNSEEN)")
-	rv, data = M.select("INBOX")
-	if rv == 'OK':
-		unread = re.search(r'UNSEEN\s(\d+)', counts[0].decode('utf-8')).group(1)
-		print ("Unread Count: " + unread)
-		process_mailbox(M)
-	M.close()
-	M.logout()
-except Exception as e:
-	if e:
-		print (e)
-END
-]]
-
-
-local notify_all_unread_email = function(email_data)
-	
-	local unread_counter = email_data:match('Unread Count: (.-)From:'):sub(1, -2)
-
-	local email_data = email_data:match('(From:.*)'):sub(1, -2)
-
-	local title = nil
-
-	if tonumber(unread_email_count) > 1 then
-		title = 'You have ' .. unread_counter .. ' unread emails!'
-	else
-		title = 'You have ' .. unread_counter .. ' unread email!'
-	end
-	
-	naughty.notification ({
-		app_name = "email",
-		title = title,
-		message = email_data
-	})
-end
-
-local notify_new_email = function(count, from, subject)
-	if not startup_show and (tonumber(count) > tonumber(unread_email_count)) then
-		unread_email_count = tonumber(count)
-
-		local message = "From: " .. from ..
-		"\nSubject: " .. subject
-		
-		naughty.notification ({
-			app_name = "email",
-			title = "You've got a new mail",
-			message = message
-		})
-	else
-		unread_email_count = tonumber(count)
-	end
-end
-
-local set_widget_markup = function(from, subject, date, tooltip)
-
-	email_recent_from:set_markup(from:gsub('%\n', ''))
-	email_recent_subject:set_markup(subject:gsub('%\n', ''))
-	email_recent_date:set_markup(date:gsub('%\n', ''))
-
-	if tooltip then
-		email_details_tooltip:set_markup(tooltip)
-	end
-end
-
-local set_latest_email_data = function(email_data)
-
-	local unread_count = email_data:match('Unread Count: (.-)From:'):sub(1, -2)
-	local recent_from = email_data:match('From: (.-)Subject:'):sub(1, -2)
-	local recent_subject = email_data:match('Subject: (.-)Local Date:'):sub(1, -2)
-	local recent_date = email_data:match('Local Date: (.-)\n')
-
-	recent_from = recent_from:match('<(.*)>') or recent_from:match('&lt;(.*)&gt;') or recent_from
-
-	set_widget_markup(
-		recent_from,
-		recent_subject,
-		recent_date
-	)
-
-	notify_new_email(unread_count, recent_from, recent_subject)
-end
-
-local fetch_email_data = function()
-	awful.spawn.easy_async_with_shell(
-		fetch_email_command,
-		function(stdout)
-			stdout = gears.string.xml_escape(stdout:sub(1, -2))
-
-			if not stdout:match('Unread Count: (.-)From:') then
-				return
-			elseif not stdout or stdout == '' then
-				return
-			end
-
-			set_latest_email_data(stdout)
-
-			if startup_show then
-				notify_all_unread_email(stdout)
-				startup_show = false
-			end
-		end
-	)
-end
-
-local check_secrets = function()
-	if secrets.email_address == '' or secrets.app_password == '' or secrets.imap_server == '' or secrets.port == '' then
-		return
-	else
-		fetch_email_data()
-	end
-end
-
-check_secrets()
-
-local update_widget_timer = gears.timer {
-	timeout = 30,
-	autostart = true,
-	call_now = true,
-	callback  = function()
-		check_secrets() 
-	end
-}
-
-email_report:connect_signal(
-	'mouse::enter',
-	function()
-		check_secrets()
-	end
-)
-
-local email_box = create_boxed_widget(email_report, dpi(300), dpi(150), x.color0)
-
---
--- rss
---
-
-local function open_link(url)
-    awful.spawn.with_shell("brave " .. url)
-    dashboard_hide()
-end
-
-local max_feeds = 6
-local feed_width = 370
-local feed_height = 320
-
-local rss_github = wibox.widget {
-    spacing = 8,
-    layout = wibox.layout.fixed.vertical
-}
-
-local function rss_links(rss, feed_name, w)
-    w:reset()
-    local f, s, b
-    for i = 1, max_feeds do
-        local b = wibox.widget {
-            markup = rss["github"].title[i],
-            margins = 2,
-            width = dpi(310),
-            widget = wibox.widget.textbox
-        }
-        w:add(b)
-  end
-end
-
-awesome.connect_signal("shit::rss", function(rss)
-    rss_links(rss, "github", rss_github)
-end)
-
-local rss_box = create_boxed_widget(rss_github, dpi(300), dpi(150), x.color0)
 
 -- Item placement
 dashboard:setup {
@@ -793,11 +385,7 @@ dashboard:setup {
                 wtr_box,
                 layout = wibox.layout.fixed.vertical
             },
-            {
-                email_box,
-                rss_box,
-                layout = wibox.layout.fixed.vertical
-            },
+            todo_widget,
             layout = wibox.layout.fixed.horizontal
         },
         nil,

@@ -9,7 +9,7 @@ if v:version > 580
   endif
 endif
 
-let g:colors_name='tlou2'
+let g:colors_name='cool'
 
 if !has('gui_running') && &t_Co != 256
   finish
@@ -45,70 +45,70 @@ let s:xgray6        = ['#585858', 240]
 
 let s:none = ['NONE', 'NONE']
 
-if !exists('g:tlou2_bold')
-  let g:tlou2_bold=1
+if !exists('g:cool_bold')
+  let g:cool_bold=1
 endif
 
-if !exists('g:tlou2_italic')
+if !exists('g:cool_italic')
   if has('gui_running') || $TERM_ITALICS ==? 'true'
-    let g:tlou2_italic=1
+    let g:cool_italic=1
   else
-    let g:tlou2_italic=0
+    let g:cool_italic=0
   endif
 endif
 
-if !exists('g:tlou2_transparent_background')
-  let g:tlou2_transparent_background=0
+if !exists('g:cool_transparent_background')
+  let g:cool_transparent_background=0
 endif
 
-if !exists('g:tlou2_undercurl')
-  let g:tlou2_undercurl=1
+if !exists('g:cool_undercurl')
+  let g:cool_undercurl=1
 endif
 
-if !exists('g:tlou2_underline')
-  let g:tlou2_underline=1
+if !exists('g:cool_underline')
+  let g:cool_underline=1
 endif
 
-if !exists('g:tlou2_inverse')
-  let g:tlou2_inverse=1
+if !exists('g:cool_inverse')
+  let g:cool_inverse=1
 endif
 
-if !exists('g:tlou2_inverse_matches')
-  let g:tlou2_inverse_matches=0
+if !exists('g:cool_inverse_matches')
+  let g:cool_inverse_matches=0
 endif
 
-if !exists('g:tlou2_inverse_match_paren')
-  let g:tlou2_inverse_match_paren=0
+if !exists('g:cool_inverse_match_paren')
+  let g:cool_inverse_match_paren=0
 endif
 
-if !exists('g:tlou2_dim_lisp_paren')
-  let g:tlou2_dim_lisp_paren=0
+if !exists('g:cool_dim_lisp_paren')
+  let g:cool_dim_lisp_paren=0
 endif
 
-let g:tlou2_guisp_fallback='NONE'
+let g:cool_guisp_fallback='NONE'
 
 let s:bold = 'bold,'
-if g:tlou2_bold == 0
+if g:cool_bold == 0
   let s:bold = ''
 endif
 
 let s:italic = 'italic,'
-if g:tlou2_italic == 0
+if g:cool_italic == 0
   let s:italic = ''
 endif
 
 let s:underline = 'underline,'
-if g:tlou2_underline == 0
+if g:cool_underline == 0
   let s:underline = ''
 endif
 
 let s:undercurl = 'undercurl,'
-if g:tlou2_undercurl == 0
+if g:cool_undercurl == 0
   let s:undercurl = ''
 endif
 
 let s:inverse = 'inverse,'
-if g:tlou2_inverse == 0
+if g:cool_inverse == 0
   let s:inverse = ''
 endif
 
@@ -137,12 +137,12 @@ function! s:HL(group, fg, ...)
 
   " special fallback
   if a:0 >= 3
-    if g:tlou2_guisp_fallback !=# 'NONE'
+    if g:cool_guisp_fallback !=# 'NONE'
       let fg = a:3
     endif
 
     " bg fallback mode should invert higlighting
-    if g:tlou2_guisp_fallback ==# 'bg'
+    if g:cool_guisp_fallback ==# 'bg'
       let emstr .= 'inverse,'
     endif
   endif

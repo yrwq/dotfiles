@@ -3,6 +3,26 @@ local helpers = require("helpers")
 
 -- launchers
 awful.keyboard.append_global_keybindings({
+    -- increase brightness
+    awful.key {
+        modifiers = { mod },
+        key = "F3",
+        group = "launcher",
+        description = "increase brightness",
+        on_press = function()
+            awful.spawn.with_shell("bri i")
+        end,
+    },
+    -- decrease brightness
+    awful.key {
+        modifiers = { mod },
+        key = "F2",
+        group = "launcher",
+        description = "decrease brightness",
+        on_press = function()
+            awful.spawn.with_shell("bri d")
+        end,
+    },
     -- launch terminal
     awful.key {
         modifiers = { mod },
@@ -13,13 +33,13 @@ awful.keyboard.append_global_keybindings({
             awful.spawn(terminal)
         end,
     },
-    -- app launcher
+    -- rofi
     awful.key {
-        modifiers = { mod },
+        modifiers = { mod, shift },
         key = "s",
         group = "launcher",
-        description = "application launcher",
-        on_press = function(s)
+        description = "rofi",
+        on_press = function()
             awful.spawn.with_shell("rofi -show drun")
         end,
     },
@@ -31,6 +51,7 @@ awful.keyboard.append_global_keybindings({
         description = "volume up",
         on_press = function()
             helpers.volume_control(5)
+            awesome.emit_signal("widget::volume")
         end,
     },
     -- volume down
@@ -41,6 +62,7 @@ awful.keyboard.append_global_keybindings({
         description = "volume down",
         on_press = function()
             helpers.volume_control(-5)
+            awesome.emit_signal("widget::volume")
         end,
     },
     -- nerd font picker
@@ -59,10 +81,7 @@ awful.keyboard.append_global_keybindings({
         key = "o",
         group = "launcher",
         description = "discord",
-        on_press = function()
-            helpers.run_or_raise({class = "discord"},
-                false, "discocss", { switchtotag = true })
-        end,
+        on_press = apps.discord,
     },
     -- draw a floating terminal
     awful.key {

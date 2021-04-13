@@ -148,9 +148,6 @@ theme.hotkeys_modifiers_fg = x.fg
 theme.hotkeys_group_margin = dpi(10)
 theme.hotkeys_bg = x.bg
 
--- Layout icon
-
-theme = theme_assets.recolor_layout(theme, x.fg)
 
 -- Wibar
 
@@ -169,9 +166,9 @@ theme.tabbar_style = "default"
 theme.tabbar_size = dpi(28)
 theme.tabbar_ontop  = true
 theme.tabbar_position = "top"
-theme.tabbar_bg_normal = x.bg
+theme.tabbar_bg_normal = x.color0
 theme.tabbar_fg_normal = x.fg
-theme.tabbar_bg_focus  = x.color0
+theme.tabbar_bg_focus  = x.bg
 theme.tabbar_fg_focus  = x.fg
 
 -- tag preview
@@ -191,5 +188,24 @@ theme.tag_preview_widget_margin = 10
 -- misc notification
 
 theme.notification_margin = dpi(5)
+
+-- widget
+theme.bar_widget_fg = x.bg
+
+-- Layout icon
+theme = theme_assets.recolor_layout(theme, theme.bar_widget_fg)
+
+theme.profile_picture = os.getenv("HOME") .. "/etc/pic/prof.jpeg"
+
+-- popup settings
+theme.popup_bg = "#00000000"
+theme.popup_bg_container = x.bg
+theme.popup_mouse_timeout = 0.5
+theme.popup_widget_radius = dpi(5)
+
+-- dashboard settings
+theme.dashboard_box_radius = dpi(12)
+theme.dashboard_box_gap = dpi(5)
+theme.dashboard_bg = x.bg .. "55"
 
 return theme

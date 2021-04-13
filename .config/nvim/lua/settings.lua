@@ -6,16 +6,12 @@ local b = vim.bo
 
 local indent = 4
 
+cmd "colorscheme current"
 cmd "syntax enable"
 cmd "filetype plugin indent on"
 
-
-cmd "colorscheme cool"
--- cmd "colorscheme kory"
--- cmd "colorscheme dear"
--- cmd "colorscheme tlou2"
-
--- global
+-- global options
+o.background = "dark"       -- set background to dark
 o.hidden = true             -- keep multiple buffers open
 o.pumheight = 10            -- make popup menu smaller
 o.fileencoding = "utf-8"    -- the encoding written to file
@@ -29,9 +25,11 @@ o.writebackup = false       -- disable backing up
 o.clipboard = "unnamedplus" -- set clipboard to system clipboard
 o.ignorecase = true         -- ignore case sensitivity
 o.formatoptions = ""        -- disable autocommenting on new line
+o.hlsearch = true           -- highlight every matches when searching
 o.undofile = true           -- enable undo file
 o.swapfile = false          -- don't create swap files
-
+o.backup = false            -- disable backing up
+o.writebackup = false       -- dont write backup files
 
 -- buffer specific
 b.tabstop = indent          -- insert 4 spaces for tab
@@ -45,12 +43,11 @@ b.autoread = true           -- automatically read files when changed outside of 
 w.number = true             -- enable line numbers
 w.signcolumn = "yes"        -- always show sign column
 
--- plugin settings
-g.indentLine_char = "▏"     -- indentline's character
-g.Hexokinase_highlighters = { "virtual" }
+-- global settings
+g.mapleader = " "
+g.indentLine_char = "▏"        -- indentline's character
 -- g.Hexokinase_highlighters = { "sign_column" }
 g.Hexokinase_v2 = 1
 g.Hexokinase_virtualText = ' '
 g.Hexokinase_signIcon = ' '
-g.gruvbox_contrast_dark = 'soft'
-g.gruvbox_contrast_light = 'soft'
+g.Hexokinase_highlighters = { "virtual" }

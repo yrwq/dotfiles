@@ -1,0 +1,25 @@
+Xft.autohint: 0
+Xft.antialias: 1
+Xft.hinting: true
+Xft.hintstyle: hintslight
+Xft.dpi: 96
+
+*.foreground:   #ffffff
+*.background:   #111314
+*.cursorColor:  #ffffff
+*.color0:       #3a3e42
+*.color8:       #5d6369
+*.color1:       #945151
+*.color9:       #b94545
+*.color2:       #7a7d43
+*.color10:      #aaae49
+*.color3:       #946b47
+*.color11:      #d49256
+*.color4:       #63808f
+*.color12:      #4993b9
+*.color5:       #85668a
+*.color13:      #ab6eb5
+*.color6:       #567b77
+*.color14:      #5eaaa3
+*.color7:       #aab3aa
+*.color15:      #e3e8e3

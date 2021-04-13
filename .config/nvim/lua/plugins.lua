@@ -32,7 +32,6 @@ local init = function ()
             require("cool.lsp_config")
         end
     }
-
     
     use {
         "glepnir/lspsaga.nvim",
@@ -44,3 +43,4 @@ local init = function ()
 end
 
 return require('packer').startup(init)
+

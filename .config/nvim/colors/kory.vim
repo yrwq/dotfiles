@@ -9,28 +9,30 @@ if v:version > 580
   endif
 endif
 
-let g:colors_name='tlou2'
+let g:colors_name='kory'
 
 if !has('gui_running') && &t_Co != 256
   finish
 endif
 
-let s:black          = ['#212121', 0]
-let s:red            = ['#e54c54', 1]
-let s:green          = ['#a7e251', 2]
-let s:yellow         = ['#edac34', 3]
-let s:blue           = ['#5b8aef', 4]
-let s:magenta        = ['#ab5ce0', 5]
-let s:cyan           = ['#39a8d5', 6]
-let s:white          = ['#eeffff', 7]
-let s:bright_black   = ['#4a4a4a', 8]
-let s:bright_red     = ['#f07178', 9]
-let s:bright_green   = ['#c3e88d', 10]
-let s:bright_yellow  = ['#ffcb6b', 11]
-let s:bright_blue    = ['#82aaff', 12]
-let s:bright_magenta = ['#c792ea', 13]
-let s:bright_cyan    = ['#89ddff', 14]
-let s:bright_white   = ['#ffffff', 15]
+let s:black   = ['#1c1f27', 8]
+let s:red     = ['#af6266', 9]
+let s:green   = ['#5da77e', 10]
+let s:yellow  = ['#bb8369', 11]
+let s:blue    = ['#658bb4', 12]
+let s:magenta = ['#9d67b8', 13]
+let s:cyan    = ['#66b2b5', 14]
+let s:white   = ['#cfcfcf', 15]
+
+let s:bright_black    = ['#2d323e', 0]
+let s:bright_red      = ['#ed858a', 1]
+let s:bright_green    = ['#85edb3', 2]
+let s:bright_yellow   = ['#eda685', 3]
+let s:bright_blue     = ['#85b8ed', 4]
+let s:bright_magenta  = ['#ca85ed', 5]
+let s:bright_cyan     = ['#85e8ed', 6]
+let s:bright_white    = ['#d0bcbc', 7]
+
 
 " xterm colors.
 let s:orange        = ['#84603C', 202]
@@ -45,70 +47,70 @@ let s:xgray6        = ['#585858', 240]
 
 let s:none = ['NONE', 'NONE']
 
-if !exists('g:tlou2_bold')
-  let g:tlou2_bold=1
+if !exists('g:space_bold')
+  let g:space_bold=1
 endif
 
-if !exists('g:tlou2_italic')
+if !exists('g:space_italic')
   if has('gui_running') || $TERM_ITALICS ==? 'true'
-    let g:tlou2_italic=1
+    let g:space_italic=1
   else
-    let g:tlou2_italic=0
+    let g:space_italic=0
   endif
 endif
 
-if !exists('g:tlou2_transparent_background')
-  let g:tlou2_transparent_background=0
+if !exists('g:space_transparent_background')
+  let g:space_transparent_background=0
 endif
 
-if !exists('g:tlou2_undercurl')
-  let g:tlou2_undercurl=1
+if !exists('g:space_undercurl')
+  let g:space_undercurl=1
 endif
 
-if !exists('g:tlou2_underline')
-  let g:tlou2_underline=1
+if !exists('g:space_underline')
+  let g:space_underline=1
 endif
 
-if !exists('g:tlou2_inverse')
-  let g:tlou2_inverse=1
+if !exists('g:space_inverse')
+  let g:space_inverse=1
 endif
 
-if !exists('g:tlou2_inverse_matches')
-  let g:tlou2_inverse_matches=0
+if !exists('g:space_inverse_matches')
+  let g:space_inverse_matches=0
 endif
 
-if !exists('g:tlou2_inverse_match_paren')
-  let g:tlou2_inverse_match_paren=0
+if !exists('g:space_inverse_match_paren')
+  let g:space_inverse_match_paren=0
 endif
 
-if !exists('g:tlou2_dim_lisp_paren')
-  let g:tlou2_dim_lisp_paren=0
+if !exists('g:space_dim_lisp_paren')
+  let g:space_dim_lisp_paren=0
 endif
 
-let g:tlou2_guisp_fallback='NONE'
+let g:space_guisp_fallback='NONE'
 
 let s:bold = 'bold,'
-if g:tlou2_bold == 0
+if g:space_bold == 0
   let s:bold = ''
 endif
 
 let s:italic = 'italic,'
-if g:tlou2_italic == 0
+if g:space_italic == 0
   let s:italic = ''
 endif
 
 let s:underline = 'underline,'
-if g:tlou2_underline == 0
+if g:space_underline == 0
   let s:underline = ''
 endif
 
 let s:undercurl = 'undercurl,'
-if g:tlou2_undercurl == 0
+if g:space_undercurl == 0
   let s:undercurl = ''
 endif
 
 let s:inverse = 'inverse,'
-if g:tlou2_inverse == 0
+if g:space_inverse == 0
   let s:inverse = ''
 endif
 
@@ -137,12 +139,12 @@ function! s:HL(group, fg, ...)
 
   " special fallback
   if a:0 >= 3
-    if g:tlou2_guisp_fallback !=# 'NONE'
+    if g:space_guisp_fallback !=# 'NONE'
       let fg = a:3
     endif
 
     " bg fallback mode should invert higlighting
-    if g:tlou2_guisp_fallback ==# 'bg'
+    if g:space_guisp_fallback ==# 'bg'
       let emstr .= 'inverse,'
     endif
   endif
@@ -292,9 +294,9 @@ call s:HL('IncSearch', s:none, s:bright_black, s:underline . s:bold)
 
 call s:HL('Underlined', s:blue, s:none, s:underline)
 
-call s:HL('StatusLine',   s:black, s:bright_black)
+call s:HL('StatusLine',   s:white, s:black)
 
-call s:HL('StatusLineNC', s:black, s:black)
+" call s:HL('StatusLineNC', s:white, s:)
 call s:HL('VertSplit', s:bright_black, s:black)
 call s:HL('WildMenu', s:black, s:white, s:bold)
 

@@ -17,47 +17,60 @@ local buttons = gears.table.join(
     end)
 )
 
-client.connect_signal("request::titlebars", function(c)
+if config.double_borders then
+    beautiful.border_width = dpi(8)
+    beautiful.border_normal = x.color0
+    beautiful.border_focus = x.color0
 
-    awful.titlebar(c, {
-        font = beautiful.nfont .. "9",
-        position = "top",
-        size = dpi(30),
-    }) : setup {
+    beautiful.titlebar_bg_normal = x.color0
+    beautiful.titlebar_bg_focus = x.color1
 
-        -- left
-        {
+    client.connect_signal("request::titlebars", function(c)
+        awful.titlebar(c, {size = dpi(3), position = "top"}) : setup {
+            buttons = buttons,
+            layout = wibox.layout.align.horizontal
+        }
+        awful.titlebar(c, {size = dpi(3), position = "bottom"}) : setup {
+            buttons = buttons,
+            layout = wibox.layout.align.horizontal
+        }
+        awful.titlebar(c, {size = dpi(3), position = "left"}) : setup {
+            buttons = buttons,
+            layout = wibox.layout.align.horizontal
+        }
+        awful.titlebar(c, {size = dpi(3), position = "right"}) : setup {
+            buttons = buttons,
+            layout = wibox.layout.align.horizontal
+        }
+    end)
+else
+    client.connect_signal("request::titlebars", function(c)
+        awful.titlebar(c, {
+            font = beautiful.nfont .. "9",
+            position = "top",
+            size = dpi(30),
+        }) : setup {
 
-            layout  = wibox.layout.fixed.horizontal
-        },
-
-        -- middle
-        {
+            -- left
             {
-                align  = "center",
-                valign  = "center",
-                widget = awful.titlebar.widget.titlewidget(c)
+                layout  = wibox.layout.fixed.horizontal
             },
-            layout  = wibox.layout.flex.horizontal
-        },
 
-        -- right
-        {
-            layout = wibox.layout.fixed.horizontal()
-        },
-        layout = wibox.layout.align.horizontal
-    }
+            -- middle
+            {
+                {
+                    align  = "center",
+                    valign  = "center",
+                    widget = awful.titlebar.widget.titlewidget(c)
+                },
+                layout  = wibox.layout.flex.horizontal
+            },
 
-	-- awful.titlebar(c, {size = 3, position = 'bottom'}) : setup {
-	-- 	buttons = buttons,
-	-- 	layout = wibox.layout.align.horizontal
-	-- }
-	-- awful.titlebar(c, {size = 3, position = 'left'}) : setup {
-	-- 	buttons = buttons,
-	-- 	layout = wibox.layout.align.horizontal
-	-- }
-	-- awful.titlebar(c, {size = 3, position = 'right'}) : setup {
-	-- 	buttons = buttons,
-	-- 	layout = wibox.layout.align.horizontal
-	-- }
-end)
+            -- right
+            {
+                layout = wibox.layout.fixed.horizontal()
+            },
+            layout = wibox.layout.align.horizontal
+        }
+    end)
+end

@@ -6,49 +6,23 @@ local dpi = require("beautiful.xresources").apply_dpi
 local helpers = require("helpers")
 local naughty = require("naughty")
 local lgi = require("lgi")
+local awestore = require("awestore")
 local bling = require("bling")
 
 local width = 300
-local height = 600
+local height = 550
 
 --
 -- header 
 --
 
-local prof_pic = {
-    image = "/home/yrwq/etc/pic/prof.jpeg",
-    resize = true,
-    clip_shape = helpers.circle(dpi(150)),
-    forced_height = dpi(150),
-    forced_width = dpi(150),
-    widget = wibox.widget.imagebox
-}
-
-local name_header = {
-    markup = "<b>Inhof Dávid</b>",
-    valign = "center",
-    align = "center",
-    font = beautiful.nfont .. "20",
-    widget = wibox.widget.textbox
-}
-
-local user_name = {
-    markup = helpers.colorize_text("@yrwq", x.color15),
-    font = beautiful.nfont .. "16",
-    valign = "center",
-    align = "center",
-    widget = wibox.widget.textbox
-}
+local user_widget = require("widgets.user")
 
 local sidebar_header = {
     nil,
     {
         {
-            prof_pic,
-            helpers.vertical_pad(dpi(10)),
-            name_header,
-            helpers.vertical_pad(dpi(5)),
-            user_name,
+            user_widget,
             layout = wibox.layout.fixed.vertical
         },
         top = dpi(20),
@@ -62,187 +36,13 @@ local sidebar_header = {
 -- quote
 --
 
-local fortune_command = "fortune -n 50 -s computers"
-local fortune_update_interval = 3600
-
-local fortune = wibox.widget {
-    font = beautiful.nfont .. "12",
-    text = "Loading your cookie...",
-    valign = "center",
-    align = "center",
-    widget = wibox.widget.textbox
-}
-
-local update_fortune = function()
-    awful.spawn.easy_async_with_shell(fortune_command, function(out)
-        -- Remove trailing whitespaces
-        out = out:gsub('^%s*(.-)%s*$', '%1')
-        fortune.markup = "<i>"..helpers.colorize_text(out, x.fg).."</i>"
-    end)
-end
-
-gears.timer {
-    autostart = true,
-    timeout = fortune_update_interval,
-    single_shot = false,
-    call_now = true,
-    callback = update_fortune
-}
-
-local fortune_widget = wibox.widget {
-    {
-        {
-            nil,
-            fortune,
-            layout = wibox.layout.align.horizontal,
-        },
-        margins = dpi(15),
-        widget = wibox.container.margin
-    },
-    forced_height = dpi(100),
-    shape = helpers.rrect(dpi(5)),
-    bg = x.color8,
-    widget = wibox.container.background
-}
-
-fortune_widget:buttons(gears.table.join(
-    -- Left click - New fortune
-    awful.button({ }, 1, update_fortune)
-))
-
-helpers.add_hover_cursor(fortune_widget, "hand1")
+local fortune = require("widgets.fortune")
 
 --
 -- music control
 --
 
-local music_header = wibox.widget {
-    markup = "<b>Now playing</b>",
-    font = beautiful.nfont .. "16",
-    align = "center",
-    valign = "center",
-    widget = wibox.widget.textbox
-}
-
-local music_title = wibox.widget {
-    markup = helpers.colorize_text("<b>Now playing</b>", x.color15),
-    font = beautiful.nfont .. "14",
-    align = "center",
-    valign = "center",
-    widget = wibox.widget.textbox
-}
-
-local Playerctl = lgi.Playerctl
-local player = Playerctl.Player{}
-update_metadata = function()
-    if player:get_title() then
-        if string.match(player:get_title(), player:get_artist()) then
-            music_title.markup = helpers.colorize_text(player:get_title(), x.color15)
-        else
-            music_title.markup = helpers.colorize_text(player:get_artist() .. " - " .. player:get_title(), x.color15)
-        end
-    else
-        music_title.markup = helpers.colorize_text("Nothing playing", x.color15)
-    end
-end
-player.on_metadata = update_metadata
-
-update_metadata()
-
-local music_prev = wibox.widget {
-    markup = "玲",
-    font = beautiful.ifont .. "16",
-    widget = wibox.widget.textbox
-}
-
-local music_toggle = wibox.widget {
-    markup = "契",
-    font = beautiful.ifont .. "16",
-    widget = wibox.widget.textbox
-}
-
-local music_next = wibox.widget {
-    markup = "怜",
-    font = beautiful.ifont .. "16",
-    widget = wibox.widget.textbox
-}
-
-helpers.add_hover_cursor(music_prev, "hand1")
-helpers.add_hover_cursor(music_next, "hand1")
-helpers.add_hover_cursor(music_toggle, "hand1")
-
-music_prev:connect_signal("button::press", function()
-    awful.spawn.with_shell("playerctl previous")
-end)
-
-music_next:connect_signal("button::press", function()
-    awful.spawn.with_shell("playerctl next")
-end)
-
-local status_cmd = "playerctl status -F"
-local playing = "false"
-
-update_status = function()
-    awful.spawn.easy_async({
-            "pkill", "--full", "--uid", os.getenv("USER"), "^playerctl status" }, function()
-        awful.spawn.with_line_callback(status_cmd, {
-            stdout = function(line)
-                if line:find("Playing") then
-                    playing = "true"
-                    music_toggle.markup = ""
-                else
-                    playing = "false"
-                    music_toggle.markup = "契"
-                end
-            end
-        })
-        collectgarbage("collect")
-    end)
-end
-
-update_status()
-
-music_toggle:connect_signal("button::press", function()
-    awful.spawn.with_shell("playerctl play-pause")
-    update_status()
-end)
-
-
-local music_control = {
-    nil,
-    {
-        {
-            music_prev,
-            music_toggle,
-            music_next,
-            spacing = dpi(30),
-            layout = wibox.layout.fixed.horizontal
-        },
-        widget = wibox.container.margin
-    },
-    expand = "none",
-    layout = wibox.layout.align.horizontal,
-}
-
-local music = wibox.widget {
-    {
-        {
-            {
-                music_header,
-                music_title,
-                music_control,
-                spacing = dpi(10),
-                layout = wibox.layout.fixed.vertical
-            },
-            margins = dpi(15),
-            widget = wibox.container.margin,
-        },
-        shape = helpers.rrect(dpi(5)),
-        bg = x.color8,
-        widget = wibox.container.background,
-    },
-    layout = wibox.layout.fixed.vertical
-}
+local music = require("widgets.playerctl")
 
 --
 -- search web
@@ -276,7 +76,7 @@ local search = wibox.widget{
     },
     forced_height = dpi(35),
     forced_width = dpi(200),
-    bg = x.color8,
+    bg = x.color0,
     shape = helpers.rrect(dpi(5)),
     widget = wibox.container.background()
 }
@@ -288,23 +88,35 @@ local search = wibox.widget{
 local sidebar = wibox.widget {
     {
         sidebar_header,
-        helpers.vertical_pad(dpi(30)),
-        fortune_widget,
+        {
+            {
+                fortune,
+                margins = dpi(10),
+                widget = wibox.container.margin
+            },
+            forced_height = dpi(70),
+            bg = x.color0,
+            widget = wibox.container.background,
+        },
+        spacing = dpi(20),
         layout = wibox.layout.fixed.vertical
     },
     {
-        helpers.vertical_pad(dpi(10)),
-        music,
-        layout = wibox.layout.fixed.vertical
+        {
+            music,
+            margins = dpi(10),
+            widget = wibox.container.margin
+        },
+        bg = x.color0,
+        widget = wibox.container.background
     },
     {
-        helpers.vertical_pad(dpi(10)),
         search,
         layout = wibox.layout.fixed.vertical
     },
 	forced_width = width,
 	forced_height = height,
-    spacing = dpi(10),
+    spacing = dpi(20),
     layout = wibox.layout.fixed.vertical
 }
 
@@ -314,20 +126,35 @@ local sidebar = wibox.widget {
 
 local sidebar_popup = awful.popup {
     widget = {
-        sidebar,
-        margins = dpi(20),
-        widget  = wibox.container.margin
+        {
+            {
+                sidebar,
+                margins = dpi(20),
+                widget  = wibox.container.margin
+            },
+            shape = helpers.prrect(dpi(10), false, true, true, false),
+            bg = x.color0 .. "55",
+            widget = wibox.container.background
+        },
+        bg = x.bg,
+        widget = wibox.container.background
     },
-    bg = x.color0,
-    shape = helpers.prrect(dpi(10), false, true, true, false),
     ontop = true,
-    placement = awful.placement.left,
+    y = (screen_height / 2) / 3, -- centered vertically
+    x = -width - 50,
     visible = false
 }
 
+local pop_anim = awestore.tweened(-450, {
+    duration = 300,
+    easing = awestore.easing.cubic_in_out
+})
+
+pop_anim:subscribe(function(x) sidebar_popup.x = x end)
+
 function sidebar_activate_prompt()
     awful.prompt.run {
-        prompt = 'Search: ',
+        prompt = "",
         textbox = search_text,
         font = beautiful.nfont .. "10",
         done_callback = function()
@@ -335,7 +162,14 @@ function sidebar_activate_prompt()
         end,
         exe_callback = function(input)
             if not input or #input == 0 then return end
-            awful.spawn.with_shell("noglob brave https://google.com/search?q=" .. input)
+            helpers.run_or_raise({
+                    class = "brave"
+                },
+                true,
+                "brave https://google.com/search?q=" .. input,
+                {
+                    switchtotag = true
+                })
         end
     }
 end
@@ -348,11 +182,11 @@ search:buttons(gears.table.join(
 
 local mouseInPopup = false
 local timer = gears.timer {
-    timeout = 0.75,
+    timeout = beautiful.popup_mouse_timeout,
     single_shot = true,
     callback = function()
         if not mouseInPopup then
-            sidebar_popup.visible = false
+            pop_anim:set(-451)
         end
     end
 }
@@ -375,8 +209,10 @@ local sidebar_activator = wibox({
 })
 
 sidebar_activator.height = height
+
 sidebar_activator:connect_signal("mouse::enter", function ()
     sidebar_popup.visible = true
+    pop_anim:set(-2)
 
 end)
 awful.placement.left(sidebar_activator)

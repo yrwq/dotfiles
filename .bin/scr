@@ -105,15 +105,15 @@ main() {
                 full|select)
                     case $copy in
                         0)
-                            notify-send -a 'screenshot' "Screenshot taken"
                             shot $method $delay
                             mv $fname $save_dir/$fname
+                            notify-send -a 'screenshot' "Screenshot taken"
                         ;;
                         *)
-                            notify-send -a 'screenshot' "Screenshot taken"
                             shot $method
                             xclip -sel clip -t image/png $fname
                             mv $fname $save_dir/$fname
+                            notify-send -a 'screenshot' "Screenshot taken"
                         ;;
                     esac
                 ;;

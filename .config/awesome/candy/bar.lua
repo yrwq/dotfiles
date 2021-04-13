@@ -7,6 +7,8 @@ local keys = require("keys")
 local dpi = beautiful.xresources.apply_dpi
 local bling = require("bling")
 
+local widget_fg = beautiful.bar_widget_fg
+
 local volume = wibox.widget {
     markup = "",
     widget = wibox.widget.textbox
@@ -14,12 +16,12 @@ local volume = wibox.widget {
 
 awesome.connect_signal("shit::volume", function(vol, muted)
     if muted then
-        volume.markup = helpers.colorize_text("muted", x.fg)
+        volume.markup = helpers.colorize_text("muted", widget_fg)
     else
         if vol then
-            volume.markup = helpers.colorize_text("  " .. vol .. "%", x.fg)
+            volume.markup = helpers.colorize_text("  " .. vol .. "%", widget_fg)
         else
-            volume.markup = helpers.colorize_text("  ", x.fg)
+            volume.markup = helpers.colorize_text("  ", widget_fg)
         end
     end
 end)
@@ -29,7 +31,7 @@ local mysystray = wibox.widget.systray()
 mysystray:set_base_size(beautiful.systray_icon_size)
 
 local noti_toggle = wibox.widget {
-    markup = helpers.colorize_text("", x.fg),
+    markup = helpers.colorize_text("", widget_fg),
     font = beautiful.ifont .. "20",
     widget = wibox.widget.textbox
 }
@@ -38,7 +40,7 @@ dont_disturb = false
 
 local notif_center = require("candy.notif-center")
 noti_toggle:connect_signal("mouse::enter", function()
-    notif_center.visible = true
+    notifcenter_show()
 end)
 
 noti_toggle:buttons(gears.table.join(
@@ -50,9 +52,9 @@ noti_toggle:buttons(gears.table.join(
 
 function update_disturb()
     if dont_disturb then
-        noti_toggle.markup = helpers.colorize_text("", x.fg)
+        noti_toggle.markup = helpers.colorize_text("", widget_fg)
     else
-        noti_toggle.markup = helpers.colorize_text("", x.fg)
+        noti_toggle.markup = helpers.colorize_text("", widget_fg)
     end
 end
 
@@ -60,42 +62,14 @@ local sep = helpers.horizontal_pad(dpi(5))
 
 local s = awful.screen.focused()
 
-date_clock = wibox.widget.textclock("  %b %d %a")
-time_clock = wibox.widget.textclock("  %H:%M")
-
+date_clock = wibox.widget.textclock(helpers.colorize_text("  %b %d %a", widget_fg))
+time_clock = wibox.widget.textclock(helpers.colorize_text("  %H:%M", widget_fg))
 
 screen.connect_signal("request::desktop_decoration", function(s)
 
     -- s.mytextclock = wibox.widget.textclock()
 
     s.mylayoutbox = awful.widget.layoutbox(s)
-
-    -- s.mytaglist = awful.widget.taglist {
-    --     screen  = s,
-    --     filter  = awful.widget.taglist.filter.all,
-    --     style = {
-    --         spacing = dpi(5),
-    --         font = beautiful.nfont .. "12",
-    --         shape = helpers.rrect(5)
-    --     },
-    --     widget_template = {
-    --         {
-    --             {
-    --                 {
-    --                     id     = "text_role",
-    --                     widget = wibox.widget.textbox,
-    --                 },
-    --                 layout = wibox.layout.fixed.horizontal,
-    --             },
-    --             left  = dpi(10),
-    --             bottom = dpi(2),
-    --             right = dpi(10),
-    --             widget = wibox.container.margin
-    --         },
-    --         id     = "background_role",
-    --         widget = wibox.container.background,
-    --     },
-    -- }
 
     s.mytaglist = awful.widget.taglist {
         screen  = s,
@@ -119,20 +93,16 @@ screen.connect_signal("request::desktop_decoration", function(s)
                 right = dpi(10),
                 widget = wibox.container.margin
             },
-            id     = 'background_role',
+            id     = "background_role",
             widget = wibox.container.background,
-            -- Add support for hover colors and an index label
-            create_callback = function(self, c3, index, objects) --luacheck: no unused args
-                self:connect_signal('mouse::enter', function()
+            create_callback = function(self, c3, index, objects)
+                self:connect_signal("mouse::enter", function()
                     if #c3:clients() > 0 then
-                        -- BLING: Update the widget with the new tag
                         awesome.emit_signal("bling::tag_preview::update", c3)
-                        -- BLING: Show the widget
                         awesome.emit_signal("bling::tag_preview::visibility", s, true)
                     end
-
                 end)
-                self:connect_signal('mouse::leave', function()
+                self:connect_signal("mouse::leave", function()
                     awesome.emit_signal("bling::tag_preview::visibility", s, false)
                 end)
             end,
@@ -144,7 +114,6 @@ screen.connect_signal("request::desktop_decoration", function(s)
         buttons = keys.tasklist_buttons,
         screen   = s,
         filter   = awful.widget.tasklist.filter.focused,
-        -- filter   = awful.widget.tasklist.filter.currenttags,
         style    = {
             font = beautiful.nfont .. "10",
             bg = x.bg
@@ -164,7 +133,6 @@ screen.connect_signal("request::desktop_decoration", function(s)
                 bottom = dpi(4),
                 widget = wibox.container.margin
             },
-            -- id = "background_role",
             widget = wibox.container.background,
         },
     }
@@ -205,7 +173,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
                         widget = wibox.container.margin
                     },
                     shape = helpers.rrect(dpi(5)),
-                    bg = x.color9,
+                    bg = x.color1,
                     widget = wibox.container.background,
                 },
                 margins = dpi(3),
@@ -222,7 +190,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
                         widget = wibox.container.margin
                     },
                     shape = helpers.rrect(dpi(5)),
-                    bg = x.color10,
+                    bg = x.color2,
                     widget = wibox.container.background,
                 },
                 margins = dpi(3),
@@ -239,7 +207,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
                         widget = wibox.container.margin
                     },
                     shape = helpers.rrect(dpi(5)),
-                    bg = x.color11,
+                    bg = x.color3,
                     widget = wibox.container.background,
                 },
                 margins = dpi(3),
@@ -256,7 +224,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
                         widget = wibox.container.margin
                     },
                     shape = helpers.rrect(dpi(5)),
-                    bg = x.color11,
+                    bg = x.color3,
                     widget = wibox.container.background,
                 },
                 margins = dpi(3),

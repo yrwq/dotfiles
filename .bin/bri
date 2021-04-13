@@ -1,0 +1,30 @@
+#!/usr/bin/env lua5.4
+
+-- the value when incrementing/decrementing brightness
+local change=0.1
+
+-- get current brightness
+local get_bri = io.popen("xrandr --verbose | grep -i brightness | cut -f2 -d ' ' | head -n1"):read("*a")
+
+-- removes new line character
+get_bri = get_bri:gsub("\n", "")
+
+-- increase brightness
+local inc = function(get_bri)
+    os.execute("xrandr --output VGA1 --brightness " .. get_bri + change)
+end
+
+-- decrease brightness
+local dec = function(get_bri)
+    os.execute("xrandr --output VGA1 --brightness " .. get_bri - change)
+end
+
+if #arg < 1 then
+    print("usage: bri <i|d>")
+end
+
+if arg[1] == "i" then
+    inc(get_bri)
+elseif arg[1] == "d" then
+    dec(get_bri)
+end

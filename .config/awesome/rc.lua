@@ -3,9 +3,45 @@ local gears = require("gears")
 local awful = require("awful")
 local beautiful = require("beautiful")
 local naughty = require("naughty")
-local wibox = require("wibox")
+local helpers = require("helpers")
+local switcher = require("utils.theme_switcher")
 
-awful.spawn.with_shell("xcompmgr")
+dpi = require("beautiful.xresources").apply_dpi
+
+awful.spawn.with_shell("picom")
+
+apps = {
+    discord = function()
+        helpers.run_or_raise({class = "discord"}, false, "discocss", { switchtotag = true })
+    end,
+    browser = function()
+        awful.spawn.with_shell("brave")
+    end,
+    spotify = function()
+        awful.spawn.with_shell("brave open.spotify.com")
+    end,
+    thunar = function()
+        awful.spawn.with_shell("thunar")
+    end,
+    zathura = function()
+        awful.spawn.with_shell("zathura")
+    end,
+    gimp = function()
+        awful.spawn.with_shell("gimp")
+    end,
+    torrent = function()
+        awful.spawn.with_shell("transmission-gtk")
+    end,
+    github = function()
+        awful.spawn.with_shell("brave github.com")
+    end,
+    youtube = function()
+        awful.spawn.with_shell("brave youtube.com")
+    end,
+    soundcloud = function()
+        awful.spawn.with_shell("brave soundcloud.com")
+    end
+}
 
 -- define screen's width and height globally
 screen_width = awful.screen.focused().geometry.width
@@ -13,25 +49,30 @@ screen_height = awful.screen.focused().geometry.height
 
 -- user variables
 config = {
-    widget = {
-		email  = {
-			-- Email address
-			address = "yrwqid@gmail.com",
-			-- App password
-			app_password = "",
-			-- Imap server
-			imap_server = "imap.gmail.com",
-			-- Port
-			port = "993"
-		},
-    },
+    double_borders = false,
 }
 
+themes = {
+    "dear",
+    "space",
+    "cool",
+    "kory"
+}
+
+-- theme = themes[3]
+
+-- give a literal string because of the theme switcher
+theme = "cool"
+
+switcher.switch(theme, false)
+
 -- initialize theme
-local theme_dir = os.getenv("HOME") .. "/.config/awesome/themes/dear/"
-beautiful.init(theme_dir .. "theme.lua")
+local theme_dir = os.getenv("HOME") .. "/.config/awesome/themes/" .. theme
+beautiful.init(theme_dir .. "/theme.lua")
 
 local bling = require("bling")
+
+bling.signal.playerctl.enable()
 
 bling.widget.tag_preview.enable {
     show_client_content = true,
@@ -129,6 +170,9 @@ require("candy.notifications")
 
 -- dashboard
 require("candy.dashboard")
+
+-- start screen
+require("candy.start")
 
 -- garbage collection to use less ram
 collectgarbage("setpause", 110)

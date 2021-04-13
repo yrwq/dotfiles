@@ -2,7 +2,7 @@ configuration {
     font: "ProFont 11";
     show-icons: false;
     sidebar-mode: true;
-    theme: "~/.config/rofi/theme.rasi";
+    theme: "~/.config/rofi/themes/current.rasi";
     display-window: "wins";
     display-run: "run";
     display-ssh: "ssh";
