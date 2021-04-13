@@ -66,7 +66,11 @@ awful.keyboard.append_global_keybindings({
         group = "popup",
         description = "sidebar",
         on_press = function()
-            sidebar.visible = not sidebar.visible
+            if sidebar.x < -1 then
+	            sidebar_show()
+            else
+                sidebar_hide()
+            end
         end,
     }
 })
