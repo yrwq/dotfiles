@@ -37,29 +37,19 @@ local pop_anim = awestore.tweened(screen_width + width, {
 
 pop_anim:subscribe(function(x) notif_popup.x = x end)
 
-local mouseInPopup = false
-local timer = gears.timer {
-    timeout = 0.75,
-    single_shot = true,
-    callback = function()
-        if not mouseInPopup then
-            pop_anim:set(screen_width + width)
-        end
-    end
-}
-
 notifcenter_show = function()
     notif_popup.visible = true
     pop_anim:set(screen_width - offset - width)
 end
 
+notifcenter_hide = function()
+    pop_anim:set(screen_width + offset + width + 1)
+end
+
 notif_popup:connect_signal("mouse::leave", function()
     if notif_popup.visible then
-        mouseInPopup = false
-        timer:again()
+        notifcenter_hide()
     end
 end)
-
-notif_popup:connect_signal("mouse::enter", function() mouseInPopup = true end)
 
 return notif_popup

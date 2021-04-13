@@ -9,6 +9,16 @@ require("awful.hotkeys_popup.keys")
 
 -- popups
 awful.keyboard.append_global_keybindings({
+    -- lockscreen
+    awful.key {
+        modifiers = { mod },
+        key = ".",
+        group = "popup",
+        description = "lockscreen",
+        on_press = function()
+            lockscreen_show()
+        end,
+    },
     -- start menu
     awful.key {
         modifiers = { mod },
@@ -46,7 +56,11 @@ awful.keyboard.append_global_keybindings({
         group = "popup",
         description = "notif_center",
         on_press = function()
-            notif_center.visible = not notif_center.visible
+            if notif_center.x > screen_width + 1 then
+                notifcenter_show()
+            else
+                notifcenter_hide()
+            end
         end,
     },
     -- dashboard

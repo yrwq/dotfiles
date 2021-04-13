@@ -59,10 +59,8 @@ themes = {
     "kory"
 }
 
--- theme = themes[3]
-
 -- give a literal string because of the theme switcher
-theme = "cool"
+theme = "kory"
 
 switcher.switch(theme, false)
 
@@ -173,6 +171,9 @@ require("candy.dashboard")
 
 -- start screen
 require("candy.start")
+
+-- lock screen
+require("candy.lockscreen")
 
 -- garbage collection to use less ram
 collectgarbage("setpause", 110)

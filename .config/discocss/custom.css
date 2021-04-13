@@ -1,23 +1,23 @@
 .theme-dark {
-    --background-primary: #201e1a;
-    --background-secondary: #322b28;
-    --background-tertiary: #322b28;
-    --channels-default: #5e4643;
-    --background-accent: #322b28;
-    --text-normal: #947e68;
-    --text-spotify: #947e68;
-    --text-muted: #867564;
-    --text-link: #6d413b;
-    --background-floating: #322b28;
-    --header-primary: #7e5d3c;
-    --header-secondary: #6b5a48;
-    --header-spotify: #6c4949;
-    --interactive-normal: #4f4141;
-    --interactive-hover: #4f4141;
-    --interactive-active: #867564;
-    --background-modifier-hover: rgba(49, 46, 40, 1);
-    --background-modifier-selected: rgba(49, 46, 40, 1);
-    --background-message-hover: rgba(39, 37, 32);
+    --background-primary: #1c1f27;
+    --background-secondary: #2d323e;
+    --background-tertiary: #2d323e;
+    --channels-default: #af6266;
+    --background-accent: #3f444e;
+    --text-normal: #e8e8e8;
+    --text-spotify: #5da77e;
+    --text-muted: #cfcfcf;
+    --text-link: #af6266;
+    --background-floating: #3f444e;
+    --header-primary: #bb8369;
+    --header-secondary: #eda685;
+    --header-spotify: #5da775;
+    --interactive-normal: #e8e8e8;
+    --interactive-hover: #9d67b8;
+    --interactive-active: #ca85ed;
+    --background-modifier-hover: #3f444e50;
+    --background-modifier-selected: #3f444e99;
+    --background-message-hover: #3f444e;
 }
 
 .theme-light {
