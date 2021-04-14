@@ -5,38 +5,38 @@ Xft.hintstyle: hintslight
 Xft.dpi: 96
 
 ! special
-*.foreground:   #e8e8e8
-*.background:   #1c1f27
-*.cursorColor:  #e8e8e8
+*.foreground:   #eccddd
+*.background:   #252525
+*.cursorColor:  #eccddd
 
 ! black
-*.color0:       #2d323e
-*.color8:       #3f444e
+*.color0:       #313131
+*.color8:       #4b4747
 
 ! red
-*.color1:       #af6266
-*.color9:       #ed858a
+*.color1:       #9f3e43
+*.color9:       #b03137
 
 ! green
-*.color2:       #5da77e
-*.color10:      #85edb3
+*.color2:       #47834f
+*.color10:      #337e3e
 
 ! yellow
-*.color3:       #bb8369
-*.color11:      #eda685
+*.color3:       #b2603b
+*.color11:      #ba5c32
 
 ! blue
-*.color4:       #658bb4
-*.color12:      #85b8ed
+*.color4:       #52539e
+*.color12:      #3a3dae
 
 ! magenta
-*.color5:       #9d67b8
-*.color13:      #ca85ed
+*.color5:       #6b46b5
+*.color13:      #5a2bb6
 
 ! cyan
-*.color6:       #66b2b5
-*.color14:      #85e8ed
+*.color6:       #49899c
+*.color14:      #276f85
 
 ! white
-*.color7:       #cfcfcf
-*.color15:      #d0bcbc
+*.color7:       #a6a6a6
+*.color15:      #e3e3e3

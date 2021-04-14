@@ -28,7 +28,7 @@ local dash_button = create_button("舘", icon_font, widget_radius, x.color8, x.b
 end)
 
 local lock_button = create_button("", icon_font, widget_radius, x.color8, x.bg, function()
-    start_hide()
+    lockscreen_show()
 end)
 
 local exit_button = create_button("", icon_font, widget_radius, x.color8, x.bg, function()
@@ -49,15 +49,35 @@ local start_header = wibox.widget {
 -- apps area
 --
 
-local app_discord = create_button("ﭮ",  icon_font, 5, x.color8, x.bg, apps.discord)
-local app_browser = create_button("",  icon_font, 5, x.color8, x.bg, apps.browser)
-local app_spotify = create_button("阮", icon_font, 5, x.color8, x.bg, apps.spotify)
-local app_thunar = create_button("",   icon_font, 5, x.color8, x.bg, apps.thunar)
-local app_zathura = create_button("",  icon_font, 5, x.color8, x.bg, apps.zathura)
-local app_gimp = create_button("",     icon_font, 5, x.color8, x.bg, apps.gimp)
-local app_torrent = create_button("",  icon_font, 5, x.color8, x.bg, apps.torrent)
-local app_github = create_button("",   icon_font, 5, x.color8, x.bg, apps.github)
-local app_youtube = create_button("輸", icon_font, 5, x.color8, x.bg, apps.youtube)
+local cfa = config.apps
+local spawn = awful.spawn
+
+local app_discord = create_button("ﭮ",  icon_font, 5, x.color8, x.bg, function()
+    cfa.discord end)
+
+local app_browser = create_button("",  icon_font, 5, x.color8, x.bg, function() 
+    spawn(cfa.browser) end)
+
+local app_spotify = create_button("阮", icon_font, 5, x.color8, x.bg, function() 
+    spawn(cfa.spotify) end)
+
+local app_thunar = create_button("",   icon_font, 5, x.color8, x.bg, function()
+    spawn(cfa.thunar) end)
+
+local app_zathura = create_button("",  icon_font, 5, x.color8, x.bg, function()
+    spawn(cfa.zathura) end)
+
+local app_gimp = create_button("",     icon_font, 5, x.color8, x.bg, function()
+    spawn(cfa.gimp) end)
+
+local app_torrent = create_button("",  icon_font, 5, x.color8, x.bg, function()
+    spawn(cfa.torrent) end)
+
+local app_github = create_button("",   icon_font, 5, x.color8, x.bg, function()
+    spawn(cfa.github) end)
+
+local app_youtube = create_button("輸", icon_font, 5, x.color8, x.bg, function()
+    spawn(cfa.youtube) end)
 
 local apps = wibox.widget {
     app_browser,

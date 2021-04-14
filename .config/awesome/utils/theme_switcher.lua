@@ -9,6 +9,7 @@ switcher.switch = function(th, rest)
     -- change global variable in rc.lua to change theme
     local awm_conf = gfs.get_configuration_dir()
     local curr_theme = awm_conf .. "themes/" .. th
+
     awful.spawn.with_shell("sed -i 's/theme = \".*\"/theme = \"" ..
         th .. "\"/' -i " .. awm_conf .. "rc.lua")
 

@@ -5,12 +5,18 @@ local bling = require("bling")
 -- client's mouse bindings
 client.connect_signal("request::default_mousebindings", function()
     awful.mouse.append_client_mousebindings({
+        
+        -- focus a client on click
         awful.button({ }, 1, function (c)
             c:activate { context = "mouse_click" }
         end),
+
+        -- move a client on mod + click
         awful.button({ mod }, 1, function (c)
             c:activate { context = "mouse_click", action = "mouse_move"  }
         end),
+
+        -- resize a client on mod + right click
         awful.button({ mod }, 3, function (c)
             c:activate { context = "mouse_click", action = "mouse_resize"}
         end),
@@ -19,6 +25,7 @@ end)
 
 -- client manipulation
 awful.keyboard.append_global_keybindings({
+
     -- toggle fullscreen
     awful.key {
         modifiers = { mod },
@@ -33,6 +40,7 @@ awful.keyboard.append_global_keybindings({
             end
         end,
     },
+
     -- close client
     awful.key {
         modifiers = { mod },
@@ -46,6 +54,7 @@ awful.keyboard.append_global_keybindings({
             end
         end,
     },
+
     -- toggle floating
     awful.key {
         modifiers = { mod, shift },
@@ -63,6 +72,7 @@ awful.keyboard.append_global_keybindings({
         end,
         -- end,
     },
+
     -- swap focused client with master
     awful.key {
         modifiers = { mod, shift },
@@ -76,6 +86,7 @@ awful.keyboard.append_global_keybindings({
             end
         end,
     },
+
     -- minimize client
     awful.key {
         modifiers = { mod },
@@ -89,6 +100,7 @@ awful.keyboard.append_global_keybindings({
             end
         end,
     },
+
     -- focus next client
     awful.key {
         modifiers = { mod },
@@ -99,6 +111,7 @@ awful.keyboard.append_global_keybindings({
             awful.client.focus.byidx(1)
         end,
     },
+
     -- focus previous client
     awful.key {
         modifiers = { mod },
@@ -109,6 +122,7 @@ awful.keyboard.append_global_keybindings({
             awful.client.focus.byidx(-1)
         end,
     },
+
     -- restore minimized clients
     awful.key {
         modifiers = { mod, shift },
@@ -123,6 +137,7 @@ awful.keyboard.append_global_keybindings({
             end
         end,
     },
+
     -- swap client with next
     awful.key {
         modifiers = { mod,shift },
@@ -133,6 +148,7 @@ awful.keyboard.append_global_keybindings({
             awful.client.swap.byidx(1)
         end,
     },
+
     -- swap client with previous
     awful.key {
         modifiers = { mod,shift },
@@ -143,6 +159,7 @@ awful.keyboard.append_global_keybindings({
             awful.client.swap.byidx(-1)
         end,
     },
+
     -- jump to urgent client
     awful.key {
         modifiers = { mod,shift },
@@ -151,6 +168,7 @@ awful.keyboard.append_global_keybindings({
         description = "jump to urgent",
         on_press = awful.client.urgent.jumpto
     },
+
     -- center a client
     awful.key {
         modifiers = { mod },
@@ -164,6 +182,7 @@ awful.keyboard.append_global_keybindings({
             end
         end,
     },
+
     -- add a client to bling tabbed
     awful.key {
         modifiers = { mod, alt },
@@ -196,6 +215,7 @@ awful.keyboard.append_global_keybindings({
             bling.module.tabbed.pop()
         end,
     },
+
     -- focus mode
     awful.key {
         modifiers = { mod, shift },
@@ -209,6 +229,7 @@ awful.keyboard.append_global_keybindings({
             end
         end,
     },
+
     -- toggle titlebar
     awful.key {
         modifiers = { mod },
@@ -279,4 +300,3 @@ awful.keyboard.append_global_keybindings({
         end,
     }
 })
-

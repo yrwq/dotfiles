@@ -3,7 +3,6 @@ local wibox = require("wibox")
 local gears = require("gears")
 local helpers = require("helpers")
 local beautiful = require("beautiful")
-local dpi = require("beautiful.xresources").apply_dpi
 
 -- buttons for the titlebar
 local buttons = gears.table.join(

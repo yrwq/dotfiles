@@ -122,8 +122,26 @@ lock_screen_box:setup{
                     {
                         {
                             require("widgets.user"),
-                            secret_textbox,
-                            spacing = dpi(30),
+                            {
+                                {
+                                    {
+                                        {
+                                            nil,
+                                            secret_textbox,
+                                            expand = "none",
+                                            layout = wibox.layout.align.horizontal
+                                        },
+                                        margins = dpi(10),
+                                        widget = wibox.container.margin
+                                    },
+                                    shape = helpers.rrect(dpi(5)),
+                                    bg = x.color0,
+                                    widget = wibox.container.background
+                                },
+                                bg = "#00000000",
+                                widget = wibox.container.background
+                            },
+                            spacing = dpi(50),
                             layout = wibox.layout.fixed.vertical
                         },
                         margins = dpi(50),

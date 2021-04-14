@@ -3,6 +3,7 @@ local naughty = require("naughty")
 
 -- wm related keybindings
 awful.keyboard.append_global_keybindings({
+
     -- close notifications
     awful.key {
         modifiers = { ctrl },
@@ -13,6 +14,7 @@ awful.keyboard.append_global_keybindings({
             naughty.destroy_all_notifications()
         end,
     },
+
     -- restart awesomewm
     awful.key {
         modifiers = { mod, shift },
@@ -21,6 +23,7 @@ awful.keyboard.append_global_keybindings({
         description = "reload awesome",
         on_press = awesome.restart
     },
+
     -- quit awesomewm
     awful.key {
         modifiers = { mod, shift },
@@ -29,4 +32,5 @@ awful.keyboard.append_global_keybindings({
         description = "quit awesome",
         on_press = awesome.quit
     },
+
 })

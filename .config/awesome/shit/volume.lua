@@ -1,7 +1,9 @@
 local awful = require("awful")
 
 local volume_old = -1
+
 local muted_old = -1
+
 local function emit_volume_info()
     awful.spawn.easy_async_with_shell(
         "pacmd list-sinks | awk '/\\* index: /{nr[NR+7];nr[NR+11]}; NR in nr'",

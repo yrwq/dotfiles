@@ -1,13 +1,17 @@
-local awful = require('awful')
-local wibox = require('wibox')
-local gears = require('gears')
-local beautiful = require('beautiful')
+local awful = require("awful")
+local wibox = require("wibox")
+local gears = require("gears")
+local beautiful = require("beautiful")
 local helpers = require("helpers")
 local keys = require("keys")
-local dpi = beautiful.xresources.apply_dpi
 local bling = require("bling")
 
+-- default foreground used by widgets
 local widget_fg = beautiful.bar_widget_fg
+
+--
+-- volume widget
+--
 
 local volume = wibox.widget {
     markup = "",
@@ -26,6 +30,10 @@ awesome.connect_signal("shit::volume", function(vol, muted)
     end
 end)
 
+--
+-- systray widget
+--
+
 local mysystray = wibox.widget.systray()
 
 mysystray:set_base_size(beautiful.systray_icon_size)
@@ -38,7 +46,12 @@ local noti_toggle = wibox.widget {
 
 dont_disturb = false
 
+--
+-- notifications
+--
+
 local notif_center = require("candy.notif-center")
+
 noti_toggle:connect_signal("mouse::enter", function()
     notifcenter_show()
 end)
@@ -58,16 +71,12 @@ function update_disturb()
     end
 end
 
-local sep = helpers.horizontal_pad(dpi(5))
-
 local s = awful.screen.focused()
 
-date_clock = wibox.widget.textclock(helpers.colorize_text("  %b %d %a", widget_fg))
-time_clock = wibox.widget.textclock(helpers.colorize_text("  %H:%M", widget_fg))
+local date_clock = wibox.widget.textclock(helpers.colorize_text("  %b %d %a", widget_fg))
+local time_clock = wibox.widget.textclock(helpers.colorize_text("  %H:%M", widget_fg))
 
 screen.connect_signal("request::desktop_decoration", function(s)
-
-    -- s.mytextclock = wibox.widget.textclock()
 
     s.mylayoutbox = awful.widget.layoutbox(s)
 
@@ -107,7 +116,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
                 end)
             end,
         },
-        buttons = taglist_buttons
+        buttons = keys.taglist_buttons
     }
 
     s.mytasklist = awful.widget.tasklist {
