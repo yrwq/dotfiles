@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 convert -background '#252525' -fill '#eccddd' \
-    -font 'ProFont-IIx' -pointsize 32 label:Dear \
-    -gravity Center -size 1000x1000 \
+    -font 'ProFont-IIx' -pointsize 32 label:$1 \
+    -gravity Center -size 500x500 \
     out.png
 
