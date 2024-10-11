@@ -9,5 +9,4 @@ Other resources that define my system:
 
 ## preview
 
-<video loop preload="auto" autoPlay playsInline src="./assets/preview_fetch.gif" ></video>
-
+<img src="./assets/preview.gif">
