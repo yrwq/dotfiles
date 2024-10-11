@@ -9,12 +9,4 @@ Other resources that define my system:
 
 ## preview
 
-### neovim
-<img src="./assets/neovim.png">
-
-### firefox, discord, emacs
-<img src="./assets/firefox_discord_emacs.png">
-
-### newsboat, weechat, yazi, yafetch
-<img src="./assets/fetch_yazi_newsboat_weechat.png">
-
+<img src="./assets/preview.gif">
