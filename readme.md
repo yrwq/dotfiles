@@ -9,4 +9,4 @@ Other resources that define my system:
 
 ## preview
 
-<img src="./assets/preview.gif">
+<img src="./assets/preview_fetch.gif">
