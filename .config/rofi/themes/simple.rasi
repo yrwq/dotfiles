@@ -1,8 +1,8 @@
 * {
-    bg0: #282828;
-    bg1: #32302f;
-    grey0: #7c6f64;
-    fg0: #d4be98;
+    bg0: #fffaf3;
+    bg1: #fffaf3;
+    grey0: #f2e9e1;
+    fg0: #575279;
 
     blue: #7daea3;
     red: #ea6962;
