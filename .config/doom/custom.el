@@ -1,1 +1,1 @@
-(setq doom-theme 'doom-gruvbox)
+(setq doom-theme 'doom-rose-pine-dawn)
