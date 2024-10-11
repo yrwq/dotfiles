@@ -1,3 +1,5 @@
+<img src="./assets/fetch.gif">
+
 This repository contains my personal collection of configuration files for the [software i use](https://yrwq.neocities.org/software).
 
 Other resources that define my system:
@@ -9,4 +11,14 @@ Other resources that define my system:
 
 ## preview
 
-<img src="./assets/fetch.gif">
+### nvim
+
+![nvim](./assets/nvim.png)
+
+### firefox, discord
+
+![ff_discord](./assets/ff_dc.png)
+
+### weechat, emacs, yazi, yafetch
+
+![busy](./assets/busy.png)
