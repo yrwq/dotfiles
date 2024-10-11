@@ -1,12 +1,12 @@
 import = [
-  "~/.config/alacritty/gruvbox.toml"
+  "~/.config/alacritty/rose.toml"
 ]
 
 [font]
 size = 14
 
 [font.normal]
-family = "FantasqueSansM Nerd Font"
+family = "AzukiFont Nerd Font"
 
 [[keyboard.bindings]]
 action = "Paste"
