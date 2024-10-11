@@ -1,0 +1,13 @@
+set selection-clipboard clipboard
+
+set default-fg "#d4be98"
+set inputbar-fg "#d4be98"
+set statusbar-fg "#d4be98"
+set default-bg "#1d2021"
+set inputbar-bg "#282828"
+set statusbar-bg "#32302f"
+set font "FantasqueSansM Nerd Font 12"
+set recolor
+set recolor-keephue
+set recolor-lightcolor "#1d2021"
+set recolor-darkcolor "#d4be98"
