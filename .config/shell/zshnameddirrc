@@ -1,0 +1,13 @@
+hash -d cf=/home/yrwq/.config 
+hash -d cfv=/home/yrwq/.config/nvim 
+hash -d cfs=/home/yrwq/.config/shell 
+hash -d D=/home/yrwq/etc/dl 
+hash -d d=/home/yrwq/etc/doc 
+hash -d m=/home/yrwq/etc/music 
+hash -d pp=/home/yrwq/etc/pic 
+hash -d sc=/home/yrwq/.local/bin 
+hash -d vv=/home/yrwq/etc/vid 
+hash -d DD=/home/yrwq/dev/dotfiles 
+hash -d rr=/home/yrwq/etc/repos 
+hash -d td=/home/yrwq/etc/dl/tor-browser/Browser/etc/dl 
+hash -d src=/home/yrwq/.local/src 

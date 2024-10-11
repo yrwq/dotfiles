@@ -1,0 +1,15 @@
+#!/bin/sh
+
+cf      ${XDG_CONFIG_HOME:-$HOME/.config}
+cfv     ${XDG_CONFIG_HOME:-$HOME/.config}/nvim
+cfs     ${XDG_CONFIG_HOME:-$HOME/.config}/shell
+D       ${XDG_DOWNLOAD_DIR:-$HOME/etc/dl}
+d       ${XDG_DOCUMENTS_DIR:-$HOME/etc/doc}
+m       ${XDG_MUSIC_DIR:-$HOME/etc/music}
+pp      ${XDG_PICTURES_DIR:-$HOME/etc/pic}
+sc      $HOME/.local/bin
+vv      ${XDG_VIDEOS_DIR:-$HOME/etc/vid}
+DD      $HOME/dev/dotfiles
+rr      $HOME/etc/repos
+td      $HOME/etc/dl/tor-browser/Browser/etc/dl
+src     $HOME/.local/src

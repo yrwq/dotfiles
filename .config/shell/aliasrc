@@ -1,0 +1,27 @@
+#!/bin/sh
+
+fman() {
+    man -k . | fzf -q "$1" --prompt='man> '  --preview $'echo {} | tr -d \'()\' | awk \'{printf "%s ", $2} {print $1}\' | xargs -r man | col -bx | bat -l man -p --color always' | tr -d '()' | awk '{printf "%s ", $2} {print $1}' | xargs -r man
+}
+
+op() {
+    selected=$(find ~/dev ~/etc/repos -mindepth 1 -maxdepth 1 -type d | fzf)
+
+    cd $selected
+}
+
+alias \
+  y="yazi" \
+  ls="eza --icons" \
+  l="eza -l --icons" \
+  la="eza -l -a --icons" \
+  ka="killall" \
+  ga="git add" \
+  gc="git commit -m" \
+  gp="git push -u origin main" \
+  mk="make && sudo make install" \
+  f="$FILE" \
+  v="nvim" \
+  z="zathura" \
+  ref="shortcuts >/dev/null; source ${XDG_CONFIG_HOME:-$HOME/.config}/shell/shortcutrc ; source ${XDG_CONFIG_HOME:-$HOME/.config}/shell/zshnameddirrc" \
+
