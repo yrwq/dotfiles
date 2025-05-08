@@ -1,5 +1,5 @@
 :root {
-	--font: 'FantasqueSansM Nerd Font';
+	--font: 'Iosevka Custom';
 	letter-spacing: -0.05ch; /* decreases letter spacing for better readability. */
 	font-weight: 400; /* UI font weight. */
 	--label-font-weight: 500; /* font weight for panel labels. */
