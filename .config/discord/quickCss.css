@@ -1,3 +1,11 @@
+/**
+ * @name Gruvbox Dark
+ * @description Gruvbox Dark for Discord
+ * @author yrwq.
+ * @version 0.0.1
+ * @website https://github.com/yrwq/dotfiles
+*/
+
 :root {
 	--font: 'Iosevka Custom';
 	letter-spacing: -0.05ch; /* decreases letter spacing for better readability. */
