@@ -1,0 +1,21 @@
+font-family = FantasqueSansM Nerd Font
+font-size = 14
+font-feature = -liga
+
+theme = dark:Github Dark,light:Github-Light-Default
+cursor-style = underline
+adjust-cursor-thickness = 1
+shell-integration = zsh
+background-blur = true
+background-opacity = 0.9
+confirm-close-surface = false
+mouse-hide-while-typing = true
+macos-titlebar-style = tabs
+macos-window-shadow = true
+
+window-padding-x = 5
+window-padding-y = 5
+# window-padding-balance = true
+
+clipboard-read = allow
+clipboard-write = allow
