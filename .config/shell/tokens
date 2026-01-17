@@ -1,5 +1,0 @@
-#!/bin/sh
-
-export DISCORD_TOKEN=""
-export PYPI_USER=""
-export PYPI_PASS=""
