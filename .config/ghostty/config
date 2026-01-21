@@ -1,0 +1,11 @@
+macos-titlebar-style = tabs
+
+font-family = "IosevkaTerm Nerd Font"
+
+font-size = 16
+font-feature = liga,dlig
+
+theme = Gruvbox Material Dark
+
+keybind = cmd+j=decrease_font_size:1
+keybind = cmd+k=increase_font_size:1
