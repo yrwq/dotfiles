@@ -1,0 +1,22 @@
+"$schema" = "https://yazi-rs.github.io/schemas/yazi.json"
+
+[mgr]
+ratio          = [ 1, 2, 3 ]
+show_hidden    = true
+
+[opener]
+edit = [
+	{ run = "nvim %s", for = "unix", block = true },
+]
+play = [
+	{ run = "mpv %s", for = "macos" },
+]
+open = [
+	{ run = "open %s",         desc = "Open", for = "macos" },
+]
+reveal = [
+	{ run = "open -R %s1",          desc = "Reveal", for = "macos" },
+]
+extract = [
+	{ run = "ya pub extract --list %s", desc = "Extract here" },
+]

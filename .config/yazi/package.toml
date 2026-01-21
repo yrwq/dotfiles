@@ -1,0 +1,7 @@
+[[plugin.deps]]
+use = "llanosrocas/yaziline"
+rev = "6266926"
+hash = "9917ab5cb9bdbab7ca7f2501f84f0f11"
+
+[flavor]
+deps = []
