@@ -1,23 +1,29 @@
 [user]
-  email = yrwqid@gmail.com
-  name = yrwq
-	signingkey = 07862297204801C7DB5C614AC47FFBA4498239D2
-
+	email = yrwqid@gmail.com
+    name = yrwq
+    signingkey = 38A01B03F0A500F83868DDDECBCE53BA770870D9
 [commit]
-  gpgSign = true
-
+    gpgSign = true
 [gpg]
-  program = gpg
-
+    program = gpg
 [core]
-  pager = delta
-
+    pager = delta
 [interactive]
-  diffFilter = delta --color-only
-
-[delta]
-  navigate = true
-  syntax-theme = gruvbox-dark
-
+    diffFilter = delta --color-only
 [merge]
-  conflictStyle = zdiff3
+    conflictStyle = zdiff3
+[delta]
+    navigate = true
+    syntax-theme = gruvbox-dark
+    dark = true
+    tabs = 2
+
+    file-style = omit
+    file-decoration-style = none
+
+    line-numbers-left-format = "{nm:>4} "
+    line-numbers-right-format = "│ {np:>4} "
+
+    wrap-left-symbol = " "
+    wrap-right-symbol = " "
+    wrap-right-prefix-symbol = " "
