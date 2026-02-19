@@ -1,22 +1,95 @@
 "$schema" = "https://yazi-rs.github.io/schemas/yazi.json"
 
 [mgr]
-ratio          = [ 1, 2, 3 ]
-show_hidden    = true
+ratio        = [ 1, 2, 3 ]
+show_hidden  = true
+show_symlink = true
 
 [opener]
-edit = [
-	{ run = "nvim %s", for = "unix", block = true },
+text = [
+	{ run = 'nvim "$@"', block = true, desc = "Neovim" },
 ]
-play = [
-	{ run = "mpv %s", for = "macos" },
+markdown = [
+	{ run = 'nvim "$@"', block = true, desc = "Neovim" },
 ]
-open = [
-	{ run = "open %s",         desc = "Open", for = "macos" },
+code = [
+	{ run = 'nvim "$@"', block = true, desc = "Neovim" },
 ]
-reveal = [
-	{ run = "open -R %s1",          desc = "Reveal", for = "macos" },
+image = [
+	{ run = 'swayimg "$@"', orphan = true, desc = "Feh" },
+	{ run = 'gimp "$@"', orphan = true, desc = "GIMP" },
 ]
-extract = [
-	{ run = "ya pub extract --list %s", desc = "Extract here" },
+video = [
+	{ run = 'mpv "$@"', orphan = true, desc = "MPV" },
+]
+audio = [
+	{ run = 'mpv "$@"', orphan = true, desc = "MPV" },
+]
+pdf = [
+	{ run = 'zathura "$@"', orphan = true, desc = "Zathura" },
+]
+office = [
+	{ run = 'libreoffice "$@"', orphan = true, desc = "LibreOffice" },
+]
+web = [
+	{ run = 'firefox "$@"', orphan = true, desc = "Firefox" },
+]
+ebook = [
+	{ run = 'zathura "$@"', orphan = true, desc = "Zathura" },
+]
+torrent = [
+	{ run = 'transmission-gtk "$@"', orphan = true, desc = "Transmission" },
+]
+model = [
+	{ run = 'blender "$@"', orphan = true, desc = "Blender" },
+]
+fallback = [
+	{ run = 'xdg-open "$@"', orphan = true, desc = "System default" },
+]
+
+[open]
+rules = [
+	{ mime = "text/*", use = "text" },
+	{ mime = "application/json", use = "code" },
+	{ mime = "application/x-yaml", use = "code" },
+	{ mime = "application/xml", use = "code" },
+	{ name = "*.md", use = "markdown" },
+	{ mime = "text/markdown", use = "markdown" },
+
+	{ name = "*.{c,cpp,h,hpp,cc,cxx}", use = "code" },
+	{ name = "*.{py,js,ts,jsx,tsx,rs,go,java,kt,swift}", use = "code" },
+	{ name = "*.{sh,bash,zsh,fish}", use = "code" },
+	{ name = "*.{html,css,scss,sass,less}", use = "code" },
+	{ name = "*.{vim,lua,rb,pl,php}", use = "code" },
+	
+	{ mime = "image/*", use = "image" },
+	{ name = "*.svg", use = "image" },
+	
+	{ mime = "video/*", use = "video" },
+	{ name = "*.{mp4,mkv,avi,mov,webm,flv,wmv}", use = "video" },
+	
+	{ mime = "audio/*", use = "audio" },
+	{ name = "*.{mp3,flac,wav,ogg,m4a,aac,opus}", use = "audio" },
+	
+	{ mime = "application/pdf", use = "pdf" },
+	
+	{ name = "*.{doc,docx,odt}", use = "office" },
+	{ name = "*.{xls,xlsx,ods}", use = "office" },
+	{ name = "*.{ppt,pptx,odp}", use = "office" },
+	
+	{ mime = "application/zip", use = "archive" },
+	{ mime = "application/x-tar", use = "archive" },
+	{ mime = "application/x-7z-compressed", use = "archive" },
+	{ mime = "application/x-rar", use = "archive" },
+	{ name = "*.{zip,tar,gz,bz2,xz,7z,rar,tgz,tbz2}", use = "archive" },
+	
+	{ name = "*.{html,htm}", use = "web" },
+	
+	{ name = "*.{epub,mobi,azw,azw3}", use = "ebook" },
+	
+	{ name = "*.torrent", use = "torrent" },
+	
+	{ name = "*.{obj,stl,fbx,blend,3ds,dae}", use = "model" },
+	
+	{ mime = "*", use = "fallback" },
 ]

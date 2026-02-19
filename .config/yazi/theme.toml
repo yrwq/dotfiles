@@ -1,0 +1,8 @@
+[flavor]
+dark = ""
+
+[mgr]
+
+[indicator]
+padding.open = "█"
+padding.close = "█"
