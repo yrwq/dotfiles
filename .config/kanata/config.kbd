@@ -1,0 +1,14 @@
+(defcfg
+  process-unmapped-keys yes
+  ;; don't grab exclusively
+  ;; ls -l /dev/input/by-path/
+  linux-dev /dev/input/by-path/platform-23510c000.spi-cs-0-event-kbd
+)
+
+(defsrc
+  caps
+)
+
+(deflayer base
+  (multi lctl lalt lsft)
+)
