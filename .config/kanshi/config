@@ -1,0 +1,8 @@
+profile {
+	output DP-1 mode 1920x1080 position 0,0
+	output eDP-1 enable scale 2 position 320,1080
+}
+
+profile {
+	output eDP-1 enable scale 1.8
+}
